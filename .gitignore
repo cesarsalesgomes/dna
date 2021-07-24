@@ -38,7 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+/*/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+
+# NestJS
+/*/dist
+/*/.env
+
+# Directus
+/*/data
