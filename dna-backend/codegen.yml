@@ -1,0 +1,8 @@
+overwrite: true
+schema:
+  - http://localhost:8055/graphql?access_token=${DIRECTUS_ACCESS_TOKEN}
+documents: null
+generates:
+  ../dna-common/graphql-schema.ts:
+    plugins:
+      - 'typescript'
