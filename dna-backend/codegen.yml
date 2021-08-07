@@ -3,6 +3,12 @@ schema:
   - http://localhost:8055/graphql?access_token=${DIRECTUS_ACCESS_TOKEN}
 documents: null
 generates:
-  ../dna-common/graphql-schema.ts:
+  # Backend Schema
+  ./graphql-schema.ts:
+    plugins:
+      - 'typescript'
+
+  # Frontend Schema
+  ../dna-frontend/graphql-schema.ts:
     plugins:
       - 'typescript'

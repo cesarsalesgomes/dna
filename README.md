@@ -45,5 +45,5 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 3. With development environment running, run `npm run generate`.
 
-4. The schema will be available in the **`dna-common`**
-   folder, under the **`graphql-schema`** file.
+4. The schema will be available in the **`dna-frontend`** and **`dna-backend`**
+   folders, under the **`graphql-schema`** file.
