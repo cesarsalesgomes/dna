@@ -1,0 +1,13 @@
+Bugs
+
+☐ Corrigir import de Observale em rxjs (system.service.ts)
+☐ Erro eslint em interface de system
+
+Melhorias
+
+☐ Importar tipos automaticamente (Ex: system controller deveria saber o retorno de system service)
+
+Lembretes
+
+☐ Entender melhor como rede interna Docker funciona
+☐ Atualizar README com feature de geração do Schema e comparação de chamada com tempo de uma chamada direta ao Directus e Nest/Directus
