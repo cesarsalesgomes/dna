@@ -24,7 +24,7 @@ services:
     container_name: directus
     image: directus/directus:latest
     ports:
-      - 8055:8055
+      - ${DIRECTUS_PORT}:${DIRECTUS_PORT}
     volumes:
       # By default, uploads are stored in /directus/uploads
       # Always make sure your volumes matches the storage root when using

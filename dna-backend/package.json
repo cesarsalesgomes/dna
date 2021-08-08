@@ -24,10 +24,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/axios": "^0.0.1",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "graphql-request": "^3.5.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -36,6 +36,7 @@
     "@graphql-codegen/cli": "1.21.7",
     "@graphql-codegen/introspection": "1.18.2",
     "@graphql-codegen/typescript": "1.23.0",
+    "@graphql-codegen/typescript-graphql-request": "^4.0.0",
     "@graphql-codegen/typescript-operations": "^1.18.4",
     "@graphql-codegen/typescript-resolvers": "1.20.0",
     "@nestjs/cli": "^8.0.0",
