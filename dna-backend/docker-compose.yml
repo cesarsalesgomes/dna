@@ -1,12 +1,13 @@
 version: '3'
 services:
+  # Postgres
   database:
     container_name: database
     image: postgres:12
     volumes:
       - ./data/database:/var/lib/postgresql/data
     networks:
-      - directus
+      - dna_network
     environment:
       POSTGRES_USER: 'directus'
       POSTGRES_PASSWORD: 'directus'
@@ -16,8 +17,9 @@ services:
     container_name: cache
     image: redis:6
     networks:
-      - directus
+      - dna_network
 
+  # Directus
   directus:
     container_name: directus
     image: directus/directus:latest
@@ -33,7 +35,8 @@ services:
       # If you want to load extensions from the host
       # - ./extensions:/directus/extensions
     networks:
-      - directus
+      dna_network:
+        ipv4_address: ${DOCKER_DNA_IPV4_DIRECTUS}
     depends_on:
       - cache
       - database
@@ -55,6 +58,7 @@ services:
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'd1r3ctu5'
 
+  # NestJS
   nest:
     container_name: nest
     build:
@@ -70,10 +74,15 @@ services:
     env_file:
       - .env
     networks:
-      - directus
+      - dna_network
     depends_on:
       - database
       - cache
       - directus
+
 networks:
-  directus:
+  dna_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_DNA_IPV4_RANGE}
