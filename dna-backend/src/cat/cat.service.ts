@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from '../../graphql/sdk';
+import { getSdk } from '@graphql/sdk';
 
 @Injectable()
 export class CatService {

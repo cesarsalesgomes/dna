@@ -6,8 +6,6 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 ## **Development**
 
-<br />
-
 ### Local development environment:
 
 <br />
@@ -29,11 +27,9 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 <br />
 
-## **Graphql Schema**
+## **GraphQL Sdk**
 
-<br />
-
-### Steps to generate the database models in typescript for equalized use on back-end and front-end development
+### Steps to generate the database models and operations in typescript for equalized use on back-end between NestJS & Directus:
 
 <br />
 
@@ -41,9 +37,9 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
    > **[[Directus] Authentication reference](https://docs.directus.io/reference/api/system/authentication/)**
 
-2. Store access token in the DIRECTUS_ACCESS_TOKEN.
+2. Store access token in the DOCKER_DNA_DIRECTUS_ACCESS_TOKEN enviroment variable.
 
-3. With development environment running, run `npm run generate`.
+3. With development docker environment running, run `npm run generate`.
 
-4. The schema will be available in the **`dna-frontend`** and **`dna-backend`**
-   folders, under the **`graphql-schema`** file.
+4. The sdk will be available in the **`dna-backend/graphql`**
+   folder, under the **`sdk`** file.
