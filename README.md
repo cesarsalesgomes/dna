@@ -2,11 +2,11 @@
 
 Creation of a fullstack project in Typescript, with the objective of joining three well-regarded tools in the community (back-end NestJS/Directus, front-end Angular) in order to create an application that will serve as a prototype for projects that want to have the current best practices in the market for development and for management
 
+<br />
+
 ## **Development**
 
 ### Local development environment:
-
-<br />
 
 1. Clone this repo with git.
 
@@ -21,11 +21,9 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 ---
 
-## **GraphQL Sdk**
+## **GraphQL SDK**
 
 ### Steps to generate the database models and operations in typescript for equalized use on back-end between NestJS & Directus:
-
-<br />
 
 1. Generate admin access token using Directus authentication login: <br />
 
