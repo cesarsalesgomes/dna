@@ -109,3 +109,6 @@ dist
 
 # Directus
 /*/data
+
+# Graphql Generator Sdk
+/*/graphql/sdk.ts

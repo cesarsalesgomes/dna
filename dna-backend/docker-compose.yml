@@ -58,6 +58,7 @@ services:
       ADMIN_EMAIL: 'admin@example.com'
       ADMIN_PASSWORD: 'd1r3ctu5'
 
+      ACCESS_TOKEN_TTL: 1d
   # NestJS
   nest:
     container_name: nest

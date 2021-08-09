@@ -5,7 +5,7 @@ Bugs
 
 Melhorias
 
-☐ Importar tipos automaticamente (Ex: system controller deveria saber o retorno de system service)
+✔ Importar tipos automaticamente (Ex: system controller deveria saber o retorno de system service) @done(21-08-08 21:03)
 
 Lembretes
 
