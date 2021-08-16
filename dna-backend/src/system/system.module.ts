@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { DirectusService } from './directus/directus.service';
 
-@Module({})
-export class SystemModule {}
+@Module({
+  providers: [DirectusService],
+  exports: [DirectusService],
+})
+export class SystemModule { }
