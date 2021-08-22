@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { GraphQLClient } from 'graphql-request';
 import { getSdk } from '@graphql/sdk';
 import {
-  ENVIROMENT_VARIABLE_DIRECTUS_PORT_NOT_DEFINED_ERROR,
-  ENVIROMENT_VARIABLE_DOCKER_DNA_DIRECTUS_ACCESS_TOKEN_NOT_DEFINED_ERROR,
-  ENVIROMENT_VARIABLE_DOCKER_DNA_IPV4_DIRECTUS_NOT_DEFINED_ERROR,
-} from './directus.error';
+  EnviromentVariableDockerDnaIPV4NotDefinedException,
+  EnviromentVariableDirectusPortNotDefinedException,
+  EnviromentVariableDockerDnaDirectusAccessTokenNotDefinedException,
+} from './directus.exception';
 
 @Injectable()
 export class DirectusService {
@@ -27,13 +27,13 @@ export class DirectusService {
     } = process.env;
 
     if (!DOCKER_DNA_IPV4_DIRECTUS)
-      throw ENVIROMENT_VARIABLE_DOCKER_DNA_IPV4_DIRECTUS_NOT_DEFINED_ERROR;
+      throw new EnviromentVariableDockerDnaIPV4NotDefinedException();
 
     if (!DIRECTUS_PORT)
-      throw ENVIROMENT_VARIABLE_DIRECTUS_PORT_NOT_DEFINED_ERROR;
+      throw new EnviromentVariableDirectusPortNotDefinedException();
 
     if (!DOCKER_DNA_DIRECTUS_ACCESS_TOKEN)
-      throw ENVIROMENT_VARIABLE_DOCKER_DNA_DIRECTUS_ACCESS_TOKEN_NOT_DEFINED_ERROR;
+      throw new EnviromentVariableDockerDnaDirectusAccessTokenNotDefinedException();
 
     return {
       DOCKER_DNA_IPV4_DIRECTUS,
