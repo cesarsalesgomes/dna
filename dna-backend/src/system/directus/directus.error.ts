@@ -1,0 +1,19 @@
+import CustomError from 'src/common/classes/Error';
+
+export const ENVIROMENT_VARIABLE_DOCKER_DNA_IPV4_DIRECTUS_NOT_DEFINED_ERROR =
+  new CustomError(
+    'ENVIROMENT_VARIABLE_DOCKER_DNA_IPV4_DIRECTUS_NOT_DEFINED',
+    'Enviroment variable DOCKER_DNA_IPV4_DIRECTUS not defined',
+  );
+
+export const ENVIROMENT_VARIABLE_DIRECTUS_PORT_NOT_DEFINED_ERROR =
+  new CustomError(
+    'ENVIROMENT_VARIABLE_DIRECTUS_PORT_NOT_DEFINED',
+    'Enviroment variable DIRECTUS_PORT not defined',
+  );
+
+export const ENVIROMENT_VARIABLE_DOCKER_DNA_DIRECTUS_ACCESS_TOKEN_NOT_DEFINED_ERROR =
+  new CustomError(
+    'ENVIROMENT_VARIABLE_DOCKER_DNA_DIRECTUS_ACCESS_TOKEN_NOT_DEFINED',
+    'Enviroment variable DOCKER_DNA_DIRECTUS_ACCESS_TOKEN not defined',
+  );

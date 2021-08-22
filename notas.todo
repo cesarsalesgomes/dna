@@ -1,7 +1,7 @@
 Bugs
 
-☐ Corrigir import de Observale em rxjs (system.service.ts)
-☐ Erro eslint em interface de system
+✔ Corrigir import de Observable em rxjs (system.service.ts) @done(21-08-15 23:38)
+✔ Erro eslint em interface de system @done(21-08-15 23:38)
 
 Melhorias
 
@@ -9,5 +9,13 @@ Melhorias
 
 Lembretes
 
-☐ Entender melhor como rede interna Docker funciona
-☐ Atualizar README com feature de geração do Schema e comparação de chamada com tempo de uma chamada direta ao Directus e Nest/Directus
+☐ Estudar módulos de interceptor e autenticação para aplicá-los no módulo Directus
+  . Transmitir mesma exceções
+  . Transmitir mesmos códigos de erro 
+☐ Interceptor de log em exceções capturadas em try catches
+  . Gravar logs em arquivos com rotação diária
+  . Gravar logs em módulo / classe ou seviço com erro da exceçao lançada
+    - Ex: [System] [Directus] ...
+☐ Comparação de chamada com tempo de uma chamada direta ao Directus e Nest/Directus 
+✔ Entender melhor como rede interna Docker funciona @done(21-08-15 23:39)
+✔ Atualizar README com feature de geração do Schema @done(21-08-15 23:39)
