@@ -1,13 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { DirectusService } from 'src/system/directus/directus.service';
+import { CatRepository } from './cat.repository';
 
 @Injectable()
 export class CatService {
-  constructor(private directusService: DirectusService) { }
+  constructor(private catRepository: CatRepository) { }
 
   async findAll() {
-    const { data } = await this.directusService.sdk.findAllCats();
-
-    return data.cat;
+    return this.catRepository.findAll();
   }
 }

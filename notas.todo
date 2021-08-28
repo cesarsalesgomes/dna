@@ -8,14 +8,15 @@ Melhorias
 ✔ Importar tipos automaticamente (Ex: system controller deveria saber o retorno de system service) @done(21-08-08 21:03)
 
 Lembretes
-
-☐ Estudar módulos de interceptor e autenticação para aplicá-los no módulo Directus
-  . Transmitir mesma exceções
-  . Transmitir mesmos códigos de erro 
+  
+☐ Interceptor em respostas de sucesso para retornar tipo GraphQLResponse
 ☐ Interceptor de log em exceções capturadas em try catches
   . Gravar logs em arquivos com rotação diária
   . Gravar logs em módulo / classe ou seviço com erro da exceçao lançada
     - Ex: [System] [Directus] ...
 ☐ Comparação de chamada com tempo de uma chamada direta ao Directus e Nest/Directus 
+✔ Estudar módulos de interceptor e autenticação para aplicá-los no módulo Directus @done(21-08-28 18:11)
+  . Transmitir mesma exceções
+  . Transmitir mesmos códigos de erro 
 ✔ Entender melhor como rede interna Docker funciona @done(21-08-15 23:39)
 ✔ Atualizar README com feature de geração do Schema @done(21-08-15 23:39)
