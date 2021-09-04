@@ -19,7 +19,7 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 5. Open development site by going to [`http://localhost:4200`](http://localhost:4200) in your browser.
 6. Open Directus configuration site by going to [`http://localhost:8055`](http://localhost:8055) in your browser.
 
----
+<br />
 
 ## **GraphQL SDK**
 
@@ -35,3 +35,25 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 4. The sdk will be available in the **`dna-backend/graphql`**
    folder, under the **`sdk`** file.
+
+<br />
+
+## **Response format**
+
+### The response pattern followed the Directus return response. Thus, it was necessary to adjust the NestJS return pattern to fit and return in the same format.
+
+<br />
+
+### For this, it was used the interface already provided by the [graphql-request](https://www.npmjs.com/package/graphql-request) library already installed and used in the GraphQL SDK, which returns the responses in the same standard as Directus.
+
+<br />
+
+```typescript
+interface GraphQLResponse<T = any> {
+  data?: T;
+  errors?: GraphQLError[];
+  extensions?: any;
+  status: number;
+  [key: string]: any;
+}
+```
