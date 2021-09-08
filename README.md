@@ -4,7 +4,7 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 <br />
 
-## **Development**
+## **Development** ⚡️
 
 ### Local development environment:
 
@@ -21,7 +21,7 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 <br />
 
-## **GraphQL SDK**
+## **GraphQL SDK** 🚀
 
 ### Steps to generate the database models and operations in typescript for equalized use on back-end between NestJS & Directus:
 
@@ -38,7 +38,7 @@ Creation of a fullstack project in Typescript, with the objective of joining thr
 
 <br />
 
-## **Response format**
+## **Response format** 👋
 
 The response pattern followed the Directus return response. Thus, it was necessary to adjust the NestJS return pattern to fit and return in the same format.
 
@@ -55,3 +55,17 @@ interface GraphQLResponse<T = any> {
   [key: string]: any;
 }
 ```
+
+<br />
+
+## **Migration** 🚚
+
+Migration is still an open topic in the directus community, where its team and community are looking for a viable solution to make migration between Directus databases possible and simple.
+
+A momentary and functional solution was found in a [discussion topic](https://github.com/directus/directus/discussions/3891) related to the subject, where a contributor provided the necessary commands to be run, so that it is possible to migrate the schema difference between two Directus databases without data loss:
+
+**[Directus Migration Script Link](https://gist.github.com/tspvivek/242c33a5dbfb149c9057f93041e4450d)**
+
+<br />
+
+_Migration steps on progress..._
