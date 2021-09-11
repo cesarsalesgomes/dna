@@ -1,6 +1,6 @@
 # DNA
 
-Creation of a fullstack project in Typescript, with the objective of joining three well-regarded tools in the community (back-end NestJS/Directus, front-end Angular) in order to create an application that will serve as a prototype for projects that want to have the current best practices in the market for development and for management
+Fullstack prototipe project in Typescript, with the objective of joining three well-regarded tools in the community (`back-end `NestJS / Directus, `front-end` Angular) in order to create an initial environment with the main necessary settings that a project commonly requires during its lifetime, so during its development try to focus as much as possible only on the code development required by the application.
 
 <br />
 
@@ -62,10 +62,12 @@ interface GraphQLResponse<T = any> {
 
 Migration is still an open topic in the directus community, where its team and community are looking for a viable solution to make migration between Directus databases possible and simple.
 
-A momentary and functional solution was found in a [discussion topic](https://github.com/directus/directus/discussions/3891) related to the subject, where a contributor provided the necessary commands to be run, so that it is possible to migrate the schema difference between two Directus databases without data loss:
+A momentary and functional solution was found in a [discussion topic](https://github.com/directus/directus/discussions/3891) related to the subject, where a contributor provided the necessary commands to be run, so that it is possible to migrate the schema difference between two Directus databases without data loss [**[Directus Migration Script Link](https://gist.github.com/tspvivek/242c33a5dbfb149c9057f93041e4450d)**]
 
-**[Directus Migration Script Link](https://gist.github.com/tspvivek/242c33a5dbfb149c9057f93041e4450d)**
+1. Copy the file _migration.sh_ from the folder dna-migration
 
-<br />
+2. Paste the file to the database docker volume path (_dna-backend/data/database_)
 
-_Migration steps on progress..._
+3. The file will then be available in the database path within the docker environment (_/var/lib/postgresql/data_)
+
+4. Open the Docker CLI, go to the step 3 route, and run the script with the desired source and target database url's values
