@@ -64,10 +64,10 @@ Migration is still an open topic in the directus community, where its team and c
 
 A momentary and functional solution was found in a [discussion topic](https://github.com/directus/directus/discussions/3891) related to the subject, where a contributor provided the necessary commands to be run, so that it is possible to migrate the schema difference between two Directus databases without data loss [**[Directus Migration Script Link](https://gist.github.com/tspvivek/242c33a5dbfb149c9057f93041e4450d)**]
 
-1. Copy the file _migration.sh_ from the folder dna-migration
+1. Copy the file _migration.sh_ from the folder dna-migration.
 
-2. Paste the file to the database docker volume path (_dna-backend/data/database_)
+2. Paste the file to the database docker volume path (_dna-backend/data/database_).
 
-3. The file will then be available in the database path within the docker environment (_/var/lib/postgresql/data_)
+3. The file will then be available in the database path within the docker environment (_/var/lib/postgresql/data_).
 
-4. Open the Docker CLI, go to the step 3 route, and run the script with the desired source and target database url's values
+4. Open the Docker CLI, go to the step 3 route, and run the script with the desired source and target database url's values.
