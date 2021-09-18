@@ -13,7 +13,8 @@
     "incremental": true,
     "skipLibCheck": true,
     "paths": {
-      "@graphql/*": ["graphql/*"]
+      "@graphql/*": ["graphql/*"],
+      "@system/*": ["src/system/*"]
     }
   }
 }
