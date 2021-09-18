@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DirectusService } from 'src/system/directus/directus.service';
+import { DirectusService } from '@system/directus/directus.service';
 
 @Injectable()
 export class CatRepository {

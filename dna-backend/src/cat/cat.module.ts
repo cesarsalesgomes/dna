@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SystemModule } from 'src/system/system.module';
+import { SystemModule } from '@system/system.module';
 import { CatController } from './cat.controller';
 import { CatService } from './cat.service';
 import { CatRepository } from './cat.repository';

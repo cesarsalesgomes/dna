@@ -77,7 +77,8 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "@graphql/(.*)": "<rootDir>/../graphql/$1"    
+      "@graphql/(.*)": "<rootDir>/../graphql/$1",
+      "@system/(.*)$": "<rootDir>/system/$1"
     }
   }
 }
