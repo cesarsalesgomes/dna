@@ -19,6 +19,18 @@ export class DirectusService {
     return getSdk(this.client);
   }
 
+  private setGraphqlClient() {
+    const {
+      DOCKER_DNA_IPV4_DIRECTUS,
+      DIRECTUS_PORT,
+      DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
+    } = this.getEnviromentVariables();
+
+    this.client = new GraphQLClient(
+      `http://${DOCKER_DNA_IPV4_DIRECTUS}:${DIRECTUS_PORT}/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}`,
+    );
+  }
+
   private getEnviromentVariables() {
     const {
       DOCKER_DNA_IPV4_DIRECTUS,
@@ -40,17 +52,5 @@ export class DirectusService {
       DIRECTUS_PORT,
       DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
     };
-  }
-
-  private setGraphqlClient() {
-    const {
-      DOCKER_DNA_IPV4_DIRECTUS,
-      DIRECTUS_PORT,
-      DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
-    } = this.getEnviromentVariables();
-
-    this.client = new GraphQLClient(
-      `http://${DOCKER_DNA_IPV4_DIRECTUS}:${DIRECTUS_PORT}/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}`,
-    );
   }
 }
