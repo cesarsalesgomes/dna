@@ -1,6 +1,6 @@
 {
   "name": "dna",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "author": "",
   "private": true,
@@ -78,7 +78,8 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "@graphql/(.*)": "<rootDir>/../graphql/$1",
-      "@system/(.*)$": "<rootDir>/system/$1"
+      "@system/(.*)$": "<rootDir>/system/$1",
+      "@utils/(.*)$": "<rootDir>/utils/$1"
     }
   }
 }
