@@ -14,7 +14,8 @@
     "skipLibCheck": true,
     "paths": {
       "@graphql/*": ["graphql/*"],
-      "@system/*": ["src/system/*"]
+      "@system/*": ["src/system/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }
