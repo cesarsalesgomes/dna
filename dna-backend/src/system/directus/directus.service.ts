@@ -16,6 +16,10 @@ export class DirectusService {
   }
 
   get sdk() {
+    return this.getSdk();
+  }
+
+  getSdk() {
     return getSdk(this.client);
   }
 
