@@ -3,6 +3,7 @@ import { DirectusService } from '@system/directus/directus.service';
 import { setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 import { CatController } from './cat.controller';
 import { CatModule } from './cat.module';
+import { findAllCatsMock } from './cat.mock';
 
 describe('[Cat] Integration Tests Spec', () => {
   let module: TestingModule;
@@ -29,12 +30,14 @@ describe('[Cat] Integration Tests Spec', () => {
     expect(directusService).toBeDefined();
   });
 
-  it('Expect route cats GET to return a list of cats', async () => {
-    jest
-      .spyOn(directusService.sdk, 'findAllCats')
-      .mockResolvedValue(<any>{ data: [] });
+  it('Expect route cats GET to return a list of cats, with a cat of id 1 ', async () => {
+    jest.spyOn(directusService, 'getSdk').mockReturnValue({
+      findAllCats: findAllCatsMock,
+    });
 
-    expect(await catController.findAll()).toBeDefined();
+    const cats = await catController.findAll();
+
+    expect(cats[0].id).toEqual('1');
   });
 
   async function setModules(modules: Array<any>) {
