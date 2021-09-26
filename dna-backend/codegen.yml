@@ -14,3 +14,11 @@ generates:
       - typescript-graphql-request
     config:
       rawRequest: true
+      namingConvention:
+        transformUnderscore: true
+
+  # Sdk Mock Data (Use in integration tests)
+  ./graphql/mock.ts:
+    plugins:
+      - typescript-mock-data:
+          typesFile: './sdk.ts'
