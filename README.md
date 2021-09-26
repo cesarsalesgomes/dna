@@ -71,3 +71,27 @@ A momentary and functional solution was found in a [discussion topic](https://gi
 3. The file will then be available in the database path within the docker environment (_/var/lib/postgresql/data_).
 
 4. Open the Docker CLI, go to the step 3 route, and run the script with the desired source and target database url's values.
+
+<br />
+
+## **Tests** ✅
+
+For the testing stage, all the well-known and recommended structure of the **[NestJS Testing Module](https://docs.nestjs.com/fundamentals/testing)** was used, leaving it responsible for `UNIT TESTING` and `INTEGRATED TESTING`, applying them according to what the system needs during its development.
+
+For the `END-TO-END`, **[Cypress](https://github.com/cypress-io/cypress)** will be used, a framework already well recognized and recommended by the community, due to its ease and great integration with Angular.
+
+### Examples:
+
+> **[UNIT TESTING](https://github.com/cesarsalesgomes/dna/blob/main/dna-backend/src/system/system.spec.ts)**
+
+_Test example in which were concerned with covering a portion of the business layer of the system module, without integration with other layers, such as the data layer._
+
+> **[INTEGRATION TESTING](https://github.com/cesarsalesgomes/dna/blob/main/dna-backend/src/cat/cat.spec.ts)**
+
+_Example of test in call of a system route, in which the call to the data layer was abstracted, trying to cover as much as possible the Directus service._
+
+_The automatic generation of false data, generated from the **[graphql-codegen-typescript-mock-data plugin](https://github.com/ardeois/graphql-codegen-typescript-mock-data#readme)**, was also provided in the generate script, so as to take advantage of graphql and thus obtain agility in the development of the tests._
+
+> **[E2E TEST]()**
+
+_Will be documented when starting Angular development ..._
