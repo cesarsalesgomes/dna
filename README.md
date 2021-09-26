@@ -1,6 +1,6 @@
 # DNA
 
-Fullstack prototipe project in Typescript, with the objective of joining three well-regarded tools in the community (`back-end` NestJS / Directus, `front-end` Angular) in order to create an initial environment with the main necessary settings that a project commonly requires during its lifetime, so during its development try to focus as much as possible only on the code development required by the application.
+Fullstack prototipe project in Typescript, with the objective of joining three well-regarded tools in the community (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io/getting-started/introduction/)**, `front-end` **[Angular](https://angular.io/)**) in order to create an initial environment with the main necessary settings that a project commonly requires during its lifetime, so during its development try to focus as much as possible only on the code development required by the application.
 
 <br />
 
@@ -90,7 +90,7 @@ _Test example in which were concerned with covering a portion of the business la
 
 _Example of test in call of a system route, in which the call to the data layer was abstracted, trying to cover as much as possible the Directus service._
 
-_The automatic generation of false data, generated from the **[graphql-codegen-typescript-mock-data plugin](https://github.com/ardeois/graphql-codegen-typescript-mock-data#readme)**, was also provided in the generate script, so as to take advantage of graphql and thus obtain agility in the development of the tests._
+_The automatic generation of false data, generated from the **[graphql-codegen-typescript-mock-data plugin](https://github.com/ardeois/graphql-codegen-typescript-mock-data#readme)**, was also provided in the `generate` script, so as to take advantage of `GraphQL` and thus obtain agility in the development of the tests._
 
 > **[E2E TEST]()**
 
