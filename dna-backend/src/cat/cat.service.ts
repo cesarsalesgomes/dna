@@ -5,7 +5,7 @@ import { CatRepository } from './cat.repository';
 export class CatService {
   constructor(private catRepository: CatRepository) { }
 
-  async findAll() {
-    return this.catRepository.findAll();
+  async findAll(accessToken: string) {
+    return this.catRepository.findAll(accessToken);
   }
 }

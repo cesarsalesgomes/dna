@@ -4,57 +4,29 @@ import { getSdk } from '@graphql/sdk';
 import {
   EnviromentVariableDockerDnaIPV4NotDefinedException,
   EnviromentVariableDirectusPortNotDefinedException,
-  EnviromentVariableDockerDnaDirectusAccessTokenNotDefinedException,
 } from './directus.exception';
 
 @Injectable()
 export class DirectusService {
-  private client: GraphQLClient;
-
-  constructor() {
-    this.setGraphqlClient();
+  getSdk(accessToken: string) {
+    return getSdk(this.getGraphqlClient(accessToken));
   }
 
-  get sdk() {
-    return this.getSdk();
-  }
+  private getGraphqlClient(accessToken: string) {
+    const { DOCKER_DNA_IPV4_DIRECTUS, DIRECTUS_PORT } = this.getEnviromentVariables();
 
-  getSdk() {
-    return getSdk(this.client);
-  }
-
-  private setGraphqlClient() {
-    const {
-      DOCKER_DNA_IPV4_DIRECTUS,
-      DIRECTUS_PORT,
-      DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
-    } = this.getEnviromentVariables();
-
-    this.client = new GraphQLClient(
-      `http://${DOCKER_DNA_IPV4_DIRECTUS}:${DIRECTUS_PORT}/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}`,
-    );
+    return new GraphQLClient(`http://${DOCKER_DNA_IPV4_DIRECTUS}:${DIRECTUS_PORT}/graphql?access_token=${accessToken}`);
   }
 
   private getEnviromentVariables() {
-    const {
-      DOCKER_DNA_IPV4_DIRECTUS,
-      DIRECTUS_PORT,
-      DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
-    } = process.env;
+    const { DOCKER_DNA_IPV4_DIRECTUS, DIRECTUS_PORT } = process.env;
 
-    if (!DOCKER_DNA_IPV4_DIRECTUS)
-      throw new EnviromentVariableDockerDnaIPV4NotDefinedException();
-
-    if (!DIRECTUS_PORT)
-      throw new EnviromentVariableDirectusPortNotDefinedException();
-
-    if (!DOCKER_DNA_DIRECTUS_ACCESS_TOKEN)
-      throw new EnviromentVariableDockerDnaDirectusAccessTokenNotDefinedException();
+    if (!DOCKER_DNA_IPV4_DIRECTUS) throw new EnviromentVariableDockerDnaIPV4NotDefinedException();
+    if (!DIRECTUS_PORT) throw new EnviromentVariableDirectusPortNotDefinedException();
 
     return {
       DOCKER_DNA_IPV4_DIRECTUS,
       DIRECTUS_PORT,
-      DOCKER_DNA_DIRECTUS_ACCESS_TOKEN,
     };
   }
 }

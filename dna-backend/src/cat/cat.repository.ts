@@ -5,7 +5,7 @@ import { DirectusService } from '@system/directus/directus.service';
 export class CatRepository {
   constructor(private directusService: DirectusService) { }
 
-  async findAll() {
-    return (await this.directusService.sdk.findAllCats()).data.cat;
+  async findAll(accessToken: string) {
+    return (await this.directusService.getSdk(accessToken).findAllCats()).data.cat;
   }
 }
