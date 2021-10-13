@@ -35,7 +35,7 @@ describe('[Cat] Integration Tests Spec', () => {
       findAllCats: findAllCatsMock,
     });
 
-    const cats = await catController.findAll();
+    const cats = await catController.findAll('accessToken');
 
     expect(cats[0].id).toBeDefined();
     expect(cats[0].name).toBeDefined();

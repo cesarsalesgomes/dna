@@ -13,17 +13,11 @@ export class SpecUtils {
     this.enviromentVariables = { ...process.env };
   }
 
-  public setSystemEnviromentVariables(
-    setIpv4Directus: boolean,
-    setDirectusPort: boolean,
-    setDirectusAccessToken: boolean,
-  ) {
+  public setSystemEnviromentVariables(setIpv4Directus: boolean, setDirectusPort: boolean) {
     this.resetEnviromentVariables();
 
     if (setIpv4Directus) process.env.DOCKER_DNA_IPV4_DIRECTUS = 'defined';
     if (setDirectusPort) process.env.DIRECTUS_PORT = 'defined';
-    if (setDirectusAccessToken)
-      process.env.DOCKER_DNA_DIRECTUS_ACCESS_TOKEN = 'defined';
   }
 
   private resetEnviromentVariables() {
@@ -41,20 +35,12 @@ export function createTestingModuleOnInnerFunction(modules: Array<any>) {
   return () => createTestingModule(modules);
 }
 
-export async function setSpecSystemEnviromentVariables(
-  setIpv4Directus = true,
-  setDirectusPort = true,
-  setDirectusAccessToken = true,
-) {
+export async function setSpecSystemEnviromentVariables(setIpv4Directus = true, setDirectusPort = true) {
   const module: TestingModule = await Test.createTestingModule({
     providers: [SpecUtils],
   }).compile();
 
   const specUtils = module.get<SpecUtils>(SpecUtils);
 
-  specUtils.setSystemEnviromentVariables(
-    setIpv4Directus,
-    setDirectusPort,
-    setDirectusAccessToken,
-  );
+  specUtils.setSystemEnviromentVariables(setIpv4Directus, setDirectusPort);
 }
