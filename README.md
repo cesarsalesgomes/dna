@@ -95,3 +95,17 @@ _The automatic generation of false data, generated from the **[graphql-codegen-t
 > **[E2E TEST]()**
 
 _Will be documented when starting Angular development ..._
+
+<br />
+
+## **Authentication** 🔒
+
+### To obtain an authentication token and gain access to the routes developed in the application, perform the steps below:
+
+1. Generate access token using Directus authentication login: <br />
+
+   > **[[Directus] Authentication reference](https://docs.directus.io/reference/api/system/authentication/)**
+
+2. Pass the token in the Authorization header (`Authorization: Bearer <token>`):
+
+   > **`Authorization: Bearer eyJh...KmUk`**
