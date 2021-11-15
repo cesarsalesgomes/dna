@@ -3,7 +3,7 @@ services:
   # Postgres
   database:
     container_name: database
-    image: postgres:12
+    image: postgres:14
     volumes:
       - ./data/database:/var/lib/postgresql/data
     networks:
@@ -59,9 +59,11 @@ services:
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
 
       ACCESS_TOKEN_TTL: 1d
+
   # NestJS
   nest:
-    container_name: nest
+    container_name: dnanestjs
+    image: dnanestjs:v1
     build:
       context: .
       target: development
