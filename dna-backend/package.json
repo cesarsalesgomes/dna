@@ -15,7 +15,7 @@
     "start:dev:docker": "docker-compose up",
     "start:dev:docker:rebuild": "docker-compose up --build -V",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
