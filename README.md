@@ -112,7 +112,7 @@ _Will be documented when starting Angular development ..._
 
 <br />
 
-## **Deployment**
+## **Deployment** ☁️
 
 After research and attempts to deploy the application via docker compose in the Azure environment, it was noticed that the ease of execution and configuration of the development environment is not the same in cloud environments with docker.
 
@@ -120,7 +120,7 @@ In this way, it was decided to deploy each system layer in parts, researching th
 
 > **Directus/Postgres**
 
-_It was chosen to deploy the database on the **[Heroku](https://heroku.com)** enviroment. The environment provides a **[Template](https://github.com/directus-community/heroku-template)** for deploying all the main technologies involved in the Directus enviroment, have basic unpaid plans for them and its simple and intuitive to configure and check the system logs and health._
+_It was chosen to deploy the Directus on the **[Heroku](https://heroku.com)** enviroment. It provides a **[Template](https://github.com/directus-community/heroku-template)** for deploying all the main technologies involved, has basic unpaid plans, its simple and intuitive to configure and check the system logs and health._
 
 _After a first attempt to create the environment via template, some errors appeared. To fix them, the template was left aside, and the environments were created in stages._
 
@@ -128,7 +128,7 @@ _First, it was necessary to create a separate Postgres database, and migrate the
 
 _An example of an initial Directus application can be found in the folder `dna-heroku`_
 
-_After that, the `dna-heroku` folder was deployed on Github, connected to a Node.js app on Heroku, and connected to the previously created database via enviroment variable._
+_After that, the `dna-heroku` folder was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via enviroment variable._
 
 **Issues found:**
 
