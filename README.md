@@ -126,9 +126,7 @@ _After a first attempt to create the environment via template, some errors appea
 
 _First, it was necessary to create a separate Postgres database, and migrate the tables from a Directus application bootstrapped, using the script explained above in the migration session._
 
-_An example of an initial Directus application can be found in the folder `dna-heroku`_
-
-_After that, the `dna-heroku` folder was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via enviroment variable._
+_An example of an initial Directus application can be found in the folder `dna-heroku`, that was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via enviroment variable._
 
 **Issues found:**
 
@@ -136,4 +134,4 @@ _After that, the `dna-heroku` folder was deployed on Github, integrated to a Nod
 
 > **NestJS**
 
-_(Heroku)._
+_Coming soon ..._
