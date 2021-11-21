@@ -1,7 +1,4 @@
-import {
-  EnviromentVariableDirectusPortNotDefinedException,
-  EnviromentVariableDockerDnaIPV4NotDefinedException,
-} from '@system/directus/directus.exception';
+import { EnviromentVariableDirectusIPNotDefinedException } from '@system/directus/directus.exception';
 import { createTestingModuleOnInnerFunction, setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 import { SystemModule } from './system.module';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -11,26 +8,17 @@ import { CatModule } from '../cat/cat.module';
 describe('[System] Unit Tests Spec', () => {
   let module: TestingModule;
 
-  it('Expected to throw EnviromentVariableDockerDnaIPV4NotDefined exception', async () => {
-    await setSpecSystemEnviromentVariables(false, false);
+  it('Expected to throw EnviromentVariableDirectusIPNotDefined exception', async () => {
+    await setSpecSystemEnviromentVariables(false);
     await setModules([CatModule]);
 
     const catController = module.get<CatController>(CatController);
 
-    expect(catController.findAll('accessToken')).rejects.toThrowError(EnviromentVariableDockerDnaIPV4NotDefinedException);
-  });
-
-  it('Expected to throw EnviromentVariableDirectusPortNotDefined exception', async () => {
-    await setSpecSystemEnviromentVariables(true, false);
-    await setModules([CatModule]);
-
-    const catController = module.get<CatController>(CatController);
-
-    expect(catController.findAll('accessToken')).rejects.toThrowError(EnviromentVariableDirectusPortNotDefinedException);
+    expect(catController.findAll('accessToken')).rejects.toThrowError(EnviromentVariableDirectusIPNotDefinedException);
   });
 
   it('Expect to create system module without errors', async () => {
-    await setSpecSystemEnviromentVariables(true, true);
+    await setSpecSystemEnviromentVariables(true);
 
     expect(createTestingModuleOnInnerFunction([SystemModule])()).toBeDefined();
   });

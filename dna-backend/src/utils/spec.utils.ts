@@ -13,11 +13,10 @@ export class SpecUtils {
     this.enviromentVariables = { ...process.env };
   }
 
-  public setSystemEnviromentVariables(setIpv4Directus: boolean, setDirectusPort: boolean) {
+  public setSystemEnviromentVariables(setIpv4Directus: boolean) {
     this.resetEnviromentVariables();
 
-    if (setIpv4Directus) process.env.DOCKER_DNA_IPV4_DIRECTUS = 'defined';
-    if (setDirectusPort) process.env.DIRECTUS_PORT = 'defined';
+    if (setIpv4Directus) process.env.DIRECTUS_IPV4 = 'defined';
   }
 
   private resetEnviromentVariables() {
@@ -35,12 +34,12 @@ export function createTestingModuleOnInnerFunction(modules: Array<any>) {
   return () => createTestingModule(modules);
 }
 
-export async function setSpecSystemEnviromentVariables(setIpv4Directus = true, setDirectusPort = true) {
+export async function setSpecSystemEnviromentVariables(setDirectusIPV4 = true) {
   const module: TestingModule = await Test.createTestingModule({
     providers: [SpecUtils],
   }).compile();
 
   const specUtils = module.get<SpecUtils>(SpecUtils);
 
-  specUtils.setSystemEnviromentVariables(setIpv4Directus, setDirectusPort);
+  specUtils.setSystemEnviromentVariables(setDirectusIPV4);
 }

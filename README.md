@@ -114,24 +114,32 @@ _Will be documented when starting Angular development ..._
 
 ## **Deployment** ☁️
 
-After research and attempts to deploy the application via docker compose in the Azure environment, it was noticed that the ease of execution and configuration of the development environment is not the same in cloud environments with docker.
+After research and attempts to deploy the application via docker compose in the `Azure` environment, it was noticed that the ease of execution and configuration of the development environment is not the same in cloud environments with docker.
 
 In this way, it was decided to deploy each system layer in parts, researching the environment where its configuration was simpler and more intuitive, less costly and with better support.
 
-> **Directus/Postgres**
+> **Directus / Postgres**
 
-_It was chosen to deploy the Directus on the **[Heroku](https://heroku.com)** enviroment. It provides a **[Template](https://github.com/directus-community/heroku-template)** for deploying all the main technologies involved, has basic unpaid plans, its simple and intuitive to configure and check the system logs and health._
+_It was chosen to deploy the `Directus` on the **[Heroku](https://heroku.com)** enviroment. It provides a **[Template](https://github.com/directus-community/heroku-template)** for deploying all the main technologies involved, has basic unpaid plans, its simple and intuitive to configure and check the system logs and health._
 
 _After a first attempt to create the environment via template, some errors appeared. To fix them, the template was left aside, and the environments were created in stages._
 
-_First, it was necessary to create a separate Postgres database, and migrate the tables from a Directus application bootstrapped, using the script explained above in the migration session._
+_First, it was necessary to create a separate `Postgres` database, and migrate the tables from a `Directus` application bootstrapped, using the script explained above in the migration session._
 
-_An example of an initial Directus application can be found in the folder `dna-heroku`, that was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via enviroment variable._
+_An example of an initial `Directus` application can be found in the folder `dna-heroku`, that was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via the enviroment variable `DB_CONNECTION_STRING`, with the query string `sslmode` set to the value `no-verify`, if the plan of the database is the free-tier¹._
 
-**Issues found:**
+**Issues:**
 
 1. **[Heroku + PostgreSQL issue](https://github.com/directus/directus/discussions/5047)**
 
+2. As described on the **[Admin Account](https://docs.directus.io/configuration/config-options/#admin-account)**, it is necessary to start the `Directus` enviroment with Docker or via CLI command to configure the first Admin User. To overcome this, run the scripts `admin_role` and `admin_user` found in the folder _dna-heroku/scripts._ (`OBS`: the password must be encoded with the `KEY/SECRET` defined on the `Directus` enviroment variables. One way to accomplish this step is to create a `Directus` application locally via Docker or CLI using the environment variable `ADMIN_PASSWORD`, and copy the generated password into the directus_users table on the Heroku enviroment).
+
 > **NestJS**
 
-_Coming soon ..._
+_The `NestJS` layer was also configured on the Heroku enviroment. To deploy it, it is necessary to:_
+
+1. Init a git repository on the `dna-backend` folder.
+
+2. Connect it to a Heroku application.
+
+3. Set the enviroment variable `DIRECTUS_IP` to the Directus domain previously created on Heroku (Ex: https://dna-directus.herokuapp.com)

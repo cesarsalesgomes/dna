@@ -3,7 +3,7 @@ services:
   # Postgres
   database:
     container_name: database
-    image: postgres:12
+    image: postgres:14
     volumes:
       - ./data/database:/var/lib/postgresql/data
     networks:
