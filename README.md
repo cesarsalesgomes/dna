@@ -132,14 +132,14 @@ _An example of an initial `Directus` application can be found in the folder `dna
 
 1. **[Heroku + PostgreSQL issue](https://github.com/directus/directus/discussions/5047)**
 
-2. As described on the **[Admin Account](https://docs.directus.io/configuration/config-options/#admin-account)**, it is necessary to start the `Directus` enviroment with Docker or via CLI command to configure the first Admin User. To overcome this, run the scripts `admin_role` and `admin_user` found in the folder _dna-heroku/scripts._ (`OBS`: the password must be encoded with the `KEY/SECRET` defined on the `Directus` enviroment variables. One way to accomplish this step is to create a `Directus` application locally via Docker or CLI using the environment variable `ADMIN_PASSWORD`, and copy the generated password into the directus_users table on the Heroku enviroment).
+2. As described on the **[Admin Account](https://docs.directus.io/configuration/config-options/#admin-account)**, it is necessary to start the `Directus` enviroment with Docker or via CLI command to configure the first Admin User. To overcome this, run the scripts **admin_role** and **admin_user** found in the folder **dna-heroku/scripts**. (**OBS**: the password must be encoded with the **KEY/SECRET** defined on the `Directus` enviroment variables. One way to accomplish this step is to create a `Directus` application locally via Docker or CLI using the environment variable **ADMIN_PASSWORD**, and copy the generated password into the **directus_users** table on the Heroku enviroment).
 
 > **NestJS**
 
 _The `NestJS` layer was also configured on the Heroku enviroment. To deploy it, it is necessary to:_
 
-1. Init a git repository on the `dna-backend` folder.
+1. Init a git repository on the **dna-backend** folder.
 
 2. Connect it to a Heroku application.
 
-3. Set the enviroment variable `DIRECTUS_IP` to the Directus domain previously created on Heroku (Ex: https://dna-directus.herokuapp.com)
+3. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Heroku (Ex: https://dna-directus.herokuapp.com)
