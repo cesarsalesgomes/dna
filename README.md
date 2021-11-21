@@ -126,7 +126,7 @@ _After a first attempt to create the environment via template, some errors appea
 
 _First, it was necessary to create a separate `Postgres` database, and migrate the tables from a `Directus` application bootstrapped, using the script explained above in the migration session._
 
-_An example of an initial `Directus` application can be found in the folder `dna-heroku`, that was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via the enviroment variable `DB_CONNECTION_STRING`, with the query string `sslmode` set to the value `no-verify`, if the plan of the database is the free-tier¹._
+_An example of an initial `Directus` application can be found in the folder **dna-heroku**, that was deployed on Github, integrated to a Node.js app on Heroku, and connected to the previously created database via the enviroment variable **DB_CONNECTION_STRING**, with the query string `sslmode` set to the value `no-verify`, if the plan of the database is the free-tier¹._
 
 **Issues:**
 
