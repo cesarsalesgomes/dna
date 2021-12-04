@@ -1,0 +1,143 @@
+version: 1
+directus: 9.1.2
+collections:
+  - collection: cat
+    meta:
+      collection: cat
+      icon: null
+      note: null
+      display_template: null
+      hidden: false
+      singleton: false
+      translations: null
+      archive_field: null
+      archive_app_filter: true
+      archive_value: null
+      unarchive_value: null
+      sort_field: null
+      accountability: all
+      color: null
+      item_duplication_fields: null
+      sort: null
+      group: null
+      collapse: open
+    schema:
+      name: cat
+      schema: public
+      comment: null
+fields:
+  - collection: cat
+    field: id
+    type: integer
+    schema:
+      name: id
+      table: cat
+      data_type: integer
+      default_value: nextval('cat_id_seq'::regclass)
+      generation_expression: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_generated: false
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      has_auto_increment: true
+      comment: null
+      schema: public
+      foreign_key_schema: null
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: cat
+      field: id
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: true
+      hidden: true
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: cat
+    field: name
+    type: string
+    schema:
+      name: name
+      table: cat
+      data_type: character varying
+      default_value: null
+      generation_expression: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      comment: null
+      schema: public
+      foreign_key_schema: null
+      foreign_key_table: null
+      foreign_key_column: null
+    meta:
+      collection: cat
+      field: name
+      special: null
+      interface: input
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
+      translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
+  - collection: directus_notifications
+    field: status
+    type: string
+    schema:
+      name: status
+      table: directus_notifications
+      data_type: character varying
+      default_value: inbox
+      generation_expression: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_generated: false
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      has_auto_increment: false
+      comment: null
+      schema: public
+      foreign_key_schema: null
+      foreign_key_table: null
+      foreign_key_column: null
+    meta: null
+relations:
+  - collection: directus_collections
+    field: group
+    related_collection: directus_collections
+    schema:
+      table: directus_collections
+      column: group
+      foreign_key_table: directus_collections
+      foreign_key_column: collection
+      foreign_key_schema: public
+      constraint_name: directus_collections_group_foreign
+      on_update: NO ACTION
+      on_delete: NO ACTION
+    meta: null
