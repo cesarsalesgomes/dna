@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "migration:up": "npx directus apply /migration/schema.yaml",
+    "migration:up": "npx directus schema apply ./migration/schema.yaml",
     "directus:start": "npx directus start",
     "start": "npm run migration:up && npm run directus:start",
     "test": "echo \"Error: no test specified\" && exit 1"
