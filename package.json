@@ -1,0 +1,12 @@
+{
+  "name": "dna-scripts",
+  "version": "1.0.0",
+  "description": "Dna Docker scripts",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start:dev:docker": "docker-compose up",
+    "start:dev:docker:rebuild": "docker-compose up --build -V"
+  }
+}
