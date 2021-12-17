@@ -1,0 +1,24 @@
+overwrite: true
+
+schema:
+  - http://localhost:8055/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+
+documents: './graphql/**/*.graphql'
+
+generates:
+  # Sdk (Typescript database model & operation file)
+  ./graphql/sdk.ts:
+    plugins:
+      - 'typescript'
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      rawRequest: true
+      namingConvention:
+        transformUnderscore: true
+
+  # Sdk Mock Data (Use in integration tests)
+  ./graphql/mock.ts:
+    plugins:
+      - typescript-mock-data:
+          typesFile: './sdk.ts'
