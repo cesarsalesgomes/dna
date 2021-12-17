@@ -10,9 +10,9 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 
 1. Clone this repo with git.
 
-2. Install back-end and front-end dependencies by running `npm install` within both directories (`dna-backend` and `dna-frontend`).
+2. Install back-end and front-end dependencies by running `npm install` within both directories (`nestjs` and `angular`).
 
-3. Start the back-end development server with `docker-compose up`.
+3. Start the back-end development server with `docker-compose up` under the folder dna.
 
 4. Start the front-end development server with `ng serve`.
 
@@ -33,7 +33,7 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 
 3. With development docker environment running, run `npm run generate`.
 
-4. The sdk will be available in the **`dna-backend/graphql`**
+4. The sdk will be available in the **`nestjs/graphql`**
    folder, under the **`sdk`** file.
 
 <br />
@@ -82,11 +82,11 @@ For the `END-TO-END`, **[Cypress](https://github.com/cypress-io/cypress)** will 
 
 ### Examples:
 
-> **[UNIT TESTING](https://github.com/cesarsalesgomes/dna/blob/main/dna-backend/src/system/system.spec.ts)**
+> **[UNIT TESTING](https://github.com/cesarsalesgomes/dna/blob/main/nestjs/src/system/system.spec.ts)**
 
 _Test example in which were concerned with covering a portion of the business layer of the system module, without integration with other layers, such as the data layer._
 
-> **[INTEGRATION TESTING](https://github.com/cesarsalesgomes/dna/blob/main/dna-backend/src/cat/cat.spec.ts)**
+> **[INTEGRATION TESTING](https://github.com/cesarsalesgomes/dna/blob/main/nestjs/src/cat/cat.spec.ts)**
 
 _Example of test in call of a system route, in which the call to the data layer was abstracted, trying to cover as much as possible the Directus service._
 
@@ -140,7 +140,7 @@ _It was chosen to deploy the `Directus` on the **[Heroku](https://heroku.com)** 
 
 _The `NestJS` layer was also configured on the Heroku enviroment. To deploy it, it is necessary to:_
 
-1. Init a git repository on the **dna-backend** folder.
+1. Init a git repository on the **nestjs** folder.
 
 2. Connect it to a Heroku application.
 

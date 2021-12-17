@@ -108,7 +108,10 @@ dist
 /*/.env
 
 # Directus
-/*/data
+/directus/uploads/*
+
+# Postgres
+/database/*
 
 # Graphql Generator Sdk
 /*/graphql/sdk.ts

@@ -1,0 +1,89 @@
+version: "3"
+services:
+  # Postgres
+  database:
+    container_name: database
+    image: postgres:13.5
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    networks:
+      - dna_network
+    environment:
+      POSTGRES_USER: "directus"
+      POSTGRES_PASSWORD: "directus"
+      POSTGRES_DB: "directus"
+
+  cache:
+    container_name: cache
+    image: redis:6
+    networks:
+      - dna_network
+
+  # Directus
+  directus:
+    container_name: directus
+    image: directus/directus:latest
+    ports:
+      - ${DIRECTUS_PORT}:${DIRECTUS_PORT}
+    volumes:
+      # By default, uploads are stored in /directus/uploads
+      # Always make sure your volumes matches the storage root when using
+      # local driver
+      - ./directus/uploads:/directus/uploads
+      # Make sure to also mount the volume when using SQLite
+      # - ./database:/directus/database
+      # If you want to load extensions from the host
+      # - ./extensions:/directus/extensions
+    networks:
+      dna_network:
+        ipv4_address: ${DOCKER_DNA_IPV4_DIRECTUS}
+    depends_on:
+      - cache
+      - database
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+
+      DB_CLIENT: "pg"
+      DB_HOST: "database"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "directus"
+      DB_PASSWORD: "directus"
+
+      CACHE_ENABLED: "true"
+      CACHE_STORE: "redis"
+      CACHE_REDIS: "redis://cache:6379"
+
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      ACCESS_TOKEN_TTL: 1d
+  # NestJS
+  nest:
+    container_name: nest
+    build:
+      context: ./nestjs
+      target: development
+    command: npm run start:dev
+    volumes:
+      - ./nestjs:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${NEST_PORT}:${NEST_PORT}
+      - 9229:9229
+    env_file:
+      - .env
+    networks:
+      - dna_network
+    depends_on:
+      - database
+      - cache
+      - directus
+
+networks:
+  dna_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_DNA_IPV4_RANGE}
