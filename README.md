@@ -12,7 +12,7 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 
 2. Install back-end and front-end dependencies by running `npm install` within both directories (`nestjs` and `angular`).
 
-3. Start the back-end development server with `docker-compose up` under the folder dna.
+3. Start the back-end development server with `docker-compose up` under the folder `dna`.
 
 4. Start the front-end development server with `ng serve`.
 
