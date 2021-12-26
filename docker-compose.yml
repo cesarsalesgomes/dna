@@ -59,6 +59,7 @@ services:
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
 
       ACCESS_TOKEN_TTL: 1d
+
   # NestJS
   nest:
     container_name: nest
@@ -80,6 +81,19 @@ services:
       - database
       - cache
       - directus
+
+  # Nginx
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - nest
+    networks:
+      - dna_network
 
 networks:
   dna_network:

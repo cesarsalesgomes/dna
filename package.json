@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start:dev:docker": "docker-compose up",
-    "start:dev:docker:rebuild": "docker-compose up --build -V"
+    "start": "docker-compose up",
+    "start:rebuild": "docker-compose up --build -V"
   }
 }
