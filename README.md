@@ -136,15 +136,17 @@ _Below are the steps to create the environment:_
 
 2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and NodeJS on an AWS EC2 FreeTier instance.
 
-3. Create and start the project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommend directory is `/home/ec2-user` (The command `sudo su` will be necessary).
+3. Create the project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommend directory is `/home/ec2-user` (The command `sudo su` will be necessary).
 
-4. Copy the file `dna.conf` on the nginx folder, to the directory `etc/nginx/conf.d` on the EC2 instance folder.
+4. Start the project using the **[Directus Linux tutorial](https://docs.directus.io/getting-started/installation/ubuntu/)** with `pm2`, to keep the application alive.
 
-5. Replace the three variables **{{HEROKU_NESTJS_API_URL}}** on the `dna.conf` file with the Heroku app Public IP created in the next section.
+5. Copy the file `dna.conf` on the nginx folder, to the directory `etc/nginx/conf.d` on the EC2 instance folder.
 
-6. Replace the variable **{{NESTJS_PUBLIC_DNS}}** with the DNS acquired necessary in the step 2.
+6. Replace the three variables **{{HEROKU_NESTJS_API_URL}}** on the `dna.conf` file with the Heroku app Public IP created in the next section.
 
-7. Restart the Nginx server with the command `systemctl restart nginx`.
+7. Replace the variable **{{NESTJS_PUBLIC_DNS}}** with the DNS acquired necessary in the step 2.
+
+8. Restart the Nginx server with the command `systemctl restart nginx`.
 
 **Issues:**
 
@@ -170,7 +172,7 @@ Monitoring a Node application is a very important step in the system, so that it
 
 As the idea of the environment is to look for tools with the highest cost-benefit, and motivated by the 4 question on the Rocketseat **[video](https://www.youtube.com/watch?v=HrkECIzaQvE)** recommendation on which tools to use for monitoring NodeJS applications, **[Nginx Amplify](https://amplify.nginx.com)** monitoring Linux was chosen.
 
-Much because it was developed by the `Nginx` developers themselves, because of the excellent documentation, easy instalation, free plan for knowledge of the tool, and many other motivations, it was chosen to use the tool instead of the market competitors.
+Much because it was developed by the `Nginx` developers themselves, because of the excellent documentation, easy instalation, free plan for knowledge of the tool, and many other motivations.
 
 To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 
