@@ -118,6 +118,8 @@ After research and attempts to deploy the application via docker compose in the 
 
 In this way, it was decided to deploy each system layer in parts, researching the environment where its configuration was simpler and more intuitive, less costly and with better support.
 
+<br />
+
 > **Directus / Database**
 
 _It was chosen to deploy the `Directus` on the **[AWS](https://aws.com)** enviroment. It has a basic unpaid plan of 1 year to its EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for machine configuration._
@@ -138,9 +140,9 @@ _Below are the steps to create the environment:_
 
 4. Copy the file `dna.conf` on the nginx folder, to the directory `etc/nginx/conf.d` on the EC2 instance folder.
 
-5. Replace the three variables `{{HEROKU_NESTJS_API_URL}}` on the `dna.conf` file with the Heroku app Public IP created in the next section.
+5. Replace the three variables **{{HEROKU_NESTJS_API_URL}}** on the `dna.conf` file with the Heroku app Public IP created in the next section.
 
-6. Replace the variable `{{NESTJS_PUBLIC_DNS}}` with the DNS acquired necessary in the step 2.
+6. Replace the variable **{{NESTJS_PUBLIC_DNS}}** with the DNS acquired necessary in the step 2.
 
 7. Restart the Nginx server with the command `systemctl restart nginx`.
 
@@ -148,18 +150,32 @@ _Below are the steps to create the environment:_
 
 1. **[Configuration to connect to AWS RDS MySql Database](https://www.youtube.com/watch?v=Ng_zi11N4_c&t=445s)**
 
+<br />
+
 > **NestJS**
 
 _The `NestJS` layer was configured on the Heroku enviroment. Due to being the business layer, and needing more code deployment, Heroku was chosen due to the simplicity of connecting to Github and performing continuous integration, still being free. To deploy it, it is necessary to:_
 
-1. Init a git repository on the **nestjs** folder (`Note`: As it is not recommended to create nested git projects, copy and paste the `nestjs` folder outside of the dna environment, and start a git repository alone).
+1. Init a git repository on the **nestjs** folder (**Note:** As it is not recommended to create nested git projects, copy and paste the `nestjs` folder outside of the dna environment, and start a git repository alone).
 
 2. Connect it to a Heroku application.
 
 3. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Aws (Ex: https://www.dna-directus.com)
 
-## **Monitoring** 🔒
+<br />
 
-https://www.youtube.com/watch?v=adQDNRZ59r0
+## **Monitoring** 🛡️
 
-2. **[Python dependency errors](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**
+Monitoring a Node application is a very important step in the system, so that it is possible to monitor the performance of the system in a fast, simple, efficient and intuitive way.
+
+As the idea of the environment is to look for tools with the highest cost-benefit, and motivated by the 4 question on the Rocketseat **[video](https://www.youtube.com/watch?v=HrkECIzaQvE)** recommendation on which tools to use for monitoring NodeJS applications, **[Nginx Amplify](https://amplify.nginx.com)** monitoring Linux was chosen.
+
+Much because it was developed by the `Nginx` developers themselves, because of the excellent documentation, easy instalation, free plan for knowledge of the tool, and many other motivations, it was chosen to use the tool instead of the market competitors.
+
+To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
+
+1. After installing Nginx in the previous section on an AWS EC2 instance, follow the steps in this **[link](https://amplify.nginx.com/docs/guide-installing-and-managing-nginx-amplify-agent.html#installing-on-centos-red-hat-linux-or-amazon-linux)** to install Amplify on Amazon Linux
+
+**Issues:**
+
+1. Many dependency errors with `Python` occurred while trying to install Amplify. To fix the dependencies, use the **[Python dependency errors link](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**, to install the necessary versions informed in the attempts to install the package `nginx-amplify-agent package`.
