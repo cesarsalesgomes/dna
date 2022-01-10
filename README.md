@@ -120,17 +120,29 @@ In this way, it was decided to deploy each system layer in parts, researching th
 
 > **Directus / Database**
 
-_It was chosen to deploy the `Directus` on the **[Heroku](https://heroku.com)** enviroment. It has basic unpaid plans, its simple and intuitive to configure and check the system logs and health. To create, follow the steps below:_
+_It was chosen to deploy the `Directus` on the **[AWS](https://aws.com)** enviroment. It has a basic unpaid plan of 1 year to its EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for machine configuration._
 
-1. Make a local install of directus, using `npx create-directus-project`.
+_Even having more steps of installation and manual configuration, the environment was chosen due to the idea of ​​integrating it with **[Nginx](https://www.nginx.com/)**, thus obtaining only one IP in production (with reverse proxy), and to take advantage of the good and free server monitoring tool **[Amplify](https://amplify.nginx.com)**, explained in the next topic._
 
-2. When asked about the database values, use the database production credentials.
+_**IMPORTANT**: The idea behind the configuration of the reverse proxy, is to redirect all calls that contain `nestjs` in their route for the NestJS server configured in the Heroku environment created in the next section; and redirect all other calls to the Directus enviroment, thus obtaining the environment configuration with only one ip. For that, then, **ALL** controllers created in the NestJS environment will need to have `nestjs` in their configuration (Ex: /nestjs/cats)._
 
-3. If created succesfully, upload to github.
+_Also remembering that continuous integration with Git will not be necessary, as there will be no code development in this environment, being only necessary to update the environment when necessary through the steps in **[Directus update guide](https://docs.directus.io/configuration/upgrades-migrations/)**._
 
-4. On Heroku, create a new app, follow the instructions and connect to github repository created.
+_Below are the steps to create the environment:_
 
-5. Copy the local enviroment variables of the `.env` file created, to the production enviroment.
+1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Mysql Database`, due to gratuity).
+
+2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and NodeJS on an AWS EC2 FreeTier instance.
+
+3. Create and start the project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommend directory is `/home/ec2-user` (The command `sudo su` will be necessary).
+
+4. Copy the file `dna.conf` on the nginx folder, to the directory `etc/nginx/conf.d` on the EC2 instance folder.
+
+5. Replace the three variables `{{HEROKU_NESTJS_API_URL}}` on the `dna.conf` file with the Heroku app Public IP created in the next section.
+
+6. Replace the variable `{{NESTJS_PUBLIC_DNS}}` with the DNS acquired necessary in the step 2.
+
+7. Restart the Nginx server with the command `systemctl restart nginx`.
 
 **Issues:**
 
@@ -138,10 +150,16 @@ _It was chosen to deploy the `Directus` on the **[Heroku](https://heroku.com)** 
 
 > **NestJS**
 
-_The `NestJS` layer was also configured on the Heroku enviroment. To deploy it, it is necessary to:_
+_The `NestJS` layer was configured on the Heroku enviroment. Due to being the business layer, and needing more code deployment, Heroku was chosen due to the simplicity of connecting to Github and performing continuous integration, still being free. To deploy it, it is necessary to:_
 
-1. Init a git repository on the **nestjs** folder.
+1. Init a git repository on the **nestjs** folder (`Note`: As it is not recommended to create nested git projects, copy and paste the `nestjs` folder outside of the dna environment, and start a git repository alone).
 
 2. Connect it to a Heroku application.
 
-3. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Heroku (Ex: https://dna-directus.herokuapp.com)
+3. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Aws (Ex: https://www.dna-directus.com)
+
+## **Monitoring** 🔒
+
+https://www.youtube.com/watch?v=adQDNRZ59r0
+
+2. **[Python dependency errors](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**
