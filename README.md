@@ -181,3 +181,15 @@ To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 **Issues:**
 
 1. Many dependency errors with `Python` occurred while trying to install Amplify. To fix the dependencies, use the **[Python dependency errors link](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**, to install the necessary versions informed in the attempts to install the package `nginx-amplify-agent package`.
+
+<br />
+
+## **File Storage** 📁
+
+Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** solution for file storage, with integration to the main cloud solutions available. like Aws S3, Azure, etc.
+
+Because most of the architecture already built is on Aws, `S3` was chosen due to its ease, practicality, security and to centralize the solution layers. Follow the **[link](https://docs.directus.io/configuration/config-options/#s3-s3)** to configure the Directus environment for Aws S3.
+
+**Issues:**
+
+1. After creating a Bucket on S3, to avoid permission erros, it's necessary to add the `AmazonS3FullAccess` permission to the Aws admin user.
