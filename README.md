@@ -186,7 +186,7 @@ To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 
 ## **File Storage** 📁
 
-Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** solution for file storage, with integration to the main cloud solutions available. like Aws S3, Azure, etc.
+Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** for file storage, with integration to the main cloud solutions available. like Aws S3, Azure, etc.
 
 Because most of the architecture already built is on Aws, `S3` was chosen due to its ease, practicality, security and to centralize the solution layers. Follow the **[link](https://docs.directus.io/configuration/config-options/#s3-s3)** to configure the Directus environment for Aws S3.
 
