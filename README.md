@@ -186,10 +186,20 @@ To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 
 ## **File Storage** 📁
 
-Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** for file storage, with integration to the main cloud solutions available. like Aws S3, Azure, etc.
+Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** for file storage, with integration to the main cloud solutions available, like Aws S3, Azure, etc.
 
 Because most of the architecture already built is on Aws, `S3` was chosen due to its ease, practicality, security and to centralize the solution layers. Follow the **[link](https://docs.directus.io/configuration/config-options/#s3-s3)** to configure the Directus environment for Aws S3.
 
 **Issues:**
 
 1. After creating a Bucket on S3, to avoid permission erros, it's necessary to add the `AmazonS3FullAccess` permission to the Aws admin user.
+
+<br />
+
+## **Cache** 🧠
+
+Directus offers a built-in data cache **[solution](https://docs.directus.io/configuration/config-options/#cache)**, with the options of `local memory`, **[Redis](https://redis.io/)** and **[Memcache](https://memcached.org/)**.
+
+Redis was chosen because is the most popular distributed caching engine today. It is production-proven and provides a host of capabilities that make it the ideal distributed caching layer for applications. **[Redis Cloud](https://redis.com/redis-enterprise-cloud/overview/)** was used to the cache cloud solution, due to its ease configuration, monitoring and better cost benefit.
+
+For monitoring and visualization of the Redis health, **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** was chosen because provides an intuitive and efficient GUI, allowing the interaction, monitor, and management of the data. For development use, follow the steps of the **[link](https://docs.redis.com/latest/ri/installing/install-docker/)**.

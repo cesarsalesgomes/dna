@@ -53,7 +53,9 @@ services:
 
       CACHE_ENABLED: "true"
       CACHE_STORE: "redis"
-      CACHE_REDIS: "redis://cache:6379"
+      CACHE_REDIS: ${REDIS_URL}
+      CACHE_AUTO_PURGE: "true"
+      CACHE_PERMISSIONS: "true"
 
       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
