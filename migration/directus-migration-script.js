@@ -19,8 +19,12 @@ function getCurrentDirectory() {
   return process.cwd();
 }
 
-function getCurrentUnixTimestampInMilliseconds() {
-  return Date.now();
+function getCurrentUTCDate() {
+  const currentDate = new Date().toISOString();
+  const currentDateWithoutMilisseconds = currentDate.substr(0, currentDate.length - 5);
+  const currentDateWithoutColons = currentDateWithoutMilisseconds.replace(':', '_').replace(':', '_');
+
+  return currentDateWithoutColons;
 }
 
 /**
@@ -46,9 +50,7 @@ async function copyDirectusSchemaGeneratedToMigrationFolder() {
 }
 
 function copyGeneratedSchemaToHistoryFolder() {
-  const currentUnixTime = getCurrentUnixTimestampInMilliseconds();
-
-  copyFileSync('schema.yaml', `./schema-history/${currentUnixTime}.yaml`)
+  copyFileSync('schema.yaml', `./schema-history/${getCurrentUTCDate()}.yaml`)
 }
 
 async function main() {
