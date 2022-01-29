@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+import { copyFileSync } from 'fs';
 
 /**
  * Helper functions
@@ -16,6 +17,10 @@ function shellCommand(cmd) {
 
 function getCurrentDirectory() {
   return process.cwd();
+}
+
+function getCurrentUnixTimestampInMilliseconds() {
+  return Date.now();
 }
 
 /**
@@ -40,10 +45,18 @@ async function copyDirectusSchemaGeneratedToMigrationFolder() {
   await shellCommand(dockerCommand);
 }
 
+function copyGeneratedSchemaToHistoryFolder() {
+  const currentUnixTime = getCurrentUnixTimestampInMilliseconds();
+
+  copyFileSync('schema.yaml', `./schema-history/${currentUnixTime}.yaml`)
+}
+
 async function main() {
   await removeSchemaFileFromDockerContainer();
   await exportDataModelToSchemaFileOnDockerDirectusInstance();
   await copyDirectusSchemaGeneratedToMigrationFolder();
+
+  copyGeneratedSchemaToHistoryFolder();
 }
 
 main();
