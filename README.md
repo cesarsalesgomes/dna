@@ -192,7 +192,7 @@ Because most of the architecture already built is on Aws, `S3` was chosen due to
 
 **Issues:**
 
-1. After creating a Bucket on S3, to avoid permission erros, it's necessary to add the `AmazonS3FullAccess` permission to the Aws admin user.
+1. After creating a Bucket on S3, to avoid permission errors, it's necessary to add the `AmazonS3FullAccess` permission to the Aws admin user.
 
 <br />
 
@@ -203,3 +203,22 @@ Directus offers a built-in data cache **[solution](https://docs.directus.io/conf
 Redis was chosen because is the most popular distributed caching engine today. It is production-proven and provides a host of capabilities that make it the ideal distributed caching layer for applications. **[Redis Cloud](https://redis.com/redis-enterprise-cloud/overview/)** was used to the cache cloud solution, due to its ease configuration, monitoring and better cost benefit.
 
 For monitoring and visualization of the Redis health, **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** was chosen because provides an intuitive and efficient GUI, allowing the interaction, monitor, and management of the data. For development use, follow the steps of the **[link](https://docs.redis.com/latest/ri/installing/install-docker/)**.
+
+<br />
+
+## **Logging** 🔎
+
+The idea behind using the Directus platform, because it's a live system, will have it's most critical errors reported and corrected by the community in new updates, and so be necessary to always keep it updated in production/development environments to be less likely to have unwanted problems.
+
+On the other hand, errors found in the business platform (the NestJS layer), must be minimized as much as possible through unit and integrated tests.
+
+However, unexpected errors can occur, and a good error logging strategy will be helpful to resolve them as quickly and efficiently as possible.
+
+For this, the combination of **[NestJS Error Filter](https://docs.nestjs.com/exception-filters)** (making it possible to centralize and capture all business exceptions), together with the **[winston-cloudwatch](https://www.npmjs.com/package/winston-cloudwatch)** package, made it possible to store the error logs found during the system's production runtime in the **[AWS CloudWatch](https://aws.amazon.com/pt/cloudwatch/)**, and thus quickly find the possible errors through the filters provided by the tool, and solve them efficiently for having been reported with the necessary details.
+
+**Observation:** It's necessary to configure the environment variables according to the **[winston-cloudwatch configuration Github link](https://github.com/lazywithclass/winston-cloudwatch#configuring)**
+
+**Issues:**
+
+1. After creating a Group/Stream Logs on CloudWatch, to avoid permission errors, it's necessary to add the `CloudWatchLogsFullAccess` permission to the Aws admin user.
+2. Due to the NestJS configuration peculiarities, the steps reported in this **[Stackoverflow link](https://stackoverflow.com/questions/69433044/winston-with-aws-cloudwatch-on-nestjs)** were followed.

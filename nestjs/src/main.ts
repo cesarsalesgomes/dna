@@ -1,9 +1,10 @@
 import { NestFactory } from '@nestjs/core';
+import logger from '@system/logger/logger.service';
 import { AppModule } from './app.module';
 import ExceptionFilterImplementation from './system/exception/exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger });
 
   /**
    * Feature 0.2.0: NestJS & Directus Exception Handling

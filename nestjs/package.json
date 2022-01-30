@@ -25,13 +25,17 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "aws-sdk": "^2.1066.0",
     "graphql": "^15.7.2",
     "graphql-request": "^3.5.0",
     "graphql-tag": "^2.12.6",
+    "nest-winston": "^1.6.2",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "winston": "^3.5.0",
+    "winston-cloudwatch": "^3.1.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.7",
