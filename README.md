@@ -180,6 +180,18 @@ To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 
 1. After installing Nginx in the previous section on an AWS EC2 instance, follow the steps in this **[link](https://amplify.nginx.com/docs/guide-installing-and-managing-nginx-amplify-agent.html#installing-on-centos-red-hat-linux-or-amazon-linux)** to install Amplify on Amazon Linux
 
+2. To log only user interaction requests (disregard robot calls, Directus Admin interactions, etc.), replace the `access_log` line in `etc/nginx/nginx.conf` file with the condition below:
+
+```
+map $uri $loggable {
+  ~^/graphql 1;
+  ~^/nestjs/ 1;
+  default 0;
+}
+
+access_log  /var/log/nginx/access.log main_ext if=$loggable;
+```
+
 **Issues:**
 
 1. Many dependency errors with `Python` occurred while trying to install Amplify. To fix the dependencies, use the **[Python dependency errors link](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**, to install the necessary versions informed in the attempts to install the package `nginx-amplify-agent package`.
