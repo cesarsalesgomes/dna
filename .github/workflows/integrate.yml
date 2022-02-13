@@ -1,7 +1,7 @@
 name: Dna NestJs Continous Integration
 
 on:
-  pull_request:
+  push:
     branches: [main]
 
 jobs:
