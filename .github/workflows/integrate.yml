@@ -1,11 +1,11 @@
 name: Dna NestJs Continous Integration
 
 on:
-  pull_request:
+  push:
     branches: [main]
 
 jobs:
-  test_pull_request:
+  dna_push_main_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

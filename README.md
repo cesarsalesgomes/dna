@@ -19,6 +19,7 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 4. Start the front-end development server with `ng serve`.
 
 5. Open development site by going to [`http://localhost:4200`](http://localhost:4200) in your browser.
+
 6. Open Directus configuration site by going to [`http://localhost:8055`](http://localhost:8055) in your browser.
 
 <br />
