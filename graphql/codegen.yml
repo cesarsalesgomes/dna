@@ -1,15 +1,15 @@
 overwrite: true
 
 schema:
-  - http://localhost:8055/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+  - http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
 
-documents: './graphql/**/*.graphql'
+documents: "./**/*.graphql"
 
 generates:
   # Sdk (Typescript database model & operation file)
-  ./graphql/sdk.ts:
+  ./directus.sdk.ts:
     plugins:
-      - 'typescript'
+      - "typescript"
       - typescript-operations
       - typescript-graphql-request
     config:
@@ -18,7 +18,7 @@ generates:
         transformUnderscore: true
 
   # Sdk Mock Data (Use in integration tests)
-  ./graphql/mock.ts:
+  ./directus.mock.ts:
     plugins:
       - typescript-mock-data:
-          typesFile: './sdk.ts'
+          typesFile: "./directus.sdk.ts"

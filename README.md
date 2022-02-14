@@ -26,18 +26,15 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 
 ## **GraphQL SDK** 🚀
 
-### Steps to generate the database models and operations in typescript for equalized use on back-end between NestJS & Directus:
+### Steps to generate the database models and operations in typescript for equalized use on Nestjs and Angular with Directus:
 
-1. Generate admin access token using Directus authentication login: <br />
+<br />
 
-   > **[[Directus] Authentication reference](https://docs.directus.io/reference/api/system/authentication/)**
+1. Install the dependencies under the **`graphql`** folder with `npm install`.
 
-2. Store access token in the DOCKER_DNA_DIRECTUS_ACCESS_TOKEN enviroment variable.
+2. With development docker environment running, run `npm start` to execute the codegen script.
 
-3. With development docker environment running, run `npm run generate`.
-
-4. The sdk will be available in the **`nestjs/graphql`**
-   folder, under the **`sdk`** file.
+3. The sdk will be available in the **`graphql`** folder, under the `directus.sdk.ts` file.
 
 <br />
 

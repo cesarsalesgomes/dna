@@ -1,0 +1,25 @@
+{
+  "name": "dna-graphql",
+  "version": "1.0.0",
+  "description": "Dna Graphql scripts and dependencies to automate the Directus Graphql Sdk generation",
+  "type": "module",
+  "main": "directus-codegen-script",
+  "scripts": {
+    "start": "node directus-codegen-script",
+    "generate": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@graphql-codegen/cli": "1.21.7",
+    "@graphql-codegen/introspection": "1.18.2",
+    "@graphql-codegen/typescript": "1.23.0",
+    "@graphql-codegen/typescript-graphql-request": "^4.0.0",
+    "@graphql-codegen/typescript-operations": "^1.18.4",
+    "@graphql-codegen/typescript-resolvers": "1.20.0",
+    "axios": "^0.26.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0",
+    "graphql-codegen-typescript-mock-data": "^1.7.2"
+  },
+  "author": "",
+  "license": "UNLICENSED"
+}

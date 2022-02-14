@@ -1,5 +1,5 @@
-import { aCat } from '@graphql/mock';
-import { FindAllCatsQuery } from '@graphql/sdk';
+import { aCat } from '@system/directus/directus.mock';
+import { FindAllCatsQuery } from '@system/directus/directus.sdk';
 import { GraphQLError } from 'graphql-request/dist/types';
 
 type findAllCats = {
