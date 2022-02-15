@@ -1,6 +1,6 @@
 {
   "name": "dna-graphql",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dna Graphql scripts and dependencies to automate the Directus Graphql Sdk generation",
   "type": "module",
   "main": "directus-codegen-script",
