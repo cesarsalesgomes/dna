@@ -37,8 +37,8 @@ describe('[Cat] Integration Tests Spec', () => {
 
     const cats = await catController.findAll('accessToken');
 
-    expect(cats[0].id).toBeUndefined();
-    expect(cats[0].name).toBeDefined();
+    expect(cats[0].id).toBeDefined();
+    expect(cats[0].name).toBeUndefined();
   });
 
   async function setModules(modules: Array<any>) {

@@ -28,8 +28,6 @@ Fullstack prototipe project in Typescript, with the objective of joining three w
 
 ### Steps to generate the database models and operations in typescript for equalized use on Nestjs and Angular with Directus:
 
-<br />
-
 1. Install the dependencies under the **`graphql`** folder with `npm install`.
 
 2. With development docker environment running, run `npm start` to execute the codegen script.
