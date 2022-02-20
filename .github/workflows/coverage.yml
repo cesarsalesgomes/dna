@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  dna_push_to_main_coverage:
+  coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
