@@ -9,23 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      # 1) Setup node version
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: "npm"
-          cache-dependency-path: nestjs/package-lock.json
 
-      # 1) Configuration
+      # 2) Cache npm installed modules on .npm
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 3) Install node_modules
       - name: Install dependencies
         run: npm install
         working-directory: nestjs
 
-      # 2) Generate tests with coverage report
+      # 4) Generate tests with coverage report
       - name: Run tests
         run: npm run test:cov
         working-directory: nestjs
 
-      # 3) Build Nest
+      # 5) Build Nest
       - name: Run build
         run: npm run build
         working-directory: nestjs
