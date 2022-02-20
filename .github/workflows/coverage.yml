@@ -1,0 +1,18 @@
+name: Coverage
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dna_push_to_main_coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./nestjs/coverage
+          fail_ci_if_error: true
+          name: dna-codecov
+          verbose: true
