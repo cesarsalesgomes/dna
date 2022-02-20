@@ -1,11 +1,11 @@
-name: Dna NestJs Continous Integration
+name: Testing & Building
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  dna_pull_request_run_tests:
+  dna_pull_request_run_test_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,16 +23,7 @@ jobs:
         run: npm run test:cov
         working-directory: nestjs
 
-      # 3) Upload coverage to Codecov
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          directory: ./nestjs/coverage
-          fail_ci_if_error: true
-          name: dna-codecov
-          verbose: true
-
-      # 4) Build Nest
+      # 3) Build Nest
       - name: Run build
         run: npm run build
         working-directory: nestjs
