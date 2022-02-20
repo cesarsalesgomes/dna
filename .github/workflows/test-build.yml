@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
+          cache: "npm"
+          cache-dependency-path: nestjs/package-lock.json
 
       # 1) Configuration
       - name: Install dependencies
