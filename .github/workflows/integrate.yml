@@ -26,9 +26,8 @@ jobs:
       # 3) Upload coverage to Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
-        working-directory: nestjs
         with:
-          directory: ./coverage
+          directory: ./nestjs/coverage
           fail_ci_if_error: true
           name: dna-codecov
           verbose: true
