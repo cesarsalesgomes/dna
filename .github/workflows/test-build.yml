@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  dna_pull_request_run_test_build:
+  test_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
