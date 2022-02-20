@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        working-directory: nestjs
         with:
           node-version: "16"
           cache: "npm"
