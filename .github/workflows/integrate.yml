@@ -12,12 +12,27 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
+
+      # 1) Configuration
       - name: Install dependencies
         run: npm install
         working-directory: nestjs
+
+      # 2) Generate tests with coverage report
       - name: Run tests
-        run: npm test
+        run: npm run test:cov
         working-directory: nestjs
+
+      # 3) Upload coverage to Codecov
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          directory: ./nestjs/coverage
+          fail_ci_if_error: true
+          name: dna-codecov
+          verbose: true
+
+      # 4) Build Nest
       - name: Run build
         run: npm run build
         working-directory: nestjs
