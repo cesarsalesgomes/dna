@@ -78,7 +78,7 @@ services:
     command: npm run start:dev
     volumes:
       - ./nestjs:/usr/src/app
-      - /usr/src/app/node_modules
+      - /usr/src/app/node_modules/
     ports:
       - ${NEST_PORT}:${NEST_PORT}
       - 9229:9229
