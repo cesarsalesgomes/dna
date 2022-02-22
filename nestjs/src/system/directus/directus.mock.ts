@@ -1,22 +1,21 @@
-/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/no-unused-vars,no-prototype-builtins */
 import { Mutation, Query, BooleanFilterOperators, Cat, CatAggregated, CatAggregatedFields, CatFilter, CreateCatInput, CreateDirectusFilesInput, CreateDirectusFoldersInput, CreateDirectusRolesInput, CreateDirectusUsersInput, DateFilterOperators, DatetimeFunctionFilterOperators, DatetimeFunctions, DatetimeFunctionsInput, DeleteMany, DeleteOne, DirectusFiles, DirectusFilesFilter, DirectusFolders, DirectusFoldersFilter, DirectusRoles, DirectusRolesFilter, DirectusUsers, DirectusUsersFilter, NumberFilterOperators, StringFilterOperators, UpdateCatInput, UpdateDirectusFilesInput, UpdateDirectusFoldersInput, UpdateDirectusRolesInput, UpdateDirectusUsersInput } from './directus.sdk';
 
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
-        create_cat_items: overrides && overrides.hasOwnProperty('create_cat_items') ? overrides.create_cat_items! : [aCat()],
         create_cat_item: overrides && overrides.hasOwnProperty('create_cat_item') ? overrides.create_cat_item! : aCat(),
-        update_cat_items: overrides && overrides.hasOwnProperty('update_cat_items') ? overrides.update_cat_items! : [aCat()],
-        update_cat_item: overrides && overrides.hasOwnProperty('update_cat_item') ? overrides.update_cat_item! : aCat(),
-        delete_cat_items: overrides && overrides.hasOwnProperty('delete_cat_items') ? overrides.delete_cat_items! : aDeleteMany(),
+        create_cat_items: overrides && overrides.hasOwnProperty('create_cat_items') ? overrides.create_cat_items! : [aCat()],
         delete_cat_item: overrides && overrides.hasOwnProperty('delete_cat_item') ? overrides.delete_cat_item! : aDeleteOne(),
+        delete_cat_items: overrides && overrides.hasOwnProperty('delete_cat_items') ? overrides.delete_cat_items! : aDeleteMany(),
+        update_cat_item: overrides && overrides.hasOwnProperty('update_cat_item') ? overrides.update_cat_item! : aCat(),
+        update_cat_items: overrides && overrides.hasOwnProperty('update_cat_items') ? overrides.update_cat_items! : [aCat()],
     };
 };
 
 export const aQuery = (overrides?: Partial<Query>): Query => {
     return {
         cat: overrides && overrides.hasOwnProperty('cat') ? overrides.cat! : [aCat()],
-        cat_by_id: overrides && overrides.hasOwnProperty('cat_by_id') ? overrides.cat_by_id! : aCat(),
         cat_aggregated: overrides && overrides.hasOwnProperty('cat_aggregated') ? overrides.cat_aggregated! : [aCatAggregated()],
+        cat_by_id: overrides && overrides.hasOwnProperty('cat_by_id') ? overrides.cat_by_id! : aCat(),
     };
 };
 
@@ -24,35 +23,35 @@ export const aBooleanFilterOperators = (overrides?: Partial<BooleanFilterOperato
     return {
         _eq: overrides && overrides.hasOwnProperty('_eq') ? overrides._eq! : false,
         _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : false,
-        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
         _nnull: overrides && overrides.hasOwnProperty('_nnull') ? overrides._nnull! : false,
+        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
     };
 };
 
 export const aCat = (overrides?: Partial<Cat>): Cat => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'f54c0ef5-82b1-4327-8142-8bf4cf1f3a2a',
-        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsers(),
         date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-01T16:35:05.633Z',
         date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctions(),
-        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsers(),
         date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-03T17:48:28.394Z',
         date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctions(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'f54c0ef5-82b1-4327-8142-8bf4cf1f3a2a',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'sequi',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsers(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsers(),
     };
 };
 
 export const aCatAggregated = (overrides?: Partial<CatAggregated>): CatAggregated => {
     return {
-        group: overrides && overrides.hasOwnProperty('group') ? overrides.group! : 'sequi',
         avg: overrides && overrides.hasOwnProperty('avg') ? overrides.avg! : aCatAggregatedFields(),
-        sum: overrides && overrides.hasOwnProperty('sum') ? overrides.sum! : aCatAggregatedFields(),
+        avgDistinct: overrides && overrides.hasOwnProperty('avgDistinct') ? overrides.avgDistinct! : aCatAggregatedFields(),
         count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : aCatAggregatedFields(),
         countDistinct: overrides && overrides.hasOwnProperty('countDistinct') ? overrides.countDistinct! : aCatAggregatedFields(),
-        avgDistinct: overrides && overrides.hasOwnProperty('avgDistinct') ? overrides.avgDistinct! : aCatAggregatedFields(),
-        sumDistinct: overrides && overrides.hasOwnProperty('sumDistinct') ? overrides.sumDistinct! : aCatAggregatedFields(),
-        min: overrides && overrides.hasOwnProperty('min') ? overrides.min! : aCatAggregatedFields(),
+        group: overrides && overrides.hasOwnProperty('group') ? overrides.group! : 'sequi',
         max: overrides && overrides.hasOwnProperty('max') ? overrides.max! : aCatAggregatedFields(),
+        min: overrides && overrides.hasOwnProperty('min') ? overrides.min! : aCatAggregatedFields(),
+        sum: overrides && overrides.hasOwnProperty('sum') ? overrides.sum! : aCatAggregatedFields(),
+        sumDistinct: overrides && overrides.hasOwnProperty('sumDistinct') ? overrides.sumDistinct! : aCatAggregatedFields(),
     };
 };
 
@@ -64,57 +63,57 @@ export const aCatAggregatedFields = (overrides?: Partial<CatAggregatedFields>): 
 
 export const aCatFilter = (overrides?: Partial<CatFilter>): CatFilter => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aNumberFilterOperators(),
-        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsersFilter(),
-        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : aDateFilterOperators(),
-        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionFilterOperators(),
-        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsersFilter(),
-        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : aDateFilterOperators(),
-        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionFilterOperators(),
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
         _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aCatFilter()],
         _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aCatFilter()],
+        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : aDateFilterOperators(),
+        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionFilterOperators(),
+        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : aDateFilterOperators(),
+        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionFilterOperators(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aNumberFilterOperators(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsersFilter(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsersFilter(),
     };
 };
 
 export const aCreateCatInput = (overrides?: Partial<CreateCatInput>): CreateCatInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8cf94551-0430-4d7f-80fc-673ceab478a0',
-        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aCreateDirectusUsersInput(),
         date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-07T10:31:13.015Z',
         date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionsInput(),
-        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aCreateDirectusUsersInput(),
         date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-06T08:33:12.926Z',
         date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionsInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8cf94551-0430-4d7f-80fc-673ceab478a0',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'debitis',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aCreateDirectusUsersInput(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aCreateDirectusUsersInput(),
     };
 };
 
 export const aCreateDirectusFilesInput = (overrides?: Partial<CreateDirectusFilesInput>): CreateDirectusFilesInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '7a17b0b5-af6f-418a-83a3-827fa33cb163',
-        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'illo',
+        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'voluptate',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'expedita',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 8640,
+        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'sequi',
         filename_disk: overrides && overrides.hasOwnProperty('filename_disk') ? overrides.filename_disk! : 'et',
         filename_download: overrides && overrides.hasOwnProperty('filename_download') ? overrides.filename_download! : 'repudiandae',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'consectetur',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'labore',
+        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 4836,
         folder: overrides && overrides.hasOwnProperty('folder') ? overrides.folder! : aCreateDirectusFoldersInput(),
-        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aCreateDirectusUsersInput(),
-        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-02T12:53:45.995Z',
-        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionsInput(),
+        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 9561,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '7a17b0b5-af6f-418a-83a3-827fa33cb163',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'sunt',
+        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'non',
         modified_by: overrides && overrides.hasOwnProperty('modified_by') ? overrides.modified_by! : aCreateDirectusUsersInput(),
         modified_on: overrides && overrides.hasOwnProperty('modified_on') ? overrides.modified_on! : '1970-01-06T11:24:26.104Z',
         modified_on_func: overrides && overrides.hasOwnProperty('modified_on_func') ? overrides.modified_on_func! : aDatetimeFunctionsInput(),
-        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'voluptate',
-        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 4836,
-        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 8859,
-        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 9561,
-        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 8640,
-        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'sequi',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'expedita',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'sunt',
+        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'illo',
         tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'at',
-        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'non',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'consectetur',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'labore',
+        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aCreateDirectusUsersInput(),
+        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-02T12:53:45.995Z',
+        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionsInput(),
+        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 8859,
     };
 };
 
@@ -128,95 +127,95 @@ export const aCreateDirectusFoldersInput = (overrides?: Partial<CreateDirectusFo
 
 export const aCreateDirectusRolesInput = (overrides?: Partial<CreateDirectusRolesInput>): CreateDirectusRolesInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9f3c65b9-5f16-403b-b01e-ed55b04d84d6',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'minima',
-        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'minus',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'corrupti',
-        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['ad'],
-        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
         admin_access: overrides && overrides.hasOwnProperty('admin_access') ? overrides.admin_access! : false,
         app_access: overrides && overrides.hasOwnProperty('app_access') ? overrides.app_access! : true,
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'corrupti',
+        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
+        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'minus',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9f3c65b9-5f16-403b-b01e-ed55b04d84d6',
+        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['ad'],
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'minima',
         users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : [aCreateDirectusUsersInput()],
     };
 };
 
 export const aCreateDirectusUsersInput = (overrides?: Partial<CreateDirectusUsersInput>): CreateDirectusUsersInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '42cb4e19-4ab9-4f0a-bfdf-b7d2deb310c8',
-        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'quos',
-        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'et',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'error',
-        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'omnis',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'dolores',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'enim',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'eum',
-        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'dolor',
+        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'tenetur',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : aCreateDirectusFilesInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'eum',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'error',
+        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : false,
+        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'amet',
+        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'quos',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '42cb4e19-4ab9-4f0a-bfdf-b7d2deb310c8',
         language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'blanditiis',
-        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'sint',
-        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'hic',
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'qui',
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aCreateDirectusRolesInput(),
-        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'autem',
         last_access: overrides && overrides.hasOwnProperty('last_access') ? overrides.last_access! : '1970-01-02T13:20:07.517Z',
         last_access_func: overrides && overrides.hasOwnProperty('last_access_func') ? overrides.last_access_func! : aDatetimeFunctionsInput(),
+        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'et',
         last_page: overrides && overrides.hasOwnProperty('last_page') ? overrides.last_page! : 'omnis',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'dolores',
+        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'omnis',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'neque',
-        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'amet',
-        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'tenetur',
-        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : false,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aCreateDirectusRolesInput(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'qui',
+        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'dolor',
+        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'hic',
+        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'sint',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'enim',
+        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'autem',
     };
 };
 
 export const aDateFilterOperators = (overrides?: Partial<DateFilterOperators>): DateFilterOperators => {
     return {
         _eq: overrides && overrides.hasOwnProperty('_eq') ? overrides._eq! : 'quaerat',
-        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 'omnis',
         _gt: overrides && overrides.hasOwnProperty('_gt') ? overrides._gt! : 'facere',
         _gte: overrides && overrides.hasOwnProperty('_gte') ? overrides._gte! : 'eos',
         _lt: overrides && overrides.hasOwnProperty('_lt') ? overrides._lt! : 'ad',
         _lte: overrides && overrides.hasOwnProperty('_lte') ? overrides._lte! : 'ut',
-        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
+        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 'omnis',
         _nnull: overrides && overrides.hasOwnProperty('_nnull') ? overrides._nnull! : true,
+        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
     };
 };
 
 export const aDatetimeFunctionFilterOperators = (overrides?: Partial<DatetimeFunctionFilterOperators>): DatetimeFunctionFilterOperators => {
     return {
-        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : aNumberFilterOperators(),
-        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : aNumberFilterOperators(),
-        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : aNumberFilterOperators(),
         day: overrides && overrides.hasOwnProperty('day') ? overrides.day! : aNumberFilterOperators(),
-        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : aNumberFilterOperators(),
         hour: overrides && overrides.hasOwnProperty('hour') ? overrides.hour! : aNumberFilterOperators(),
         minute: overrides && overrides.hasOwnProperty('minute') ? overrides.minute! : aNumberFilterOperators(),
+        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : aNumberFilterOperators(),
         second: overrides && overrides.hasOwnProperty('second') ? overrides.second! : aNumberFilterOperators(),
+        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : aNumberFilterOperators(),
+        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : aNumberFilterOperators(),
+        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : aNumberFilterOperators(),
     };
 };
 
 export const aDatetimeFunctions = (overrides?: Partial<DatetimeFunctions>): DatetimeFunctions => {
     return {
-        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : 6131,
-        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : 5250,
-        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : 6439,
         day: overrides && overrides.hasOwnProperty('day') ? overrides.day! : 6751,
-        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : 6325,
         hour: overrides && overrides.hasOwnProperty('hour') ? overrides.hour! : 4788,
         minute: overrides && overrides.hasOwnProperty('minute') ? overrides.minute! : 1565,
+        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : 5250,
         second: overrides && overrides.hasOwnProperty('second') ? overrides.second! : 8118,
+        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : 6439,
+        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : 6325,
+        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : 6131,
     };
 };
 
 export const aDatetimeFunctionsInput = (overrides?: Partial<DatetimeFunctionsInput>): DatetimeFunctionsInput => {
     return {
-        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : 9940,
-        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : 7265,
-        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : 1103,
         day: overrides && overrides.hasOwnProperty('day') ? overrides.day! : 8473,
-        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : 2077,
         hour: overrides && overrides.hasOwnProperty('hour') ? overrides.hour! : 4320,
         minute: overrides && overrides.hasOwnProperty('minute') ? overrides.minute! : 1958,
+        month: overrides && overrides.hasOwnProperty('month') ? overrides.month! : 7265,
         second: overrides && overrides.hasOwnProperty('second') ? overrides.second! : 2395,
+        week: overrides && overrides.hasOwnProperty('week') ? overrides.week! : 1103,
+        weekday: overrides && overrides.hasOwnProperty('weekday') ? overrides.weekday! : 2077,
+        year: overrides && overrides.hasOwnProperty('year') ? overrides.year! : 9940,
     };
 };
 
@@ -234,59 +233,59 @@ export const aDeleteOne = (overrides?: Partial<DeleteOne>): DeleteOne => {
 
 export const aDirectusFiles = (overrides?: Partial<DirectusFiles>): DirectusFiles => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '4ff67016-13de-4f23-8780-72121f1d91ff',
-        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'quo',
+        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'aspernatur',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'quia',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 6666,
+        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'nihil',
         filename_disk: overrides && overrides.hasOwnProperty('filename_disk') ? overrides.filename_disk! : 'debitis',
         filename_download: overrides && overrides.hasOwnProperty('filename_download') ? overrides.filename_download! : 'laudantium',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'error',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'molestiae',
+        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 7422,
         folder: overrides && overrides.hasOwnProperty('folder') ? overrides.folder! : aDirectusFolders(),
-        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aDirectusUsers(),
-        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-06T01:35:56.476Z',
-        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctions(),
+        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 5935,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '4ff67016-13de-4f23-8780-72121f1d91ff',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'eligendi',
+        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'sit',
         modified_by: overrides && overrides.hasOwnProperty('modified_by') ? overrides.modified_by! : aDirectusUsers(),
         modified_on: overrides && overrides.hasOwnProperty('modified_on') ? overrides.modified_on! : '1970-01-01T05:17:08.518Z',
         modified_on_func: overrides && overrides.hasOwnProperty('modified_on_func') ? overrides.modified_on_func! : aDatetimeFunctions(),
-        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'aspernatur',
-        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 7422,
-        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 7053,
-        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 5935,
-        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 6666,
-        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'nihil',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'quia',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'eligendi',
+        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'quo',
         tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'libero',
-        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'sit',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'error',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'molestiae',
+        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aDirectusUsers(),
+        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-06T01:35:56.476Z',
+        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctions(),
+        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 7053,
     };
 };
 
 export const aDirectusFilesFilter = (overrides?: Partial<DirectusFilesFilter>): DirectusFilesFilter => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
-        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : aStringFilterOperators(),
+        _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusFilesFilter()],
+        _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusFilesFilter()],
+        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : aStringFilterOperators(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : aNumberFilterOperators(),
+        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : aStringFilterOperators(),
         filename_disk: overrides && overrides.hasOwnProperty('filename_disk') ? overrides.filename_disk! : aStringFilterOperators(),
         filename_download: overrides && overrides.hasOwnProperty('filename_download') ? overrides.filename_download! : aStringFilterOperators(),
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterOperators(),
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : aStringFilterOperators(),
+        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : aNumberFilterOperators(),
         folder: overrides && overrides.hasOwnProperty('folder') ? overrides.folder! : aDirectusFoldersFilter(),
-        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aDirectusUsersFilter(),
-        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : aDateFilterOperators(),
-        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionFilterOperators(),
+        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : aNumberFilterOperators(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : aStringFilterOperators(),
+        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : aStringFilterOperators(),
         modified_by: overrides && overrides.hasOwnProperty('modified_by') ? overrides.modified_by! : aDirectusUsersFilter(),
         modified_on: overrides && overrides.hasOwnProperty('modified_on') ? overrides.modified_on! : aDateFilterOperators(),
         modified_on_func: overrides && overrides.hasOwnProperty('modified_on_func') ? overrides.modified_on_func! : aDatetimeFunctionFilterOperators(),
-        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : aStringFilterOperators(),
-        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : aNumberFilterOperators(),
-        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : aNumberFilterOperators(),
-        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : aNumberFilterOperators(),
-        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : aNumberFilterOperators(),
-        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : aStringFilterOperators(),
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : aStringFilterOperators(),
+        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : aStringFilterOperators(),
         tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : aStringFilterOperators(),
-        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : aStringFilterOperators(),
-        _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusFilesFilter()],
-        _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusFilesFilter()],
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterOperators(),
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : aStringFilterOperators(),
+        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : aDirectusUsersFilter(),
+        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : aDateFilterOperators(),
+        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionFilterOperators(),
+        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : aNumberFilterOperators(),
     };
 };
 
@@ -300,174 +299,174 @@ export const aDirectusFolders = (overrides?: Partial<DirectusFolders>): Directus
 
 export const aDirectusFoldersFilter = (overrides?: Partial<DirectusFoldersFilter>): DirectusFoldersFilter => {
     return {
+        _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusFoldersFilter()],
+        _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusFoldersFilter()],
         id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
         parent: overrides && overrides.hasOwnProperty('parent') ? overrides.parent! : aDirectusFoldersFilter(),
-        _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusFoldersFilter()],
-        _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusFoldersFilter()],
     };
 };
 
 export const aDirectusRoles = (overrides?: Partial<DirectusRoles>): DirectusRoles => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '7a3fdd79-234f-4a85-82dd-b8f757787f06',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'cumque',
-        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'in',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'dolores',
-        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['reprehenderit'],
-        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
         admin_access: overrides && overrides.hasOwnProperty('admin_access') ? overrides.admin_access! : true,
         app_access: overrides && overrides.hasOwnProperty('app_access') ? overrides.app_access! : true,
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'dolores',
+        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
+        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'in',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '7a3fdd79-234f-4a85-82dd-b8f757787f06',
+        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['reprehenderit'],
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'cumque',
         users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : [aDirectusUsers()],
     };
 };
 
 export const aDirectusRolesFilter = (overrides?: Partial<DirectusRolesFilter>): DirectusRolesFilter => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
-        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : aStringFilterOperators(),
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
-        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : aStringFilterOperators(),
-        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : aBooleanFilterOperators(),
-        admin_access: overrides && overrides.hasOwnProperty('admin_access') ? overrides.admin_access! : aBooleanFilterOperators(),
-        app_access: overrides && overrides.hasOwnProperty('app_access') ? overrides.app_access! : aBooleanFilterOperators(),
-        users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : aDirectusUsersFilter(),
         _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusRolesFilter()],
         _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusRolesFilter()],
+        admin_access: overrides && overrides.hasOwnProperty('admin_access') ? overrides.admin_access! : aBooleanFilterOperators(),
+        app_access: overrides && overrides.hasOwnProperty('app_access') ? overrides.app_access! : aBooleanFilterOperators(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
+        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : aBooleanFilterOperators(),
+        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : aStringFilterOperators(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
+        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : aStringFilterOperators(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
+        users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : aDirectusUsersFilter(),
     };
 };
 
 export const aDirectusUsers = (overrides?: Partial<DirectusUsers>): DirectusUsers => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '6c9806ce-3499-4c8a-bf99-2fef6cb6a6c8',
-        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'sed',
-        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'expedita',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'dolor',
-        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'velit',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'nihil',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'porro',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'earum',
-        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'modi',
+        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'cupiditate',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : aDirectusFiles(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'earum',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'dolor',
+        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : true,
+        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'velit',
+        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'sed',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '6c9806ce-3499-4c8a-bf99-2fef6cb6a6c8',
         language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'veritatis',
-        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'amet',
-        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'totam',
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'atque',
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aDirectusRoles(),
-        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'distinctio',
         last_access: overrides && overrides.hasOwnProperty('last_access') ? overrides.last_access! : '1970-01-12T22:08:08.316Z',
         last_access_func: overrides && overrides.hasOwnProperty('last_access_func') ? overrides.last_access_func! : aDatetimeFunctions(),
+        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'expedita',
         last_page: overrides && overrides.hasOwnProperty('last_page') ? overrides.last_page! : 'consequatur',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'nihil',
+        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'velit',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'sequi',
-        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'velit',
-        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'cupiditate',
-        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : true,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aDirectusRoles(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'atque',
+        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'modi',
+        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'totam',
+        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'amet',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'porro',
+        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'distinctio',
     };
 };
 
 export const aDirectusUsersFilter = (overrides?: Partial<DirectusUsersFilter>): DirectusUsersFilter => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
-        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : aStringFilterOperators(),
-        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : aStringFilterOperators(),
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : aStringFilterOperators(),
-        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : aStringFilterOperators(),
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : aStringFilterOperators(),
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterOperators(),
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
-        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : aStringFilterOperators(),
-        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : aDirectusFilesFilter(),
-        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : aStringFilterOperators(),
-        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : aStringFilterOperators(),
-        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : aStringFilterOperators(),
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : aStringFilterOperators(),
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aDirectusRolesFilter(),
-        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : aStringFilterOperators(),
-        last_access: overrides && overrides.hasOwnProperty('last_access') ? overrides.last_access! : aDateFilterOperators(),
-        last_access_func: overrides && overrides.hasOwnProperty('last_access_func') ? overrides.last_access_func! : aDatetimeFunctionFilterOperators(),
-        last_page: overrides && overrides.hasOwnProperty('last_page') ? overrides.last_page! : aStringFilterOperators(),
-        provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : aStringFilterOperators(),
-        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : aStringFilterOperators(),
-        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : aStringFilterOperators(),
-        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : aBooleanFilterOperators(),
         _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aDirectusUsersFilter()],
         _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aDirectusUsersFilter()],
+        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : aStringFilterOperators(),
+        avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : aDirectusFilesFilter(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : aStringFilterOperators(),
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : aStringFilterOperators(),
+        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : aBooleanFilterOperators(),
+        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : aStringFilterOperators(),
+        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : aStringFilterOperators(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aStringFilterOperators(),
+        language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : aStringFilterOperators(),
+        last_access: overrides && overrides.hasOwnProperty('last_access') ? overrides.last_access! : aDateFilterOperators(),
+        last_access_func: overrides && overrides.hasOwnProperty('last_access_func') ? overrides.last_access_func! : aDatetimeFunctionFilterOperators(),
+        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : aStringFilterOperators(),
+        last_page: overrides && overrides.hasOwnProperty('last_page') ? overrides.last_page! : aStringFilterOperators(),
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : aStringFilterOperators(),
+        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : aStringFilterOperators(),
+        provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : aStringFilterOperators(),
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : aDirectusRolesFilter(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : aStringFilterOperators(),
+        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : aStringFilterOperators(),
+        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : aStringFilterOperators(),
+        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : aStringFilterOperators(),
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : aStringFilterOperators(),
+        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : aStringFilterOperators(),
     };
 };
 
 export const aNumberFilterOperators = (overrides?: Partial<NumberFilterOperators>): NumberFilterOperators => {
     return {
         _eq: overrides && overrides.hasOwnProperty('_eq') ? overrides._eq! : 7.92,
-        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 7.92,
-        _in: overrides && overrides.hasOwnProperty('_in') ? overrides._in! : [4.51],
-        _nin: overrides && overrides.hasOwnProperty('_nin') ? overrides._nin! : [8.37],
         _gt: overrides && overrides.hasOwnProperty('_gt') ? overrides._gt! : 2.76,
         _gte: overrides && overrides.hasOwnProperty('_gte') ? overrides._gte! : 2.83,
+        _in: overrides && overrides.hasOwnProperty('_in') ? overrides._in! : [4.51],
         _lt: overrides && overrides.hasOwnProperty('_lt') ? overrides._lt! : 4.31,
         _lte: overrides && overrides.hasOwnProperty('_lte') ? overrides._lte! : 4.94,
-        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
+        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 7.92,
+        _nin: overrides && overrides.hasOwnProperty('_nin') ? overrides._nin! : [8.37],
         _nnull: overrides && overrides.hasOwnProperty('_nnull') ? overrides._nnull! : false,
+        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : true,
     };
 };
 
 export const aStringFilterOperators = (overrides?: Partial<StringFilterOperators>): StringFilterOperators => {
     return {
-        _eq: overrides && overrides.hasOwnProperty('_eq') ? overrides._eq! : 'animi',
-        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 'dignissimos',
         _contains: overrides && overrides.hasOwnProperty('_contains') ? overrides._contains! : 'unde',
-        _ncontains: overrides && overrides.hasOwnProperty('_ncontains') ? overrides._ncontains! : 'est',
-        _starts_with: overrides && overrides.hasOwnProperty('_starts_with') ? overrides._starts_with! : 'at',
-        _nstarts_with: overrides && overrides.hasOwnProperty('_nstarts_with') ? overrides._nstarts_with! : 'incidunt',
-        _ends_with: overrides && overrides.hasOwnProperty('_ends_with') ? overrides._ends_with! : 'rem',
-        _nends_with: overrides && overrides.hasOwnProperty('_nends_with') ? overrides._nends_with! : 'eligendi',
-        _in: overrides && overrides.hasOwnProperty('_in') ? overrides._in! : ['quia'],
-        _nin: overrides && overrides.hasOwnProperty('_nin') ? overrides._nin! : ['sint'],
-        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : false,
-        _nnull: overrides && overrides.hasOwnProperty('_nnull') ? overrides._nnull! : false,
         _empty: overrides && overrides.hasOwnProperty('_empty') ? overrides._empty! : true,
+        _ends_with: overrides && overrides.hasOwnProperty('_ends_with') ? overrides._ends_with! : 'rem',
+        _eq: overrides && overrides.hasOwnProperty('_eq') ? overrides._eq! : 'animi',
+        _in: overrides && overrides.hasOwnProperty('_in') ? overrides._in! : ['quia'],
+        _ncontains: overrides && overrides.hasOwnProperty('_ncontains') ? overrides._ncontains! : 'est',
         _nempty: overrides && overrides.hasOwnProperty('_nempty') ? overrides._nempty! : false,
+        _nends_with: overrides && overrides.hasOwnProperty('_nends_with') ? overrides._nends_with! : 'eligendi',
+        _neq: overrides && overrides.hasOwnProperty('_neq') ? overrides._neq! : 'dignissimos',
+        _nin: overrides && overrides.hasOwnProperty('_nin') ? overrides._nin! : ['sint'],
+        _nnull: overrides && overrides.hasOwnProperty('_nnull') ? overrides._nnull! : false,
+        _nstarts_with: overrides && overrides.hasOwnProperty('_nstarts_with') ? overrides._nstarts_with! : 'incidunt',
+        _null: overrides && overrides.hasOwnProperty('_null') ? overrides._null! : false,
+        _starts_with: overrides && overrides.hasOwnProperty('_starts_with') ? overrides._starts_with! : 'at',
     };
 };
 
 export const anUpdateCatInput = (overrides?: Partial<UpdateCatInput>): UpdateCatInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2ee2ffcc-0048-4d3e-9521-7d14c5f11cf1',
-        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : anUpdateDirectusUsersInput(),
         date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-13T01:13:38.411Z',
         date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionsInput(),
-        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : anUpdateDirectusUsersInput(),
         date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-15T13:25:41.643Z',
         date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionsInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '2ee2ffcc-0048-4d3e-9521-7d14c5f11cf1',
         name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'repellat',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : anUpdateDirectusUsersInput(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : anUpdateDirectusUsersInput(),
     };
 };
 
 export const anUpdateDirectusFilesInput = (overrides?: Partial<UpdateDirectusFilesInput>): UpdateDirectusFilesInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8105d55b-e81e-4eb9-aab6-195c53ac0da8',
-        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'rerum',
+        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'praesentium',
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'sed',
+        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 770,
+        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'est',
         filename_disk: overrides && overrides.hasOwnProperty('filename_disk') ? overrides.filename_disk! : 'fugiat',
         filename_download: overrides && overrides.hasOwnProperty('filename_download') ? overrides.filename_download! : 'eos',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'animi',
-        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'aut',
+        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 8900,
         folder: overrides && overrides.hasOwnProperty('folder') ? overrides.folder! : anUpdateDirectusFoldersInput(),
-        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : anUpdateDirectusUsersInput(),
-        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-07T04:52:09.103Z',
-        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionsInput(),
+        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 5382,
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '8105d55b-e81e-4eb9-aab6-195c53ac0da8',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'ab',
+        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'facere',
         modified_by: overrides && overrides.hasOwnProperty('modified_by') ? overrides.modified_by! : anUpdateDirectusUsersInput(),
         modified_on: overrides && overrides.hasOwnProperty('modified_on') ? overrides.modified_on! : '1970-01-15T04:36:38.341Z',
         modified_on_func: overrides && overrides.hasOwnProperty('modified_on_func') ? overrides.modified_on_func! : aDatetimeFunctionsInput(),
-        charset: overrides && overrides.hasOwnProperty('charset') ? overrides.charset! : 'praesentium',
-        filesize: overrides && overrides.hasOwnProperty('filesize') ? overrides.filesize! : 8900,
-        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 1282,
-        height: overrides && overrides.hasOwnProperty('height') ? overrides.height! : 5382,
-        duration: overrides && overrides.hasOwnProperty('duration') ? overrides.duration! : 770,
-        embed: overrides && overrides.hasOwnProperty('embed') ? overrides.embed! : 'est',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'sed',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'ab',
+        storage: overrides && overrides.hasOwnProperty('storage') ? overrides.storage! : 'rerum',
         tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'voluptatem',
-        metadata: overrides && overrides.hasOwnProperty('metadata') ? overrides.metadata! : 'facere',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'animi',
+        type: overrides && overrides.hasOwnProperty('type') ? overrides.type! : 'aut',
+        uploaded_by: overrides && overrides.hasOwnProperty('uploaded_by') ? overrides.uploaded_by! : anUpdateDirectusUsersInput(),
+        uploaded_on: overrides && overrides.hasOwnProperty('uploaded_on') ? overrides.uploaded_on! : '1970-01-07T04:52:09.103Z',
+        uploaded_on_func: overrides && overrides.hasOwnProperty('uploaded_on_func') ? overrides.uploaded_on_func! : aDatetimeFunctionsInput(),
+        width: overrides && overrides.hasOwnProperty('width') ? overrides.width! : 1282,
     };
 };
 
@@ -481,42 +480,42 @@ export const anUpdateDirectusFoldersInput = (overrides?: Partial<UpdateDirectusF
 
 export const anUpdateDirectusRolesInput = (overrides?: Partial<UpdateDirectusRolesInput>): UpdateDirectusRolesInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e00df04b-c7e1-4f22-a24d-cc7bfe6720aa',
-        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'voluptas',
-        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'aut',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'eos',
-        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['quos'],
-        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
         admin_access: overrides && overrides.hasOwnProperty('admin_access') ? overrides.admin_access! : false,
         app_access: overrides && overrides.hasOwnProperty('app_access') ? overrides.app_access! : true,
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'eos',
+        enforce_tfa: overrides && overrides.hasOwnProperty('enforce_tfa') ? overrides.enforce_tfa! : false,
+        icon: overrides && overrides.hasOwnProperty('icon') ? overrides.icon! : 'aut',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e00df04b-c7e1-4f22-a24d-cc7bfe6720aa',
+        ip_access: overrides && overrides.hasOwnProperty('ip_access') ? overrides.ip_access! : ['quos'],
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'voluptas',
         users: overrides && overrides.hasOwnProperty('users') ? overrides.users! : [anUpdateDirectusUsersInput()],
     };
 };
 
 export const anUpdateDirectusUsersInput = (overrides?: Partial<UpdateDirectusUsersInput>): UpdateDirectusUsersInput => {
     return {
-        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '95417fe5-058b-4f12-989b-b2912c8cfacf',
-        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'expedita',
-        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'sed',
-        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'quia',
-        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'sequi',
-        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'accusantium',
-        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'et',
-        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aut',
-        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'quaerat',
+        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'enim',
         avatar: overrides && overrides.hasOwnProperty('avatar') ? overrides.avatar! : anUpdateDirectusFilesInput(),
+        description: overrides && overrides.hasOwnProperty('description') ? overrides.description! : 'aut',
+        email: overrides && overrides.hasOwnProperty('email') ? overrides.email! : 'quia',
+        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : false,
+        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'odit',
+        first_name: overrides && overrides.hasOwnProperty('first_name') ? overrides.first_name! : 'expedita',
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '95417fe5-058b-4f12-989b-b2912c8cfacf',
         language: overrides && overrides.hasOwnProperty('language') ? overrides.language! : 'eius',
-        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'fugit',
-        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'mollitia',
-        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'et',
-        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : anUpdateDirectusRolesInput(),
-        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'pariatur',
         last_access: overrides && overrides.hasOwnProperty('last_access') ? overrides.last_access! : '1970-01-01T23:57:35.604Z',
         last_access_func: overrides && overrides.hasOwnProperty('last_access_func') ? overrides.last_access_func! : aDatetimeFunctionsInput(),
+        last_name: overrides && overrides.hasOwnProperty('last_name') ? overrides.last_name! : 'sed',
         last_page: overrides && overrides.hasOwnProperty('last_page') ? overrides.last_page! : 'sit',
+        location: overrides && overrides.hasOwnProperty('location') ? overrides.location! : 'accusantium',
+        password: overrides && overrides.hasOwnProperty('password') ? overrides.password! : 'sequi',
         provider: overrides && overrides.hasOwnProperty('provider') ? overrides.provider! : 'necessitatibus',
-        external_identifier: overrides && overrides.hasOwnProperty('external_identifier') ? overrides.external_identifier! : 'odit',
-        auth_data: overrides && overrides.hasOwnProperty('auth_data') ? overrides.auth_data! : 'enim',
-        email_notifications: overrides && overrides.hasOwnProperty('email_notifications') ? overrides.email_notifications! : false,
+        role: overrides && overrides.hasOwnProperty('role') ? overrides.role! : anUpdateDirectusRolesInput(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'et',
+        tags: overrides && overrides.hasOwnProperty('tags') ? overrides.tags! : 'quaerat',
+        tfa_secret: overrides && overrides.hasOwnProperty('tfa_secret') ? overrides.tfa_secret! : 'mollitia',
+        theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'fugit',
+        title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'et',
+        token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'pariatur',
     };
 };
