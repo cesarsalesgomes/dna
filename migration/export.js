@@ -53,12 +53,17 @@ function copyGeneratedSchemaToHistoryFolder() {
   copyFileSync('schema.yaml', `./schema-history/${getCurrentUTCDate()}.yaml`)
 }
 
+function copyGeneratedSchemaToDirectusMigrationsFolder() {
+  copyFileSync('schema.yaml', `../directus/migrations/schema.yaml`)
+}
+
 async function main() {
   await removeSchemaFileFromDockerContainer();
   await exportDataModelToSchemaFileOnDockerDirectusInstance();
   await copyDirectusSchemaGeneratedToMigrationFolder();
 
   copyGeneratedSchemaToHistoryFolder();
+  copyGeneratedSchemaToDirectusMigrationsFolder();
 }
 
 main();

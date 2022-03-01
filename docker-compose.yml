@@ -26,14 +26,15 @@ services:
     ports:
       - ${DIRECTUS_PORT}:${DIRECTUS_PORT}
     volumes:
-      # By default, uploads are stored in /directus/uploads
-      # Always make sure your volumes matches the storage root when using
-      # local driver
       - ./directus/uploads:/directus/uploads
-      # Make sure to also mount the volume when using SQLite
-      # - ./database:/directus/database
-      # If you want to load extensions from the host
-      # - ./extensions:/directus/extensions
+      - ./directus/migrations:/directus/migrations
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npx directus schema apply --yes ./migrations/schema.yaml
+        npx directus bootstrap
+        npx directus start
     networks:
       dna_network:
         ipv4_address: ${DOCKER_DNA_IPV4_DIRECTUS}

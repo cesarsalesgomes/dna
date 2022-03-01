@@ -1,11 +1,11 @@
-name: Testing & Building
+name: Testing Nest unit & integrations tests
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  test_build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,9 +31,4 @@ jobs:
       # 4) Generate tests with coverage report
       - name: Run tests
         run: npm run test:cov
-        working-directory: nestjs
-
-      # 5) Build Nest
-      - name: Run build
-        run: npm run build
         working-directory: nestjs
