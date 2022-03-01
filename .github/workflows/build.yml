@@ -1,4 +1,4 @@
-name: Build Nest application after running the Migration & Graphql Codegen scripts
+name: Build
 
 on:
   pull_request:
@@ -10,27 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # 1) Build and run the docker stack
-      - name: Build Docker stack
-      - uses: actions/setup-node@v2
-        run: docker-compose up -d
-
-      # 2) Import last migration generated to docker stack
-      - name: Import migration
-        run: npm run import
-        working-directory: migration
-
-      # 3) Generate updated graphql sdk
-      - name: Generate updated graphql sdk
-        run: npm start
-        working-directory: graphql
-
-      # 4) Setup node version
+      # 1) Setup node version
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
 
-      # 5) Cache npm installed modules on .npm
+      # 2) Cache npm installed modules on .npm
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -38,12 +23,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # 6) Install node_modules
+      # 3) Install node_modules
       - name: Install dependencies
         run: npm install
         working-directory: nestjs
 
-      # 7) Build Nest
-      - name: Run build
+      # 4) Build application
+      - name: Build app
         run: npm run build
         working-directory: nestjs

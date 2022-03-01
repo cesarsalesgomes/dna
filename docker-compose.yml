@@ -82,7 +82,6 @@ services:
       - /usr/src/app/node_modules/
     ports:
       - ${NEST_PORT}:${NEST_PORT}
-      - 9229:9229
     env_file:
       - .env
     networks:
