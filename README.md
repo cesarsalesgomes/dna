@@ -224,3 +224,29 @@ For this, the combination of **[NestJS Error Filter](https://docs.nestjs.com/exc
 
 1. After creating a Group/Stream Logs on CloudWatch, to avoid permission errors, it's necessary to add the `CloudWatchLogsFullAccess` permission to the Aws admin user.
 2. Due to the NestJS configuration peculiarities, the steps reported in this **[Stackoverflow link](https://stackoverflow.com/questions/69433044/winston-with-aws-cloudwatch-on-nestjs)** were followed.
+
+<br />
+
+## **Continuous Integration** 🤖
+
+`Continuous Integration` is a way to increase code quality, removing the responsibility from the developers some manual steps that must be performed before merging to the main code. Tests and checks of the code are handled on a server and automatically reported back
+
+For this, **[Github Actions](https://docs.github.com/actions)** were used, due to the easy configuration with the repository already hosted on `Github`, and the many ready-made actions already shared by the community, in addition to the high cost benefit due to the free plan for public repositories.
+
+Below is the list of configured actions:
+
+> **[TEST](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/test.yml)**
+
+_Battery of tests performed in the business layer when performing a pull request to the main branch. If any of the tests fail, merge will be canceled._
+
+> **[BUILD](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/build.yml)**
+
+_Checks if the business layer build was performed normally, avoiding data typing errors and possible execution errors. if an error occurs, the merge will be canceled._
+
+> **[COVERAGE](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/coverage.yml)**
+
+_Uploads generated coverage to **[Codecov](https://about.codecov.io/)**, highlighting and keeping history on which portions of the code that have not been properly tested or may require additional testing, then generates a report on your test suite’s code coverage, and overlays that directly onto your source code, making it even easier to identify needed test areas._
+
+> **[DEPENDABOT](https://github.com/cesarsalesgomes/dna/blob/main/.github/dependabot.yml)**
+
+_**[Dependabot](https://docs.github.com/en/enterprise-server@3.3/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions)** creates pull requests to keep your dependencies up to date, and you can use GitHub Actions to perform automated tasks when these pull requests are created._
