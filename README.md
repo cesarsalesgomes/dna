@@ -174,7 +174,7 @@ To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
 
 2. To log only user interaction requests (disregard robot calls, Directus Admin interactions, etc.), replace the **access_log** line in **etc/nginx/nginx.conf** file with the condition below:
 
-```
+```bash
 map $uri $loggable {
   ~^/graphql 1;
   ~^/nestjs/ 1;
