@@ -2,6 +2,8 @@
 
 [![codecov](https://codecov.io/gh/cesarsalesgomes/dna/branch/main/graph/badge.svg?token=YH13U4UY6V)](https://codecov.io/gh/cesarsalesgomes/dna)
 
+[![GitHub Super-Linter](https://github.com/cesarsalesgomes/dna/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 Fullstack prototipe project in Typescript, with the objective of joining three well-regarded tools in the community (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io/getting-started/introduction/)**, `front-end` **[Angular](https://angular.io/)**) in order to create an initial environment with the main necessary settings that a project commonly requires during its lifetime, so during its development try to focus as much as possible only on the code development required by the application.
 
 <br />
@@ -229,9 +231,9 @@ For this, the combination of **[NestJS Error Filter](https://docs.nestjs.com/exc
 
 ## **Continuous Integration** 🤖
 
-`Continuous Integration` is a way to increase code quality, removing the responsibility from the developers some manual steps that must be performed before merging to the main code. Tests and checks of the code are handled on a server and automatically reported back
+`Continuous Integration` is a way to increase code quality, removing the responsibility from the developers some manual steps that must be performed before merging to the main code. Tests and checks of the code are handled on a server and automatically reported back.
 
-For this, **[Github Actions](https://docs.github.com/actions)** were used, due to the easy configuration with the repository already hosted on `Github`, and the many ready-made actions already shared by the community, in addition to the high cost benefit due to the free plan for public repositories.
+For this, **[Github Actions](https://docs.github.com/actions)** were used, due to the easy configuration with the repository already hosted on `Github`, and the many ready-made actions already shared by the community.
 
 Below is the list of configured actions:
 
@@ -241,12 +243,16 @@ _Battery of tests performed in the business layer when performing a pull request
 
 > **[BUILD](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/build.yml)**
 
-_Checks if the business layer build was performed normally, avoiding data typing errors and possible execution errors. if an error occurs, the merge will be canceled._
+_Checks if the business layer build was performed normally, avoiding data typing errors and possible execution errors. If an error occurs, the merge will be canceled._
 
 > **[COVERAGE](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/coverage.yml)**
 
-_Uploads generated coverage to **[Codecov](https://about.codecov.io/)**, highlighting and keeping history on which portions of the code that have not been properly tested or may require additional testing, then generates a report on your test suite’s code coverage, and overlays that directly onto your source code, making it even easier to identify needed test areas._
+_Uploads generated coverage to **[Codecov](https://about.codecov.io/)**, highlighting and keeping history on which portions of the code that have not been properly tested or may require additional testing._
 
 > **[DEPENDABOT](https://github.com/cesarsalesgomes/dna/blob/main/.github/dependabot.yml)**
 
-_**[Dependabot](https://docs.github.com/en/enterprise-server@3.3/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions)** creates pull requests to keep your dependencies up to date, and you can use GitHub Actions to perform automated tasks when these pull requests are created._
+_**[Dependabot](https://docs.github.com/en/enterprise-server@3.3/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions)** creates pull requests to keep your dependencies up to date, and uses GitHub Actions to perform automated tasks when these pull requests are created._
+
+> **[LINTER](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/linter.yml)**
+
+_**[Super-linter](https://github.com/marketplace/actions/super-linter)** automate the process establishing coding best practices and prevent broken code from being uploaded to the main branch._
