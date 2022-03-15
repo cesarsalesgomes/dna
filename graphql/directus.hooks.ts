@@ -1,13 +1,29 @@
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
-import { GraphQLError } from 'graphql-request/dist/types';
-import { print } from 'graphql'
-import gql from 'graphql-tag';
+import { useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
+  return async (): Promise<TData> => {
+    const res = await fetch("http://localhost/graphql", {
+    method: "POST",
+    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0NzM2MzYxNCwiZXhwIjoxNjQ3NDUwMDE0LCJpc3MiOiJkaXJlY3R1cyJ9.64GvEb7GnxBVgZVBnmP5N_7FedpYEIo_FT-LK7ZvU4A"}}),
+      body: JSON.stringify({ query, variables }),
+    });
+
+    const json = await res.json();
+
+    if (json.errors) {
+      const { message } = json.errors[0];
+
+      throw new Error(message);
+    }
+
+    return json.data;
+  }
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -25,21 +41,21 @@ export type Mutation = {
   __typename?: 'Mutation';
   create_cat_item?: Maybe<Cat>;
   create_cat_items?: Maybe<Array<Maybe<Cat>>>;
-  delete_cat_item?: Maybe<DeleteOne>;
-  delete_cat_items?: Maybe<DeleteMany>;
+  delete_cat_item?: Maybe<Delete_One>;
+  delete_cat_items?: Maybe<Delete_Many>;
   update_cat_item?: Maybe<Cat>;
   update_cat_items?: Maybe<Array<Maybe<Cat>>>;
 };
 
 
-export type MutationCreateCatItemArgs = {
-  data: CreateCatInput;
+export type MutationCreate_Cat_ItemArgs = {
+  data: Create_Cat_Input;
 };
 
 
-export type MutationCreateCatItemsArgs = {
-  data?: InputMaybe<Array<CreateCatInput>>;
-  filter?: InputMaybe<CatFilter>;
+export type MutationCreate_Cat_ItemsArgs = {
+  data?: InputMaybe<Array<Create_Cat_Input>>;
+  filter?: InputMaybe<Cat_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -48,25 +64,25 @@ export type MutationCreateCatItemsArgs = {
 };
 
 
-export type MutationDeleteCatItemArgs = {
+export type MutationDelete_Cat_ItemArgs = {
   id: Scalars['ID'];
 };
 
 
-export type MutationDeleteCatItemsArgs = {
+export type MutationDelete_Cat_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
 
-export type MutationUpdateCatItemArgs = {
-  data: UpdateCatInput;
+export type MutationUpdate_Cat_ItemArgs = {
+  data: Update_Cat_Input;
   id: Scalars['ID'];
 };
 
 
-export type MutationUpdateCatItemsArgs = {
-  data: UpdateCatInput;
-  filter?: InputMaybe<CatFilter>;
+export type MutationUpdate_Cat_ItemsArgs = {
+  data: Update_Cat_Input;
+  filter?: InputMaybe<Cat_Filter>;
   ids: Array<InputMaybe<Scalars['ID']>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -78,13 +94,13 @@ export type MutationUpdateCatItemsArgs = {
 export type Query = {
   __typename?: 'Query';
   cat?: Maybe<Array<Maybe<Cat>>>;
-  cat_aggregated?: Maybe<Array<Maybe<CatAggregated>>>;
+  cat_aggregated?: Maybe<Array<Maybe<Cat_Aggregated>>>;
   cat_by_id?: Maybe<Cat>;
 };
 
 
 export type QueryCatArgs = {
-  filter?: InputMaybe<CatFilter>;
+  filter?: InputMaybe<Cat_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -93,8 +109,8 @@ export type QueryCatArgs = {
 };
 
 
-export type QueryCatAggregatedArgs = {
-  filter?: InputMaybe<CatFilter>;
+export type QueryCat_AggregatedArgs = {
+  filter?: InputMaybe<Cat_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   limit?: InputMaybe<Scalars['Int']>;
   search?: InputMaybe<Scalars['String']>;
@@ -102,11 +118,11 @@ export type QueryCatAggregatedArgs = {
 };
 
 
-export type QueryCatByIdArgs = {
+export type QueryCat_By_IdArgs = {
   id: Scalars['ID'];
 };
 
-export type BooleanFilterOperators = {
+export type Boolean_Filter_Operators = {
   _eq?: InputMaybe<Scalars['Boolean']>;
   _neq?: InputMaybe<Scalars['Boolean']>;
   _nnull?: InputMaybe<Scalars['Boolean']>;
@@ -116,18 +132,18 @@ export type BooleanFilterOperators = {
 export type Cat = {
   __typename?: 'cat';
   date_created?: Maybe<Scalars['Date']>;
-  date_created_func?: Maybe<DatetimeFunctions>;
+  date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']>;
-  date_updated_func?: Maybe<DatetimeFunctions>;
+  date_updated_func?: Maybe<Datetime_Functions>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
-  user_created?: Maybe<DirectusUsers>;
-  user_updated?: Maybe<DirectusUsers>;
+  user_created?: Maybe<Directus_Users>;
+  user_updated?: Maybe<Directus_Users>;
 };
 
 
-export type CatUserCreatedArgs = {
-  filter?: InputMaybe<DirectusUsersFilter>;
+export type CatUser_CreatedArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -136,8 +152,8 @@ export type CatUserCreatedArgs = {
 };
 
 
-export type CatUserUpdatedArgs = {
-  filter?: InputMaybe<DirectusUsersFilter>;
+export type CatUser_UpdatedArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -145,49 +161,49 @@ export type CatUserUpdatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type CatAggregated = {
+export type Cat_Aggregated = {
   __typename?: 'cat_aggregated';
-  avg?: Maybe<CatAggregatedFields>;
-  avgDistinct?: Maybe<CatAggregatedFields>;
-  count?: Maybe<CatAggregatedFields>;
-  countDistinct?: Maybe<CatAggregatedFields>;
+  avg?: Maybe<Cat_Aggregated_Fields>;
+  avgDistinct?: Maybe<Cat_Aggregated_Fields>;
+  count?: Maybe<Cat_Aggregated_Fields>;
+  countDistinct?: Maybe<Cat_Aggregated_Fields>;
   group?: Maybe<Scalars['JSON']>;
-  max?: Maybe<CatAggregatedFields>;
-  min?: Maybe<CatAggregatedFields>;
-  sum?: Maybe<CatAggregatedFields>;
-  sumDistinct?: Maybe<CatAggregatedFields>;
+  max?: Maybe<Cat_Aggregated_Fields>;
+  min?: Maybe<Cat_Aggregated_Fields>;
+  sum?: Maybe<Cat_Aggregated_Fields>;
+  sumDistinct?: Maybe<Cat_Aggregated_Fields>;
 };
 
-export type CatAggregatedFields = {
+export type Cat_Aggregated_Fields = {
   __typename?: 'cat_aggregated_fields';
   id?: Maybe<Scalars['Float']>;
 };
 
-export type CatFilter = {
-  _and?: InputMaybe<Array<InputMaybe<CatFilter>>>;
-  _or?: InputMaybe<Array<InputMaybe<CatFilter>>>;
-  date_created?: InputMaybe<DateFilterOperators>;
-  date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
-  date_updated?: InputMaybe<DateFilterOperators>;
-  date_updated_func?: InputMaybe<DatetimeFunctionFilterOperators>;
-  id?: InputMaybe<NumberFilterOperators>;
-  name?: InputMaybe<StringFilterOperators>;
-  user_created?: InputMaybe<DirectusUsersFilter>;
-  user_updated?: InputMaybe<DirectusUsersFilter>;
+export type Cat_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Cat_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Cat_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<Directus_Users_Filter>;
+  user_updated?: InputMaybe<Directus_Users_Filter>;
 };
 
-export type CreateCatInput = {
+export type Create_Cat_Input = {
   date_created?: InputMaybe<Scalars['Date']>;
-  date_created_func?: InputMaybe<DatetimeFunctionsInput>;
+  date_created_func?: InputMaybe<Datetime_FunctionsInput>;
   date_updated?: InputMaybe<Scalars['Date']>;
-  date_updated_func?: InputMaybe<DatetimeFunctionsInput>;
+  date_updated_func?: InputMaybe<Datetime_FunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  user_created?: InputMaybe<CreateDirectusUsersInput>;
-  user_updated?: InputMaybe<CreateDirectusUsersInput>;
+  user_created?: InputMaybe<Create_Directus_Users_Input>;
+  user_updated?: InputMaybe<Create_Directus_Users_Input>;
 };
 
-export type CreateDirectusFilesInput = {
+export type Create_Directus_Files_Input = {
   charset?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   duration?: InputMaybe<Scalars['Int']>;
@@ -195,31 +211,31 @@ export type CreateDirectusFilesInput = {
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download: Scalars['String'];
   filesize?: InputMaybe<Scalars['Int']>;
-  folder?: InputMaybe<CreateDirectusFoldersInput>;
+  folder?: InputMaybe<Create_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
-  modified_by?: InputMaybe<CreateDirectusUsersInput>;
+  modified_by?: InputMaybe<Create_Directus_Users_Input>;
   modified_on: Scalars['Date'];
-  modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  modified_on_func?: InputMaybe<Datetime_FunctionsInput>;
   storage: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
-  uploaded_by?: InputMaybe<CreateDirectusUsersInput>;
+  uploaded_by?: InputMaybe<Create_Directus_Users_Input>;
   uploaded_on: Scalars['Date'];
-  uploaded_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  uploaded_on_func?: InputMaybe<Datetime_FunctionsInput>;
   width?: InputMaybe<Scalars['Int']>;
 };
 
-export type CreateDirectusFoldersInput = {
+export type Create_Directus_Folders_Input = {
   id?: InputMaybe<Scalars['ID']>;
   name: Scalars['String'];
-  parent?: InputMaybe<CreateDirectusFoldersInput>;
+  parent?: InputMaybe<Create_Directus_Folders_Input>;
 };
 
-export type CreateDirectusRolesInput = {
+export type Create_Directus_Roles_Input = {
   admin_access: Scalars['Boolean'];
   app_access: Scalars['Boolean'];
   description?: InputMaybe<Scalars['String']>;
@@ -228,12 +244,12 @@ export type CreateDirectusRolesInput = {
   id?: InputMaybe<Scalars['ID']>;
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name: Scalars['String'];
-  users?: InputMaybe<Array<InputMaybe<CreateDirectusUsersInput>>>;
+  users?: InputMaybe<Array<InputMaybe<Create_Directus_Users_Input>>>;
 };
 
-export type CreateDirectusUsersInput = {
+export type Create_Directus_Users_Input = {
   auth_data?: InputMaybe<Scalars['JSON']>;
-  avatar?: InputMaybe<CreateDirectusFilesInput>;
+  avatar?: InputMaybe<Create_Directus_Files_Input>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   email_notifications?: InputMaybe<Scalars['Boolean']>;
@@ -242,13 +258,13 @@ export type CreateDirectusUsersInput = {
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['String']>;
   last_access?: InputMaybe<Scalars['Date']>;
-  last_access_func?: InputMaybe<DatetimeFunctionsInput>;
+  last_access_func?: InputMaybe<Datetime_FunctionsInput>;
   last_name?: InputMaybe<Scalars['String']>;
   last_page?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   provider: Scalars['String'];
-  role?: InputMaybe<CreateDirectusRolesInput>;
+  role?: InputMaybe<Create_Directus_Roles_Input>;
   status: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
   tfa_secret?: InputMaybe<Scalars['String']>;
@@ -257,7 +273,7 @@ export type CreateDirectusUsersInput = {
   token?: InputMaybe<Scalars['String']>;
 };
 
-export type DateFilterOperators = {
+export type Date_Filter_Operators = {
   _eq?: InputMaybe<Scalars['String']>;
   _gt?: InputMaybe<Scalars['String']>;
   _gte?: InputMaybe<Scalars['String']>;
@@ -268,18 +284,18 @@ export type DateFilterOperators = {
   _null?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type DatetimeFunctionFilterOperators = {
-  day?: InputMaybe<NumberFilterOperators>;
-  hour?: InputMaybe<NumberFilterOperators>;
-  minute?: InputMaybe<NumberFilterOperators>;
-  month?: InputMaybe<NumberFilterOperators>;
-  second?: InputMaybe<NumberFilterOperators>;
-  week?: InputMaybe<NumberFilterOperators>;
-  weekday?: InputMaybe<NumberFilterOperators>;
-  year?: InputMaybe<NumberFilterOperators>;
+export type Datetime_Function_Filter_Operators = {
+  day?: InputMaybe<Number_Filter_Operators>;
+  hour?: InputMaybe<Number_Filter_Operators>;
+  minute?: InputMaybe<Number_Filter_Operators>;
+  month?: InputMaybe<Number_Filter_Operators>;
+  second?: InputMaybe<Number_Filter_Operators>;
+  week?: InputMaybe<Number_Filter_Operators>;
+  weekday?: InputMaybe<Number_Filter_Operators>;
+  year?: InputMaybe<Number_Filter_Operators>;
 };
 
-export type DatetimeFunctions = {
+export type Datetime_Functions = {
   __typename?: 'datetime_functions';
   day?: Maybe<Scalars['Int']>;
   hour?: Maybe<Scalars['Int']>;
@@ -291,7 +307,7 @@ export type DatetimeFunctions = {
   year?: Maybe<Scalars['Int']>;
 };
 
-export type DatetimeFunctionsInput = {
+export type Datetime_FunctionsInput = {
   day?: InputMaybe<Scalars['Int']>;
   hour?: InputMaybe<Scalars['Int']>;
   minute?: InputMaybe<Scalars['Int']>;
@@ -302,17 +318,17 @@ export type DatetimeFunctionsInput = {
   year?: InputMaybe<Scalars['Int']>;
 };
 
-export type DeleteMany = {
+export type Delete_Many = {
   __typename?: 'delete_many';
   ids: Array<Maybe<Scalars['ID']>>;
 };
 
-export type DeleteOne = {
+export type Delete_One = {
   __typename?: 'delete_one';
   id: Scalars['ID'];
 };
 
-export type DirectusFiles = {
+export type Directus_Files = {
   __typename?: 'directus_files';
   charset?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -321,27 +337,27 @@ export type DirectusFiles = {
   filename_disk?: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
   filesize?: Maybe<Scalars['Int']>;
-  folder?: Maybe<DirectusFolders>;
+  folder?: Maybe<Directus_Folders>;
   height?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['ID']>;
   location?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
-  modified_by?: Maybe<DirectusUsers>;
+  modified_by?: Maybe<Directus_Users>;
   modified_on: Scalars['Date'];
-  modified_on_func?: Maybe<DatetimeFunctions>;
+  modified_on_func?: Maybe<Datetime_Functions>;
   storage: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  uploaded_by?: Maybe<DirectusUsers>;
+  uploaded_by?: Maybe<Directus_Users>;
   uploaded_on: Scalars['Date'];
-  uploaded_on_func?: Maybe<DatetimeFunctions>;
+  uploaded_on_func?: Maybe<Datetime_Functions>;
   width?: Maybe<Scalars['Int']>;
 };
 
 
-export type DirectusFilesFolderArgs = {
-  filter?: InputMaybe<DirectusFoldersFilter>;
+export type Directus_FilesFolderArgs = {
+  filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -350,8 +366,8 @@ export type DirectusFilesFolderArgs = {
 };
 
 
-export type DirectusFilesModifiedByArgs = {
-  filter?: InputMaybe<DirectusUsersFilter>;
+export type Directus_FilesModified_ByArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -360,8 +376,8 @@ export type DirectusFilesModifiedByArgs = {
 };
 
 
-export type DirectusFilesUploadedByArgs = {
-  filter?: InputMaybe<DirectusUsersFilter>;
+export type Directus_FilesUploaded_ByArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -369,44 +385,44 @@ export type DirectusFilesUploadedByArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type DirectusFilesFilter = {
-  _and?: InputMaybe<Array<InputMaybe<DirectusFilesFilter>>>;
-  _or?: InputMaybe<Array<InputMaybe<DirectusFilesFilter>>>;
-  charset?: InputMaybe<StringFilterOperators>;
-  description?: InputMaybe<StringFilterOperators>;
-  duration?: InputMaybe<NumberFilterOperators>;
-  embed?: InputMaybe<StringFilterOperators>;
-  filename_disk?: InputMaybe<StringFilterOperators>;
-  filename_download?: InputMaybe<StringFilterOperators>;
-  filesize?: InputMaybe<NumberFilterOperators>;
-  folder?: InputMaybe<DirectusFoldersFilter>;
-  height?: InputMaybe<NumberFilterOperators>;
-  id?: InputMaybe<StringFilterOperators>;
-  location?: InputMaybe<StringFilterOperators>;
-  metadata?: InputMaybe<StringFilterOperators>;
-  modified_by?: InputMaybe<DirectusUsersFilter>;
-  modified_on?: InputMaybe<DateFilterOperators>;
-  modified_on_func?: InputMaybe<DatetimeFunctionFilterOperators>;
-  storage?: InputMaybe<StringFilterOperators>;
-  tags?: InputMaybe<StringFilterOperators>;
-  title?: InputMaybe<StringFilterOperators>;
-  type?: InputMaybe<StringFilterOperators>;
-  uploaded_by?: InputMaybe<DirectusUsersFilter>;
-  uploaded_on?: InputMaybe<DateFilterOperators>;
-  uploaded_on_func?: InputMaybe<DatetimeFunctionFilterOperators>;
-  width?: InputMaybe<NumberFilterOperators>;
+export type Directus_Files_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Directus_Files_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Directus_Files_Filter>>>;
+  charset?: InputMaybe<String_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  duration?: InputMaybe<Number_Filter_Operators>;
+  embed?: InputMaybe<String_Filter_Operators>;
+  filename_disk?: InputMaybe<String_Filter_Operators>;
+  filename_download?: InputMaybe<String_Filter_Operators>;
+  filesize?: InputMaybe<Number_Filter_Operators>;
+  folder?: InputMaybe<Directus_Folders_Filter>;
+  height?: InputMaybe<Number_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  location?: InputMaybe<String_Filter_Operators>;
+  metadata?: InputMaybe<String_Filter_Operators>;
+  modified_by?: InputMaybe<Directus_Users_Filter>;
+  modified_on?: InputMaybe<Date_Filter_Operators>;
+  modified_on_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  storage?: InputMaybe<String_Filter_Operators>;
+  tags?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  type?: InputMaybe<String_Filter_Operators>;
+  uploaded_by?: InputMaybe<Directus_Users_Filter>;
+  uploaded_on?: InputMaybe<Date_Filter_Operators>;
+  uploaded_on_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  width?: InputMaybe<Number_Filter_Operators>;
 };
 
-export type DirectusFolders = {
+export type Directus_Folders = {
   __typename?: 'directus_folders';
   id?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
-  parent?: Maybe<DirectusFolders>;
+  parent?: Maybe<Directus_Folders>;
 };
 
 
-export type DirectusFoldersParentArgs = {
-  filter?: InputMaybe<DirectusFoldersFilter>;
+export type Directus_FoldersParentArgs = {
+  filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -414,15 +430,15 @@ export type DirectusFoldersParentArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type DirectusFoldersFilter = {
-  _and?: InputMaybe<Array<InputMaybe<DirectusFoldersFilter>>>;
-  _or?: InputMaybe<Array<InputMaybe<DirectusFoldersFilter>>>;
-  id?: InputMaybe<StringFilterOperators>;
-  name?: InputMaybe<StringFilterOperators>;
-  parent?: InputMaybe<DirectusFoldersFilter>;
+export type Directus_Folders_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Directus_Folders_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Directus_Folders_Filter>>>;
+  id?: InputMaybe<String_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+  parent?: InputMaybe<Directus_Folders_Filter>;
 };
 
-export type DirectusRoles = {
+export type Directus_Roles = {
   __typename?: 'directus_roles';
   admin_access: Scalars['Boolean'];
   app_access: Scalars['Boolean'];
@@ -432,12 +448,12 @@ export type DirectusRoles = {
   id?: Maybe<Scalars['ID']>;
   ip_access?: Maybe<Array<Maybe<Scalars['String']>>>;
   name: Scalars['String'];
-  users?: Maybe<Array<Maybe<DirectusUsers>>>;
+  users?: Maybe<Array<Maybe<Directus_Users>>>;
 };
 
 
-export type DirectusRolesUsersArgs = {
-  filter?: InputMaybe<DirectusUsersFilter>;
+export type Directus_RolesUsersArgs = {
+  filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -445,24 +461,24 @@ export type DirectusRolesUsersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type DirectusRolesFilter = {
-  _and?: InputMaybe<Array<InputMaybe<DirectusRolesFilter>>>;
-  _or?: InputMaybe<Array<InputMaybe<DirectusRolesFilter>>>;
-  admin_access?: InputMaybe<BooleanFilterOperators>;
-  app_access?: InputMaybe<BooleanFilterOperators>;
-  description?: InputMaybe<StringFilterOperators>;
-  enforce_tfa?: InputMaybe<BooleanFilterOperators>;
-  icon?: InputMaybe<StringFilterOperators>;
-  id?: InputMaybe<StringFilterOperators>;
-  ip_access?: InputMaybe<StringFilterOperators>;
-  name?: InputMaybe<StringFilterOperators>;
-  users?: InputMaybe<DirectusUsersFilter>;
+export type Directus_Roles_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Directus_Roles_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Directus_Roles_Filter>>>;
+  admin_access?: InputMaybe<Boolean_Filter_Operators>;
+  app_access?: InputMaybe<Boolean_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  enforce_tfa?: InputMaybe<Boolean_Filter_Operators>;
+  icon?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  ip_access?: InputMaybe<String_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+  users?: InputMaybe<Directus_Users_Filter>;
 };
 
-export type DirectusUsers = {
+export type Directus_Users = {
   __typename?: 'directus_users';
   auth_data?: Maybe<Scalars['JSON']>;
-  avatar?: Maybe<DirectusFiles>;
+  avatar?: Maybe<Directus_Files>;
   description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   email_notifications?: Maybe<Scalars['Boolean']>;
@@ -471,13 +487,13 @@ export type DirectusUsers = {
   id?: Maybe<Scalars['ID']>;
   language?: Maybe<Scalars['String']>;
   last_access?: Maybe<Scalars['Date']>;
-  last_access_func?: Maybe<DatetimeFunctions>;
+  last_access_func?: Maybe<Datetime_Functions>;
   last_name?: Maybe<Scalars['String']>;
   last_page?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   provider: Scalars['String'];
-  role?: Maybe<DirectusRoles>;
+  role?: Maybe<Directus_Roles>;
   status: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
   tfa_secret?: Maybe<Scalars['String']>;
@@ -487,8 +503,8 @@ export type DirectusUsers = {
 };
 
 
-export type DirectusUsersAvatarArgs = {
-  filter?: InputMaybe<DirectusFilesFilter>;
+export type Directus_UsersAvatarArgs = {
+  filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -497,8 +513,8 @@ export type DirectusUsersAvatarArgs = {
 };
 
 
-export type DirectusUsersRoleArgs = {
-  filter?: InputMaybe<DirectusRolesFilter>;
+export type Directus_UsersRoleArgs = {
+  filter?: InputMaybe<Directus_Roles_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   page?: InputMaybe<Scalars['Int']>;
@@ -506,35 +522,35 @@ export type DirectusUsersRoleArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type DirectusUsersFilter = {
-  _and?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
-  _or?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
-  auth_data?: InputMaybe<StringFilterOperators>;
-  avatar?: InputMaybe<DirectusFilesFilter>;
-  description?: InputMaybe<StringFilterOperators>;
-  email?: InputMaybe<StringFilterOperators>;
-  email_notifications?: InputMaybe<BooleanFilterOperators>;
-  external_identifier?: InputMaybe<StringFilterOperators>;
-  first_name?: InputMaybe<StringFilterOperators>;
-  id?: InputMaybe<StringFilterOperators>;
-  language?: InputMaybe<StringFilterOperators>;
-  last_access?: InputMaybe<DateFilterOperators>;
-  last_access_func?: InputMaybe<DatetimeFunctionFilterOperators>;
-  last_name?: InputMaybe<StringFilterOperators>;
-  last_page?: InputMaybe<StringFilterOperators>;
-  location?: InputMaybe<StringFilterOperators>;
-  password?: InputMaybe<StringFilterOperators>;
-  provider?: InputMaybe<StringFilterOperators>;
-  role?: InputMaybe<DirectusRolesFilter>;
-  status?: InputMaybe<StringFilterOperators>;
-  tags?: InputMaybe<StringFilterOperators>;
-  tfa_secret?: InputMaybe<StringFilterOperators>;
-  theme?: InputMaybe<StringFilterOperators>;
-  title?: InputMaybe<StringFilterOperators>;
-  token?: InputMaybe<StringFilterOperators>;
+export type Directus_Users_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
+  auth_data?: InputMaybe<String_Filter_Operators>;
+  avatar?: InputMaybe<Directus_Files_Filter>;
+  description?: InputMaybe<String_Filter_Operators>;
+  email?: InputMaybe<String_Filter_Operators>;
+  email_notifications?: InputMaybe<Boolean_Filter_Operators>;
+  external_identifier?: InputMaybe<String_Filter_Operators>;
+  first_name?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  language?: InputMaybe<String_Filter_Operators>;
+  last_access?: InputMaybe<Date_Filter_Operators>;
+  last_access_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  last_name?: InputMaybe<String_Filter_Operators>;
+  last_page?: InputMaybe<String_Filter_Operators>;
+  location?: InputMaybe<String_Filter_Operators>;
+  password?: InputMaybe<String_Filter_Operators>;
+  provider?: InputMaybe<String_Filter_Operators>;
+  role?: InputMaybe<Directus_Roles_Filter>;
+  status?: InputMaybe<String_Filter_Operators>;
+  tags?: InputMaybe<String_Filter_Operators>;
+  tfa_secret?: InputMaybe<String_Filter_Operators>;
+  theme?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+  token?: InputMaybe<String_Filter_Operators>;
 };
 
-export type NumberFilterOperators = {
+export type Number_Filter_Operators = {
   _eq?: InputMaybe<Scalars['Float']>;
   _gt?: InputMaybe<Scalars['Float']>;
   _gte?: InputMaybe<Scalars['Float']>;
@@ -547,7 +563,7 @@ export type NumberFilterOperators = {
   _null?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type StringFilterOperators = {
+export type String_Filter_Operators = {
   _contains?: InputMaybe<Scalars['String']>;
   _empty?: InputMaybe<Scalars['Boolean']>;
   _ends_with?: InputMaybe<Scalars['String']>;
@@ -564,18 +580,18 @@ export type StringFilterOperators = {
   _starts_with?: InputMaybe<Scalars['String']>;
 };
 
-export type UpdateCatInput = {
+export type Update_Cat_Input = {
   date_created?: InputMaybe<Scalars['Date']>;
-  date_created_func?: InputMaybe<DatetimeFunctionsInput>;
+  date_created_func?: InputMaybe<Datetime_FunctionsInput>;
   date_updated?: InputMaybe<Scalars['Date']>;
-  date_updated_func?: InputMaybe<DatetimeFunctionsInput>;
+  date_updated_func?: InputMaybe<Datetime_FunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  user_created?: InputMaybe<UpdateDirectusUsersInput>;
-  user_updated?: InputMaybe<UpdateDirectusUsersInput>;
+  user_created?: InputMaybe<Update_Directus_Users_Input>;
+  user_updated?: InputMaybe<Update_Directus_Users_Input>;
 };
 
-export type UpdateDirectusFilesInput = {
+export type Update_Directus_Files_Input = {
   charset?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   duration?: InputMaybe<Scalars['Int']>;
@@ -583,31 +599,31 @@ export type UpdateDirectusFilesInput = {
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download?: InputMaybe<Scalars['String']>;
   filesize?: InputMaybe<Scalars['Int']>;
-  folder?: InputMaybe<UpdateDirectusFoldersInput>;
+  folder?: InputMaybe<Update_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
-  modified_by?: InputMaybe<UpdateDirectusUsersInput>;
+  modified_by?: InputMaybe<Update_Directus_Users_Input>;
   modified_on?: InputMaybe<Scalars['Date']>;
-  modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  modified_on_func?: InputMaybe<Datetime_FunctionsInput>;
   storage?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
-  uploaded_by?: InputMaybe<UpdateDirectusUsersInput>;
+  uploaded_by?: InputMaybe<Update_Directus_Users_Input>;
   uploaded_on?: InputMaybe<Scalars['Date']>;
-  uploaded_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  uploaded_on_func?: InputMaybe<Datetime_FunctionsInput>;
   width?: InputMaybe<Scalars['Int']>;
 };
 
-export type UpdateDirectusFoldersInput = {
+export type Update_Directus_Folders_Input = {
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<UpdateDirectusFoldersInput>;
+  parent?: InputMaybe<Update_Directus_Folders_Input>;
 };
 
-export type UpdateDirectusRolesInput = {
+export type Update_Directus_Roles_Input = {
   admin_access?: InputMaybe<Scalars['Boolean']>;
   app_access?: InputMaybe<Scalars['Boolean']>;
   description?: InputMaybe<Scalars['String']>;
@@ -616,12 +632,12 @@ export type UpdateDirectusRolesInput = {
   id?: InputMaybe<Scalars['ID']>;
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
-  users?: InputMaybe<Array<InputMaybe<UpdateDirectusUsersInput>>>;
+  users?: InputMaybe<Array<InputMaybe<Update_Directus_Users_Input>>>;
 };
 
-export type UpdateDirectusUsersInput = {
+export type Update_Directus_Users_Input = {
   auth_data?: InputMaybe<Scalars['JSON']>;
-  avatar?: InputMaybe<UpdateDirectusFilesInput>;
+  avatar?: InputMaybe<Update_Directus_Files_Input>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   email_notifications?: InputMaybe<Scalars['Boolean']>;
@@ -630,13 +646,13 @@ export type UpdateDirectusUsersInput = {
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['String']>;
   last_access?: InputMaybe<Scalars['Date']>;
-  last_access_func?: InputMaybe<DatetimeFunctionsInput>;
+  last_access_func?: InputMaybe<Datetime_FunctionsInput>;
   last_name?: InputMaybe<Scalars['String']>;
   last_page?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   provider?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<UpdateDirectusRolesInput>;
+  role?: InputMaybe<Update_Directus_Roles_Input>;
   status?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
   tfa_secret?: InputMaybe<Scalars['String']>;
@@ -658,7 +674,7 @@ export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
 
 
-export const CatByIdDocument = gql`
+export const CatByIdDocument = `
     query catById($data: ID!) {
   cat_by_id(id: $data) {
     id
@@ -666,7 +682,19 @@ export const CatByIdDocument = gql`
   }
 }
     `;
-export const FindAllCatsDocument = gql`
+export const useCatByIdQuery = <
+      TData = CatByIdQuery,
+      TError = unknown
+    >(
+      variables: CatByIdQueryVariables,
+      options?: UseQueryOptions<CatByIdQuery, TError, TData>
+    ) =>
+    useQuery<CatByIdQuery, TError, TData>(
+      ['catById', variables],
+      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+      options
+    );
+export const FindAllCatsDocument = `
     query findAllCats {
   cat {
     id
@@ -674,21 +702,15 @@ export const FindAllCatsDocument = gql`
   }
 }
     `;
-
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
-
-
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
-const CatByIdDocumentString = print(CatByIdDocument);
-const FindAllCatsDocumentString = print(FindAllCatsDocument);
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: CatByIdQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'catById');
-    },
-    findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindAllCatsQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats');
-    }
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;
+export const useFindAllCatsQuery = <
+      TData = FindAllCatsQuery,
+      TError = unknown
+    >(
+      variables?: FindAllCatsQueryVariables,
+      options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
+    ) =>
+    useQuery<FindAllCatsQuery, TError, TData>(
+      variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
+      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+      options
+    );

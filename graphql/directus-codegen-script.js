@@ -4,7 +4,10 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 
 const DIRECTUS_SDK_FILENAME = 'directus.sdk.ts';
+
 const DIRECTUS_MOCK_FILENAME = 'directus.mock.ts';
+
+const DIRECTUS_HOOKS_FILENAME = 'directus.hooks.ts';
 
 /**
  * Helper functions
@@ -56,6 +59,9 @@ function copyGeneratedMockToNestSystemDirectusFolder() {
   copyFileSync(`${DIRECTUS_MOCK_FILENAME}`, `../nestjs/src/system/directus/${DIRECTUS_MOCK_FILENAME}`);
 }
 
+function copyGeneratedHooksToReactDirectusFolder() {
+  copyFileSync(`${DIRECTUS_HOOKS_FILENAME}`, `../react/src/${DIRECTUS_HOOKS_FILENAME}`);
+}
 
 async function main() {
   setDotenvConfiguration()
@@ -64,6 +70,7 @@ async function main() {
 
   copyGeneratedSdkToNestSystemDirectusFolder();
   copyGeneratedMockToNestSystemDirectusFolder();
+  copyGeneratedHooksToReactDirectusFolder();
 }
 
 main();

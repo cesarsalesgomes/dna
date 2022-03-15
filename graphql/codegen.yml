@@ -22,3 +22,17 @@ generates:
     plugins:
       - typescript-mock-data:
           typesFile: "./directus.sdk.ts"
+
+  # React Query Hooks
+  ./directus.hooks.ts:
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher:
+        endpoint: "http://localhost/graphql"
+        fetchParams:
+          headers:
+            Content-Type: application/json
+            Authorization: Bearer ${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
