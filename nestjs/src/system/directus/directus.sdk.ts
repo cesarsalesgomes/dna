@@ -645,12 +645,27 @@ export type UpdateDirectusUsersInput = {
   token?: InputMaybe<Scalars['String']>;
 };
 
+export type CatByIdQueryVariables = Exact<{
+  data: Scalars['ID'];
+}>;
+
+
+export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
+
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
 
 
+export const CatByIdDocument = gql`
+    query catById($data: ID!) {
+  cat_by_id(id: $data) {
+    id
+    name
+  }
+}
+    `;
 export const FindAllCatsDocument = gql`
     query findAllCats {
   cat {
@@ -664,9 +679,13 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const CatByIdDocumentString = print(CatByIdDocument);
 const FindAllCatsDocumentString = print(FindAllCatsDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: CatByIdQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'catById');
+    },
     findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindAllCatsQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats');
     }
