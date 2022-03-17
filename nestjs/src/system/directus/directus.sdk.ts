@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import { GraphQLError } from 'graphql-request/dist/types';
-import { print } from 'graphql'
+import { print } from 'graphql';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -31,11 +31,9 @@ export type Mutation = {
   update_cat_items?: Maybe<Array<Maybe<Cat>>>;
 };
 
-
 export type MutationCreateCatItemArgs = {
   data: CreateCatInput;
 };
-
 
 export type MutationCreateCatItemsArgs = {
   data?: InputMaybe<Array<CreateCatInput>>;
@@ -47,22 +45,18 @@ export type MutationCreateCatItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type MutationDeleteCatItemArgs = {
   id: Scalars['ID'];
 };
-
 
 export type MutationDeleteCatItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
-
 export type MutationUpdateCatItemArgs = {
   data: UpdateCatInput;
   id: Scalars['ID'];
 };
-
 
 export type MutationUpdateCatItemsArgs = {
   data: UpdateCatInput;
@@ -82,7 +76,6 @@ export type Query = {
   cat_by_id?: Maybe<Cat>;
 };
 
-
 export type QueryCatArgs = {
   filter?: InputMaybe<CatFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -92,7 +85,6 @@ export type QueryCatArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type QueryCatAggregatedArgs = {
   filter?: InputMaybe<CatFilter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -100,7 +92,6 @@ export type QueryCatAggregatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type QueryCatByIdArgs = {
   id: Scalars['ID'];
@@ -125,7 +116,6 @@ export type Cat = {
   user_updated?: Maybe<DirectusUsers>;
 };
 
-
 export type CatUserCreatedArgs = {
   filter?: InputMaybe<DirectusUsersFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -134,7 +124,6 @@ export type CatUserCreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type CatUserUpdatedArgs = {
   filter?: InputMaybe<DirectusUsersFilter>;
@@ -339,7 +328,6 @@ export type DirectusFiles = {
   width?: Maybe<Scalars['Int']>;
 };
 
-
 export type DirectusFilesFolderArgs = {
   filter?: InputMaybe<DirectusFoldersFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -349,7 +337,6 @@ export type DirectusFilesFolderArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type DirectusFilesModifiedByArgs = {
   filter?: InputMaybe<DirectusUsersFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -358,7 +345,6 @@ export type DirectusFilesModifiedByArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type DirectusFilesUploadedByArgs = {
   filter?: InputMaybe<DirectusUsersFilter>;
@@ -404,7 +390,6 @@ export type DirectusFolders = {
   parent?: Maybe<DirectusFolders>;
 };
 
-
 export type DirectusFoldersParentArgs = {
   filter?: InputMaybe<DirectusFoldersFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -434,7 +419,6 @@ export type DirectusRoles = {
   name: Scalars['String'];
   users?: Maybe<Array<Maybe<DirectusUsers>>>;
 };
-
 
 export type DirectusRolesUsersArgs = {
   filter?: InputMaybe<DirectusUsersFilter>;
@@ -486,7 +470,6 @@ export type DirectusUsers = {
   token?: Maybe<Scalars['String']>;
 };
 
-
 export type DirectusUsersAvatarArgs = {
   filter?: InputMaybe<DirectusFilesFilter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -495,7 +478,6 @@ export type DirectusUsersAvatarArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type DirectusUsersRoleArgs = {
   filter?: InputMaybe<DirectusRolesFilter>;
@@ -649,46 +631,71 @@ export type CatByIdQueryVariables = Exact<{
   data: Scalars['ID'];
 }>;
 
+export type CatByIdQuery = { __typename?: 'Query'; cat_by_id?: { __typename?: 'cat'; id?: string | null; name?: string | null } | null };
 
-export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
+export type FindAllCatsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
-
+export type FindAllCatsQuery = {
+  __typename?: 'Query';
+  cat?: Array<{ __typename?: 'cat'; id?: string | null; name?: string | null } | null> | null;
+};
 
 export const CatByIdDocument = gql`
-    query catById($data: ID!) {
-  cat_by_id(id: $data) {
-    id
-    name
+  query catById($data: ID!) {
+    cat_by_id(id: $data) {
+      id
+      name
+    }
   }
-}
-    `;
+`;
 export const FindAllCatsDocument = gql`
-    query findAllCats {
-  cat {
-    id
-    name
+  query findAllCats {
+    cat {
+      id
+      name
+    }
   }
-}
-    `;
+`;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
-
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?: Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 const CatByIdDocumentString = print(CatByIdDocument);
 const FindAllCatsDocumentString = print(FindAllCatsDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: CatByIdQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'catById');
+    catById(
+      variables: CatByIdQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<{
+      data?: CatByIdQuery | undefined;
+      extensions?: any;
+      headers: Dom.Headers;
+      status: number;
+      errors?: GraphQLError[] | undefined;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
+        'catById',
+      );
     },
-    findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindAllCatsQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats');
-    }
+    findAllCats(
+      variables?: FindAllCatsQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<{
+      data?: FindAllCatsQuery | undefined;
+      extensions?: any;
+      headers: Dom.Headers;
+      status: number;
+      errors?: GraphQLError[] | undefined;
+    }> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, { ...requestHeaders, ...wrappedRequestHeaders }),
+        'findAllCats',
+      );
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
