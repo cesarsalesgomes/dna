@@ -67,7 +67,7 @@ function Posts({ setPostId }) {
 }
 
 function Post({ postId, setPostId }) {
-  const { status, data, error, isFetching } = useCatByIdQuery(postId);
+  const { status, data, error, isFetching } = useCatByIdQuery({ data: postId });
 
   return (
     <div>
@@ -82,7 +82,7 @@ function Post({ postId, setPostId }) {
         <span>Error: {error.message}</span>
       ) : (
             <>
-              <h1>{data.name}</h1>
+              <h1>{data?.cat_by_id?.name}</h1>
               <div>{isFetching ? 'Background Updating...' : ' '}</div>
             </>
           )}

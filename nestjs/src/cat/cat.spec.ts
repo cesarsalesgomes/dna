@@ -3,7 +3,7 @@ import { DirectusService } from '@system/directus/directus.service';
 import { setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 import { CatController } from './cat.controller';
 import { CatModule } from './cat.module';
-import { findAllCatsMock } from './cat.mock';
+import { findAllCatsMock, catByIdMock } from './cat.mock';
 
 describe('[Cat] Integration Tests Spec', () => {
   let module: TestingModule;
@@ -33,6 +33,7 @@ describe('[Cat] Integration Tests Spec', () => {
   it('Expect route cats GET to return a list of cats, with a cat of id 1 ', async () => {
     jest.spyOn(directusService, 'getSdk').mockReturnValue({
       findAllCats: findAllCatsMock,
+      catById: catByIdMock,
     });
 
     const cats = await catController.findAll('accessToken');
