@@ -9,7 +9,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
     const res = await fetch("http://localhost/graphql", {
     method: "POST",
-    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0NzUxNjc4NSwiZXhwIjoxNjQ3NjAzMTg1LCJpc3MiOiJkaXJlY3R1cyJ9.lW-eZCIW-nqeR59veHyvIR3WR7ecEPvHwQOBULupwa8"}}),
+    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0NzU1NTc3MywiZXhwIjoxNjQ3NjQyMTczLCJpc3MiOiJkaXJlY3R1cyJ9.0NHvV6j71BRVPLmLf-KaBMF8ct53OCZgGqE5fvBBXPg"}}),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -684,7 +684,7 @@ export const CatByIdDocument = `
     `;
 export const useCatByIdQuery = <
       TData = CatByIdQuery,
-      TError = unknown
+      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
     >(
       variables: CatByIdQueryVariables,
       options?: UseQueryOptions<CatByIdQuery, TError, TData>
@@ -704,7 +704,7 @@ export const FindAllCatsDocument = `
     `;
 export const useFindAllCatsQuery = <
       TData = FindAllCatsQuery,
-      TError = unknown
+      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
     >(
       variables?: FindAllCatsQueryVariables,
       options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
