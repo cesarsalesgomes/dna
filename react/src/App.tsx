@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { useQueryClient, QueryClient, QueryClientProvider } from 'react-query';
+import React, { Dispatch, SetStateAction } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { useCatByIdQuery, useFindAllCatsQuery } from './directus.hooks';
+import { useFindAllCatsQuery, useCatByIdQuery } from './directus.hooks';
 
 const queryClient = new QueryClient();
 
@@ -22,9 +21,8 @@ export function App() {
   );
 }
 
-function Posts({ setPostId }) {
-  const queryClient = useQueryClient();
-  const { status, data, error, isFetching } = useFindAllCatsQuery();
+function Posts({ setPostId }: { setPostId: Dispatch<SetStateAction<number>> }) {
+  const { status, data, error, isFetching } = useFindAllCatsQuery({});
 
   return (
     <div>
@@ -33,14 +31,14 @@ function Posts({ setPostId }) {
         {status === 'loading' ? (
           'Loading...'
         ) : status === 'error' ? (
-          <span>Error: {error.message}</span>
+          <span>Error: {error!.message}</span>
         ) : (
               <>
                 <div>
                   {data!.cat!.map((post) => (
                     <p key={post!.id}>
                       <a
-                        onClick={() => setPostId(post!.id)}
+                        onClick={() => setPostId(Number(post!.id))}
                         href="#"
                         style={
                           // We can find the existing query data here to show bold links for
@@ -66,8 +64,8 @@ function Posts({ setPostId }) {
   );
 }
 
-function Post({ postId, setPostId }) {
-  const { status, data, error, isFetching } = useCatByIdQuery({ data: postId });
+function Post({ postId, setPostId }: { postId: number; setPostId: Dispatch<SetStateAction<number>> }) {
+  const { status, data, error, isFetching } = useCatByIdQuery({ data: `${postId}` });
 
   return (
     <div>
@@ -79,7 +77,7 @@ function Post({ postId, setPostId }) {
       {!postId || status === 'loading' ? (
         'Loading...'
       ) : status === 'error' ? (
-        <span>Error: {error.message}</span>
+        <span>Error: {error!.message}</span>
       ) : (
             <>
               <h1>{data?.cat_by_id?.name}</h1>
