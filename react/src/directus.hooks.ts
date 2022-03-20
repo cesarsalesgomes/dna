@@ -1,4 +1,5 @@
 import { useQuery, UseQueryOptions } from 'react-query';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -7,9 +8,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch("http://localhost/graphql", {
-    method: "POST",
-    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0NzU1NTc3MywiZXhwIjoxNjQ3NjQyMTczLCJpc3MiOiJkaXJlY3R1cyJ9.0NHvV6j71BRVPLmLf-KaBMF8ct53OCZgGqE5fvBBXPg"}}),
+    const res = await fetch('http://localhost/graphql', {
+      method: 'POST',
+      ...({ 'headers': { 'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0Nzc3NzQzNSwiZXhwIjoxNjQ3ODYzODM1LCJpc3MiOiJkaXJlY3R1cyJ9.6NRNP7xnVBC8GgI7roa3A0b3EcfG3Xu5JwtKt0RY8IU' } }),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -683,17 +684,17 @@ export const CatByIdDocument = `
 }
     `;
 export const useCatByIdQuery = <
-      TData = CatByIdQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables: CatByIdQueryVariables,
-      options?: UseQueryOptions<CatByIdQuery, TError, TData>
-    ) =>
-    useQuery<CatByIdQuery, TError, TData>(
-      ['catById', variables],
-      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
-      options
-    );
+  TData = CatByIdQuery,
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
+>(
+  variables: CatByIdQueryVariables,
+  options?: UseQueryOptions<CatByIdQuery, TError, TData>
+) =>
+  useQuery<CatByIdQuery, TError, TData>(
+    ['catById', variables],
+    fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+    options
+  );
 export const FindAllCatsDocument = `
     query findAllCats {
   cat {
@@ -703,14 +704,14 @@ export const FindAllCatsDocument = `
 }
     `;
 export const useFindAllCatsQuery = <
-      TData = FindAllCatsQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables?: FindAllCatsQueryVariables,
-      options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
-    ) =>
-    useQuery<FindAllCatsQuery, TError, TData>(
-      variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
-      options
-    );
+  TData = FindAllCatsQuery,
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
+>(
+  variables?: FindAllCatsQueryVariables,
+  options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
+) =>
+  useQuery<FindAllCatsQuery, TError, TData>(
+    variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
+    fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+    options
+  );

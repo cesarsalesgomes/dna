@@ -3,9 +3,10 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: ['airbnb', 'airbnb-typescript', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', "plugin:react/jsx-runtime", 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: './tsconfig.json',
     ecmaFeatures: {
       jsx: true,
     },
@@ -20,6 +21,14 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'quotes': [2, 'single', { 'avoidEscape': true }],
-    'max-len': ['error', { 'code': 140, 'comments': 140 }]
+    'max-len': ['error', { 'code': 140, 'comments': 140 }],
+    "no-multiple-empty-lines": "error",
+    "no-var": "error",
+    "semi": "error",
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "no-use-before-define": "error"
   },
 };
