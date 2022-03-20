@@ -3,7 +3,16 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb', 'airbnb-typescript', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', "plugin:react/jsx-runtime", 'prettier'],
+  extends: [
+    'airbnb',
+    'airbnb-typescript',
+    'airbnb/hooks',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
+    'prettier'
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -14,6 +23,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint', 'eslint-plugin-import-helpers', 'prettier'],
+  ignorePatterns: ['.eslintrc.js'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

@@ -10,37 +10,34 @@ interface IShowErrorOrCats extends ReactQueryProps<FindAllCatsQuery> {
   setCatId: Dispatch<SetStateAction<number>>
 }
 
-function ShowErrorOrCats(
-  { status, error, isFetching, data, setCatId }: IShowErrorOrCats) {
+function ShowErrorOrCats({ status, error, isFetching, data, setCatId }: IShowErrorOrCats) {
   return status === 'error' ? (
     <span>Error: {error!.message}</span>
   ) : (
       <>
         <div>
-          {data!.cat!.map((post) => (
-            <p key={post!.id}>
+          {data!.cat!.map((cat) => (
+            <p key={cat!.id}>
               <button
                 type="button"
-                onClick={() => setCatId(Number(post!.id))}
+                onClick={() => setCatId(Number(cat!.id))}
                 style={
-                  // We can find the existing query data here to show bold links for
-                  // ones that are cached
-                  queryClient.getQueryData(['post', post!.id])
+                  // We can find the existing query data here to show bold links for ones that are cached
+                  queryClient.getQueryData(['findAllCats', cat!.id])
                     ? {
-                      fontWeight: 'bold',
-                      color: 'green',
+                      backgroundColor: 'green',
                     }
                     : {}
                 }
               >
-                {post!.name}
+                {cat!.name}
               </button>
             </p>
           ))}
         </div>
         <div>{isFetching ? 'Background Updating...' : ' '}</div>
       </>
-    )
+    );
 }
 
 function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {

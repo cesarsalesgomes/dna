@@ -11,7 +11,7 @@ function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<Cat
         <h1>{data?.cat_by_id?.name}</h1>
         <div>{isFetching ? 'Background Updating...' : ' '}</div>
       </>
-    )
+    );
 }
 
 function Cat({ catId, setCatId }: { catId: number; setCatId: Dispatch<SetStateAction<number>> }) {
