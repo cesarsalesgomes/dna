@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { CatByIdQuery, useCatByIdQuery } from '../directus.hooks';
 import ReactQueryStatusEnum from '../Enums/ReactQueryStatus';
 import ReactQueryProps from '../Interfaces/ReactQueryProps';
+import './Cat.scss';
 
 function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<CatByIdQuery>) {
   return status === ReactQueryStatusEnum.Error ? (
@@ -20,7 +21,7 @@ function Cat({ catId, setCatId }: { catId: number; setCatId: Dispatch<SetStateAc
   return (
     <div>
       <div>
-        <button type="button" onClick={() => setCatId(-1)}>
+        <button type="button" className="button" onClick={() => setCatId(-1)}>
           Back
         </button>
       </div>
