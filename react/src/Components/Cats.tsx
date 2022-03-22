@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+
 import { FindAllCatsQuery, useFindAllCatsQuery } from '../directus.hooks';
 import ReactQueryStatusEnum from '../Enums/ReactQueryStatus';
 import ReactQueryProps from '../Interfaces/ReactQueryProps';
