@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { CatByIdQuery, useCatByIdQuery } from '../directus.hooks';
-import ReactQueryStatusEnum from '../Enums/ReactQueryStatus';
-import ReactQueryProps from '../Interfaces/ReactQueryProps';
+import { CatByIdQuery, useCatByIdQuery } from '../../hooks/directus/directus.hooks';
+import ReactQueryStatusEnum from '../../types/enums/ReactQueryStatus';
+import ReactQueryProps from '../../types/interfaces/ReactQueryProps';
 import './Cat.scss';
 
 function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<CatByIdQuery>) {
