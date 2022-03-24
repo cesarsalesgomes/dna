@@ -1,10 +1,9 @@
+import Cat from '@features/cats/cat';
+import Cats from '@features/cats/cat-list';
+import QueryClientSingleton from '@providers/QueryClient';
 import { useState } from 'react';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-
-import Cat from './Components/Cat';
-import Cats from './Components/Cats';
-import QueryClientSingleton from './Singletons/QueryClient';
 
 const queryClient = QueryClientSingleton.getInstance();
 

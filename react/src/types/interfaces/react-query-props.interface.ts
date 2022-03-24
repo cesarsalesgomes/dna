@@ -1,5 +1,6 @@
-import ReactQueryStatusType from '../Types/ReactQueryStatus';
-import GraphQLError from './GraphQLError';
+import ReactQueryStatusType from '../react-query-status.type';
+
+import GraphQLError from './graphql-error.interface';
 
 interface ReactQueryProps<T> {
   status: ReactQueryStatusType,

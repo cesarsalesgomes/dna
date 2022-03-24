@@ -260,3 +260,47 @@ _**[Dependabot](https://docs.github.com/en/enterprise-server@3.3/code-security/s
 > **[LINTER](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/linter.yml)**
 
 _**[Super-linter](https://github.com/marketplace/actions/super-linter)** automate the process establishing coding best practices and prevent broken code from being uploaded to the main branch._
+
+<br />
+
+## **React** ⚛️
+
+`React` is a great tool for building frontend applications. It has a very diverse ecosystem with hundreds of great libraries for literally anything you might need.
+
+The goal of the React repo is to serve as a ready-to-start collection of resources and good practices when starting a new project.
+
+The application has been bootstrapped using **[Vite](https://vitejs.dev/)**, a pre-configured dev server + bundler combo, but leaner and faster, recommended nowadays instead of the traditional `create-react-app`.
+
+`Eslint` + `Prettier` were used for formatting code and receiving alerts to maintain the good practices of React codding.
+
+For server communication, **[React Query](https://react-query.tanstack.com/)** was used, a library that effectively helps manage and keep track of server state, providing a consistent and straightforward way of managing server state as all of this have been abstracted into the library.
+
+The project structure was inspired by the great article about the **[Screaming Architecture](https://dev.to/profydev/screaming-architecture-evolution-of-a-react-folder-structure-4g25)**, that motivates the developer to focus on what the system needs to the tell about code, not the framework used. Below is the explanation of the structure:
+
+```sh
+src
+|
++-- assets            # assets folder can contain all the static files such as images, fonts, etc.
+|
++-- components        # shared components used across the entire application
+|
++-- config            # all the global configuration, env variables etc. get exported from here and used in the app
+|
++-- features          # feature based modules
+|
++-- hooks             # shared hooks used across the entire application
+|
++-- lib               # re-exporting different libraries preconfigured for the application
+|
++-- providers         # all of the application providers
+|
++-- routes            # routes configuration
+|
++-- stores            # global state stores
+|
++-- test              # test utilities and mock server
+|
++-- types             # base types used accross the application
+|
++-- utils             # shared utility functions
+```

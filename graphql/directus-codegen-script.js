@@ -60,7 +60,7 @@ function copyGeneratedMockToNestSystemDirectusFolder() {
 }
 
 function copyGeneratedHooksToReactDirectusFolder() {
-  copyFileSync(`${DIRECTUS_HOOKS_FILENAME}`, `../react/src/${DIRECTUS_HOOKS_FILENAME}`);
+  copyFileSync(`${DIRECTUS_HOOKS_FILENAME}`, `../react/src/hooks/directus/${DIRECTUS_HOOKS_FILENAME}`);
 }
 
 async function main() {
