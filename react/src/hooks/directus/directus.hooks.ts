@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useQuery, UseQueryOptions } from 'react-query';
 
 export type Maybe<T> = T | null;
@@ -13,7 +14,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
       ...({
         'headers': {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0Nzc3NzQzNSwiZXhwIjoxNjQ3ODYzODM1LCJpc3MiOiJkaXJlY3R1cyJ9.6NRNP7xnVBC8GgI7roa3A0b3EcfG3Xu5JwtKt0RY8IU'
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0Nzk5MjcxOCwiZXhwIjoxNjQ4MDc5MTE4LCJpc3MiOiJkaXJlY3R1cyJ9.eVnv1UI_-45JZgguJ0jY3cO22aFLGwCONVFs4CxE4Ik'
         }
       }),
       body: JSON.stringify({ query, variables }),
