@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "paths": {
       "@system/*": ["src/system/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@modules/*": ["src/modules/*"],
+      "@constants/*": ["src/constants/*"]
     }
   }
 }
