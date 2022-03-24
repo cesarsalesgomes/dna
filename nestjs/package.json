@@ -23,7 +23,7 @@
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-express": "^8.4.2",
     "aws-sdk": "^2.1066.0",
     "graphql": "^15.7.2",
     "graphql-request": "^4.1.0",
