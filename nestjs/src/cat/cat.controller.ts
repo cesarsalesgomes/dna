@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AccessToken } from '@system/decorators/access-token.decorator';
+
 import { CatService } from './cat.service';
 
 @Controller('/nestjs/cats')

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from './directus.sdk';
+
 import { EnviromentVariableDirectusIPNotDefinedException } from './directus.exception';
+import { getSdk } from './directus.sdk';
 
 @Injectable()
 export class DirectusService {

@@ -1,14 +1,29 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DirectusService } from '@system/directus/directus.service';
 import { setSpecSystemEnviromentVariables } from '@utils/spec.utils';
+
 import { CatController } from './cat.controller';
-import { CatModule } from './cat.module';
 import { findAllCatsMock, catByIdMock } from './cat.mock';
+import { CatModule } from './cat.module';
 
 describe('[Cat] Integration Tests Spec', () => {
   let module: TestingModule;
   let catController: CatController;
   let directusService: DirectusService;
+
+  async function setModules(modules: Array<any>) {
+    module = await Test.createTestingModule({
+      imports: modules,
+    }).compile();
+  }
+
+  function setControllers() {
+    catController = module.get<CatController>(CatController);
+  }
+
+  function setProviders() {
+    directusService = module.get<DirectusService>(DirectusService);
+  }
 
   beforeAll(async () => {
     await setSpecSystemEnviromentVariables();
@@ -42,17 +57,4 @@ describe('[Cat] Integration Tests Spec', () => {
     expect(cats[0].name).toBeDefined();
   });
 
-  async function setModules(modules: Array<any>) {
-    module = await Test.createTestingModule({
-      imports: modules,
-    }).compile();
-  }
-
-  function setControllers() {
-    catController = module.get<CatController>(CatController);
-  }
-
-  function setProviders() {
-    directusService = module.get<DirectusService>(DirectusService);
-  }
 });

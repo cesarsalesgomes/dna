@@ -7,9 +7,10 @@
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import * as CloudWatchTransport from 'winston-cloudwatch';
+
 import { WINSTON_CLOUDWATCH_NAME, WINSTON_WARN_LEVEL } from './logger.contants';
 
-const messageFormatter = () => (item: winston.LogEntry) => item.level + ': ' + item.message + ' ' + JSON.stringify(item.meta);
+const messageFormatter = () => (item: winston.LogEntry) => `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`;
 
 const winstonTransport: winston.transport = new winston.transports.Console({
   format: winston.format.combine(winston.format.timestamp(), winston.format.ms(), nestWinstonModuleUtilities.format.nestLike()),
