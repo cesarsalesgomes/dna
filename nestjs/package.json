@@ -25,7 +25,7 @@
     "@nestjs/axios": "^0.0.7",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-express": "^8.4.2",
     "@nestjs/schedule": "^1.0.2",
     "aws-sdk": "^2.1066.0",
     "graphql": "^15.7.2",
