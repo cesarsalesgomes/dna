@@ -15,7 +15,7 @@ export class RestaurantReservationsService {
       take(1)
     ).subscribe((data) => {
       console.log(data);
-    })
+    });
   }
 
   getTagMeRestauranteReservations(idReservation: string): Observable<AxiosResponse<any>> {
@@ -23,6 +23,6 @@ export class RestaurantReservationsService {
       headers: {
         apitoken: TAG_ME_TOKEN
       }
-    })
+    });
   }
 }

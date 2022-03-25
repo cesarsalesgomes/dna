@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import logger from '@system/logger/logger.service';
+
 import { AppModule } from './app.module';
 import ExceptionFilterImplementation from './system/exception/exception.filter';
 
