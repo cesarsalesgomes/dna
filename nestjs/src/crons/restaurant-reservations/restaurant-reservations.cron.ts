@@ -8,6 +8,6 @@ export class RestaurantReservationsCron {
 
   @Cron(CronExpression.EVERY_10_SECONDS)
   handleCron() {
-    this.restaurantReservationsService.processGetTagMeRestauranteReservations();
+    this.restaurantReservationsService.processTagMeRestauranteReservations();
   }
 }
