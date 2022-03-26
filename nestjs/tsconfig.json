@@ -15,8 +15,9 @@
     "paths": {
       "@system/*": ["src/system/*"],
       "@utils/*": ["src/utils/*"],
-      "@modules/*": ["src/modules/*"],
-      "@constants/*": ["src/constants/*"]
+      "@feature/*": ["src/features/*"],
+      "@constants/*": ["src/constants/*"],
+      "@providers/*": ["src/providers/*"]
     }
   }
 }

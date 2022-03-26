@@ -2,8 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EnviromentVariableDirectusIPNotDefinedException } from '@system/directus/directus.exception';
 import { createTestingModuleOnInnerFunction, setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 
-import { CatController } from '../cat/cat.controller';
-import { CatModule } from '../cat/cat.module';
+import { CatController } from '../features/cat/cat.controller';
+import { CatModule } from '../features/cat/cat.module';
 
 import { SystemModule } from './system.module';
 

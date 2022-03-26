@@ -1,14 +1,13 @@
-import { RestaurantReservationsModule } from '@modules/restaurant-reservations/restaurant-reservations.module';
 import { Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
-import { CatModule } from './cat/cat.module';
 import { CronsModule } from './crons/cron.module';
+import { FeaturesModule } from './features/features.module';
 import { ResponseInterceptor } from './system/interceptors/response.interceptor';
 import { SystemModule } from './system/system.module';
 
 @Module({
-  imports: [SystemModule, CatModule, CronsModule, RestaurantReservationsModule],
+  imports: [SystemModule, CronsModule, FeaturesModule],
   providers: [
     {
       provide: APP_INTERCEPTOR,
