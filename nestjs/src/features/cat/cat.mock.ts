@@ -2,7 +2,7 @@ import { aCat } from '@system/directus/directus.mock';
 import { CatByIdQuery, FindAllCatsQuery } from '@system/directus/directus.sdk';
 import { GraphQLError } from 'graphql-request/dist/types';
 
-type findAllCats = {
+type FindAllCats = {
   data?: FindAllCatsQuery;
   extensions?: any;
   headers: Headers;
@@ -10,7 +10,7 @@ type findAllCats = {
   errors?: GraphQLError[];
 };
 
-type catById = {
+type CatById = {
   data?: CatByIdQuery;
   extensions?: any;
   headers: Headers;
@@ -18,7 +18,11 @@ type catById = {
   errors?: GraphQLError[];
 };
 
-export const findAllCatsMock: () => Promise<findAllCats> = async () => ({
+function getFakeCat() {
+  return aCat({ user_created: null, user_updated: null });
+}
+
+export const findAllCatsMock: () => Promise<FindAllCats> = async () => ({
   data: {
     cat: [getFakeCat()],
   },
@@ -26,14 +30,10 @@ export const findAllCatsMock: () => Promise<findAllCats> = async () => ({
   headers: <any>{},
 });
 
-export const catByIdMock: () => Promise<catById> = async () => ({
+export const catByIdMock: () => Promise<CatById> = async () => ({
   data: {
     cat_by_id: getFakeCat(),
   },
   status: 200,
   headers: <any>{},
 });
-
-function getFakeCat() {
-  return aCat({ user_created: null, user_updated: null });
-}
