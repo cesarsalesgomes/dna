@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^8.4.2",
     "@nestjs/schedule": "^1.0.2",
     "aws-sdk": "^2.1066.0",
+    "dayjs": "^1.11.0",
     "got": "11.8.2",
     "graphql": "^15.7.2",
     "graphql-request": "^4.1.0",
