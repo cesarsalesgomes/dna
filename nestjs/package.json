@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch-logs": "^3.56.0",
+    "@nestjs-modules/mailer": "^1.6.1",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.4.2",
@@ -32,6 +33,7 @@
     "graphql-request": "^4.1.0",
     "graphql-tag": "^2.12.6",
     "nest-winston": "^1.6.2",
+    "nodemailer": "^6.7.3",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
@@ -48,6 +50,7 @@
     "@types/got": "^9.6.12",
     "@types/jest": "^27.0.0",
     "@types/node": "^17.0.19",
+    "@types/nodemailer": "^6.4.4",
     "@types/passport-jwt": "^3.0.6",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
