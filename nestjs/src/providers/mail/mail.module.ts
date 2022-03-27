@@ -13,6 +13,7 @@ import { MailService } from './mail.service';
           user: process.env.MAIL_USER,
           pass: process.env.MAIL_PASSWORD,
         },
+        port: Number(process.env.MAIL_PORT)
       },
       defaults: {
         from: process.env.MAIL_FROM,

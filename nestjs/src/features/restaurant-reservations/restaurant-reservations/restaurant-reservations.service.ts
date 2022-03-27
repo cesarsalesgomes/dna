@@ -1,6 +1,9 @@
-import { TAG_ME_URL, TAG_ME_TOKEN, CASA_DO_PORCO_TAG_ME_ID } from '@constants/restaurant-service.constants';
+import {
+  TAG_ME_URL, TAG_ME_TOKEN, CASA_DO_PORCO_TAG_ME_ID, ALERT_EMAIL_ADDRESS, ALERT_EMAIL_SUBJECT
+} from '@constants/restaurant-service.constants';
 import { Injectable } from '@nestjs/common';
 import { GotService } from '@providers/got/got.service';
+import { MailService } from '@providers/mail/mail.service';
 import { DateUtils } from '@utils/date.utils';
 import { DayOfTheWeek } from 'src/enums/date.enums';
 
@@ -9,7 +12,7 @@ import { TagMeRestaurantInfo, TagMeRestaurantReservation } from './restaurant-re
 @Injectable()
 export class RestaurantReservationsService {
 
-  constructor(private gotService: GotService, private dateUtils: DateUtils) { }
+  constructor(private gotService: GotService, private dateUtils: DateUtils, private mailService: MailService) { }
 
   getTagMeRestauranteReservations(idReservation: string) {
     return this.gotService.get()(
@@ -42,7 +45,13 @@ export class RestaurantReservationsService {
 
     const availableDaysOfTheWeek = this.getDaysOfTheWeekAvailable(availableDays);
 
-    console.log(this.checkIfThereIsAWeekendAvailable(availableDaysOfTheWeek));
+    if (this.checkIfThereIsAWeekendAvailable(availableDaysOfTheWeek)) {
+      await this.mailService.sendEmail({
+        to: ALERT_EMAIL_ADDRESS,
+        subject: ALERT_EMAIL_SUBJECT,
+        text: 'Available'
+      });
+    }
   }
 
 }
