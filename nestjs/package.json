@@ -30,7 +30,7 @@
     "aws-sdk": "^2.1066.0",
     "dayjs": "^1.11.0",
     "got": "11.8.2",
-    "graphql": "^15.7.2",
+    "graphql": "^16.3.0",
     "graphql-request": "^4.1.0",
     "graphql-tag": "^2.12.6",
     "nest-winston": "^1.6.2",
