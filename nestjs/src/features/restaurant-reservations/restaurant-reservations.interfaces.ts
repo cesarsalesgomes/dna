@@ -1,5 +1,5 @@
 export interface TagMeRestaurantReservation {
-  reservationDay: '2022-03-26',
+  reservationDay: string,
   available: boolean
 }
 
