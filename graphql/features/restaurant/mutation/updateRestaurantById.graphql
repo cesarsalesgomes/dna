@@ -1,0 +1,7 @@
+mutation updateRestaurant($id: ID!, $data: update_restaurant_input!) {
+  update_restaurant_item(id: $id, data: $data) {
+    id
+    name
+    status
+  }
+}

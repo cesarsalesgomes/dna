@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 
 const DIRECTUS_SDK_FILENAME = 'directus.sdk.ts';
 
+const DIRECTUS_SYSTEM_SDK_FILENAME = 'directus-system.sdk.ts';
+
 const DIRECTUS_MOCK_FILENAME = 'directus.mock.ts';
 
 const DIRECTUS_HOOKS_FILENAME = 'directus.hooks.ts';
@@ -52,7 +54,11 @@ async function setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(accessToken)
 }
 
 function copyGeneratedSdkToNestSystemDirectusFolder() {
-  copyFileSync(`${DIRECTUS_SDK_FILENAME}`, `../nestjs/src/system/directus/${DIRECTUS_SDK_FILENAME}`);
+  copyFileSync(`${DIRECTUS_SDK_FILENAME}`, `../nestjs/src/system/directus/sdk/${DIRECTUS_SDK_FILENAME}`);
+}
+
+function copyGeneratedSystemSdkToNestSystemDirectusFolder() {
+  copyFileSync(`${DIRECTUS_SYSTEM_SDK_FILENAME}`, `../nestjs/src/system/directus/sdk/${DIRECTUS_SYSTEM_SDK_FILENAME}`);
 }
 
 function copyGeneratedMockToNestSystemDirectusFolder() {
@@ -69,6 +75,7 @@ async function main() {
   await setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(await getDirectusAccessToken());
 
   copyGeneratedSdkToNestSystemDirectusFolder();
+  copyGeneratedSystemSdkToNestSystemDirectusFolder();
   copyGeneratedMockToNestSystemDirectusFolder();
   copyGeneratedHooksToReactDirectusFolder();
 }
