@@ -1,5 +1,5 @@
-import { AuthModule } from '@feature/auth/auth.module';
-import { RestaurantModule } from '@feature/restaurant/restaurant.module';
+import { AuthModule } from '@features/auth/auth.module';
+import { RestaurantModule } from '@features/restaurant/restaurant.module';
 import { Module } from '@nestjs/common';
 import { GotService } from '@providers/got/got.service';
 import { MailModule } from '@providers/mail/mail.module';
