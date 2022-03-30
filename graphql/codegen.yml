@@ -1,13 +1,22 @@
 overwrite: true
 
-schema:
-  - http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
-
-documents: "./**/*.graphql"
-
 generates:
   # Sdk (Typescript database model & operation file)
   ./directus.sdk.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents: "features/**/*.graphql"
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      rawRequest: true
+      namingConvention:
+        transformUnderscore: true
+
+  ./directus-system.sdk.ts:
+    schema: http://localhost/graphql/system
+    documents: "system/**/*.graphql"
     plugins:
       - "typescript"
       - typescript-operations
@@ -19,12 +28,16 @@ generates:
 
   # Sdk Mock Data (Use in integration tests)
   ./directus.mock.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents: "features/**/*.graphql"
     plugins:
       - typescript-mock-data:
-          typesFile: "./directus.sdk.ts"
+          typesFile: "./sdk/directus.sdk.ts"
 
   # React Query Hooks
   ./directus.hooks.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents: "features/**/*.graphql"
     plugins:
       - "typescript"
       - typescript-operations

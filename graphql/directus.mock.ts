@@ -1,13 +1,19 @@
-import { Mutation, Query, BooleanFilterOperators, Cat, CatAggregated, CatAggregatedFields, CatFilter, CreateCatInput, CreateDirectusFilesInput, CreateDirectusFoldersInput, CreateDirectusRolesInput, CreateDirectusUsersInput, DateFilterOperators, DatetimeFunctionFilterOperators, DatetimeFunctions, DatetimeFunctionsInput, DeleteMany, DeleteOne, DirectusFiles, DirectusFilesFilter, DirectusFolders, DirectusFoldersFilter, DirectusRoles, DirectusRolesFilter, DirectusUsers, DirectusUsersFilter, NumberFilterOperators, StringFilterOperators, UpdateCatInput, UpdateDirectusFilesInput, UpdateDirectusFoldersInput, UpdateDirectusRolesInput, UpdateDirectusUsersInput } from './directus.sdk';
+import { Mutation, Query, BooleanFilterOperators, Cat, CatAggregated, CatAggregatedFields, CatFilter, CreateCatInput, CreateDirectusFilesInput, CreateDirectusFoldersInput, CreateDirectusRolesInput, CreateDirectusUsersInput, CreateRestaurantInput, DateFilterOperators, DatetimeFunctionFilterOperators, DatetimeFunctions, DatetimeFunctionsInput, DeleteMany, DeleteOne, DirectusFiles, DirectusFilesFilter, DirectusFolders, DirectusFoldersFilter, DirectusRoles, DirectusRolesFilter, DirectusUsers, DirectusUsersFilter, NumberFilterOperators, Restaurant, RestaurantAggregated, RestaurantAggregatedFields, RestaurantFilter, StringFilterOperators, UpdateCatInput, UpdateDirectusFilesInput, UpdateDirectusFoldersInput, UpdateDirectusRolesInput, UpdateDirectusUsersInput, UpdateRestaurantInput } from './sdk/directus.sdk';
 
 export const aMutation = (overrides?: Partial<Mutation>): Mutation => {
     return {
         create_cat_item: overrides && overrides.hasOwnProperty('create_cat_item') ? overrides.create_cat_item! : aCat(),
         create_cat_items: overrides && overrides.hasOwnProperty('create_cat_items') ? overrides.create_cat_items! : [aCat()],
+        create_restaurant_item: overrides && overrides.hasOwnProperty('create_restaurant_item') ? overrides.create_restaurant_item! : aRestaurant(),
+        create_restaurant_items: overrides && overrides.hasOwnProperty('create_restaurant_items') ? overrides.create_restaurant_items! : [aRestaurant()],
         delete_cat_item: overrides && overrides.hasOwnProperty('delete_cat_item') ? overrides.delete_cat_item! : aDeleteOne(),
         delete_cat_items: overrides && overrides.hasOwnProperty('delete_cat_items') ? overrides.delete_cat_items! : aDeleteMany(),
+        delete_restaurant_item: overrides && overrides.hasOwnProperty('delete_restaurant_item') ? overrides.delete_restaurant_item! : aDeleteOne(),
+        delete_restaurant_items: overrides && overrides.hasOwnProperty('delete_restaurant_items') ? overrides.delete_restaurant_items! : aDeleteMany(),
         update_cat_item: overrides && overrides.hasOwnProperty('update_cat_item') ? overrides.update_cat_item! : aCat(),
         update_cat_items: overrides && overrides.hasOwnProperty('update_cat_items') ? overrides.update_cat_items! : [aCat()],
+        update_restaurant_item: overrides && overrides.hasOwnProperty('update_restaurant_item') ? overrides.update_restaurant_item! : aRestaurant(),
+        update_restaurant_items: overrides && overrides.hasOwnProperty('update_restaurant_items') ? overrides.update_restaurant_items! : [aRestaurant()],
     };
 };
 
@@ -16,6 +22,9 @@ export const aQuery = (overrides?: Partial<Query>): Query => {
         cat: overrides && overrides.hasOwnProperty('cat') ? overrides.cat! : [aCat()],
         cat_aggregated: overrides && overrides.hasOwnProperty('cat_aggregated') ? overrides.cat_aggregated! : [aCatAggregated()],
         cat_by_id: overrides && overrides.hasOwnProperty('cat_by_id') ? overrides.cat_by_id! : aCat(),
+        restaurant: overrides && overrides.hasOwnProperty('restaurant') ? overrides.restaurant! : [aRestaurant()],
+        restaurant_aggregated: overrides && overrides.hasOwnProperty('restaurant_aggregated') ? overrides.restaurant_aggregated! : [aRestaurantAggregated()],
+        restaurant_by_id: overrides && overrides.hasOwnProperty('restaurant_by_id') ? overrides.restaurant_by_id! : aRestaurant(),
     };
 };
 
@@ -164,6 +173,20 @@ export const aCreateDirectusUsersInput = (overrides?: Partial<CreateDirectusUser
         theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'sint',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'enim',
         token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'autem',
+    };
+};
+
+export const aCreateRestaurantInput = (overrides?: Partial<CreateRestaurantInput>): CreateRestaurantInput => {
+    return {
+        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-05T06:39:07.798Z',
+        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionsInput(),
+        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-11T08:40:07.444Z',
+        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionsInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '52e633cc-4eb6-48f8-a95b-6f371079aa65',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'ratione',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'omnis',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aCreateDirectusUsersInput(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aCreateDirectusUsersInput(),
     };
 };
 
@@ -410,6 +433,56 @@ export const aNumberFilterOperators = (overrides?: Partial<NumberFilterOperators
     };
 };
 
+export const aRestaurant = (overrides?: Partial<Restaurant>): Restaurant => {
+    return {
+        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-09T03:00:03.613Z',
+        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctions(),
+        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-09T19:08:44.968Z',
+        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctions(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : '9f2be2f6-5d9e-4449-9cf4-0d31bd797a1f',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'iusto',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'inventore',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsers(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsers(),
+    };
+};
+
+export const aRestaurantAggregated = (overrides?: Partial<RestaurantAggregated>): RestaurantAggregated => {
+    return {
+        avg: overrides && overrides.hasOwnProperty('avg') ? overrides.avg! : aRestaurantAggregatedFields(),
+        avgDistinct: overrides && overrides.hasOwnProperty('avgDistinct') ? overrides.avgDistinct! : aRestaurantAggregatedFields(),
+        count: overrides && overrides.hasOwnProperty('count') ? overrides.count! : aRestaurantAggregatedFields(),
+        countDistinct: overrides && overrides.hasOwnProperty('countDistinct') ? overrides.countDistinct! : aRestaurantAggregatedFields(),
+        group: overrides && overrides.hasOwnProperty('group') ? overrides.group! : 'quibusdam',
+        max: overrides && overrides.hasOwnProperty('max') ? overrides.max! : aRestaurantAggregatedFields(),
+        min: overrides && overrides.hasOwnProperty('min') ? overrides.min! : aRestaurantAggregatedFields(),
+        sum: overrides && overrides.hasOwnProperty('sum') ? overrides.sum! : aRestaurantAggregatedFields(),
+        sumDistinct: overrides && overrides.hasOwnProperty('sumDistinct') ? overrides.sumDistinct! : aRestaurantAggregatedFields(),
+    };
+};
+
+export const aRestaurantAggregatedFields = (overrides?: Partial<RestaurantAggregatedFields>): RestaurantAggregatedFields => {
+    return {
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 9.68,
+    };
+};
+
+export const aRestaurantFilter = (overrides?: Partial<RestaurantFilter>): RestaurantFilter => {
+    return {
+        _and: overrides && overrides.hasOwnProperty('_and') ? overrides._and! : [aRestaurantFilter()],
+        _or: overrides && overrides.hasOwnProperty('_or') ? overrides._or! : [aRestaurantFilter()],
+        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : aDateFilterOperators(),
+        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionFilterOperators(),
+        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : aDateFilterOperators(),
+        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionFilterOperators(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : aNumberFilterOperators(),
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : aStringFilterOperators(),
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : aStringFilterOperators(),
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : aDirectusUsersFilter(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : aDirectusUsersFilter(),
+    };
+};
+
 export const aStringFilterOperators = (overrides?: Partial<StringFilterOperators>): StringFilterOperators => {
     return {
         _contains: overrides && overrides.hasOwnProperty('_contains') ? overrides._contains! : 'unde',
@@ -517,5 +590,19 @@ export const anUpdateDirectusUsersInput = (overrides?: Partial<UpdateDirectusUse
         theme: overrides && overrides.hasOwnProperty('theme') ? overrides.theme! : 'fugit',
         title: overrides && overrides.hasOwnProperty('title') ? overrides.title! : 'et',
         token: overrides && overrides.hasOwnProperty('token') ? overrides.token! : 'pariatur',
+    };
+};
+
+export const anUpdateRestaurantInput = (overrides?: Partial<UpdateRestaurantInput>): UpdateRestaurantInput => {
+    return {
+        date_created: overrides && overrides.hasOwnProperty('date_created') ? overrides.date_created! : '1970-01-11T03:13:01.635Z',
+        date_created_func: overrides && overrides.hasOwnProperty('date_created_func') ? overrides.date_created_func! : aDatetimeFunctionsInput(),
+        date_updated: overrides && overrides.hasOwnProperty('date_updated') ? overrides.date_updated! : '1970-01-13T14:05:35.333Z',
+        date_updated_func: overrides && overrides.hasOwnProperty('date_updated_func') ? overrides.date_updated_func! : aDatetimeFunctionsInput(),
+        id: overrides && overrides.hasOwnProperty('id') ? overrides.id! : 'e19dd2bd-496f-43d5-8efe-a7e7dce8a061',
+        name: overrides && overrides.hasOwnProperty('name') ? overrides.name! : 'inventore',
+        status: overrides && overrides.hasOwnProperty('status') ? overrides.status! : 'ea',
+        user_created: overrides && overrides.hasOwnProperty('user_created') ? overrides.user_created! : anUpdateDirectusUsersInput(),
+        user_updated: overrides && overrides.hasOwnProperty('user_updated') ? overrides.user_updated! : anUpdateDirectusUsersInput(),
     };
 };
