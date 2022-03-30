@@ -1,8 +1,8 @@
 import {
   TAG_ME_URL, TAG_ME_TOKEN, CASA_DO_PORCO_TAG_ME_ID, ALERT_EMAIL_ADDRESS, ALERT_EMAIL_SUBJECT, CASA_DO_PORCO_NAME
 } from '@constants/restaurant-service.constants';
-import { AuthService } from '@feature/auth/auth.service';
-import { RestaurantService } from '@feature/restaurant/restaurant.service';
+import { AuthService } from '@features/auth/auth.service';
+import { RestaurantService } from '@features/restaurant/restaurant.service';
 import { Injectable } from '@nestjs/common';
 import { GotService } from '@providers/got/got.service';
 import { MailService } from '@providers/mail/mail.service';

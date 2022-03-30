@@ -1,6 +1,6 @@
 import {
   RestaurantReservationsService
-} from '@feature/restaurant-reservations/restaurant-reservations.service';
+} from '@features/restaurant-reservations/restaurant-reservations.service';
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 

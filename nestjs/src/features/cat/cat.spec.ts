@@ -1,9 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { DirectusService } from '@system/directus/directus.service';
-import { setSpecSystemEnviromentVariables } from '@utils/spec.utils';
+import { getSdkMock, setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 
 import { CatController } from './cat.controller';
-import { findAllCatsMock, catByIdMock } from './cat.mock';
 import { CatModule } from './cat.module';
 
 describe('[Cat] Integration Tests Spec', () => {
@@ -46,10 +45,7 @@ describe('[Cat] Integration Tests Spec', () => {
   });
 
   it('Expect route cats GET to return a list of cats, with a cat of id 1 ', async () => {
-    jest.spyOn(directusService, 'getSdk').mockReturnValue({
-      findAllCats: findAllCatsMock,
-      catById: catByIdMock,
-    });
+    jest.spyOn(directusService, 'getSdk').mockReturnValue(getSdkMock);
 
     const cats = await catController.findAll('accessToken');
 

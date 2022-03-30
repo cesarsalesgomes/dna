@@ -94,7 +94,10 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "@system/(.*)$": "<rootDir>/system/$1",
-      "@utils/(.*)$": "<rootDir>/utils/$1"
+      "@utils/(.*)$": "<rootDir>/utils/$1",
+      "@features/(.*)$": "<rootDir>/features/$1",
+      "@constants/(.*)$": "<rootDir>/constants/$1",
+      "@providers/(.*)$": "<rootDir>/providers/$1"
     }
   }
 }
