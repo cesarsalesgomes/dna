@@ -277,7 +277,7 @@ _**[Super-linter](https://github.com/marketplace/actions/super-linter)** automat
 
 `React` is a great tool for building frontend applications. It has a very diverse ecosystem with hundreds of great libraries for literally anything you might need.
 
-The goal of the React repo is to serve as a ready-to-start collection of resources and good practices when starting a new project.
+The goal of the React repository is to serve as a ready-to-start collection of resources and good practices when starting a new project.
 
 The application has been bootstrapped using **[Vite](https://vitejs.dev/)**, a pre-configured dev server + bundler combo, but leaner and faster, recommended nowadays instead of the traditional `create-react-app`.
 
