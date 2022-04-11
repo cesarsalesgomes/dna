@@ -39,7 +39,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
-    "winston": "^3.5.0",
+    "winston": "^3.7.2",
     "winston-cloudwatch": "^4.0.1"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.1.4",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-import-helpers": "^1.2.1",
     "eslint-plugin-jsx-a11y": "6.5.1",
