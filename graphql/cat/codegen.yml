@@ -1,0 +1,43 @@
+overwrite: true
+
+generates:
+  # Sdk (Typescript database model & operation file)
+  ./cat/cat.sdk.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./cat/queries/*.graphql
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      rawRequest: true
+      namingConvention:
+        transformUnderscore: true
+
+  # Sdk Mock Data (Use in tests)
+  ./cat/cat.mock.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./cat/queries/*.graphql
+    plugins:
+      - typescript-mock-data:
+          typesFile: "./cat.sdk.ts"
+
+  # React Query Hooks
+  ./cat/cat.hooks.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./cat/queries/*.graphql
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher:
+        endpoint: "http://localhost/graphql"
+        fetchParams:
+          headers:
+            Content-Type: application/json
+            Authorization: Bearer ${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+      errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

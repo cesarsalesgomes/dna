@@ -1,14 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DirectusService } from '@system/directus/directus.service';
-import { getSdkMock, setSpecSystemEnviromentVariables } from '@utils/spec.utils';
+import { setSpecSystemEnviromentVariables } from '@utils/spec.utils';
 
 import { CatController } from './cat.controller';
 import { CatModule } from './cat.module';
+import { CatRepository } from './cat.repository';
+import { getCatSdkMock } from './cat.sdk.mock';
 
 describe('[Cat] Integration Tests Spec', () => {
   let module: TestingModule;
   let catController: CatController;
-  let directusService: DirectusService;
+  let catRepository: CatRepository;
 
   async function setModules(modules: Array<any>) {
     module = await Test.createTestingModule({
@@ -21,7 +22,7 @@ describe('[Cat] Integration Tests Spec', () => {
   }
 
   function setProviders() {
-    directusService = module.get<DirectusService>(DirectusService);
+    catRepository = module.get<CatRepository>(CatRepository);
   }
 
   beforeAll(async () => {
@@ -41,11 +42,11 @@ describe('[Cat] Integration Tests Spec', () => {
   });
 
   it('Expect providers to be defined', async () => {
-    expect(directusService).toBeDefined();
+    expect(catRepository).toBeDefined();
   });
 
   it('Expect route cats GET to return a list of cats, with a cat of id 1 ', async () => {
-    jest.spyOn(directusService, 'getSdk').mockReturnValue(getSdkMock);
+    jest.spyOn(catRepository, 'getCatSdk').mockReturnValue(getCatSdkMock);
 
     const cats = await catController.findAll('accessToken');
 

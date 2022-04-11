@@ -1,8 +1,5 @@
-import { catByIdMock, findAllCatsMock } from '@features/cat/cat.mock';
-import { findRestaurantMock, updateRestaurantMock } from '@features/restaurant/restaurant.mock';
 import { Injectable } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Sdk } from '@system/directus/sdk/directus.sdk';
 
 @Injectable()
 export class SpecUtils {
@@ -46,10 +43,3 @@ export async function setSpecSystemEnviromentVariables(setDirectusIPV4 = true) {
 
   specUtils.setSystemEnviromentVariables(setDirectusIPV4);
 }
-
-export const getSdkMock: Sdk = {
-  findAllCats: findAllCatsMock,
-  catById: catByIdMock,
-  updateRestaurant: updateRestaurantMock,
-  findRestaurant: findRestaurantMock
-};

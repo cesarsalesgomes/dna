@@ -2,9 +2,11 @@ overwrite: true
 
 generates:
   # Sdk (Typescript database model & operation file)
-  ./directus.sdk.ts:
+  ./restaurant/restaurant.sdk.ts:
     schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
-    documents: "features/**/*.graphql"
+    documents:
+      - ./restaurant/mutations/*.graphql
+      - ./restaurant/queries/*.graphql
     plugins:
       - "typescript"
       - typescript-operations
@@ -14,30 +16,22 @@ generates:
       namingConvention:
         transformUnderscore: true
 
-  ./directus-system.sdk.ts:
-    schema: http://localhost/graphql/system
-    documents: "system/**/*.graphql"
-    plugins:
-      - "typescript"
-      - typescript-operations
-      - typescript-graphql-request
-    config:
-      rawRequest: true
-      namingConvention:
-        transformUnderscore: true
-
-  # Sdk Mock Data (Use in integration tests)
-  ./directus.mock.ts:
+  # Sdk Mock Data (Use in tests)
+  ./restaurant/restaurant.mock.ts:
     schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
-    documents: "features/**/*.graphql"
+    documents:
+      - ./restaurant/mutations/*.graphql
+      - ./restaurant/queries/*.graphql
     plugins:
       - typescript-mock-data:
-          typesFile: "./sdk/directus.sdk.ts"
+          typesFile: "./restaurant.sdk.ts"
 
   # React Query Hooks
-  ./directus.hooks.ts:
+  ./restaurant/restaurant.hooks.ts:
     schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
-    documents: "features/**/*.graphql"
+    documents:
+      - ./restaurant/mutations/*.graphql
+      - ./restaurant/queries/*.graphql
     plugins:
       - "typescript"
       - typescript-operations
