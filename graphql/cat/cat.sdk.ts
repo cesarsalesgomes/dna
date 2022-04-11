@@ -341,7 +341,7 @@ export type CreateRestaurantInput = {
   date_updated_func?: InputMaybe<DatetimeFunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  status: Scalars['String'];
+  status?: InputMaybe<Scalars['String']>;
   user_created?: InputMaybe<CreateDirectusUsersInput>;
   user_updated?: InputMaybe<CreateDirectusUsersInput>;
 };
@@ -644,7 +644,7 @@ export type Restaurant = {
   date_updated_func?: Maybe<DatetimeFunctions>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
-  status: Scalars['String'];
+  status?: Maybe<Scalars['String']>;
   user_created?: Maybe<DirectusUsers>;
   user_updated?: Maybe<DirectusUsers>;
 };
@@ -823,21 +823,6 @@ export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
 
-export type UpdateRestaurantMutationVariables = Exact<{
-  id: Scalars['ID'];
-  data: UpdateRestaurantInput;
-}>;
-
-
-export type UpdateRestaurantMutation = { __typename?: 'Mutation', update_restaurant_item?: { __typename?: 'restaurant', id?: string | null, name?: string | null, status: string } | null };
-
-export type FindRestaurantQueryVariables = Exact<{
-  data: RestaurantFilter;
-}>;
-
-
-export type FindRestaurantQuery = { __typename?: 'Query', restaurant?: Array<{ __typename?: 'restaurant', id?: string | null, name?: string | null, status: string } | null> | null };
-
 
 export const CatByIdDocument = gql`
     query catById($data: ID!) {
@@ -855,24 +840,6 @@ export const FindAllCatsDocument = gql`
   }
 }
     `;
-export const UpdateRestaurantDocument = gql`
-    mutation updateRestaurant($id: ID!, $data: update_restaurant_input!) {
-  update_restaurant_item(id: $id, data: $data) {
-    id
-    name
-    status
-  }
-}
-    `;
-export const FindRestaurantDocument = gql`
-    query findRestaurant($data: restaurant_filter!) {
-  restaurant(filter: $data) {
-    id
-    name
-    status
-  }
-}
-    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
@@ -880,8 +847,6 @@ export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, str
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 const CatByIdDocumentString = print(CatByIdDocument);
 const FindAllCatsDocumentString = print(FindAllCatsDocument);
-const UpdateRestaurantDocumentString = print(UpdateRestaurantDocument);
-const FindRestaurantDocumentString = print(FindRestaurantDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: CatByIdQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
@@ -889,12 +854,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindAllCatsQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats');
-    },
-    updateRestaurant(variables: UpdateRestaurantMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: UpdateRestaurantMutation | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<UpdateRestaurantMutation>(UpdateRestaurantDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateRestaurant');
-    },
-    findRestaurant(variables: FindRestaurantQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindRestaurantQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindRestaurantQuery>(FindRestaurantDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findRestaurant');
     }
   };
 }

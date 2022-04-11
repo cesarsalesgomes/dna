@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions, useMutation, UseMutationOptions } from 'react-query';
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -8,8 +8,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
     const res = await fetch("http://localhost/graphql", {
-    method: "POST",
-    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBmYjVjNjIzLWZkYzMtNGVlZC05N2FkLThmNGFkMjViYTIxZSIsInJvbGUiOiI3NDY0Mzg3YS1mMTY3LTQ3MWUtYTA3OC1jNGYyZGQzNGUyYTMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0ODUxNjQxNCwiZXhwIjoxNjQ4NjAyODE0LCJpc3MiOiJkaXJlY3R1cyJ9.-IayifBTrVQZXlQx6jh1E_cf7VLTiNk5L5mKXAjOyMo"}}),
+      method: "POST",
+      ...({ "headers": { "Content-Type": "application/json", "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI5ZGY0ZTdhLTdlYjItNGZmMS04ZWJmLWZkYjFhNTI3ODc2YiIsInJvbGUiOiJkMjYxOTJiMC0xMzk4LTRhNTQtOTAxYi1jZGRiNTYzOGZlYTciLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0OTY3NjExNiwiZXhwIjoxNjQ5NzYyNTE2LCJpc3MiOiJkaXJlY3R1cyJ9.p0yGSfw7ViZZf358zEBzRzN7LlRh2G-ElvL3tNYtQ4U" } }),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -357,7 +357,7 @@ export type Create_Restaurant_Input = {
   date_updated_func?: InputMaybe<Datetime_FunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
-  status: Scalars['String'];
+  status?: InputMaybe<Scalars['String']>;
   user_created?: InputMaybe<Create_Directus_Users_Input>;
   user_updated?: InputMaybe<Create_Directus_Users_Input>;
 };
@@ -660,7 +660,7 @@ export type Restaurant = {
   date_updated_func?: Maybe<Datetime_Functions>;
   id?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
-  status: Scalars['String'];
+  status?: Maybe<Scalars['String']>;
   user_created?: Maybe<Directus_Users>;
   user_updated?: Maybe<Directus_Users>;
 };
@@ -827,74 +827,22 @@ export type Update_Restaurant_Input = {
   user_updated?: InputMaybe<Update_Directus_Users_Input>;
 };
 
-export type CatByIdQueryVariables = Exact<{
-  data: Scalars['ID'];
-}>;
-
-
-export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
-
-export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
-
 export type UpdateRestaurantMutationVariables = Exact<{
   id: Scalars['ID'];
   data: Update_Restaurant_Input;
 }>;
 
 
-export type UpdateRestaurantMutation = { __typename?: 'Mutation', update_restaurant_item?: { __typename?: 'restaurant', id?: string | null, name?: string | null, status: string } | null };
+export type UpdateRestaurantMutation = { __typename?: 'Mutation', update_restaurant_item?: { __typename?: 'restaurant', id?: string | null, name?: string | null, status?: string | null } | null };
 
 export type FindRestaurantQueryVariables = Exact<{
   data: Restaurant_Filter;
 }>;
 
 
-export type FindRestaurantQuery = { __typename?: 'Query', restaurant?: Array<{ __typename?: 'restaurant', id?: string | null, name?: string | null, status: string } | null> | null };
+export type FindRestaurantQuery = { __typename?: 'Query', restaurant?: Array<{ __typename?: 'restaurant', id?: string | null, name?: string | null, status?: string | null } | null> | null };
 
 
-export const CatByIdDocument = `
-    query catById($data: ID!) {
-  cat_by_id(id: $data) {
-    id
-    name
-  }
-}
-    `;
-export const useCatByIdQuery = <
-      TData = CatByIdQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables: CatByIdQueryVariables,
-      options?: UseQueryOptions<CatByIdQuery, TError, TData>
-    ) =>
-    useQuery<CatByIdQuery, TError, TData>(
-      ['catById', variables],
-      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
-      options
-    );
-export const FindAllCatsDocument = `
-    query findAllCats {
-  cat {
-    id
-    name
-  }
-}
-    `;
-export const useFindAllCatsQuery = <
-      TData = FindAllCatsQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables?: FindAllCatsQueryVariables,
-      options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
-    ) =>
-    useQuery<FindAllCatsQuery, TError, TData>(
-      variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
-      options
-    );
 export const UpdateRestaurantDocument = `
     mutation updateRestaurant($id: ID!, $data: update_restaurant_input!) {
   update_restaurant_item(id: $id, data: $data) {
@@ -905,14 +853,14 @@ export const UpdateRestaurantDocument = `
 }
     `;
 export const useUpdateRestaurantMutation = <
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;},
-      TContext = unknown
-    >(options?: UseMutationOptions<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>) =>
-    useMutation<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>(
-      ['updateRestaurant'],
-      (variables?: UpdateRestaurantMutationVariables) => fetcher<UpdateRestaurantMutation, UpdateRestaurantMutationVariables>(UpdateRestaurantDocument, variables)(),
-      options
-    );
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; },
+  TContext = unknown
+>(options?: UseMutationOptions<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>) =>
+  useMutation<UpdateRestaurantMutation, TError, UpdateRestaurantMutationVariables, TContext>(
+    ['updateRestaurant'],
+    (variables?: UpdateRestaurantMutationVariables) => fetcher<UpdateRestaurantMutation, UpdateRestaurantMutationVariables>(UpdateRestaurantDocument, variables)(),
+    options
+  );
 export const FindRestaurantDocument = `
     query findRestaurant($data: restaurant_filter!) {
   restaurant(filter: $data) {
@@ -923,14 +871,14 @@ export const FindRestaurantDocument = `
 }
     `;
 export const useFindRestaurantQuery = <
-      TData = FindRestaurantQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables: FindRestaurantQueryVariables,
-      options?: UseQueryOptions<FindRestaurantQuery, TError, TData>
-    ) =>
-    useQuery<FindRestaurantQuery, TError, TData>(
-      ['findRestaurant', variables],
-      fetcher<FindRestaurantQuery, FindRestaurantQueryVariables>(FindRestaurantDocument, variables),
-      options
-    );
+  TData = FindRestaurantQuery,
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
+>(
+  variables: FindRestaurantQueryVariables,
+  options?: UseQueryOptions<FindRestaurantQuery, TError, TData>
+) =>
+  useQuery<FindRestaurantQuery, TError, TData>(
+    ['findRestaurant', variables],
+    fetcher<FindRestaurantQuery, FindRestaurantQueryVariables>(FindRestaurantDocument, variables),
+    options
+  );
