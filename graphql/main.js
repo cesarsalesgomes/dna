@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { runAuthGraphqlCodegenScript } from './auth/codegen.js';
-import { runCatGraphqlCodegenScript } from './cat/codegen.js'
-import { runRestaurantGraphqlCodegenScript } from './restaurant/codegen.js'
-import { setDotenvConfiguration } from './utils.js';
+import {
+  setDotenvConfiguration, copyGeneratedFilesToUsageFolders, getFeaturesDirectoriesExcludingNodeModules, shellCommand
+} from './utils.js';
 
 const DIRECTUS_LOCAL_LOGIN_ROUTE = 'http://127.0.0.1/auth/login';
 
@@ -16,14 +15,28 @@ async function getDirectusAccessToken() {
   }).then(({ data }) => data.data.access_token)
 }
 
+async function setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(accessToken, pathToCodegen) {
+  const command = `cross-env DOCKER_DNA_DIRECTUS_ACCESS_TOKEN=${accessToken} graphql-codegen --config ${pathToCodegen}`;
+
+  await shellCommand(command);
+}
+
+async function runGraphqlCodegenScriptAndCopyGeneratedFilesToUsageFolders(accessToken, featureName) {
+  const PATH_TO_AUTH_CODEGEN = `./${featureName}/codegen.yml`;
+
+  await setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(accessToken, PATH_TO_AUTH_CODEGEN);
+
+  copyGeneratedFilesToUsageFolders(featureName);
+}
+
 async function main() {
   setDotenvConfiguration()
 
   const accessToken = await getDirectusAccessToken();
 
-  await runCatGraphqlCodegenScript(accessToken);
-  await runAuthGraphqlCodegenScript(accessToken);
-  await runRestaurantGraphqlCodegenScript(accessToken);
+  for (const featureName of getFeaturesDirectoriesExcludingNodeModules()) {
+    await runGraphqlCodegenScriptAndCopyGeneratedFilesToUsageFolders(accessToken, featureName);
+  }
 
   console.log('Graphql Codegen generated with success')
 }
