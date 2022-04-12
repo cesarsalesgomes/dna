@@ -1,6 +1,0 @@
-query findAllCats {
-  cat {
-    id
-    name
-  }
-}

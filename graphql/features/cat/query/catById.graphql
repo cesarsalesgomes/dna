@@ -1,6 +1,0 @@
-query catById($data: ID!) {
-  cat_by_id(id: $data) {
-    id
-    name
-  }
-}

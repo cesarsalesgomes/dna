@@ -1,8 +1,13 @@
 import dotenv from 'dotenv';
 import { exec } from 'child_process';
+import { copyFileSync, readdirSync } from 'fs';
 
 function getCurrentDirectory() {
   return process.cwd();
+}
+
+export function setDotenvConfiguration() {
+  dotenv.config({ path: `${getCurrentDirectory()}/../.env` })
 }
 
 export function shellCommand(cmd) {
@@ -15,12 +20,31 @@ export function shellCommand(cmd) {
   });
 }
 
-export async function setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(accessToken, pathToCodegen) {
-  const command = `cross-env DOCKER_DNA_DIRECTUS_ACCESS_TOKEN=${accessToken} graphql-codegen --config ${pathToCodegen}`;
-
-  await shellCommand(command);
+export function getFeaturesDirectoriesExcludingNodeModules() {
+  return readdirSync(getCurrentDirectory(), { withFileTypes: true })
+    .filter(directory => directory.isDirectory())
+    .map(directory => directory.name)
+    .filter(filename => filename !== 'node_modules');
 }
 
-export function setDotenvConfiguration() {
-  dotenv.config({ path: `${getCurrentDirectory()}/../.env` })
+/**
+ * Scripts to copy generated files to the folders of use
+ */
+
+function copySdkToNestFolder(filename) {
+  copyFileSync(`./${filename}/${filename}.sdk.ts`, `../nestjs/src/features/${filename}/${filename}.sdk.ts`);
+}
+
+function copyMockToNestFolder(filename) {
+  copyFileSync(`./${filename}/${filename}.mock.ts`, `../nestjs/src/features/${filename}/${filename}.mock.ts`);
+}
+
+function copyHooksToReactFolder(filename) {
+  copyFileSync(`./${filename}/${filename}.hooks.ts`, `../react/src/hooks/${filename}.hooks.ts`);
+}
+
+export function copyGeneratedFilesToUsageFolders(filename) {
+  copySdkToNestFolder(filename);
+  copyMockToNestFolder(filename);
+  copyHooksToReactFolder(filename);
 }
