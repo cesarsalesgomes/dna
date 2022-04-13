@@ -12,7 +12,7 @@ async function getDirectusAccessToken() {
   return axios.post(DIRECTUS_LOCAL_LOGIN_ROUTE, {
     email,
     password
-  }).then(({ data }) => data.data.access_token)
+  }).then(({ data }) => data.data.access_token);
 }
 
 async function setAccessTokenOnEnviromentAndRunGraphqlCodegenScript(accessToken, pathToCodegen) {
@@ -35,10 +35,15 @@ async function main() {
   const accessToken = await getDirectusAccessToken();
 
   for (const featureName of getFeaturesDirectoriesExcludingNodeModules()) {
-    await runGraphqlCodegenScriptAndCopyGeneratedFilesToUsageFolders(accessToken, featureName);
+    try {
+      await runGraphqlCodegenScriptAndCopyGeneratedFilesToUsageFolders(accessToken, featureName);
+
+      console.log(`[${featureName.toUpperCase()}] Graphql Codegen generated with success\n`);
+    } catch (error) {
+      console.error(`[${featureName.toUpperCase()}] the following error occurred: ${error}\n`);
+    }
   }
 
-  console.log('Graphql Codegen generated with success')
 }
 
 main();

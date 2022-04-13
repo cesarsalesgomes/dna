@@ -7,13 +7,13 @@ function getCurrentDirectory() {
 }
 
 export function setDotenvConfiguration() {
-  dotenv.config({ path: `${getCurrentDirectory()}/../.env` })
+  dotenv.config({ path: `${getCurrentDirectory()}/../.env` });
 }
 
 export function shellCommand(cmd) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
-      if (error) console.warn(error);
+      if (error) reject(error);
 
       resolve(stdout ? stdout : stderr);
     });
