@@ -22,7 +22,7 @@ export class RestaurantReservationsService {
     private restaurantService: RestaurantService
   ) { }
 
-  private getTagMeRestauranteReservations(idReservation: string) {
+  private getTagMeRestaurantReservations(idReservation: string) {
     return this.gotService.get()(
       `${TAG_ME_URL}/ReservationStatus/${idReservation}/availabilityForApp/reservationWidget`,
       {
@@ -49,8 +49,10 @@ export class RestaurantReservationsService {
   async processTagMeRestauranteReservations() {
     const accessToken = await this.authService.getAccessToken();
 
-    if (await this.restaurantService.checkIfRestaurantIsActive(accessToken, CASA_DO_PORCO_NAME)) {
-      const { availabilities } = await this.getTagMeRestauranteReservations(CASA_DO_PORCO_TAG_ME_ID);
+    const restaurant = await this.restaurantService.getRestaurantByName(accessToken, CASA_DO_PORCO_NAME);
+
+    if (this.restaurantService.checkIfRestaurantIsActive(restaurant)) {
+      const { availabilities } = await this.getTagMeRestaurantReservations(CASA_DO_PORCO_TAG_ME_ID);
 
       const availableDays = this.getAvailableDays(availabilities);
 
@@ -63,7 +65,7 @@ export class RestaurantReservationsService {
           text: 'Available'
         });
 
-        this.restaurantService.disableRestaurantByName(accessToken, CASA_DO_PORCO_NAME);
+        this.restaurantService.disableRestaurant(accessToken, restaurant);
       }
     }
   }
