@@ -162,13 +162,15 @@ _Below are the steps to create the environment:_
 
 > **NestJS**
 
-_The `NestJS` layer was configured on the Heroku enviroment. Due to being the business layer, and needing more code deployment, Heroku was chosen due to the simplicity of connecting to GitHub and performing continuous integration, still being free. To deploy it, it is necessary to:_
+_The `NestJS` layer was configured on the Heroku enviroment. Due to being the business layer, and needing more code deployment, Heroku was chosen due to the simplicity of connecting to GitHub and performing continuous integration, still being free. To deploy it, it's necessary to:_
 
-1. Init a git repository on the **nestjs** folder (**Note:** As it is not recommended to create nested git projects, copy and paste the `nestjs` folder outside of the dna environment, and start a git repository alone).
+1. Init an empty Git repository.
 
-2. Connect it to a Heroku application.
+2. Follow the steps **[on how to pull the files and changes of another repository](https://stackoverflow.com/a/24816134)**.
 
-3. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Aws (Ex: www.dna-directus.com)
+3. Connect it to a Heroku application. The Procfile on the root directory will install, build, and start the Nest enviroment.
+
+4. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Aws (Ex: www.dna-directus.com)
 
 <br />
 
