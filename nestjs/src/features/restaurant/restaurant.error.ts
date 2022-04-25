@@ -1,1 +1,0 @@
-export const RESTAURANT_NOT_FOUND_ERROR = 'Restaurant not found';

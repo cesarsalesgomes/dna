@@ -166,7 +166,7 @@ _The `NestJS` layer was configured on the Heroku enviroment. Due to being the bu
 
 1. Init an empty Git repository.
 
-2. Follow the steps **[on how to pull the files and changes of another repository](https://stackoverflow.com/a/24816134)**.
+2. Follow the steps **[on how to pull the files and changes of another repository](https://stackoverflow.com/a/24816134)** and **[how to merge unrelated stories](https://stackoverflow.com/a/37938036)**.
 
 3. Connect it to a Heroku application. The Procfile on the root directory will install, build, and start the Nest enviroment.
 
