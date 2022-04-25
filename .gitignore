@@ -100,7 +100,6 @@ dist
 .tern-port
 
 # NestJS
-/*/dist
 /*/.env
 
 # Directus
