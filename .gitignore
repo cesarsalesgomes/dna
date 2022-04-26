@@ -76,6 +76,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
+dist
 
 # Gatsby files
 .cache/
@@ -99,6 +100,7 @@ typings/
 .tern-port
 
 # NestJS
+/*/dist
 /*/.env
 
 # Directus
