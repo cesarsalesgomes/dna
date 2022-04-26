@@ -1,1 +1,1 @@
-web: sh -c 'cd nestjs && npm run start:prod && npm install && npm run build'
+worker: sh -c 'cd nestjs && npm install && npm run build && npm run start:prod'
