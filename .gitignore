@@ -46,10 +46,10 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
+/*/.env
 
 # NestJS
-/*/dist
-/*/.env
+/nestjs/dist
 
 # Directus
 /directus/uploads/*
