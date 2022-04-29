@@ -132,7 +132,7 @@ _Even having more steps of installation and manual configuration, the environmen
 
 _**IMPORTANT**: The idea behind the configuration of the reverse proxy, is to redirect all calls that contain `nestjs` in their route for the NestJS server configured in the Heroku environment created in the next section; and redirect all other calls to the Directus enviroment, thus obtaining the environment configuration with only one ip._
 
-_For that, then, **ALL** controllers created in the NestJS environment will need to have `nestjs` in their configuration (Ex: /nestjs/cats)._
+_For that, then, **ALL** controllers created in the NestJS environment will have a `nestjs` in their path (Ex: /nestjs/cats), being possible due to the **[configuration of global prefixes in all routes](https://docs.nestjs.com/faq/global-prefix)**._
 
 _Also remembering that continuous integration with Git will not be necessary, as there will be no code development in this environment, being only necessary to update the environment when necessary through the steps in **[Directus update guide](https://docs.directus.io/configuration/upgrades-migrations/)**._
 

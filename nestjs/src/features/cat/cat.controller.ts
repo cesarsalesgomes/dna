@@ -3,7 +3,7 @@ import { AccessToken } from '@system/decorators/access-token.decorator';
 
 import { CatService } from './cat.service';
 
-@Controller('/nestjs/cats')
+@Controller('/cats')
 export class CatController {
   constructor(private catService: CatService) { }
 
