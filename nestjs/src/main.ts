@@ -12,6 +12,9 @@ async function bootstrap() {
    */
   app.useGlobalFilters(new ExceptionFilterImplementation());
 
+  /* Set all routes with 'nestjs' prefix */
+  app.setGlobalPrefix('nestjs');
+
   await app.listen(process.env.PORT || 3000);
 }
 
