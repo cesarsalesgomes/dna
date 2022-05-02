@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.67.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.81.0",
     "@nestjs-modules/mailer": "^1.6.1",
     "@nestjs/cli": "^8.2.4",
     "@nestjs/common": "^8.0.0",
@@ -30,7 +30,7 @@
     "@nestjs/schedule": "^1.1.0",
     "@nestjs/testing": "^8.4.4",
     "aws-sdk": "^2.1122.0",
-    "dayjs": "^1.11.0",
+    "dayjs": "^1.11.1",
     "got": "11.8.2",
     "graphql": "^16.3.0",
     "graphql-request": "^4.1.0",
