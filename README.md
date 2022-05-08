@@ -170,7 +170,7 @@ _The `NestJS` layer was configured on the Heroku enviroment. Due to being the bu
 
 3. Connect it to a Heroku application. The Procfile on the root directory will install, build, and start the Nest enviroment.
 
-4. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on Aws (Ex: www.dna-directus.com)
+4. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on AWS (Ex: www.dna-directus.com)
 
 <br />
 
@@ -206,13 +206,13 @@ access_log  /var/log/nginx/access.log main_ext if=$loggable;
 
 ## **File Storage** 📁
 
-Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** for file storage, with integration to the main cloud solutions available, like Aws S3, Azure, etc.
+Directus offers a complete **[solution](https://docs.directus.io/app/file-library/#file-library)** for file storage, with integration to the main cloud solutions available, like AWS S3, Azure, etc.
 
-Because most of the architecture already built is on Aws, `S3` was chosen due to its ease, practicality, security and to centralize the solution layers. Follow the **[link](https://docs.directus.io/configuration/config-options/#s3-s3)** to configure the Directus environment for Aws S3.
+Because most of the architecture already built is on AWS, `S3` was chosen due to its ease, practicality, security and to centralize the solution layers. Follow the **[link](https://docs.directus.io/configuration/config-options/#s3-s3)** to configure the Directus environment for AWS S3.
 
 **Issues:**
 
-1. After creating a Bucket on S3, to avoid permission errors, it's necessary to add the `AmazonS3FullAccess` permission to the Aws admin user.
+1. After creating a Bucket on S3, to avoid permission errors, it's necessary to add the `AmazonS3FullAccess` permission to the AWS admin user.
 
 <br />
 
@@ -242,14 +242,14 @@ This quickly find the possible errors through the filters provided by the tool, 
 
 **Issues:**
 
-1. After creating a Group/Stream Logs on CloudWatch, to avoid permission errors, it's necessary to add the `CloudWatchLogsFullAccess` permission to the Aws admin user.
+1. After creating a Group/Stream Logs on CloudWatch, to avoid permission errors, it's necessary to add the `CloudWatchLogsFullAccess` permission to the AWS admin user.
 2. Due to the NestJS configuration peculiarities, the steps reported in this **[Stack Overflow link](https://stackoverflow.com/questions/69433044/winston-with-aws-cloudwatch-on-nestjs)** were followed.
 
 <br />
 
 ## **Continuous Integration** 🤖
 
-`Continuous Integration` is a way to increase code quality, removing the responsibility from the developers some manual steps that must be performed before merging to the main code. Tests and checks of the code are handled on a server and automatically reported back.
+`Continuous integration` is a way to increase code quality, removing the responsibility from the developers some manual steps that must be performed before merging to the main code. Tests and checks of the code are handled on a server and automatically reported back.
 
 For this, **[GitHub Actions](https://docs.github.com/actions)** were used, due to the easy configuration with the repository already hosted on `GitHub`, and the many ready-made actions already shared by the community.
 
@@ -274,6 +274,43 @@ _**[Dependabot](https://docs.github.com/en/enterprise-server@3.3/code-security/s
 > **[LINTER](https://github.com/cesarsalesgomes/dna/blob/main/.github/workflows/linter.yml)**
 
 _**[Super-linter](https://github.com/marketplace/actions/super-linter)** automate the process establishing coding best practices and prevent broken code from being uploaded to the main branch._
+
+<br />
+
+## **Continuous Deployment** 🦾
+
+`Continuous deployment` allows you to automatically deploy revisions to a production environment without explicit approval from a developer, thus automating the entire software release process.
+
+For this, **[AWS CodePipeline](https://aws.amazon.com/pt/getting-started/hands-on/continuous-deployment-pipeline/)** were used, for study purposes and ease `GitHub` integration.
+
+Below is the list of required configuration steps:
+
+> **1. EC2 startup script**
+
+For automatic startup of backend applications, it's necessary to configure a script that will be run when restarting an `AWS EC2` instance.
+
+Some steps are necessary before editing the instance **[User Data](https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/user-data.html)**, responsible for executing the initial script.
+
+Because `Node` **bin** folder directory is not yet in the `PATH` environment variable at the time of **User Data** script execution, the `pm2` command, responsible for starting the `Directus` application, is not found.
+
+Thus, it's necessary to **[edit the PATH variable](https://opensource.com/article/17/6/set-path-linux)**, concatenating the directory path of the **bin** folder where `Node` was installed (**Obs:** Use the `whereis node` command, to get the directory).
+
+To do so, edit the `~/.bashrc` file, adding the command `export PATH="$PATH:/path/to/bin/dir/node"` (**Ex:** `export PATH=$PATH:/root/.nvm/versions/node /v16.13.1/bin`).
+
+After this step, it's possible to define the script that will be run when the instance is restarted, which can be used either via **[User Data](https://aws.amazon.com/pt/premiumsupport/knowledge-center/execute-user-data-ec2)** , or **[Cloud-Init](https://stackoverflow.com/questions/23411408/how-do-i-set-up-cloud-init-on-custom-amis-in-aws-centos)**, and so start the application automatically:
+
+```sh
+# Required to carry out the editing of the PATH environment variable (https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix).
+source ~/.bashrc
+
+ # Startup script where Directus was installed
+cd /home/ec2-user/dna-directus && pm2 start npm -- start
+
+# Nginx startup
+systemctl restart nginx
+```
+
+**Observation:** To check for any possible errors, check the error logs in the file `/var/log/cloud-init-output.log`.
 
 <br />
 
