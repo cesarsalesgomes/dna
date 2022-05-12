@@ -10,7 +10,7 @@
   "dependencies": {
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/introspection": "2.1.1",
-    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript": "2.4.11",
     "@graphql-codegen/typescript-graphql-request": "^4.4.5",
     "@graphql-codegen/typescript-operations": "^2.4.0",
     "@graphql-codegen/typescript-react-query": "^3.5.9",
