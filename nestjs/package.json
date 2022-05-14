@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch-logs": "^3.81.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.87.0",
     "@nestjs-modules/mailer": "^1.6.1",
     "@nestjs/cli": "^8.2.4",
     "@nestjs/common": "^8.0.0",
