@@ -124,53 +124,39 @@ In this way, it was decided to deploy each system layer in parts, researching th
 
 <br />
 
-> **Directus / Database**
+> **Directus / NestJS / Database**
 
-_It was chosen to deploy the `Directus` on the **[AWS](https://aws.com)** enviroment. It has a basic unpaid plan of 1 year to its EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for machine configuration._
+_It was chosen to deploy the backend enviroment on the **[AWS](https://aws.com)**. It has a basic unpaid plan of 1 year to its EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for machine configuration._
 
 _Even having more steps of installation and manual configuration, the environment was chosen due to the idea of ​​integrating it with **[Nginx](https://www.nginx.com/)**, thus obtaining only one IP in production (with reverse proxy), and to take advantage of the good and free server monitoring tool **[Amplify](https://amplify.nginx.com)**, explained in the next topic._
 
-_**IMPORTANT**: The idea behind the configuration of the reverse proxy, is to redirect all calls that contain `nestjs` in their route for the NestJS server configured in the Heroku environment created in the next section; and redirect all other calls to the Directus enviroment, thus obtaining the environment configuration with only one ip._
+_The idea behind the configuration of the reverse proxy, is to redirect all calls that contain `nestjs` in their route to NestJS, and redirect all other calls to Directus, thus obtaining the environment configuration with only one ip._
 
 _For that, then, **ALL** controllers created in the NestJS environment will have a `nestjs` in their path (Ex: /nestjs/cats), being possible due to the **[configuration of global prefixes in all routes](https://docs.nestjs.com/faq/global-prefix)**._
 
-_Also remembering that continuous integration with Git will not be necessary, as there will be no code development in this environment, being only necessary to update the environment when necessary through the steps in **[Directus update guide](https://docs.directus.io/configuration/upgrades-migrations/)**._
+_**IMPORTANT**: in the development environment, the docker image used by Directus will always try to use the latest version. Therefore, it is necessary to keep the same version in production. To update the environment when necessary, use the steps in **[Directus update guide](https://docs.directus.io/configuration/upgrades-migrations/)**._
 
-_Below are the steps to create the environment:_
+_Below are the steps of creation:_
 
-1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Mysql Database`, due to gratuity).
+1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Mysql Database`).
 
 2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
 
-3. Create the project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommend directory is `/home/ec2-user` (The command `sudo su` will be necessary).
+3. Set the production enviroment variables on the `.bashrc` script file. They will be set when rebooting the server.
 
-4. Start the project using the **[Directus Linux tutorial](https://docs.directus.io/getting-started/installation/ubuntu/)** with `pm2`, to keep the application alive.
+4. Create the `Directus` project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommended directory is `/home/ec2-user` (The command `sudo su` will be necessary).
 
-5. Copy the file `dna.conf` on the nginx folder, to the directory `etc/nginx/conf.d` on the EC2 instance folder.
+5. Start the project using the **[Directus Linux tutorial](https://docs.directus.io/getting-started/installation/ubuntu/)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
 
-6. Replace the three variables **{{HEROKU_NESTJS_API_URL}}** on the `dna.conf` file with the Heroku app Public IP created in the next section.
+6. Clone the `dna` repository on the recommended directory of the step 3, go to the _nest_ folder, and also start the application with `pm2` **(pm2 start npm --name "Nest" -- start)**. The command will install the production modules, build and start the application.
 
-7. Replace the variable **{{NESTJS_PUBLIC_DNS}}** with the DNS acquired necessary in the step 2.
+7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder, to the server locations of the `etc/nginx/conf.d/default.conf` file on the EC2 instance folder.
 
 8. Restart the Nginx server with the command `systemctl restart nginx`.
 
 **Issues:**
 
 1. **[Configuration to connect to AWS RDS MySql Database](https://www.youtube.com/watch?v=Ng_zi11N4_c&t=445s)**
-
-<br />
-
-> **NestJS**
-
-_The `NestJS` layer was configured on the Heroku enviroment. Due to being the business layer, and needing more code deployment, Heroku was chosen due to the simplicity of connecting to GitHub and performing continuous integration, still being free. To deploy it, it's necessary to:_
-
-1. Init an empty Git repository.
-
-2. Follow the steps **[on how to pull the files and changes of another repository](https://stackoverflow.com/a/24816134)** and **[how to merge unrelated stories](https://stackoverflow.com/a/37938036)**.
-
-3. Connect it to a Heroku application. The Procfile on the root directory will install, build, and start the Nest enviroment.
-
-4. Set the enviroment variable **DIRECTUS_IP** to the Directus domain previously created on AWS (Ex: www.dna-directus.com)
 
 <br />
 
@@ -291,7 +277,7 @@ For automatic startup of backend applications, it's necessary to configure a scr
 
 Some steps are necessary before editing the instance **[User Data](https://docs.aws.amazon.com/pt_br/AWSEC2/latest/UserGuide/user-data.html)**, responsible for executing the initial script.
 
-Because `Node` **bin** folder directory is not yet in the `PATH` environment variable at the time of **User Data** script execution, the `pm2` command, responsible for starting the `Directus` application, is not found.
+Because `Node` **bin** folder directory is not yet in the `PATH` environment variable at the time of **User Data** script execution, the `pm2` command, responsible for starting the `Directus` and `Nest` applications, is not found.
 
 Thus, it's necessary to **[edit the PATH variable](https://opensource.com/article/17/6/set-path-linux)**, concatenating the directory path of the **bin** folder where `Node` was installed (**Obs:** Use the `whereis node` command, to get the directory).
 
@@ -303,8 +289,9 @@ After this step, it's possible to define the script that will be run when the in
 # Required to carry out the editing of the PATH environment variable (https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix).
 source ~/.bashrc
 
- # Startup script where Directus was installed
-cd /home/ec2-user/dna-directus && pm2 start npm -- start
+ # Startup scripts of Directus and Nest
+cd /home/ec2-user/dna-directus && pm2 start npm --name "Directus" -- start
+cd /home/ec2-user/dna/nest && pm2 start npm --name "Nest" -- start
 
 # Nginx startup
 systemctl restart nginx
