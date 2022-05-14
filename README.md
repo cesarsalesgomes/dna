@@ -12,7 +12,21 @@ Fullstack project in Typescript, with the objective of joining three well-regard
 
 ### Local development environment
 
-1. Clone this repository with git.
+1. Follow the git commands bellow when starting a new project based on the `Dna` architecture:
+
+```sh
+git remote add dna https://github.com/cesarsalesgomes/dna.git
+
+git fetch dna main
+
+git checkout -b dna-main dna/main
+
+git checkout main
+
+git merge dna-main --allow-unrelated-histories
+
+git remote set-url --push dna no_push                           # Necessary to not accidentally upload code to the dna repository
+```
 
 2. Run `npm start` under the root folder. It will start the docker images needed for development, import the most current **migration** of the application and generate the **GraphQL Sdk** used as a mirror of the Directus data models for use in the business layer (Nestjs) and frontend.
 
