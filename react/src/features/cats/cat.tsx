@@ -1,8 +1,7 @@
 import ReactQueryStatusEnum from '@enums/react-query-status.enum';
+import { CatByIdQuery, useCatByIdQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import { Dispatch, SetStateAction } from 'react';
-
-import { CatByIdQuery, useCatByIdQuery } from '../../hooks/directus/directus.hooks';
 
 import './Cat.scss';
 
