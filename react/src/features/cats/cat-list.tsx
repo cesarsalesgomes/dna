@@ -1,5 +1,5 @@
 import ReactQueryStatusEnum from '@enums/react-query-status.enum';
-import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/directus/directus.hooks';
+import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import QueryClientSingleton from '@providers/QueryClient';
 import { Dispatch, SetStateAction } from 'react';
