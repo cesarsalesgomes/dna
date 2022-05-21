@@ -4,7 +4,7 @@ import { aCat } from './cat.mock';
 import { CatByIdQuery, FindAllCatsQuery, Sdk } from './cat.sdk';
 
 type FindAllCats = {
-  data?: FindAllCatsQuery;
+  data: FindAllCatsQuery;
   extensions?: any;
   headers: Headers;
   status: number;
@@ -12,7 +12,7 @@ type FindAllCats = {
 };
 
 type CatById = {
-  data?: CatByIdQuery;
+  data: CatByIdQuery;
   extensions?: any;
   headers: Headers;
   status: number;
