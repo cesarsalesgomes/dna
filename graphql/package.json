@@ -5,7 +5,7 @@
   "type": "module",
   "main": "directus-codegen-script",
   "scripts": {
-    "start": "node main"
+    "start": "npm install && node main"
   },
   "dependencies": {
     "@graphql-codegen/cli": "2.6.2",
