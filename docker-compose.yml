@@ -70,6 +70,8 @@ services:
 
       ACCESS_TOKEN_TTL: 1d
 
+      CORS_ENABLED: "true"
+
   # NestJS
   nest:
     container_name: nest

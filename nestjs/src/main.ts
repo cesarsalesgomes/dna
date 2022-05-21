@@ -8,12 +8,15 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { logger });
 
   /**
-   * Feature 0.2.0: NestJS & Directus Exception Handling
+   * NestJS & Directus Exception Handling
    */
   app.useGlobalFilters(new ExceptionFilterImplementation());
 
   /* Set all routes with 'nestjs' prefix */
   app.setGlobalPrefix('nestjs');
+
+  /* Cors */
+  app.enableCors();
 
   await app.listen(process.env.PORT || 3000);
 }
