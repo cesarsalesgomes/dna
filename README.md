@@ -19,7 +19,9 @@ git remote add dna https://github.com/cesarsalesgomes/dna.git
 
 git fetch dna main
 
-git checkout -b dna-main dna/main
+git checkout -b dna-main
+
+git merge dna/main
 
 git checkout main
 
