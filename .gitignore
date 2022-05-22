@@ -57,5 +57,7 @@ typings/
 # Postgres
 /database/*
 
-# Graphql Generator Sdk
-/*/graphql/sdk.ts
+# Graphql Codegen
+/graphql/*/*.sdk.ts
+/graphql/*/*.hooks.ts
+/graphql/*/*.mock.ts
