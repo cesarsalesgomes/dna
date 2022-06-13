@@ -154,19 +154,19 @@ _**IMPORTANT**: in the development environment, the docker image used by Directu
 
 _Below are the steps of creation:_
 
-1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Mysql Database`).
+1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Postgres Database`).
 
 2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
 
 3. Set the production enviroment variables on the `.bashrc` script file. They will be set when rebooting the server.
 
-4. Create the `Directus` project following the steps on **[Directus Quickstart Guide](https://docs.directus.io/getting-started/quickstart/)** using the database production credentials. The recommended directory is `/home/ec2-user` (The command `sudo su` will be necessary).
+4. Create the `Directus` project following the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials. The recommended directory is `/home/ec2-user` (The command `sudo su` will be necessary).
 
-5. Start the project using the **[Directus Linux tutorial](https://docs.directus.io/getting-started/installation/ubuntu/)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
+5. Start the project using the **[Ubuntu](https://docs.directus.io/self-hosted/installation/ubuntu/#ubuntu)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
 
 6. Clone the `dna` repository on the recommended directory of the step 3, go to the _nest_ folder, and also start the application with `pm2` **(pm2 start npm --name "Nest" -- start)**. The command will install the production modules, build and start the application.
 
-7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder, to the server locations of the `etc/nginx/conf.d/default.conf` file on the EC2 instance folder.
+7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder to the server locations of the `etc/nginx/conf.d/default.conf` file on the EC2 instance folder.
 
 8. Restart the Nginx server with the command `systemctl restart nginx`.
 
@@ -306,8 +306,8 @@ After this step, it's possible to define the script that will be run when the in
 source ~/.bashrc
 
  # Startup scripts of Directus and Nest
-cd /home/ec2-user/dna-directus && pm2 start npm --name "Directus" -- start
-cd /home/ec2-user/dna/nest && pm2 start npm --name "Nest" -- start
+cd /home/ec2-user/dna-project/directus && pm2 start npm --name "Directus" -- start
+cd /home/ec2-user/dna-project/nest && pm2 start npm --name "Nest" -- start
 
 # Nginx startup
 systemctl restart nginx
