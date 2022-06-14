@@ -154,7 +154,7 @@ _**IMPORTANT**: in the development environment, the docker image used by Directu
 
 _Below are the steps of creation:_
 
-1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Postgres Database`).
+1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Postgres Database`) ¹.
 
 2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
 
@@ -166,13 +166,14 @@ _Below are the steps of creation:_
 
 6. Clone the `dna` repository on the recommended directory of the step 3, go to the _nest_ folder, and also start the application with `pm2` **(pm2 start npm --name "Nest" -- start)**. The command will install the production modules, build and start the application.
 
-7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder to the server locations of the `etc/nginx/conf.d/default.conf` file on the EC2 instance folder.
+7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder², to the server locations of the `etc/nginx/conf.d/project-name.conf` file (necessary to be created) on the EC2 instance folder.
 
 8. Restart the Nginx server with the command `systemctl restart nginx`.
 
 **Issues:**
 
 1. **[Configuration to connect to AWS RDS MySql Database](https://www.youtube.com/watch?v=Ng_zi11N4_c&t=445s)**
+2. Copying and pasting from the file generates unexpected nginx errors, so it is necessary to type the characters
 
 <br />
 
