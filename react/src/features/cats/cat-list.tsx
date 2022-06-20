@@ -20,6 +20,7 @@ function ShowErrorOrCats({ status, error, isFetching, data, setCatId }: IShowErr
             <p key={cat!.id}>
               <button
                 type="button"
+                className="p-2 bg-cyan-800"
                 onClick={() => setCatId(Number(cat!.id))}
                 style={
                   // We can find the existing query data here to show bold links for ones that are cached
@@ -45,7 +46,7 @@ function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
 
   return (
     <div>
-      <h1>Cats</h1>
+      <h1 className="my-4">Cats</h1>
       <div>
         {status === ReactQueryStatusEnum.Loading ? (
           'Loading...'

@@ -11,8 +11,7 @@
     "graphql": "^16.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.34.16",
-    "sass": "^1.49.9"
+    "react-query": "^3.34.16"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
@@ -20,6 +19,7 @@
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
     "@vitejs/plugin-react": "^1.0.7",
+    "autoprefixer": "^10.4.7",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^16.1.4",
@@ -31,7 +31,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "postcss": "^8.4.14",
     "prettier": "^2.5.1",
+    "tailwindcss": "^3.1.3",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
     "vite-tsconfig-paths": "^3.4.1"

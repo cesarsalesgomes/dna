@@ -3,7 +3,7 @@ import { CatByIdQuery, useCatByIdQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import { Dispatch, SetStateAction } from 'react';
 
-import './Cat.scss';
+import './Cat.css';
 
 function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<CatByIdQuery>) {
   return status === ReactQueryStatusEnum.Error ? (
