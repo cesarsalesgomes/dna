@@ -1,6 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
-import { GraphQLError } from 'graphql-request/dist/types';
 import { print } from 'graphql'
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
@@ -226,13 +225,24 @@ export type CatAggregated = {
   __typename?: 'cat_aggregated';
   avg?: Maybe<CatAggregatedFields>;
   avgDistinct?: Maybe<CatAggregatedFields>;
-  count?: Maybe<CatAggregatedFields>;
+  count?: Maybe<CatAggregatedCount>;
+  countAll?: Maybe<Scalars['Int']>;
   countDistinct?: Maybe<CatAggregatedFields>;
   group?: Maybe<Scalars['JSON']>;
   max?: Maybe<CatAggregatedFields>;
   min?: Maybe<CatAggregatedFields>;
   sum?: Maybe<CatAggregatedFields>;
   sumDistinct?: Maybe<CatAggregatedFields>;
+};
+
+export type CatAggregatedCount = {
+  __typename?: 'cat_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
 };
 
 export type CatAggregatedFields = {
@@ -253,6 +263,19 @@ export type CatFilter = {
   user_updated?: InputMaybe<DirectusUsersFilter>;
 };
 
+export type CountFunctionFilterOperators = {
+  count?: InputMaybe<NumberFilterOperators>;
+};
+
+export type CountFunctions = {
+  __typename?: 'count_functions';
+  count?: Maybe<Scalars['Int']>;
+};
+
+export type CountFunctionsInput = {
+  count?: InputMaybe<Scalars['Int']>;
+};
+
 export type CreateCatInput = {
   date_created?: InputMaybe<Scalars['Date']>;
   date_created_func?: InputMaybe<DatetimeFunctionsInput>;
@@ -271,17 +294,19 @@ export type CreateDirectusFilesInput = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: InputMaybe<Scalars['Int']>;
+  filesize?: InputMaybe<Scalars['String']>;
   folder?: InputMaybe<CreateDirectusFoldersInput>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
+  metadata_func?: InputMaybe<CountFunctionsInput>;
   modified_by?: InputMaybe<CreateDirectusUsersInput>;
   modified_on: Scalars['Date'];
   modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
   storage: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<CountFunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<CreateDirectusUsersInput>;
@@ -306,10 +331,12 @@ export type CreateDirectusRolesInput = {
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: InputMaybe<Array<InputMaybe<CreateDirectusUsersInput>>>;
+  users_func?: InputMaybe<CountFunctionsInput>;
 };
 
 export type CreateDirectusUsersInput = {
   auth_data?: InputMaybe<Scalars['JSON']>;
+  auth_data_func?: InputMaybe<CountFunctionsInput>;
   avatar?: InputMaybe<CreateDirectusFilesInput>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -328,6 +355,7 @@ export type CreateDirectusUsersInput = {
   role?: InputMaybe<CreateDirectusRolesInput>;
   status: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<CountFunctionsInput>;
   tfa_secret?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -409,17 +437,19 @@ export type DirectusFiles = {
   embed?: Maybe<Scalars['String']>;
   filename_disk?: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: Maybe<Scalars['Int']>;
+  filesize?: Maybe<Scalars['String']>;
   folder?: Maybe<DirectusFolders>;
   height?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['ID']>;
   location?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
+  metadata_func?: Maybe<CountFunctions>;
   modified_by?: Maybe<DirectusUsers>;
   modified_on: Scalars['Date'];
   modified_on_func?: Maybe<DatetimeFunctions>;
   storage: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
+  tags_func?: Maybe<CountFunctions>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   uploaded_by?: Maybe<DirectusUsers>;
@@ -467,17 +497,19 @@ export type DirectusFilesFilter = {
   embed?: InputMaybe<StringFilterOperators>;
   filename_disk?: InputMaybe<StringFilterOperators>;
   filename_download?: InputMaybe<StringFilterOperators>;
-  filesize?: InputMaybe<NumberFilterOperators>;
+  filesize?: InputMaybe<StringFilterOperators>;
   folder?: InputMaybe<DirectusFoldersFilter>;
   height?: InputMaybe<NumberFilterOperators>;
   id?: InputMaybe<StringFilterOperators>;
   location?: InputMaybe<StringFilterOperators>;
   metadata?: InputMaybe<StringFilterOperators>;
+  metadata_func?: InputMaybe<CountFunctionFilterOperators>;
   modified_by?: InputMaybe<DirectusUsersFilter>;
   modified_on?: InputMaybe<DateFilterOperators>;
   modified_on_func?: InputMaybe<DatetimeFunctionFilterOperators>;
   storage?: InputMaybe<StringFilterOperators>;
   tags?: InputMaybe<StringFilterOperators>;
+  tags_func?: InputMaybe<CountFunctionFilterOperators>;
   title?: InputMaybe<StringFilterOperators>;
   type?: InputMaybe<StringFilterOperators>;
   uploaded_by?: InputMaybe<DirectusUsersFilter>;
@@ -522,6 +554,7 @@ export type DirectusRoles = {
   ip_access?: Maybe<Array<Maybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: Maybe<Array<Maybe<DirectusUsers>>>;
+  users_func?: Maybe<CountFunctions>;
 };
 
 
@@ -546,11 +579,13 @@ export type DirectusRolesFilter = {
   ip_access?: InputMaybe<StringFilterOperators>;
   name?: InputMaybe<StringFilterOperators>;
   users?: InputMaybe<DirectusUsersFilter>;
+  users_func?: InputMaybe<CountFunctionFilterOperators>;
 };
 
 export type DirectusUsers = {
   __typename?: 'directus_users';
   auth_data?: Maybe<Scalars['JSON']>;
+  auth_data_func?: Maybe<CountFunctions>;
   avatar?: Maybe<DirectusFiles>;
   description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -569,6 +604,7 @@ export type DirectusUsers = {
   role?: Maybe<DirectusRoles>;
   status: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
+  tags_func?: Maybe<CountFunctions>;
   tfa_secret?: Maybe<Scalars['String']>;
   theme?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -599,6 +635,7 @@ export type DirectusUsersFilter = {
   _and?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
   _or?: InputMaybe<Array<InputMaybe<DirectusUsersFilter>>>;
   auth_data?: InputMaybe<StringFilterOperators>;
+  auth_data_func?: InputMaybe<CountFunctionFilterOperators>;
   avatar?: InputMaybe<DirectusFilesFilter>;
   description?: InputMaybe<StringFilterOperators>;
   email?: InputMaybe<StringFilterOperators>;
@@ -617,6 +654,7 @@ export type DirectusUsersFilter = {
   role?: InputMaybe<DirectusRolesFilter>;
   status?: InputMaybe<StringFilterOperators>;
   tags?: InputMaybe<StringFilterOperators>;
+  tags_func?: InputMaybe<CountFunctionFilterOperators>;
   tfa_secret?: InputMaybe<StringFilterOperators>;
   theme?: InputMaybe<StringFilterOperators>;
   title?: InputMaybe<StringFilterOperators>;
@@ -673,13 +711,25 @@ export type RestaurantAggregated = {
   __typename?: 'restaurant_aggregated';
   avg?: Maybe<RestaurantAggregatedFields>;
   avgDistinct?: Maybe<RestaurantAggregatedFields>;
-  count?: Maybe<RestaurantAggregatedFields>;
+  count?: Maybe<RestaurantAggregatedCount>;
+  countAll?: Maybe<Scalars['Int']>;
   countDistinct?: Maybe<RestaurantAggregatedFields>;
   group?: Maybe<Scalars['JSON']>;
   max?: Maybe<RestaurantAggregatedFields>;
   min?: Maybe<RestaurantAggregatedFields>;
   sum?: Maybe<RestaurantAggregatedFields>;
   sumDistinct?: Maybe<RestaurantAggregatedFields>;
+};
+
+export type RestaurantAggregatedCount = {
+  __typename?: 'restaurant_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
 };
 
 export type RestaurantAggregatedFields = {
@@ -736,17 +786,19 @@ export type UpdateDirectusFilesInput = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download?: InputMaybe<Scalars['String']>;
-  filesize?: InputMaybe<Scalars['Int']>;
+  filesize?: InputMaybe<Scalars['String']>;
   folder?: InputMaybe<UpdateDirectusFoldersInput>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
+  metadata_func?: InputMaybe<CountFunctionsInput>;
   modified_by?: InputMaybe<UpdateDirectusUsersInput>;
   modified_on?: InputMaybe<Scalars['Date']>;
   modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
   storage?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<CountFunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<UpdateDirectusUsersInput>;
@@ -771,10 +823,12 @@ export type UpdateDirectusRolesInput = {
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<Array<InputMaybe<UpdateDirectusUsersInput>>>;
+  users_func?: InputMaybe<CountFunctionsInput>;
 };
 
 export type UpdateDirectusUsersInput = {
   auth_data?: InputMaybe<Scalars['JSON']>;
+  auth_data_func?: InputMaybe<CountFunctionsInput>;
   avatar?: InputMaybe<UpdateDirectusFilesInput>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -793,6 +847,7 @@ export type UpdateDirectusUsersInput = {
   role?: InputMaybe<UpdateDirectusRolesInput>;
   status?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<CountFunctionsInput>;
   tfa_secret?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -841,19 +896,19 @@ export const FindAllCatsDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 const CatByIdDocumentString = print(CatByIdDocument);
 const FindAllCatsDocumentString = print(FindAllCatsDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: CatByIdQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'catById');
+    catById(variables: CatByIdQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: CatByIdQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<CatByIdQuery>(CatByIdDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'catById', 'query');
     },
-    findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: FindAllCatsQuery | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats');
+    findAllCats(variables?: FindAllCatsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: FindAllCatsQuery; extensions?: any; headers: Dom.Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<FindAllCatsQuery>(FindAllCatsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'findAllCats', 'query');
     }
   };
 }

@@ -1,4 +1,6 @@
+import { endpointUrl, fetchParams } from '@config/react-query.config';
 import { useQuery, UseQueryOptions } from 'react-query';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -7,9 +9,9 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
-    const res = await fetch("http://localhost/graphql", {
-    method: "POST",
-    ...({"headers":{"Content-Type":"application/json","Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI5ZGY0ZTdhLTdlYjItNGZmMS04ZWJmLWZkYjFhNTI3ODc2YiIsInJvbGUiOiJkMjYxOTJiMC0xMzk4LTRhNTQtOTAxYi1jZGRiNTYzOGZlYTciLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTY0OTY3NjExNiwiZXhwIjoxNjQ5NzYyNTE2LCJpc3MiOiJkaXJlY3R1cyJ9.p0yGSfw7ViZZf358zEBzRzN7LlRh2G-ElvL3tNYtQ4U"}}),
+    const res = await fetch(endpointUrl as string, {
+      method: 'POST',
+      ...(fetchParams),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -22,7 +24,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
     }
 
     return json.data;
-  }
+  };
 }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -53,11 +55,9 @@ export type Mutation = {
   update_restaurant_items?: Maybe<Array<Maybe<Restaurant>>>;
 };
 
-
 export type MutationCreate_Cat_ItemArgs = {
   data: Create_Cat_Input;
 };
-
 
 export type MutationCreate_Cat_ItemsArgs = {
   data?: InputMaybe<Array<Create_Cat_Input>>;
@@ -69,11 +69,9 @@ export type MutationCreate_Cat_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type MutationCreate_Restaurant_ItemArgs = {
   data: Create_Restaurant_Input;
 };
-
 
 export type MutationCreate_Restaurant_ItemsArgs = {
   data?: InputMaybe<Array<Create_Restaurant_Input>>;
@@ -85,32 +83,26 @@ export type MutationCreate_Restaurant_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type MutationDelete_Cat_ItemArgs = {
   id: Scalars['ID'];
 };
-
 
 export type MutationDelete_Cat_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
-
 export type MutationDelete_Restaurant_ItemArgs = {
   id: Scalars['ID'];
 };
-
 
 export type MutationDelete_Restaurant_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
-
 export type MutationUpdate_Cat_ItemArgs = {
   data: Update_Cat_Input;
   id: Scalars['ID'];
 };
-
 
 export type MutationUpdate_Cat_ItemsArgs = {
   data: Update_Cat_Input;
@@ -123,12 +115,10 @@ export type MutationUpdate_Cat_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type MutationUpdate_Restaurant_ItemArgs = {
   data: Update_Restaurant_Input;
   id: Scalars['ID'];
 };
-
 
 export type MutationUpdate_Restaurant_ItemsArgs = {
   data: Update_Restaurant_Input;
@@ -151,7 +141,6 @@ export type Query = {
   restaurant_by_id?: Maybe<Restaurant>;
 };
 
-
 export type QueryCatArgs = {
   filter?: InputMaybe<Cat_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -161,7 +150,6 @@ export type QueryCatArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type QueryCat_AggregatedArgs = {
   filter?: InputMaybe<Cat_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -170,11 +158,9 @@ export type QueryCat_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type QueryCat_By_IdArgs = {
   id: Scalars['ID'];
 };
-
 
 export type QueryRestaurantArgs = {
   filter?: InputMaybe<Restaurant_Filter>;
@@ -185,7 +171,6 @@ export type QueryRestaurantArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type QueryRestaurant_AggregatedArgs = {
   filter?: InputMaybe<Restaurant_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -193,7 +178,6 @@ export type QueryRestaurant_AggregatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type QueryRestaurant_By_IdArgs = {
   id: Scalars['ID'];
@@ -218,7 +202,6 @@ export type Cat = {
   user_updated?: Maybe<Directus_Users>;
 };
 
-
 export type CatUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -227,7 +210,6 @@ export type CatUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type CatUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -242,13 +224,24 @@ export type Cat_Aggregated = {
   __typename?: 'cat_aggregated';
   avg?: Maybe<Cat_Aggregated_Fields>;
   avgDistinct?: Maybe<Cat_Aggregated_Fields>;
-  count?: Maybe<Cat_Aggregated_Fields>;
+  count?: Maybe<Cat_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
   countDistinct?: Maybe<Cat_Aggregated_Fields>;
   group?: Maybe<Scalars['JSON']>;
   max?: Maybe<Cat_Aggregated_Fields>;
   min?: Maybe<Cat_Aggregated_Fields>;
   sum?: Maybe<Cat_Aggregated_Fields>;
   sumDistinct?: Maybe<Cat_Aggregated_Fields>;
+};
+
+export type Cat_Aggregated_Count = {
+  __typename?: 'cat_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
 };
 
 export type Cat_Aggregated_Fields = {
@@ -269,6 +262,19 @@ export type Cat_Filter = {
   user_updated?: InputMaybe<Directus_Users_Filter>;
 };
 
+export type Count_Function_Filter_Operators = {
+  count?: InputMaybe<Number_Filter_Operators>;
+};
+
+export type Count_Functions = {
+  __typename?: 'count_functions';
+  count?: Maybe<Scalars['Int']>;
+};
+
+export type Count_FunctionsInput = {
+  count?: InputMaybe<Scalars['Int']>;
+};
+
 export type Create_Cat_Input = {
   date_created?: InputMaybe<Scalars['Date']>;
   date_created_func?: InputMaybe<Datetime_FunctionsInput>;
@@ -287,17 +293,19 @@ export type Create_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: InputMaybe<Scalars['Int']>;
+  filesize?: InputMaybe<Scalars['String']>;
   folder?: InputMaybe<Create_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
+  metadata_func?: InputMaybe<Count_FunctionsInput>;
   modified_by?: InputMaybe<Create_Directus_Users_Input>;
   modified_on: Scalars['Date'];
   modified_on_func?: InputMaybe<Datetime_FunctionsInput>;
   storage: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<Count_FunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<Create_Directus_Users_Input>;
@@ -322,10 +330,12 @@ export type Create_Directus_Roles_Input = {
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: InputMaybe<Array<InputMaybe<Create_Directus_Users_Input>>>;
+  users_func?: InputMaybe<Count_FunctionsInput>;
 };
 
 export type Create_Directus_Users_Input = {
   auth_data?: InputMaybe<Scalars['JSON']>;
+  auth_data_func?: InputMaybe<Count_FunctionsInput>;
   avatar?: InputMaybe<Create_Directus_Files_Input>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -344,6 +354,7 @@ export type Create_Directus_Users_Input = {
   role?: InputMaybe<Create_Directus_Roles_Input>;
   status: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<Count_FunctionsInput>;
   tfa_secret?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -425,17 +436,19 @@ export type Directus_Files = {
   embed?: Maybe<Scalars['String']>;
   filename_disk?: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: Maybe<Scalars['Int']>;
+  filesize?: Maybe<Scalars['String']>;
   folder?: Maybe<Directus_Folders>;
   height?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['ID']>;
   location?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
+  metadata_func?: Maybe<Count_Functions>;
   modified_by?: Maybe<Directus_Users>;
   modified_on: Scalars['Date'];
   modified_on_func?: Maybe<Datetime_Functions>;
   storage: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
+  tags_func?: Maybe<Count_Functions>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   uploaded_by?: Maybe<Directus_Users>;
@@ -443,7 +456,6 @@ export type Directus_Files = {
   uploaded_on_func?: Maybe<Datetime_Functions>;
   width?: Maybe<Scalars['Int']>;
 };
-
 
 export type Directus_FilesFolderArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
@@ -454,7 +466,6 @@ export type Directus_FilesFolderArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
 export type Directus_FilesModified_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -463,7 +474,6 @@ export type Directus_FilesModified_ByArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type Directus_FilesUploaded_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -483,17 +493,19 @@ export type Directus_Files_Filter = {
   embed?: InputMaybe<String_Filter_Operators>;
   filename_disk?: InputMaybe<String_Filter_Operators>;
   filename_download?: InputMaybe<String_Filter_Operators>;
-  filesize?: InputMaybe<Number_Filter_Operators>;
+  filesize?: InputMaybe<String_Filter_Operators>;
   folder?: InputMaybe<Directus_Folders_Filter>;
   height?: InputMaybe<Number_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
   location?: InputMaybe<String_Filter_Operators>;
   metadata?: InputMaybe<String_Filter_Operators>;
+  metadata_func?: InputMaybe<Count_Function_Filter_Operators>;
   modified_by?: InputMaybe<Directus_Users_Filter>;
   modified_on?: InputMaybe<Date_Filter_Operators>;
   modified_on_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   storage?: InputMaybe<String_Filter_Operators>;
   tags?: InputMaybe<String_Filter_Operators>;
+  tags_func?: InputMaybe<Count_Function_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
   type?: InputMaybe<String_Filter_Operators>;
   uploaded_by?: InputMaybe<Directus_Users_Filter>;
@@ -508,7 +520,6 @@ export type Directus_Folders = {
   name: Scalars['String'];
   parent?: Maybe<Directus_Folders>;
 };
-
 
 export type Directus_FoldersParentArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
@@ -538,8 +549,8 @@ export type Directus_Roles = {
   ip_access?: Maybe<Array<Maybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: Maybe<Array<Maybe<Directus_Users>>>;
+  users_func?: Maybe<Count_Functions>;
 };
-
 
 export type Directus_RolesUsersArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -562,11 +573,13 @@ export type Directus_Roles_Filter = {
   ip_access?: InputMaybe<String_Filter_Operators>;
   name?: InputMaybe<String_Filter_Operators>;
   users?: InputMaybe<Directus_Users_Filter>;
+  users_func?: InputMaybe<Count_Function_Filter_Operators>;
 };
 
 export type Directus_Users = {
   __typename?: 'directus_users';
   auth_data?: Maybe<Scalars['JSON']>;
+  auth_data_func?: Maybe<Count_Functions>;
   avatar?: Maybe<Directus_Files>;
   description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -585,12 +598,12 @@ export type Directus_Users = {
   role?: Maybe<Directus_Roles>;
   status: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
+  tags_func?: Maybe<Count_Functions>;
   tfa_secret?: Maybe<Scalars['String']>;
   theme?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
 };
-
 
 export type Directus_UsersAvatarArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
@@ -600,7 +613,6 @@ export type Directus_UsersAvatarArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type Directus_UsersRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
@@ -615,6 +627,7 @@ export type Directus_Users_Filter = {
   _and?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
   _or?: InputMaybe<Array<InputMaybe<Directus_Users_Filter>>>;
   auth_data?: InputMaybe<String_Filter_Operators>;
+  auth_data_func?: InputMaybe<Count_Function_Filter_Operators>;
   avatar?: InputMaybe<Directus_Files_Filter>;
   description?: InputMaybe<String_Filter_Operators>;
   email?: InputMaybe<String_Filter_Operators>;
@@ -633,6 +646,7 @@ export type Directus_Users_Filter = {
   role?: InputMaybe<Directus_Roles_Filter>;
   status?: InputMaybe<String_Filter_Operators>;
   tags?: InputMaybe<String_Filter_Operators>;
+  tags_func?: InputMaybe<Count_Function_Filter_Operators>;
   tfa_secret?: InputMaybe<String_Filter_Operators>;
   theme?: InputMaybe<String_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
@@ -665,7 +679,6 @@ export type Restaurant = {
   user_updated?: Maybe<Directus_Users>;
 };
 
-
 export type RestaurantUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -674,7 +687,6 @@ export type RestaurantUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
-
 
 export type RestaurantUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -689,13 +701,25 @@ export type Restaurant_Aggregated = {
   __typename?: 'restaurant_aggregated';
   avg?: Maybe<Restaurant_Aggregated_Fields>;
   avgDistinct?: Maybe<Restaurant_Aggregated_Fields>;
-  count?: Maybe<Restaurant_Aggregated_Fields>;
+  count?: Maybe<Restaurant_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']>;
   countDistinct?: Maybe<Restaurant_Aggregated_Fields>;
   group?: Maybe<Scalars['JSON']>;
   max?: Maybe<Restaurant_Aggregated_Fields>;
   min?: Maybe<Restaurant_Aggregated_Fields>;
   sum?: Maybe<Restaurant_Aggregated_Fields>;
   sumDistinct?: Maybe<Restaurant_Aggregated_Fields>;
+};
+
+export type Restaurant_Aggregated_Count = {
+  __typename?: 'restaurant_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  date_updated?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['Int']>;
+  user_created?: Maybe<Scalars['Int']>;
+  user_updated?: Maybe<Scalars['Int']>;
 };
 
 export type Restaurant_Aggregated_Fields = {
@@ -752,17 +776,19 @@ export type Update_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download?: InputMaybe<Scalars['String']>;
-  filesize?: InputMaybe<Scalars['Int']>;
+  filesize?: InputMaybe<Scalars['String']>;
   folder?: InputMaybe<Update_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
+  metadata_func?: InputMaybe<Count_FunctionsInput>;
   modified_by?: InputMaybe<Update_Directus_Users_Input>;
   modified_on?: InputMaybe<Scalars['Date']>;
   modified_on_func?: InputMaybe<Datetime_FunctionsInput>;
   storage?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<Count_FunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<Update_Directus_Users_Input>;
@@ -787,10 +813,12 @@ export type Update_Directus_Roles_Input = {
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<Array<InputMaybe<Update_Directus_Users_Input>>>;
+  users_func?: InputMaybe<Count_FunctionsInput>;
 };
 
 export type Update_Directus_Users_Input = {
   auth_data?: InputMaybe<Scalars['JSON']>;
+  auth_data_func?: InputMaybe<Count_FunctionsInput>;
   avatar?: InputMaybe<Update_Directus_Files_Input>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -809,6 +837,7 @@ export type Update_Directus_Users_Input = {
   role?: InputMaybe<Update_Directus_Roles_Input>;
   status?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
+  tags_func?: InputMaybe<Count_FunctionsInput>;
   tfa_secret?: InputMaybe<Scalars['String']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
@@ -831,14 +860,11 @@ export type CatByIdQueryVariables = Exact<{
   data: Scalars['ID'];
 }>;
 
-
 export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
 
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
-
 export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
-
 
 export const CatByIdDocument = `
     query catById($data: ID!) {
@@ -849,17 +875,17 @@ export const CatByIdDocument = `
 }
     `;
 export const useCatByIdQuery = <
-      TData = CatByIdQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables: CatByIdQueryVariables,
-      options?: UseQueryOptions<CatByIdQuery, TError, TData>
-    ) =>
-    useQuery<CatByIdQuery, TError, TData>(
-      ['catById', variables],
-      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
-      options
-    );
+  TData = CatByIdQuery,
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
+>(
+  variables: CatByIdQueryVariables,
+  options?: UseQueryOptions<CatByIdQuery, TError, TData>
+) =>
+  useQuery<CatByIdQuery, TError, TData>(
+    ['catById', variables],
+    fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+    options
+  );
 export const FindAllCatsDocument = `
     query findAllCats {
   cat {
@@ -869,14 +895,14 @@ export const FindAllCatsDocument = `
 }
     `;
 export const useFindAllCatsQuery = <
-      TData = FindAllCatsQuery,
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
-    >(
-      variables?: FindAllCatsQueryVariables,
-      options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
-    ) =>
-    useQuery<FindAllCatsQuery, TError, TData>(
-      variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
-      options
-    );
+  TData = FindAllCatsQuery,
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
+>(
+  variables?: FindAllCatsQueryVariables,
+  options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
+) =>
+  useQuery<FindAllCatsQuery, TError, TData>(
+    variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
+    fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+    options
+  );
