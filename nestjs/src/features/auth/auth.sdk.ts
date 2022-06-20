@@ -1,6 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
-import { GraphQLError } from 'graphql-request/dist/types';
 import { print } from 'graphql'
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
@@ -192,15 +191,15 @@ export const AuthLoginDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 const AuthLoginDocumentString = print(AuthLoginDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    authLogin(variables: AuthLoginMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data?: AuthLoginMutation | undefined; extensions?: any; headers: Dom.Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper((wrappedRequestHeaders) => client.rawRequest<AuthLoginMutation>(AuthLoginDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'authLogin');
+    authLogin(variables: AuthLoginMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<{ data: AuthLoginMutation; extensions?: any; headers: Dom.Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<AuthLoginMutation>(AuthLoginDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'authLogin', 'mutation');
     }
   };
 }

@@ -30,14 +30,13 @@ generates:
     documents:
       - ./cat/queries/*.graphql
     plugins:
-      - "typescript"
+      - add:
+          content: 'import { endpointUrl, fetchParams } from "@config/react-query.config";'
+      - typescript
       - typescript-operations
       - typescript-react-query
     config:
       fetcher:
-        endpoint: "http://localhost/graphql"
-        fetchParams:
-          headers:
-            Content-Type: application/json
-            Authorization: Bearer ${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+        endpoint: "endpointUrl"
+        fetchParams: "fetchParams"
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
