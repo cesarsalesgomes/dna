@@ -1,4 +1,4 @@
-import { RequireAuth } from '@features/auth';
+import { RequireAuth, AuthProvider } from '@features/auth';
 import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
@@ -27,16 +27,18 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route element={<Menu />}>
-          <Route path="/" element={
-            <RequireAuth>
-              <CatsCondition />
-            </RequireAuth>
-          } />
-          <Route path="login" element={<Login />} />
-        </Route>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route element={<Menu />}>
+            <Route path="/" element={
+              <RequireAuth>
+                <CatsCondition />
+              </RequireAuth>
+            } />
+            <Route path="login" element={<Login />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );
