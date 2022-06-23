@@ -1,11 +1,13 @@
-import { fetchParams } from '@config/react-query.config';
+import { RequireAuth } from '@features/auth';
 import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
+import { Menu } from '@features/menu';
 import QueryClientSingleton from '@providers/QueryClient';
 import { useState } from 'react';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { Route, Routes } from 'react-router-dom';
 
 const queryClient = QueryClientSingleton.getInstance();
 
@@ -25,10 +27,16 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {
-        !fetchParams.headers.Authorization ? (<Login />) : (<CatsCondition />)
-      }
-
+      <Routes>
+        <Route element={<Menu />}>
+          <Route path="/" element={
+            <RequireAuth>
+              <CatsCondition />
+            </RequireAuth>
+          } />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );

@@ -11,7 +11,8 @@
     "graphql": "^16.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.34.16"
+    "react-query": "^3.34.16",
+    "react-router-dom": "6"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",
