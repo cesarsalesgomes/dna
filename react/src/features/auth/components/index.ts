@@ -1,4 +1,4 @@
-import RequireAuth from './require-auth';
+import RequireAuth from './require-auth.component';
 
 export {
   RequireAuth

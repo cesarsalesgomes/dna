@@ -3,7 +3,7 @@ import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
 import { Menu } from '@features/menu';
-import QueryClientSingleton from '@providers/QueryClient';
+import QueryClientSingleton from '@providers/query-client.provider';
 import { useState } from 'react';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
