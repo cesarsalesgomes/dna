@@ -1,7 +1,7 @@
 import ReactQueryStatusEnum from '@enums/react-query-status.enum';
 import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
-import QueryClientSingleton from '@providers/QueryClient';
+import QueryClientSingleton from '@providers/query-client.provider';
 import { Dispatch, SetStateAction } from 'react';
 
 const queryClient = QueryClientSingleton.getInstance();
