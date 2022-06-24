@@ -1,27 +1,39 @@
 import useAuth from '@features/auth/hooks/auth.hook';
+import AuthContextType from '@features/auth/types/auth-context.interface';
+import { AuthLoginMutationVariables } from '@hooks/auth.hooks';
 import { FormEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+
+function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLoginMutationVariables {
+  const formData = new FormData(event.currentTarget);
+
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+
+  return {
+    email,
+    password
+  };
+}
+
+function sendBackToLastPageTriedToVisit(navigate: NavigateFunction, location: Location) {
+  const from = location.state?.from?.pathname || '/';
+
+  return () => navigate(from, { replace: true });
+}
+
+function handleSubmit(auth: AuthContextType, navigate: NavigateFunction, location: Location) {
+  return (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    auth.signIn(getFormUsernameAndPassword(event), sendBackToLastPageTriedToVisit(navigate, location));
+  };
+}
 
 export default function Login() {
   const auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-
-  const from = location.state?.from?.pathname || '/';
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    auth.signin('Logged User', () => {
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-      navigate(from, { replace: true });
-    });
-  };
 
   return (
     <>
@@ -49,7 +61,7 @@ export default function Login() {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit(auth, navigate, location)}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
