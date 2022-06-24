@@ -1,7 +1,8 @@
+import { AuthLoginMutation, AuthLoginMutationVariables } from '@hooks/auth.hooks';
+
 interface AuthContextType {
-  user: any;
-  signin: (user: string, callback: VoidFunction) => void;
-  signout: (callback: VoidFunction) => void;
+  authTokens: AuthLoginMutation;
+  signIn: (variables: AuthLoginMutationVariables, callback: VoidFunction) => void;
 }
 
 export default AuthContextType;

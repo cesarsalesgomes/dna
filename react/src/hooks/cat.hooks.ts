@@ -1,6 +1,5 @@
-import { endpointUrl, fetchParams } from '@config/react-query.config';
+import { endpointUrl, fetchParams } from "@config/react-query.config";
 import { useQuery, UseQueryOptions } from 'react-query';
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -10,8 +9,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
     const res = await fetch(endpointUrl as string, {
-      method: 'POST',
-      ...(fetchParams),
+    method: "POST",
+    ...(fetchParams),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -24,7 +23,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
     }
 
     return json.data;
-  };
+  }
 }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -55,9 +54,11 @@ export type Mutation = {
   update_restaurant_items?: Maybe<Array<Maybe<Restaurant>>>;
 };
 
+
 export type MutationCreate_Cat_ItemArgs = {
   data: Create_Cat_Input;
 };
+
 
 export type MutationCreate_Cat_ItemsArgs = {
   data?: InputMaybe<Array<Create_Cat_Input>>;
@@ -69,9 +70,11 @@ export type MutationCreate_Cat_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationCreate_Restaurant_ItemArgs = {
   data: Create_Restaurant_Input;
 };
+
 
 export type MutationCreate_Restaurant_ItemsArgs = {
   data?: InputMaybe<Array<Create_Restaurant_Input>>;
@@ -83,26 +86,32 @@ export type MutationCreate_Restaurant_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationDelete_Cat_ItemArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationDelete_Cat_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
+
 export type MutationDelete_Restaurant_ItemArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationDelete_Restaurant_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
+
 export type MutationUpdate_Cat_ItemArgs = {
   data: Update_Cat_Input;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdate_Cat_ItemsArgs = {
   data: Update_Cat_Input;
@@ -115,10 +124,12 @@ export type MutationUpdate_Cat_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationUpdate_Restaurant_ItemArgs = {
   data: Update_Restaurant_Input;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdate_Restaurant_ItemsArgs = {
   data: Update_Restaurant_Input;
@@ -141,6 +152,7 @@ export type Query = {
   restaurant_by_id?: Maybe<Restaurant>;
 };
 
+
 export type QueryCatArgs = {
   filter?: InputMaybe<Cat_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -150,6 +162,7 @@ export type QueryCatArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryCat_AggregatedArgs = {
   filter?: InputMaybe<Cat_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -158,9 +171,11 @@ export type QueryCat_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryCat_By_IdArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryRestaurantArgs = {
   filter?: InputMaybe<Restaurant_Filter>;
@@ -171,6 +186,7 @@ export type QueryRestaurantArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryRestaurant_AggregatedArgs = {
   filter?: InputMaybe<Restaurant_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -178,6 +194,7 @@ export type QueryRestaurant_AggregatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type QueryRestaurant_By_IdArgs = {
   id: Scalars['ID'];
@@ -202,6 +219,7 @@ export type Cat = {
   user_updated?: Maybe<Directus_Users>;
 };
 
+
 export type CatUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -210,6 +228,7 @@ export type CatUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type CatUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -457,6 +476,7 @@ export type Directus_Files = {
   width?: Maybe<Scalars['Int']>;
 };
 
+
 export type Directus_FilesFolderArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -466,6 +486,7 @@ export type Directus_FilesFolderArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type Directus_FilesModified_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -474,6 +495,7 @@ export type Directus_FilesModified_ByArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type Directus_FilesUploaded_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -521,6 +543,7 @@ export type Directus_Folders = {
   parent?: Maybe<Directus_Folders>;
 };
 
+
 export type Directus_FoldersParentArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -551,6 +574,7 @@ export type Directus_Roles = {
   users?: Maybe<Array<Maybe<Directus_Users>>>;
   users_func?: Maybe<Count_Functions>;
 };
+
 
 export type Directus_RolesUsersArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -605,6 +629,7 @@ export type Directus_Users = {
   token?: Maybe<Scalars['String']>;
 };
 
+
 export type Directus_UsersAvatarArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -613,6 +638,7 @@ export type Directus_UsersAvatarArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type Directus_UsersRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
@@ -679,6 +705,7 @@ export type Restaurant = {
   user_updated?: Maybe<Directus_Users>;
 };
 
+
 export type RestaurantUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -687,6 +714,7 @@ export type RestaurantUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type RestaurantUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -860,11 +888,14 @@ export type CatByIdQueryVariables = Exact<{
   data: Scalars['ID'];
 }>;
 
+
 export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
 
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
+
 export type FindAllCatsQuery = { __typename?: 'Query', cat?: Array<{ __typename?: 'cat', id?: string | null, name?: string | null } | null> | null };
+
 
 export const CatByIdDocument = `
     query catById($data: ID!) {
@@ -875,17 +906,17 @@ export const CatByIdDocument = `
 }
     `;
 export const useCatByIdQuery = <
-  TData = CatByIdQuery,
-  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
->(
-  variables: CatByIdQueryVariables,
-  options?: UseQueryOptions<CatByIdQuery, TError, TData>
-) =>
-  useQuery<CatByIdQuery, TError, TData>(
-    ['catById', variables],
-    fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
-    options
-  );
+      TData = CatByIdQuery,
+      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
+    >(
+      variables: CatByIdQueryVariables,
+      options?: UseQueryOptions<CatByIdQuery, TError, TData>
+    ) =>
+    useQuery<CatByIdQuery, TError, TData>(
+      ['catById', variables],
+      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+      options
+    );
 export const FindAllCatsDocument = `
     query findAllCats {
   cat {
@@ -895,14 +926,14 @@ export const FindAllCatsDocument = `
 }
     `;
 export const useFindAllCatsQuery = <
-  TData = FindAllCatsQuery,
-  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
->(
-  variables?: FindAllCatsQueryVariables,
-  options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
-) =>
-  useQuery<FindAllCatsQuery, TError, TData>(
-    variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-    fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
-    options
-  );
+      TData = FindAllCatsQuery,
+      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
+    >(
+      variables?: FindAllCatsQueryVariables,
+      options?: UseQueryOptions<FindAllCatsQuery, TError, TData>
+    ) =>
+    useQuery<FindAllCatsQuery, TError, TData>(
+      variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
+      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+      options
+    );
