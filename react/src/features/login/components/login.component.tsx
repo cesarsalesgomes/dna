@@ -1,40 +1,6 @@
-import useAuth from '@features/auth/hooks/auth.hook';
-import AuthContextType from '@features/auth/types/auth-context.interface';
-import { AuthLoginMutationVariables } from '@hooks/auth.hooks';
-import { FormEvent } from 'react';
-import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
-
-function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLoginMutationVariables {
-  const formData = new FormData(event.currentTarget);
-
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-
-  return {
-    email,
-    password
-  };
-}
-
-function sendBackToLastPageTriedToVisit(navigate: NavigateFunction, location: Location) {
-  const from = location.state?.from?.pathname || '/';
-
-  return () => navigate(from, { replace: true });
-}
-
-function handleSubmit(auth: AuthContextType, navigate: NavigateFunction, location: Location) {
-  return (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    auth.signIn(getFormUsernameAndPassword(event), sendBackToLastPageTriedToVisit(navigate, location));
-  };
-}
+import useSendLoginForm from '../hooks/send-login-form.hook';
 
 export default function Login() {
-  const auth = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-
   return (
     <>
       {/*
@@ -61,7 +27,7 @@ export default function Login() {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit(auth, navigate, location)}>
+          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={useSendLoginForm()}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>

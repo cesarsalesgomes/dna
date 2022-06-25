@@ -30,13 +30,9 @@ generates:
     documents:
       - ./cat/queries/*.graphql
     plugins:
-      - add:
-          content: 'import { endpointUrl, fetchParams } from "@config/react-query.config";'
       - typescript
       - typescript-operations
       - typescript-react-query
     config:
-      fetcher:
-        endpoint: "endpointUrl"
-        fetchParams: "fetchParams"
+      fetcher: "@config/react-query.config#graphqlFetcher"
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

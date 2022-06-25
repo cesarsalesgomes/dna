@@ -1,30 +1,10 @@
-import { endpointUrl, fetchParams } from "@config/react-query.config";
 import { useQuery, UseQueryOptions } from 'react-query';
+import { graphqlFetcher } from '@config/react-query.config';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-
-function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
-  return async (): Promise<TData> => {
-    const res = await fetch(endpointUrl as string, {
-    method: "POST",
-    ...(fetchParams),
-      body: JSON.stringify({ query, variables }),
-    });
-
-    const json = await res.json();
-
-    if (json.errors) {
-      const { message } = json.errors[0];
-
-      throw new Error(message);
-    }
-
-    return json.data;
-  }
-}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -914,7 +894,7 @@ export const useCatByIdQuery = <
     ) =>
     useQuery<CatByIdQuery, TError, TData>(
       ['catById', variables],
-      fetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+      graphqlFetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
       options
     );
 export const FindAllCatsDocument = `
@@ -934,6 +914,6 @@ export const useFindAllCatsQuery = <
     ) =>
     useQuery<FindAllCatsQuery, TError, TData>(
       variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      fetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+      graphqlFetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
       options
     );
