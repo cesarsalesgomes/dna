@@ -1,0 +1,4 @@
+export enum DirectusForbiddenErrorCode {
+  INVALID_CREDENTIALS = 'INVALID_CREDENTIALS',
+  TOKEN_EXPIRED = 'TOKEN_EXPIRED'
+}

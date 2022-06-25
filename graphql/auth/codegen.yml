@@ -34,9 +34,5 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
-      fetcher:
-        endpoint: "http://localhost/graphql/system"
-        fetchParams:
-          headers:
-            Content-Type: application/json
+      fetcher: "@config/react-query.config#graphqlSystemFetcher"
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

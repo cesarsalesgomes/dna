@@ -2,6 +2,7 @@ import ReactQueryStatusEnum from '@enums/react-query-status.enum';
 import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import QueryClientSingleton from '@providers/query-client.provider';
+import { throwGraphQLErrorIfExists } from '@utils/error.utils';
 import { Dispatch, SetStateAction } from 'react';
 
 const queryClient = QueryClientSingleton.getInstance();
@@ -11,6 +12,8 @@ interface IShowErrorOrCats extends ReactQueryProps<FindAllCatsQuery> {
 }
 
 function ShowErrorOrCats({ status, error, isFetching, data, setCatId }: IShowErrorOrCats) {
+  throwGraphQLErrorIfExists(error);
+
   return status === 'error' ? (
     <span>Error: {error!.message}</span>
   ) : (
@@ -43,6 +46,9 @@ function ShowErrorOrCats({ status, error, isFetching, data, setCatId }: IShowErr
 
 function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
   const { status, data, error, isFetching } = useFindAllCatsQuery({});
+
+  // TODO: Check if its possible to throw error inside mutations and queries
+  throwGraphQLErrorIfExists(error);
 
   return (
     <div>

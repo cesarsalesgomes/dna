@@ -1,3 +1,4 @@
+import ErrorBoundary from '@components/error-boundary.component';
 import { RequireAuth, AuthProvider } from '@features/auth';
 import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
@@ -32,7 +33,9 @@ export default function App() {
           <Route element={<Menu />}>
             <Route path="/" element={
               <RequireAuth>
-                <CatsCondition />
+                <ErrorBoundary>
+                  <CatsCondition />
+                </ErrorBoundary>
               </RequireAuth>
             } />
             <Route path="login" element={<Login />} />
