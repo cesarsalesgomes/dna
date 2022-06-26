@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions } from 'react-query';
-import { graphqlFetcher } from '@config/react-query.config';
+import { useGraphqlFetcher } from '@config/react-query.config';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -894,7 +894,7 @@ export const useCatByIdQuery = <
     ) =>
     useQuery<CatByIdQuery, TError, TData>(
       ['catById', variables],
-      graphqlFetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument, variables),
+      useGraphqlFetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument).bind(null, variables),
       options
     );
 export const FindAllCatsDocument = `
@@ -914,6 +914,6 @@ export const useFindAllCatsQuery = <
     ) =>
     useQuery<FindAllCatsQuery, TError, TData>(
       variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      graphqlFetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument, variables),
+      useGraphqlFetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument).bind(null, variables),
       options
     );

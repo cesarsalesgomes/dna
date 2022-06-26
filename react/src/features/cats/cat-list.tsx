@@ -2,53 +2,45 @@ import ReactQueryStatusEnum from '@enums/react-query-status.enum';
 import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import QueryClientSingleton from '@providers/query-client.provider';
-import { throwGraphQLErrorIfExists } from '@utils/error.utils';
 import { Dispatch, SetStateAction } from 'react';
 
 const queryClient = QueryClientSingleton.getInstance();
 
-interface IShowErrorOrCats extends ReactQueryProps<FindAllCatsQuery> {
+interface IShowCats extends ReactQueryProps<FindAllCatsQuery> {
   setCatId: Dispatch<SetStateAction<number>>
 }
 
-function ShowErrorOrCats({ status, error, isFetching, data, setCatId }: IShowErrorOrCats) {
-  throwGraphQLErrorIfExists(error);
-
-  return status === 'error' ? (
-    <span>Error: {error!.message}</span>
-  ) : (
-      <>
-        <div>
-          {data!.cat!.map((cat) => (
-            <p key={cat!.id}>
-              <button
-                type="button"
-                className="p-2 bg-cyan-800"
-                onClick={() => setCatId(Number(cat!.id))}
-                style={
-                  // We can find the existing query data here to show bold links for ones that are cached
-                  queryClient.getQueryData(['findAllCats', cat!.id])
-                    ? {
-                      backgroundColor: 'green',
-                    }
-                    : {}
-                }
-              >
-                {cat!.name}
-              </button>
-            </p>
-          ))}
-        </div>
-        <div>{isFetching ? 'Background Updating...' : ' '}</div>
-      </>
-    );
+function ShowCats({ isFetching, data, setCatId }: IShowCats) {
+  return (
+    <>
+      <div>
+        {data!.cat!.map((cat) => (
+          <p key={cat!.id}>
+            <button
+              type="button"
+              className="p-2 bg-cyan-800"
+              onClick={() => setCatId(Number(cat!.id))}
+              style={
+                // We can find the existing query data here to show bold links for ones that are cached
+                queryClient.getQueryData(['findAllCats', cat!.id])
+                  ? {
+                    backgroundColor: 'green',
+                  }
+                  : {}
+              }
+            >
+              {cat!.name}
+            </button>
+          </p>
+        ))}
+      </div>
+      <div>{isFetching ? 'Background Updating...' : ' '}</div>
+    </>
+  );
 }
 
 function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
-  const { status, data, error, isFetching } = useFindAllCatsQuery({});
-
-  // TODO: Check if its possible to throw error inside mutations and queries
-  throwGraphQLErrorIfExists(error);
+  const { status, data, isFetching } = useFindAllCatsQuery({});
 
   return (
     <div>
@@ -56,7 +48,7 @@ function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
       <div>
         {status === ReactQueryStatusEnum.Loading ? (
           'Loading...'
-        ) : <ShowErrorOrCats status={status} error={error} isFetching={isFetching} data={data} setCatId={setCatId} />}
+        ) : <ShowCats isFetching={isFetching} data={data} setCatId={setCatId} />}
       </div>
     </div>
   );

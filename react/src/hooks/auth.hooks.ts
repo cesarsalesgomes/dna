@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from 'react-query';
-import { graphqlSystemFetcher } from '@config/react-query.config';
+import { useGraphqlSystemFetcher } from '@config/react-query.config';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -194,6 +194,6 @@ export const useAuthLoginMutation = <
     >(options?: UseMutationOptions<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>) =>
     useMutation<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>(
       ['authLogin'],
-      (variables?: AuthLoginMutationVariables) => graphqlSystemFetcher<AuthLoginMutation, AuthLoginMutationVariables>(AuthLoginDocument, variables)(),
+      useGraphqlSystemFetcher<AuthLoginMutation, AuthLoginMutationVariables>(AuthLoginDocument),
       options
     );

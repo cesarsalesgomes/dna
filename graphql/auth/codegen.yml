@@ -34,5 +34,7 @@ generates:
       - typescript-operations
       - typescript-react-query
     config:
-      fetcher: "@config/react-query.config#graphqlSystemFetcher"
+      fetcher:
+        func: "@config/react-query.config#useGraphqlSystemFetcher"
+        isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

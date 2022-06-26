@@ -1,17 +1,19 @@
-/* eslint-disable react/state-in-constructor */
 import { DirectusForbiddenErrorCode } from '@enums/directus-error-code.enum';
-import ErrorState from '@interfaces/error-state.interface';
 import GraphQLError from '@interfaces/graphql-error.interface';
-import { Component } from 'react';
+import { ReactNode } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import DirectusErrorCodeType from '../types/directus-error-code.type';
 
 import NavigateToLogin from './navigate-to-login.component';
 
+// TODO: treat FORBIDDEN error extension
 function checkIfItsAForbiddenError(code: DirectusErrorCodeType) {
+  // Directus Errors: https://docs.directus.io/reference/introduction/#error-codes
   if (
     code === DirectusForbiddenErrorCode.INVALID_CREDENTIALS ||
-    code === DirectusForbiddenErrorCode.TOKEN_EXPIRED
+    code === DirectusForbiddenErrorCode.TOKEN_EXPIRED ||
+    code === DirectusForbiddenErrorCode.INVALID_TOKEN
   ) {
     return true;
   }
@@ -19,25 +21,20 @@ function checkIfItsAForbiddenError(code: DirectusErrorCodeType) {
   return false;
 }
 
-export default class ErrorBoundary extends Component {
-  state: ErrorState = { hasError: false, error: null };
+function ErrorFallback({ error }: { error: GraphQLError }) {
+  const { code } = error.extensions!;
 
-  static getDerivedStateFromError(error: GraphQLError | null) {
-    return { hasError: true, error };
-  }
+  if (checkIfItsAForbiddenError(code)) return <NavigateToLogin />;
 
-  render() {
-    const { hasError, error } = this.state;
-    const { children } = this.props;
+  return (
+    <div>{error?.message}</div>
+  );
+}
 
-    if (hasError && error && error.extensions) {
-      const { code } = error.extensions;
-
-      if (checkIfItsAForbiddenError(code)) return <NavigateToLogin />;
-
-      return (<div>{error.message}</div>);
-    }
-
-    return children;
-  }
+export default function DirectusErrorBoundary({ children }: { children: ReactNode }) {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      {children}
+    </ErrorBoundary>
+  );
 }
