@@ -28,20 +28,18 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Routes>
-          <Route element={<Menu />}>
-            <Route path="/" element={
-              <RequireAuth>
-                <ErrorBoundary>
-                  <CatsCondition />
-                </ErrorBoundary>
-              </RequireAuth>
-            } />
-            <Route path="login" element={<Login />} />
-          </Route>
-        </Routes>
-      </AuthProvider>
+      <Routes>
+        <Route element={<Menu />}>
+          <Route path="/" element={
+            <RequireAuth>
+              <ErrorBoundary>
+                <CatsCondition />
+              </ErrorBoundary>
+            </RequireAuth>
+          } />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );

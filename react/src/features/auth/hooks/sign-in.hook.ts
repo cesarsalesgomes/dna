@@ -1,12 +1,14 @@
 import { AuthLoginMutationVariables, useAuthLoginMutation } from '@hooks/auth.hooks';
 
-import { setAccessToken } from '../utils/token.utils';
+import { setAccessTokenToLocalStorage } from '../utils/storage.utils';
 
 export default function useSignIn() {
   const { mutateAsync } = useAuthLoginMutation();
 
   return async (variables: AuthLoginMutationVariables, callback: VoidFunction) => {
-    setAccessToken(await mutateAsync(variables));
+    const accessToken = (await mutateAsync(variables)).auth_login?.access_token as string;
+
+    setAccessTokenToLocalStorage(accessToken);
 
     callback();
   };

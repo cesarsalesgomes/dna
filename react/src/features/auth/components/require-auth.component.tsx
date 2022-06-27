@@ -1,13 +1,28 @@
+import { useMemo, useState } from 'react';
 import { NavigateToLogin } from 'src/components';
 
-import { getAccessToken, setAuthorizationHeader } from '../utils/token.utils';
+import AuthContext from '../contexts/auth.context';
+import AuthContextType from '../types/auth-context.interface';
+import { getAccessTokenFromLocalStorage } from '../utils/storage.utils';
+
+function authContextProvider(value: AuthContextType, children: JSX.Element) {
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
-  const accessToken = getAccessToken();
+  const [accessToken, setAccessToken] = useState<string>('');
 
-  if (!(accessToken)) return <NavigateToLogin />;
+  const value = useMemo(() => ({ accessToken }), [accessToken]);
 
-  setAuthorizationHeader(accessToken);
+  if (accessToken) return authContextProvider(value, children);
 
-  return children;
+  const accessTokenFromLocalStorage = getAccessTokenFromLocalStorage();
+
+  if (accessTokenFromLocalStorage) {
+    setAccessToken(accessTokenFromLocalStorage);
+
+    return authContextProvider(value, children);
+  };
+
+  return <NavigateToLogin />;
 }
