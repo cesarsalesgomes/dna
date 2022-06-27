@@ -1,16 +1,9 @@
+import useAuth from '@features/auth/hooks/auth.hook';
 import { useErrorHandler } from 'react-error-boundary';
 
 /**
  * Custom fetchers used by React Query Codegen (https://www.graphql-code-generator.com/plugins/typescript-react-query)
  */
-
-// FIXME: store access token as a context hook (Example in the link above)
-export const fetchParams = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer '
-  }
-};
 
 // Graphql Fetcher
 
@@ -20,13 +13,17 @@ export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
   const handleError = useErrorHandler();
+  const { accessToken } = useAuth();
 
   return async (variables?: TVariables): Promise<TData> => {
     const res = await fetch(graphqlUrl, {
       method: 'POST',
-      ...(fetchParams),
-      ...(options ?? {}),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      },
       body: JSON.stringify({ query, variables }),
+      ...(options ?? {}),
     });
 
     const json = await res.json();
@@ -54,8 +51,8 @@ export const useGraphqlSystemFetcher = <TData, TVariables>(
       headers: {
         'Content-Type': 'application/json',
       },
-      ...(options ?? {}),
       body: JSON.stringify({ query, variables }),
+      ...(options ?? {}),
     });
 
     const json = await res.json();
