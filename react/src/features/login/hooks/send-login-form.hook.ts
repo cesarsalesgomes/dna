@@ -1,4 +1,4 @@
-import useAuth from '@features/auth/hooks/auth.hook';
+import useSignIn from '@features/auth/hooks/sign-in.hook';
 import { AuthLoginMutationVariables } from '@hooks/auth.hooks';
 import { FormEvent } from 'react';
 import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
@@ -22,13 +22,13 @@ function sendBackToLastPageTriedToVisit(navigate: NavigateFunction, location: Lo
 }
 
 export default function useSendLoginForm() {
-  const auth = useAuth();
+  const signIn = useSignIn();
   const location = useLocation();
   const navigate = useNavigate();
 
   return (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    auth.signIn(getFormUsernameAndPassword(event), sendBackToLastPageTriedToVisit(navigate, location));
+    signIn(getFormUsernameAndPassword(event), sendBackToLastPageTriedToVisit(navigate, location));
   };
 }

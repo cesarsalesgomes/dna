@@ -11,10 +11,10 @@ interface IShowCats extends ReactQueryProps<FindAllCatsQuery> {
 }
 
 function ShowCats({ isFetching, data, setCatId }: IShowCats) {
-  return (
+  return data && data?.cat ? (
     <>
       <div>
-        {data!.cat!.map((cat) => (
+        {data.cat.map((cat) => (
           <p key={cat!.id}>
             <button
               type="button"
@@ -36,7 +36,7 @@ function ShowCats({ isFetching, data, setCatId }: IShowCats) {
       </div>
       <div>{isFetching ? 'Background Updating...' : ' '}</div>
     </>
-  );
+  ) : <div>No cats</div>;
 }
 
 function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
