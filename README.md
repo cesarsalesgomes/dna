@@ -150,7 +150,7 @@ _The idea behind the configuration of the reverse proxy, is to redirect all call
 
 _For that, then, **ALL** controllers created in the NestJS environment will have a `nestjs` in their path (Ex: /nestjs/cats), being possible due to the **[configuration of global prefixes in all routes](https://docs.nestjs.com/faq/global-prefix)**._
 
-_**IMPORTANT**: in the development environment, the docker image used by Directus will always try to use the latest version. Therefore, it is necessary to keep the same version in production. To update the environment when necessary, use the steps in **[Directus update guide](https://docs.directus.io/configuration/upgrades-migrations/)**._
+_**IMPORTANT**: in the development environment, the docker image used by Directus will always try to use the latest version. Therefore, it is necessary to keep the same version in production. To update the environment when necessary, use the steps in **[Directus update guide](https://docs.directus.io/self-hosted/upgrades-migrations/)**._
 
 _Below are the steps of creation:_
 
@@ -158,22 +158,25 @@ _Below are the steps of creation:_
 
 2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
 
-3. Set the production enviroment variables on the `.bashrc` script file. They will be set when rebooting the server.
+3. Clone the `dna` repository. The recommended directory is `/home/ec2-user`.
 
-4. Create the `Directus` project following the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials. The recommended directory is `/home/ec2-user` (The command `sudo su` will be necessary).
+4. Create the `Directus` project following the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials. The recommended directory is `/home/ec2-user/dna/directus` (The command `sudo su` will be necessary).
 
-5. Start the project using the **[Ubuntu](https://docs.directus.io/self-hosted/installation/ubuntu/#ubuntu)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
+5. Set the production enviroment variables. NestJS enviroment variables go on the `.bashrc` script file; Directus environment variables must be inserted in the `.env` file (previously created by the Directus CLI).
 
-6. Clone the `dna` repository on the recommended directory of the step 3, go to the _nest_ folder, and also start the application with `pm2` **(pm2 start npm --name "Nest" -- start)**. The command will install the production modules, build and start the application.
+6. Start the Directus project using the **[Ubuntu](https://docs.directus.io/self-hosted/installation/ubuntu/#ubuntu)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
 
-7. Copy the _/nestjs_ and _/directus_ server locations of the `default.conf` on the nginx folder², to the server locations of the `etc/nginx/conf.d/project-name.conf` file (necessary to be created) on the EC2 instance folder.
+7. Start NestJS by going to the _nest_ folder, and also start the application with `pm2` **(pm2 start npm --name "Nest" -- start)**. The command will install the production modules, build and start the application.
 
-8. Restart the Nginx server with the command `systemctl restart nginx`.
+8. Copy the _/nestjs_ and _/directus_ server locations of the `default-prod.conf` on the nginx folder², to the server locations of the `etc/nginx/conf.d/project-name.conf` file (necessary to be created) on the EC2 instance folder³.
+
+9. Restart the Nginx server with the command `systemctl restart nginx`.
 
 **Issues:**
 
 1. **[Configuration to connect to AWS RDS MySql Database](https://www.youtube.com/watch?v=Ng_zi11N4_c&t=445s)**
 2. Copying and pasting from the file generates unexpected nginx errors, so it is necessary to type the characters
+3. Localhost on Docker containers is different from the localhost on the host machine. That's why the .conf file in the nginx directory has the names of the Nest and Directus containers in the `proxy_pass` properties. In production, the properties must be set to `localhost:port` of the respective applications
 
 <br />
 
