@@ -12,13 +12,13 @@ Fullstack Typescript project with the objective of joining three well-regarded t
 
 ### Local development environment
 
-1. Fork this repository to start a new project based on the `Dna` architecture (**[Github sync fork guide](https://docs.github.com/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-original-repository)** to sync the fork with `Dna` updates).
+1. Fork this repository to start a new project based on the **Dna** architecture (**[Github sync fork guide](https://docs.github.com/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-original-repository)** to sync the fork with updates).
 
 2. Rename the file `example.env` to `.env` (Contains the required initial environment variables).
 
-3. Run `npm start` under the root folder. It will install the `Docker` images needed for development and start the `Nest` and `Directus` enviroments with `docker-compose`.
+3. Run **npm start** under the root folder. It will install the `Docker` images needed for development and start the `Nest`/`Directus` enviroments with `docker-compose`.
 
-   1. **Optional:** To run the example route under the `cats` feature controller on `nestjs` folder, that integrates with `Directus`, start the application with `npm run start:migration-import` (It will import the necessary schema migration of the `cats` feature).
+   1. **Optional:** To run the example route of the integration between `Nest`/`Directus` under the `cats` feature controller, start the application with **npm run start:migration-import** (It will import the necessary schema migration of the `cats` feature).
 
 <br />
 
