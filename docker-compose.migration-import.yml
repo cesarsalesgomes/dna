@@ -32,6 +32,7 @@ services:
       - /bin/sh
       - -c
       - |
+        npx directus schema apply --yes ./migrations/schema.yaml
         npx directus bootstrap
         npx directus start
     networks:
