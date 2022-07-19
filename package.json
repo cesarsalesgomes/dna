@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "docker-compose up",
-    "start:rebuild": "docker-compose up --build -V"
+    "start:rebuild": "docker-compose up --build -V",
+    "start:migration-import": "docker-compose -f docker-compose.migration-import.yml up"
   }
 }

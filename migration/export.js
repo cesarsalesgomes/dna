@@ -32,9 +32,13 @@ function getCurrentUTCDate() {
  */
 
 async function removeSchemaFileFromDockerContainer() {
-  const dockerCommand = `docker exec directus rm schema.yaml`;
+  try {
+    const dockerCommand = `docker exec directus rm schema.yaml`;
 
-  await shellCommand(dockerCommand);
+    await shellCommand(dockerCommand);
+  } catch (error) {
+    // Ignore error when file to be removed is not found
+  }
 }
 
 async function exportDataModelToSchemaFileOnDockerDirectusInstance() {
