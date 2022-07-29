@@ -42,7 +42,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
     "winston": "^3.7.2",
-    "winston-cloudwatch": "^4.0.1"
+    "winston-cloudwatch": "^6.0.1"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.10",
