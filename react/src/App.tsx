@@ -1,5 +1,5 @@
 import ErrorBoundary from '@components/error-boundary.component';
-import { RequireAuth, AuthProvider } from '@features/auth';
+import { RequireAuth } from '@features/auth';
 import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
