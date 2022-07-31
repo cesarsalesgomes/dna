@@ -1,9 +1,7 @@
-import ErrorBoundary from '@components/error-boundary.component';
-import { RequireAuth } from '@features/auth';
+import Home from '@components/home';
 import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
-import { Menu } from '@features/menu';
 import QueryClientSingleton from '@providers/query-client.provider';
 import { useState } from 'react';
 import { QueryClientProvider } from 'react-query';
@@ -25,20 +23,13 @@ function CatsCondition() {
 }
 
 export default function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route element={<Menu />}>
-          <Route path="/" element={
-            <RequireAuth>
-              <ErrorBoundary>
-                <CatsCondition />
-              </ErrorBoundary>
-            </RequireAuth>
-          } />
-          <Route path="login" element={<Login />} />
+        <Route path="/" element={<Home />}>
+          <Route path="cats" element={<CatsCondition />} />
         </Route>
+        <Route path="login" element={<Login />} />
       </Routes>
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
