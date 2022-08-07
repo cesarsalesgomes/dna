@@ -1,5 +1,6 @@
-import { useMutation, UseMutationOptions } from 'react-query';
 import { useGraphqlSystemFetcher } from '@config/react-query.config';
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -36,7 +37,6 @@ export type Mutation = {
   utils_sort?: Maybe<Scalars['Boolean']>;
 };
 
-
 export type MutationAuth_LoginArgs = {
   email: Scalars['String'];
   mode?: InputMaybe<Auth_Mode>;
@@ -44,67 +44,55 @@ export type MutationAuth_LoginArgs = {
   password: Scalars['String'];
 };
 
-
 export type MutationAuth_LogoutArgs = {
   refresh_token?: InputMaybe<Scalars['String']>;
 };
-
 
 export type MutationAuth_Password_RequestArgs = {
   email: Scalars['String'];
   reset_url?: InputMaybe<Scalars['String']>;
 };
 
-
 export type MutationAuth_Password_ResetArgs = {
   password: Scalars['String'];
   token: Scalars['String'];
 };
-
 
 export type MutationAuth_RefreshArgs = {
   mode?: InputMaybe<Auth_Mode>;
   refresh_token?: InputMaybe<Scalars['String']>;
 };
 
-
 export type MutationUsers_Invite_AcceptArgs = {
   password: Scalars['String'];
   token: Scalars['String'];
 };
 
-
 export type MutationUsers_Me_Tfa_DisableArgs = {
   otp: Scalars['String'];
 };
-
 
 export type MutationUsers_Me_Tfa_EnableArgs = {
   otp: Scalars['String'];
   secret: Scalars['String'];
 };
 
-
 export type MutationUsers_Me_Tfa_GenerateArgs = {
   password: Scalars['String'];
 };
 
-
 export type MutationUtils_Hash_GenerateArgs = {
   string: Scalars['String'];
 };
-
 
 export type MutationUtils_Hash_VerifyArgs = {
   hash: Scalars['String'];
   string: Scalars['String'];
 };
 
-
 export type MutationUtils_RevertArgs = {
   revision: Scalars['ID'];
 };
-
 
 export type MutationUtils_SortArgs = {
   collection: Scalars['String'];
@@ -123,7 +111,6 @@ export type Query = {
   server_specs_graphql?: Maybe<Scalars['String']>;
   server_specs_oas?: Maybe<Scalars['JSON']>;
 };
-
 
 export type QueryServer_Specs_GraphqlArgs = {
   scope?: InputMaybe<Graphql_Sdl_Scope>;
@@ -176,9 +163,7 @@ export type AuthLoginMutationVariables = Exact<{
   password: Scalars['String'];
 }>;
 
-
 export type AuthLoginMutation = { __typename?: 'Mutation', auth_login?: { __typename?: 'auth_tokens', access_token?: string | null, refresh_token?: string | null } | null };
-
 
 export const AuthLoginDocument = `
     mutation authLogin($email: String!, $password: String!) {
@@ -189,11 +174,11 @@ export const AuthLoginDocument = `
 }
     `;
 export const useAuthLoginMutation = <
-      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;},
-      TContext = unknown
-    >(options?: UseMutationOptions<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>) =>
-    useMutation<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>(
-      ['authLogin'],
-      useGraphqlSystemFetcher<AuthLoginMutation, AuthLoginMutationVariables>(AuthLoginDocument),
-      options
-    );
+  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; },
+  TContext = unknown
+>(options?: UseMutationOptions<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>) =>
+  useMutation<AuthLoginMutation, TError, AuthLoginMutationVariables, TContext>(
+    ['authLogin'],
+    useGraphqlSystemFetcher<AuthLoginMutation, AuthLoginMutationVariables>(AuthLoginDocument),
+    options
+  );
