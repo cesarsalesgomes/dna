@@ -3,9 +3,9 @@ import Cat from '@features/cats/cat';
 import Cats from '@features/cats/cat-list';
 import { Login } from '@features/login';
 import QueryClientSingleton from '@providers/query-client.provider';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
-import { QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { Route, Routes } from 'react-router-dom';
 
 const queryClient = QueryClientSingleton.getInstance();
