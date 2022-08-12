@@ -1,7 +1,8 @@
 import useSignIn from '@features/auth/hooks/sign-in.hook';
+import { setAccessTokenToLocalStorage } from '@features/auth/utils/storage.utils';
 import { AuthLoginMutationVariables } from '@hooks/auth.hooks';
+import useNavigation from '@hooks/navigation.hooks';
 import { FormEvent } from 'react';
-import { Location, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLoginMutationVariables {
   const formData = new FormData(event.currentTarget);
@@ -15,20 +16,18 @@ function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLogi
   };
 }
 
-function sendBackToLastPageTriedToVisit(navigate: NavigateFunction, location: Location) {
-  const from = location.state?.from?.pathname || '/';
-
-  return () => navigate(from, { replace: true });
-}
-
 export default function useSendLoginForm() {
   const signIn = useSignIn();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { sendBackToLastPageTriedToVisit } = useNavigation();
 
-  return (event: FormEvent<HTMLFormElement>) => {
+  return async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    signIn(getFormUsernameAndPassword(event), sendBackToLastPageTriedToVisit(navigate, location));
+    const accessToken = await signIn(getFormUsernameAndPassword(event));
+
+    if (accessToken) {
+      setAccessTokenToLocalStorage(accessToken);
+      sendBackToLastPageTriedToVisit();
+    }
   };
 }

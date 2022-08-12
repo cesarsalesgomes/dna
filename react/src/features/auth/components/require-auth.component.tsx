@@ -1,5 +1,5 @@
+import { NavigateToLogin } from '@features/login';
 import { useState } from 'react';
-import { NavigateToLogin } from 'src/components';
 
 import AuthContextProvider from '../providers/auth.provider';
 import { getAccessTokenFromLocalStorage } from '../utils/storage.utils';

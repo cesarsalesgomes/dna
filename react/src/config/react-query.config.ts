@@ -1,5 +1,5 @@
 import useAuth from '@features/auth/hooks/auth.hook';
-import { useErrorHandler } from 'react-error-boundary';
+import useErrorHandler from '@hooks/error-handler.hooks';
 
 /**
  * Custom fetchers used by React Query Codegen (https://www.graphql-code-generator.com/plugins/typescript-react-query)
@@ -12,8 +12,8 @@ const graphqlUrl = 'http://localhost/graphql';
 export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const handleError = useErrorHandler();
   const { accessToken } = useAuth();
+  const { reactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
     const res = await fetch(graphqlUrl, {
@@ -29,7 +29,7 @@ export const useGraphqlFetcher = <TData, TVariables>(
     const json = await res.json();
 
     if (json.errors) {
-      return handleError(json.errors[0]) as any;
+      return reactQueryErrorHandler(json.errors[0]) as any;
     }
 
     return json.data;
@@ -43,7 +43,7 @@ const graphqlSystemUrl = 'http://localhost/graphql/system';
 export const useGraphqlSystemFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const handleError = useErrorHandler();
+  const { reactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
     const res = await fetch(graphqlSystemUrl, {
@@ -58,9 +58,9 @@ export const useGraphqlSystemFetcher = <TData, TVariables>(
     const json = await res.json();
 
     if (json.errors) {
-      return handleError(json.errors[0]) as any;
+      return reactQueryErrorHandler(json.errors[0]) as any;
     }
 
     return json.data;
   };
-};
+}; 
