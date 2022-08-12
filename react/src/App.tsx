@@ -1,36 +1,28 @@
-import Home from '@components/home';
-import Cat from '@features/cats/cat';
-import Cats from '@features/cats/cat-list';
-import { Login } from '@features/login';
+import Loading from '@components/loading.component';
+import CatsCondition from '@features/cats/cats-condition';
+import { ErrorBoundary } from '@features/error-boundary';
+import { Home } from '@features/home';
+import { Login, NavigateToLogin } from '@features/login';
 import QueryClientSingleton from '@providers/query-client.provider';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 const queryClient = QueryClientSingleton.getInstance();
 
-function CatsCondition() {
-  const [catId, setCatId] = useState(-1);
-
-  return (
-    catId > -1 ? (
-      <Cat catId={catId} setCatId={setCatId} />
-    ) : (
-        <Cats setCatId={setCatId} />
-      )
-  );
-}
-
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="cats" element={<CatsCondition />} />
-        </Route>
-        <Route path="login" element={<Login />} />
-      </Routes>
+      <ErrorBoundary>
+        <Loading />
+        <Routes>
+          <Route path="/" element={<Home />}>
+            <Route path="cats" element={<CatsCondition />} />
+          </Route>
+          <Route path="login" element={<Login />} />
+          <Route path="navigate-to-login" element={<NavigateToLogin />} />
+        </Routes>
+      </ErrorBoundary>
       <ReactQueryDevtools initialIsOpen />
     </QueryClientProvider>
   );

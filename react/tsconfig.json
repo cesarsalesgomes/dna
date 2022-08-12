@@ -26,10 +26,11 @@
       "@providers/*": ["src/providers/*"],
       "@routes/*": ["src/routes/*"],
       "@test/*": ["src/test/*"],
+      "@types/*": ["src/types/*"],
       "@interfaces/*": ["src/types/interfaces/*"],
       "@enums/*": ["src/types/enums/*"],
-      "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@constants/*": ["src/constants/*"]
     }
   },
   "include": ["src"],
