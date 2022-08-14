@@ -1,21 +1,19 @@
 import { NavigateToLogin } from '@features/login';
-import { useState } from 'react';
+import { useAtom } from 'jotai';
 
-import AuthContextProvider from '../providers/auth.provider';
-import { getAccessTokenFromLocalStorage } from '../utils/storage.utils';
+import { accessTokenAtom, userIdAtom } from '../atoms';
+import { checkAccessTokenInLocalStorage, checkAccessTokenInMemory } from '../utils/auth.utils';
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
-  const [accessToken, setAccessToken] = useState<string>('');
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const [userId, setUserId] = useAtom(userIdAtom);
 
-  if (accessToken) return AuthContextProvider(accessToken, children);
-
-  const accessTokenFromLocalStorage = getAccessTokenFromLocalStorage();
-
-  if (accessTokenFromLocalStorage) {
-    setAccessToken(accessTokenFromLocalStorage);
-
-    return AuthContextProvider(accessTokenFromLocalStorage, children);
-  };
+  if (
+    checkAccessTokenInMemory(setUserId, userId, accessToken) ||
+    checkAccessTokenInLocalStorage(setAccessToken, setUserId, userId)
+  ) {
+    return (<div>{children}</div>);
+  }
 
   return <NavigateToLogin />;
 }

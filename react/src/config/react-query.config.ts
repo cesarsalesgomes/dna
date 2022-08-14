@@ -1,5 +1,6 @@
-import useAuth from '@features/auth/hooks/auth.hook';
+import { accessTokenAtom } from '@features/auth/atoms';
 import useErrorHandler from '@hooks/error-handler.hooks';
+import { useAtom } from 'jotai';
 
 /**
  * Custom fetchers used by React Query Codegen (https://www.graphql-code-generator.com/plugins/typescript-react-query)
@@ -12,7 +13,7 @@ const graphqlUrl = 'http://localhost/graphql';
 export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const { accessToken } = useAuth();
+  const [accessToken] = useAtom(accessTokenAtom);
   const { reactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
