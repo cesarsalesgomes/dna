@@ -1,4 +1,5 @@
 import Loading from '@components/loading.component';
+import Banner from '@features/banner/components/banner.component';
 import CatsCondition from '@features/cats/cats-condition';
 import { ErrorBoundary } from '@features/error-boundary';
 import { Home } from '@features/home';
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
+        <Banner />
         <Loading />
         <Routes>
           <Route path="/" element={<Home />}>
