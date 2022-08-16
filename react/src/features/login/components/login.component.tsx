@@ -12,15 +12,15 @@ export default function Login() {
         ```
       */}
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md w-full space-y-8 prose dark:prose-invert">
           <div>
             <img
               className="mx-auto h-12 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
               alt="Workflow"
             />
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            <h2 className="mt-6 text-center text-3xl font-extrabold">Sign in to your account</h2>
+            <p className="mt-2 text-center text-sm">
               Or{' '}
               <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
                 start your 14-day free trial
@@ -68,7 +68,7 @@ export default function Login() {
                   type="checkbox"
                   className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-sm">
                   Remember me
                 </label>
               </div>
