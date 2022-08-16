@@ -1,5 +1,5 @@
 import { accessTokenAtom } from '@features/auth/atoms';
-import useErrorHandler from '@hooks/error-handler.hooks';
+import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
 import { useAtom } from 'jotai';
 
 /**
@@ -14,7 +14,7 @@ export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
-  const { reactQueryErrorHandler } = useErrorHandler();
+  const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
     const res = await fetch(graphqlUrl, {
@@ -33,6 +33,8 @@ export const useGraphqlFetcher = <TData, TVariables>(
       return reactQueryErrorHandler(json.errors[0]) as any;
     }
 
+    resetReactQueryErrorHandler();
+
     return json.data;
   };
 };
@@ -44,7 +46,7 @@ const graphqlSystemUrl = 'http://localhost/graphql/system';
 export const useGraphqlSystemFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const { reactQueryErrorHandler } = useErrorHandler();
+  const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
     const res = await fetch(graphqlSystemUrl, {
@@ -61,6 +63,8 @@ export const useGraphqlSystemFetcher = <TData, TVariables>(
     if (json.errors) {
       return reactQueryErrorHandler(json.errors[0]) as any;
     }
+
+    resetReactQueryErrorHandler();
 
     return json.data;
   };
