@@ -9,10 +9,10 @@ function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<Cat
   return status === ReactQueryStatusEnum.Error ? (
     <span>Error: {error!.message}</span>
   ) : (
-      <>
+      <div className="prose dark:prose-invert">
         <h1>{data?.cat_by_id?.name}</h1>
         <div>{isFetching ? 'Background Updating...' : ' '}</div>
-      </>
+      </div>
     );
 }
 
@@ -20,7 +20,7 @@ function Cat({ catId, setCatId }: { catId: number; setCatId: Dispatch<SetStateAc
   const { status, data, error, isFetching } = useCatByIdQuery({ data: `${catId}` });
 
   return (
-    <div>
+    <div className="prose dark:prose-invert">
       <div>
         <button type="button" className="button" onClick={() => setCatId(-1)}>
           Back

@@ -1,4 +1,5 @@
 import Loading from '@components/loading.component';
+import NavigateToHome from '@components/navigate-to-home.component';
 import Banner from '@features/banner/components/banner.component';
 import CatsCondition from '@features/cats/cats-condition';
 import { ErrorBoundary } from '@features/error-boundary';
@@ -20,6 +21,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />}>
             <Route path="cats" element={<CatsCondition />} />
+            <Route path="" element={<NavigateToHome />} />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="navigate-to-login" element={<NavigateToLogin />} />

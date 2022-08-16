@@ -43,7 +43,7 @@ function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
   const { status, data, isFetching } = useFindAllCatsQuery({});
 
   return (
-    <div>
+    <div className="prose dark:prose-invert">
       <h1 className="my-4">Cats</h1>
       <div>
         {status === ReactQueryStatusEnum.Loading ? (
