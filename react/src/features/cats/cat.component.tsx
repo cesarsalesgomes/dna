@@ -3,8 +3,6 @@ import { CatByIdQuery, useCatByIdQuery } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import { Dispatch, SetStateAction } from 'react';
 
-import './Cat.css';
-
 function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<CatByIdQuery>) {
   return status === ReactQueryStatusEnum.Error ? (
     <span>Error: {error!.message}</span>
@@ -22,7 +20,7 @@ function Cat({ catId, setCatId }: { catId: number; setCatId: Dispatch<SetStateAc
   return (
     <div className="prose dark:prose-invert">
       <div>
-        <button type="button" className="button" onClick={() => setCatId(-1)}>
+        <button type="button" onClick={() => setCatId(-1)}>
           Back
         </button>
       </div>

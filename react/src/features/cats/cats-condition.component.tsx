@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import Cat from './cat';
-import Cats from './cat-list';
+import Cats from './cat-list.component';
+import Cat from './cat.component';
 
 export default function CatsCondition() {
   const [catId, setCatId] = useState(-1);

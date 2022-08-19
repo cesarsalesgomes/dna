@@ -1,7 +1,7 @@
 import Loading from '@components/loading.component';
 import NavigateToHome from '@components/navigate-to-home.component';
 import Banner from '@features/banner/components/banner.component';
-import CatsCondition from '@features/cats/cats-condition';
+import CatsCondition from '@features/cats/cats-condition.component';
 import { ErrorBoundary } from '@features/error-boundary';
 import { Home } from '@features/home';
 import { Login, NavigateToLogin } from '@features/login';
