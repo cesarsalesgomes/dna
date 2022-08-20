@@ -29,6 +29,7 @@ generates:
     schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
     documents:
       - ./cat/queries/*.graphql
+      - ./cat/mutations/*.graphql
     plugins:
       - typescript
       - typescript-operations

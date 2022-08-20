@@ -1,0 +1,5 @@
+mutation createCat($data: create_cat_input!) {
+  create_cat_item(data: $data) {
+    id
+  }
+}

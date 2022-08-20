@@ -4,6 +4,8 @@ import ReactQueryProps from '@interfaces/react-query-props.interface';
 import QueryClientSingleton from '@providers/query-client.provider';
 import { Dispatch, SetStateAction } from 'react';
 
+import CatCreate from './cat-create.component';
+
 const queryClient = QueryClientSingleton.getInstance();
 
 interface IShowCats extends ReactQueryProps<FindAllCatsQuery> {
@@ -43,8 +45,9 @@ function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
   const { status, data, isFetching } = useFindAllCatsQuery({});
 
   return (
-    <div>
+    <div className="flex flex-col prose dark:prose-invert">
       <h1 className="my-4">Cats</h1>
+      <CatCreate />
       <div>
         {status === ReactQueryStatusEnum.Loading ? (
           'Loading...'
