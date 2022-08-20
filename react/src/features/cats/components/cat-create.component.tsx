@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 
+import useCreateCat from '../hooks/create-cat.hook';
+
 export default function CatCreate() {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = data => console.log(data);
-
   return (
-    <form action="#" method="POST" onSubmit={handleSubmit(onSubmit)}>
+    <form action="#" method="POST" onSubmit={handleSubmit(useCreateCat())}>
       <div className="bg-gray-200 shadow overflow-hidden sm:rounded-md">
         <div className="px-4 py-5 sm:p-6">
           <div className="flex flex-row justify-between gap-8">
