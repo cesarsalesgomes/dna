@@ -1,4 +1,4 @@
-import { UNEXPECTED_ERROR_MESSAGE } from '@constants/message.constants';
+import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { checkIfItsAForbiddenError, getGraphQlErrorCode } from '@features/error-boundary/utils/error-boundary.utils';
 import { SetStateAction } from 'react';
 import { NavigateFunction } from 'react-router-dom';
@@ -16,10 +16,10 @@ export function reactQueryErrorHandler(
       if (error.message) {
         setBannerMessage(error.message);
       } else {
-        setBannerMessage(UNEXPECTED_ERROR_MESSAGE);
+        setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
       }
     } catch (err) {
-      setBannerMessage(UNEXPECTED_ERROR_MESSAGE);
+      setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
     }
   };
 }

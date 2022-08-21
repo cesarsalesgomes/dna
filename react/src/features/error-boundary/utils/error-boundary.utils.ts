@@ -1,4 +1,4 @@
-import { UNEXPECTED_ERROR_MESSAGE } from '@constants/message.constants';
+import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { DirectusForbiddenErrorCode, ServerErrorCode } from '@enums/directus-error-code.enum';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import DirectusErrorCodeType from 'src/types/directus-error-code.type';
@@ -21,5 +21,5 @@ export function getGraphQlErrorCode(error: GraphQLError): DirectusErrorCodeType 
 }
 
 export function getGraphQlErrorMessage({ error }: { error: GraphQLError }): string {
-  return error.message || UNEXPECTED_ERROR_MESSAGE;
+  return error.message || UNEXPECTED_ERROR_NOTIFICATION;
 }
