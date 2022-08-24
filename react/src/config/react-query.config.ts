@@ -1,3 +1,4 @@
+import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { accessTokenAtom } from '@features/auth/atoms';
 import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
 import { useAtom } from 'jotai';
@@ -17,25 +18,30 @@ export const useGraphqlFetcher = <TData, TVariables>(
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
-    const res = await fetch(graphqlUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`
-      },
-      body: JSON.stringify({ query, variables }),
-      ...(options ?? {}),
-    });
+    try {
+      const res = await fetch(graphqlUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({ query, variables }),
+        ...(options ?? {}),
+      });
 
-    const json = await res.json();
+      const json = await res.json();
 
-    if (json.errors) {
-      return reactQueryErrorHandler(json.errors[0]) as any;
+      if (json.errors) {
+        return reactQueryErrorHandler(json.errors[0]) as any;
+      }
+
+      resetReactQueryErrorHandler();
+
+      return json.data;
+    } catch (error) {
+      // TODO: send error to analytics
+      return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     }
-
-    resetReactQueryErrorHandler();
-
-    return json.data;
   };
 };
 
@@ -49,23 +55,28 @@ export const useGraphqlSystemFetcher = <TData, TVariables>(
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
-    const res = await fetch(graphqlSystemUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query, variables }),
-      ...(options ?? {}),
-    });
+    try {
+      const res = await fetch(graphqlSystemUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, variables }),
+        ...(options ?? {}),
+      });
 
-    const json = await res.json();
+      const json = await res.json();
 
-    if (json.errors) {
-      return reactQueryErrorHandler(json.errors[0]) as any;
+      if (json.errors) {
+        return reactQueryErrorHandler(json.errors[0]) as any;
+      }
+
+      resetReactQueryErrorHandler();
+
+      return json.data;
+    } catch (error) {
+      // TODO: send error to analytics
+      return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     }
-
-    resetReactQueryErrorHandler();
-
-    return json.data;
   };
 }; 
