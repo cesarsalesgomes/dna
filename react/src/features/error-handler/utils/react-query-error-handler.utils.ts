@@ -13,12 +13,14 @@ export function reactQueryErrorHandler(
 
       if (checkIfItsAForbiddenError(code)) navigate('/navigate-to-login');
 
+      // TODO: send error to analytics
       if (error.message) {
         setBannerMessage(error.message);
       } else {
         setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
       }
     } catch (err) {
+      // TODO: send error to analytics
       setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
     }
   };
