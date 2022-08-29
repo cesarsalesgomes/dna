@@ -11,7 +11,7 @@ export function reactQueryErrorHandler(
     try {
       const code = getGraphQlErrorCode(error);
 
-      if (checkIfItsAForbiddenError(code)) navigate('/navigate-to-login');
+      if (checkIfItsAForbiddenError(code)) navigate('/login/navigate');
 
       // TODO: send error to analytics
       if (error.message) {
