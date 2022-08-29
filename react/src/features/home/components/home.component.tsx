@@ -1,16 +1,19 @@
 import NavigateToHome from '@components/navigate-to-home.component';
 import { RequireAuth } from '@features/auth';
-import { Birds } from '@features/birds';
-import { CatsCondition } from '@features/cats';
-import { Menu } from '@features/menu';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import MenuLayout from './menu-layout.component';
+
+const Cats = lazy(() => import('@features/cats/components/cats-condition.component'));
+const Birds = lazy(() => import('@features/birds/components/birds.component'));
 
 export default function Home() {
   return (
     <RequireAuth>
       <Routes>
-        <Route path="/" element={<Menu />} >
-          <Route path="cats" element={<CatsCondition />} />
+        <Route path="/" element={<MenuLayout />} >
+          <Route path="cats" element={<Cats />} />
           <Route path="birds" element={<Birds />} />
           <Route path="/*" element={<NavigateToHome />} />
         </Route>

@@ -1,4 +1,3 @@
-import Loading from '@components/loading.component';
 import Banner from '@features/banner/components/banner.component';
 import { ErrorBoundary } from '@features/error-boundary';
 import QueryClientSingleton from '@providers/query-client.provider';
@@ -13,7 +12,6 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
         <Banner />
-        <Loading />
         <AppRoutes />
       </ErrorBoundary>
       <ReactQueryDevtools initialIsOpen />
