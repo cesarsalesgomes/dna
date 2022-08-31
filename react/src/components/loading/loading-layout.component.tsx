@@ -1,7 +1,7 @@
 import LoadingSpinner from '@assets/looties/loading-spinner/loading-spinner.lootie';
 import { MENU_NAVBAR_HEIGHT } from '@constants/styles.constants';
 
-export default function Loading() {
+export default function LoadingLayout() {
   return (
     <div
       className="w-screen bg-black opacity-25 absolute z-50 flex justify-center items-center"
