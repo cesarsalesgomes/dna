@@ -9,10 +9,12 @@ const Cats = lazy(() => import('@features/cats/components/cats-condition.compone
 const Birds = lazy(() => import('@features/birds/components/birds.component'));
 
 export default function Home() {
+  // TODO: wildcard path (/*) navigate to NotFound page
   return (
     <RequireAuth>
       <Routes>
         <Route path="/" element={<MenuLayout />} >
+          <Route index element={<NavigateToHome />} />
           <Route path="cats" element={<Cats />} />
           <Route path="birds" element={<Birds />} />
           <Route path="/*" element={<NavigateToHome />} />
