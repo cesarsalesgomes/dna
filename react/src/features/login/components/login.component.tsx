@@ -1,3 +1,5 @@
+import { SubmitButtonWithLoadingWhenFetching } from '@components/buttons';
+
 import useSendLoginForm from '../hooks/send-login-form.hook';
 
 export default function Login() {
@@ -80,14 +82,7 @@ export default function Login() {
               </div>
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-              >
-                Sign in
-              </button>
-            </div>
+            <SubmitButtonWithLoadingWhenFetching label="Sign in" />
           </form>
         </div>
       </div>
