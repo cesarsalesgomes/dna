@@ -1,15 +1,16 @@
 import { bannerMessageAtom } from '@features/banner/atoms';
 import { useAtom } from 'jotai';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import useNavigation from '../../../hooks/navigation.hooks';
 import { reactQueryErrorHandler, resetReactQueryErrorHandler } from '../utils/react-query-error-handler.utils';
 
 export default function useErrorHandler() {
-  const { navigate } = useNavigation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [, setBannerMessage] = useAtom(bannerMessageAtom);
 
   return {
-    reactQueryErrorHandler: reactQueryErrorHandler(navigate, setBannerMessage),
+    reactQueryErrorHandler: reactQueryErrorHandler(navigate, location, setBannerMessage),
     resetReactQueryErrorHandler: resetReactQueryErrorHandler(setBannerMessage)
   };
 }
