@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, NavigateFunction, Location } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface StateLocation {
   from?: {
@@ -6,20 +6,13 @@ interface StateLocation {
   }
 }
 
-function sendBackToLastPageTriedToVisit(navigate: NavigateFunction, location: Location) {
+export function useSendBackToLastPageTriedToVisit() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return () => {
     const from = (location.state as StateLocation)?.from?.pathname || '/';
 
     navigate(from, { replace: true });
-  };
-}
-
-export default function useNavigation() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  return {
-    sendBackToLastPageTriedToVisit: sendBackToLastPageTriedToVisit(navigate, location),
-    navigate
   };
 }

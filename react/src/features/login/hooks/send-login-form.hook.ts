@@ -1,7 +1,9 @@
+import { accessTokenAtom } from '@features/auth/atoms';
 import useSignIn from '@features/auth/hooks/sign-in.hook';
 import { setAccessTokenToLocalStorage } from '@features/auth/utils/storage.utils';
 import { AuthLoginMutationVariables } from '@hooks/auth.hooks';
-import useNavigation from '@hooks/navigation.hooks';
+import { useSendBackToLastPageTriedToVisit } from '@hooks/navigation.hooks';
+import { useAtom } from 'jotai';
 import { FormEvent } from 'react';
 
 function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLoginMutationVariables {
@@ -18,7 +20,8 @@ function getFormUsernameAndPassword(event: FormEvent<HTMLFormElement>): AuthLogi
 
 export default function useSendLoginForm() {
   const signIn = useSignIn();
-  const { sendBackToLastPageTriedToVisit } = useNavigation();
+  const sendBackToLastPageTriedToVisit = useSendBackToLastPageTriedToVisit();
+  const [, setAccessToken] = useAtom(accessTokenAtom);
 
   return async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,6 +29,7 @@ export default function useSendLoginForm() {
     const accessToken = await signIn(getFormUsernameAndPassword(event));
 
     if (accessToken) {
+      setAccessToken(accessToken);
       setAccessTokenToLocalStorage(accessToken);
       sendBackToLastPageTriedToVisit();
     }
