@@ -27,8 +27,8 @@
       "@routes/*": ["src/routes/*"],
       "@test/*": ["src/test/*"],
       "@types/*": ["src/types/*"],
-      "@interfaces/*": ["src/types/interfaces/*"],
-      "@enums/*": ["src/types/enums/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@enums/*": ["src/enums/*"],
       "@utils/*": ["src/utils/*"],
       "@constants/*": ["src/constants/*"]
     }
