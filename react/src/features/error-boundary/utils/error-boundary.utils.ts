@@ -1,14 +1,14 @@
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
-import { ForbiddenErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
+import { ClientErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import ErrorCodesType from 'src/types/error-codes.type';
 
 // TODO: treat FORBIDDEN error extension
 export function checkIfItsAForbiddenError(code: ErrorCodesType) {
   if (
-    code === ForbiddenErrorCodes.INVALID_CREDENTIALS ||
-    code === ForbiddenErrorCodes.TOKEN_EXPIRED ||
-    code === ForbiddenErrorCodes.INVALID_TOKEN
+    code === ClientErrorCodes.INVALID_CREDENTIALS ||
+    code === ClientErrorCodes.TOKEN_EXPIRED ||
+    code === ClientErrorCodes.INVALID_TOKEN
   ) {
     return true;
   }

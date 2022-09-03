@@ -4,7 +4,7 @@
 
 // 4xx: Client errors codes
 
-export enum ForbiddenErrorCodes {
+export enum ClientErrorCodes {
   INVALID_CREDENTIALS = 'INVALID_CREDENTIALS',
   TOKEN_EXPIRED = 'TOKEN_EXPIRED',
   INVALID_TOKEN = 'INVALID_TOKEN'

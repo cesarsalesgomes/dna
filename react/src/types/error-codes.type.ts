@@ -1,5 +1,5 @@
-import { ForbiddenErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
+import { ClientErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
 
-type ErrorCodesType = ForbiddenErrorCodes | ServerErrorCodes;
+type ErrorCodesType = ClientErrorCodes | ServerErrorCodes;
 
 export default ErrorCodesType;
