@@ -1,9 +1,9 @@
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { checkIfItsAForbiddenError, getGraphQlErrorCode } from '@features/error-boundary/utils/error-boundary.utils';
 import { navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating } from '@features/login/utils/navigate-to-login.utils';
+import GraphQLError from '@interfaces/graphql-error.interface';
 import { SetStateAction } from 'react';
 import { Location, NavigateFunction } from 'react-router-dom';
-import GraphQLError from 'src/types/interfaces/graphql-error.interface';
 
 export function reactQueryErrorHandler(
   navigate: NavigateFunction,
