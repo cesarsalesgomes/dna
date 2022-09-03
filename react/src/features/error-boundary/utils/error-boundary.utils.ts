@@ -1,14 +1,14 @@
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
-import { DirectusForbiddenErrorCode, ServerErrorCode } from '@enums/directus-error-code.enum';
+import { ForbiddenErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
 import GraphQLError from '@interfaces/graphql-error.interface';
-import DirectusErrorCodeType from 'src/types/directus-error-code.type';
+import ErrorCodesType from 'src/types/error-codes.type';
 
 // TODO: treat FORBIDDEN error extension
-export function checkIfItsAForbiddenError(code: DirectusErrorCodeType) {
+export function checkIfItsAForbiddenError(code: ErrorCodesType) {
   if (
-    code === DirectusForbiddenErrorCode.INVALID_CREDENTIALS ||
-    code === DirectusForbiddenErrorCode.TOKEN_EXPIRED ||
-    code === DirectusForbiddenErrorCode.INVALID_TOKEN
+    code === ForbiddenErrorCodes.INVALID_CREDENTIALS ||
+    code === ForbiddenErrorCodes.TOKEN_EXPIRED ||
+    code === ForbiddenErrorCodes.INVALID_TOKEN
   ) {
     return true;
   }
@@ -16,8 +16,8 @@ export function checkIfItsAForbiddenError(code: DirectusErrorCodeType) {
   return false;
 }
 
-export function getGraphQlErrorCode(error: GraphQLError): DirectusErrorCodeType {
-  return error.extensions?.code || ServerErrorCode.INTERNAL_SERVER_ERROR;
+export function getGraphQlErrorCode(error: GraphQLError): ErrorCodesType {
+  return error.extensions?.code || ServerErrorCodes.INTERNAL_SERVER_ERROR;
 }
 
 export function getGraphQlErrorMessage({ error }: { error: GraphQLError }): string {
