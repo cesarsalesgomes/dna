@@ -1,4 +1,4 @@
-import DirectusErrorCodeType from '../types/directus-error-code.type';
+import DirectusErrorCodeType from '../types/error-codes.type';
 
 interface GraphQLError {
   message: string;

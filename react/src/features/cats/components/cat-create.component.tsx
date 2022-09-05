@@ -7,7 +7,7 @@ export default function CatCreate() {
 
   return (
     <form action="#" method="POST" onSubmit={handleSubmit(useCreateCat())}>
-      <div className="bg-gray-200 shadow overflow-hidden sm:rounded-md">
+      <div className="overflow-hidden bg-gray-200 shadow sm:rounded-md">
         <div className="px-4 py-5 sm:p-6">
           <div className="flex flex-row justify-between gap-8">
             <div className="flex flex-col">
@@ -18,14 +18,14 @@ export default function CatCreate() {
                 type="text"
                 id="name"
                 autoComplete="given-name"
-                className="mt-1 text-gray-700 focus:ring-primary-500 focus:border-primary-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                className="mt-1 block w-full rounded-md border-gray-300 text-gray-700 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                 {...register('name', { required: true })}
               />
             </div>
             <div className="flex pt-5">
               <button
                 type="submit"
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
                 Create
           </button>

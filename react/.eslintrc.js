@@ -11,6 +11,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/jsx-runtime',
+    "plugin:tailwindcss/recommended",
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
@@ -22,7 +23,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'eslint-plugin-import-helpers', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'eslint-plugin-import-helpers', 'tailwindcss', 'prettier'],
   ignorePatterns: ['.eslintrc.js', 'vite.config.ts'],
   rules: {
     'import/order': [
