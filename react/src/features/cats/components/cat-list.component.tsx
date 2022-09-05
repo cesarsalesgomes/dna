@@ -20,7 +20,7 @@ function ShowCats({ isFetching, data, setCatId }: IShowCats) {
           <p key={cat!.id}>
             <button
               type="button"
-              className="p-2 bg-cyan-800"
+              className="bg-cyan-800 p-2"
               onClick={() => setCatId(Number(cat!.id))}
               style={
                 // We can find the existing query data here to show bold links for ones that are cached
@@ -45,7 +45,7 @@ function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
   const { status, data, isFetching } = useFindAllCatsQuery({});
 
   return (
-    <div className="flex flex-col prose dark:prose-invert">
+    <div className="prose flex flex-col dark:prose-invert">
       <h1 className="my-4">Cats</h1>
       <CatCreate />
       <div>

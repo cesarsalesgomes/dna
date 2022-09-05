@@ -2,7 +2,7 @@ import LoadingSpinner from '@assets/looties/loading-spinner/loading-spinner.loot
 
 export default function LoadingButton() {
   return (
-    <div className="bg-black w-full h-full opacity-25 absolute z-50 flex justify-center items-center" >
+    <div className="absolute z-50 flex h-full w-full items-center justify-center bg-black opacity-25" >
       <LoadingSpinner style={{ height: '100%' }} />
     </div>
   );

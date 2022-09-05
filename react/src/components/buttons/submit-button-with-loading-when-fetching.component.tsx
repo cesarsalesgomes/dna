@@ -14,7 +14,7 @@ export default function SubmitButtonWithLoadingWhenFetching({ label }: { label: 
       { fetching ? <LoadingButton /> : ''}
       <button
         type="submit"
-        className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 ${fetching ? 'text-primary-600' : 'text-white'}`}
+        className={`group relative flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${fetching ? 'text-primary-600' : 'text-white'}`}
       >
         {label}
       </button>
