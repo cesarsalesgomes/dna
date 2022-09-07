@@ -1,9 +1,10 @@
-/* eslint-disable max-len */
 import { MENU_NAVBAR_HEIGHT } from '@constants/styles.constants';
 import { Disclosure, Menu as HeadlessUiMenu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import Logout from './logout.component';
 
 const navigation = [
   { name: 'Cats', href: 'cats' },
@@ -113,14 +114,7 @@ export default function Menu() {
                         )}
                       </HeadlessUiMenu.Item>
                       <HeadlessUiMenu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
+                        <Logout />
                       </HeadlessUiMenu.Item>
                     </HeadlessUiMenu.Items>
                   </Transition>
