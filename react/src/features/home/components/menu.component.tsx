@@ -1,9 +1,10 @@
-/* eslint-disable max-len */
 import { MENU_NAVBAR_HEIGHT } from '@constants/styles.constants';
 import { Disclosure, Menu as HeadlessUiMenu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import Logout from './logout.component';
 
 const navigation = [
   { name: 'Cats', href: 'cats' },
@@ -113,14 +114,7 @@ export default function Menu() {
                         )}
                       </HeadlessUiMenu.Item>
                       <HeadlessUiMenu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sign out
-                          </a>
-                        )}
+                        <Logout />
                       </HeadlessUiMenu.Item>
                     </HeadlessUiMenu.Items>
                   </Transition>
@@ -132,18 +126,16 @@ export default function Menu() {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <NavLink
                   key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                  to={item.href}
+                  className={({ isActive }) => classNames(
+                    isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </NavLink>
               ))}
             </div>
           </Disclosure.Panel>
