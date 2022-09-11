@@ -1,3 +1,4 @@
+import { incrementFetchesBeingPerformedAtom, decrementFetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { accessTokenAtom } from '@features/auth/atoms';
 import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
@@ -15,10 +16,14 @@ export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
+  const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
+  const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables): Promise<TData> => {
     try {
+      incrementFetchesBeingPerformed();
+
       const res = await fetch(graphqlUrl, {
         method: 'POST',
         headers: {
@@ -41,6 +46,8 @@ export const useGraphqlFetcher = <TData, TVariables>(
     } catch (error) {
       // TODO: send error to analytics
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
+    } finally {
+      decrementFetchesBeingPerformed();
     }
   };
 };

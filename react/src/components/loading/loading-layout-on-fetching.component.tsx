@@ -1,12 +1,12 @@
-import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { fetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
+import { useAtom } from 'jotai';
 
 import LoadingLayout from './loading-layout.component';
 
 export default function LoadingLayoutOnFetching() {
-  const isFetching = useIsFetching();
-  const isMutating = useIsMutating();
+  const [fetchesBeingPerformed] = useAtom(fetchesBeingPerformedAtom);
 
   return (
-    (isFetching || isMutating) ? <LoadingLayout /> : <div />
+    (fetchesBeingPerformed > 0) ? <LoadingLayout /> : <div />
   );
 }
