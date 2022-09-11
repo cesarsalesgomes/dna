@@ -2,6 +2,8 @@ import { incrementFetchesBeingPerformedAtom, decrementFetchesBeingPerformedAtom 
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { accessTokenAtom } from '@features/auth/atoms';
 import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
+import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-performed-atom';
+import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
 /**
@@ -20,9 +22,11 @@ export const useGraphqlFetcher = <TData, TVariables>(
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
-  return async (variables?: TVariables): Promise<TData> => {
+  return async (variables?: TVariables & IgnoreFetchesBeingPerformedAtom): Promise<TData> => {
+    const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
+
     try {
-      incrementFetchesBeingPerformed();
+      if (!ignoreFetchesBeingPerformed) incrementFetchesBeingPerformed();
 
       const res = await fetch(graphqlUrl, {
         method: 'POST',
@@ -47,7 +51,7 @@ export const useGraphqlFetcher = <TData, TVariables>(
       // TODO: send error to analytics
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
-      decrementFetchesBeingPerformed();
+      if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
     }
   };
 };
