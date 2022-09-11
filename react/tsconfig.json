@@ -30,7 +30,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@enums/*": ["src/enums/*"],
       "@utils/*": ["src/utils/*"],
-      "@constants/*": ["src/constants/*"]
+      "@constants/*": ["src/constants/*"],
+      "@atoms/*": ["src/atoms/*"]
     }
   },
   "include": ["src"],
