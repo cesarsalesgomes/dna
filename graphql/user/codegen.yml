@@ -1,0 +1,40 @@
+overwrite: true
+
+generates:
+  # Sdk (Typescript database model & operation file)
+  ./user/user.sdk.ts:
+    schema: http://localhost/graphql/system?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./user/queries/*.graphql
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      rawRequest: true
+      namingConvention:
+        transformUnderscore: true
+
+  # Sdk Mock Data (Use in tests)
+  ./user/user.mock.ts:
+    schema: http://localhost/graphql/system?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./user/queries/*.graphql
+    plugins:
+      - typescript-mock-data:
+          typesFile: "./user.sdk.ts"
+
+  # React Query Hooks
+  ./user/user.hooks.ts:
+    schema: http://localhost/graphql/system?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./user/queries/*.graphql
+    plugins:
+      - "typescript"
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher:
+        func: "@config/react-query.config#useGraphqlSystemWithAuthorizationFetcher"
+        isReactHook: true
+      errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

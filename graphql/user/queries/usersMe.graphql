@@ -1,0 +1,7 @@
+query usersMe {
+  users_me {
+    avatar {
+      id
+    }
+  }
+}
