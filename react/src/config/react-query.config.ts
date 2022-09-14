@@ -12,7 +12,7 @@ import { useAtom } from 'jotai';
 
 // Graphql Fetcher
 
-const graphqlUrl = 'http://localhost/graphql';
+const graphqlUrl = 'http://localhost/graphql'; // TODO: use enviroment variables 
 
 export const useGraphqlFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
@@ -88,6 +88,50 @@ export const useGraphqlSystemFetcher = <TData, TVariables>(
     } catch (error) {
       // TODO: send error to analytics
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
+    }
+  };
+};
+
+// Graphql System Fetcher with Authorization
+
+export const useGraphqlSystemWithAuthorizationFetcher = <TData, TVariables>(
+  query: string, options?: RequestInit['headers']
+): ((variables?: TVariables) => Promise<TData>) => {
+  const [accessToken] = useAtom(accessTokenAtom);
+  const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
+  const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
+  const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
+
+  return async (variables?: TVariables): Promise<TData> => {
+    const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
+
+    try {
+      if (!ignoreFetchesBeingPerformed) incrementFetchesBeingPerformed();
+
+      const res = await fetch(graphqlSystemUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({ query, variables }),
+        ...(options ?? {}),
+      });
+
+      const json = await res.json();
+
+      if (json.errors) {
+        return reactQueryErrorHandler(json.errors[0]) as any;
+      }
+
+      resetReactQueryErrorHandler();
+
+      return json.data;
+    } catch (error) {
+      // TODO: send error to analytics
+      return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
+    } finally {
+      if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
     }
   };
 }; 
