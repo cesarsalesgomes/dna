@@ -7,7 +7,7 @@ export default function LoadingLayout() {
       className="absolute z-50 flex w-screen items-center justify-center bg-black opacity-25"
       style={{ height: `calc(100vh - ${MENU_NAVBAR_HEIGHT})` }}
     >
-      <LoadingSpinner style={{ height: '10rem' }} />
+      <LoadingSpinner style={{ height: '25%' }} />
     </div>
   );
 }
