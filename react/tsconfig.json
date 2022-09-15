@@ -18,20 +18,19 @@
     "baseUrl": "./",
     "paths": {
       "@assets/*": ["src/assets/*"],
+      "@atoms/*": ["src/atoms/*"],
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
+      "@constants/*": ["src/constants/*"],
+      "@enums/*": ["src/enums/*"],
       "@features/*": ["src/features/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@lib/*": ["src/lib/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@providers/*": ["src/providers/*"],
       "@routes/*": ["src/routes/*"],
       "@test/*": ["src/test/*"],
       "@types/*": ["src/types/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@enums/*": ["src/enums/*"],
-      "@utils/*": ["src/utils/*"],
-      "@constants/*": ["src/constants/*"],
-      "@atoms/*": ["src/atoms/*"]
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["src"],

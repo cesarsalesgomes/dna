@@ -42,7 +42,7 @@ function ShowCats({ isFetching, data, setCatId }: IShowCats) {
 }
 
 function Cats({ setCatId }: { setCatId: Dispatch<SetStateAction<number>> }) {
-  const { status, data, isFetching } = useFindAllCatsQuery({});
+  const { status, data, isFetching } = useFindAllCatsQuery();
 
   return (
     <div className="prose flex flex-col dark:prose-invert">
