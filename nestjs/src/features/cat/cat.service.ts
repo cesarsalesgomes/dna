@@ -9,4 +9,8 @@ export class CatService {
   async findAll(accessToken: string) {
     return this.catRepository.findAll(accessToken);
   }
+
+  async findById(accessToken: string, id: string) {
+    return this.catRepository.findById(accessToken, id);
+  }
 }
