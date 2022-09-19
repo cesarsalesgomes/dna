@@ -7,7 +7,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
+  ID: number | string;
   String: string;
   Boolean: boolean;
   Int: number;
@@ -709,19 +709,19 @@ export type CreateCatMutationVariables = Exact<{
 }>;
 
 
-export type CreateCatMutation = { __typename?: 'Mutation', create_cat_item?: { __typename?: 'cat', id?: string | null } | null };
+export type CreateCatMutation = { __typename?: 'Mutation', create_cat_item?: { __typename?: 'cat', id?: number | string | null } | null };
 
 export type CatByIdQueryVariables = Exact<{
   data: Scalars['ID'];
 }>;
 
 
-export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: string | null, name?: string | null } | null };
+export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: number | string | null, name?: string | null } | null };
 
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id?: string | null, name?: string | null }> };
+export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id?: number | string | null, name?: string | null }> };
 
 
 export const CreateCatDocument = `
