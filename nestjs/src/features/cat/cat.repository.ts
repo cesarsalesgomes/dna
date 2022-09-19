@@ -14,4 +14,8 @@ export class CatRepository {
   async findAll(accessToken: string) {
     return (await this.getCatSdk(accessToken).findAllCats()).data.cat;
   }
+
+  async findById(accessToken: string, id: string) {
+    return (await this.getCatSdk(accessToken).catById({ data: id })).data.cat_by_id;
+  }
 }
