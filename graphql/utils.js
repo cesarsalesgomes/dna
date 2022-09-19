@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { exec } from 'child_process';
-import { copyFileSync, readdirSync } from 'fs';
+import { copyFileSync, readdirSync, existsSync } from 'fs';
 
 function getCurrentDirectory() {
   return process.cwd();
@@ -32,15 +32,24 @@ export function getFeaturesDirectoriesExcludingNodeModules() {
  */
 
 function copySdkToNestFolder(filename) {
-  copyFileSync(`./${filename}/${filename}.sdk.ts`, `../nestjs/src/features/${filename}/${filename}.sdk.ts`);
+  const sdkGeneratedFilePath = `./${filename}/${filename}.sdk.ts`;
+
+  if (existsSync(sdkGeneratedFilePath))
+    copyFileSync(sdkGeneratedFilePath, `../nestjs/src/features/${filename}/${filename}.sdk.ts`);
 }
 
 function copyMockToNestFolder(filename) {
-  copyFileSync(`./${filename}/${filename}.mock.ts`, `../nestjs/src/features/${filename}/${filename}.mock.ts`);
+  const mockGeneratedFilePath = `./${filename}/${filename}.mock.ts`;
+
+  if (existsSync(mockGeneratedFilePath))
+    copyFileSync(mockGeneratedFilePath, `../nestjs/src/features/${filename}/${filename}.mock.ts`);
 }
 
 function copyHooksToReactFolder(filename) {
-  copyFileSync(`./${filename}/${filename}.hooks.ts`, `../react/src/hooks/${filename}.hooks.ts`);
+  const hooksGeneratedFilePath = `./${filename}/${filename}.hooks.ts`;
+
+  if (existsSync(hooksGeneratedFilePath))
+    copyFileSync(`./${filename}/${filename}.hooks.ts`, `../react/src/hooks/${filename}.hooks.ts`);
 }
 
 export function copyGeneratedFilesToUsageFolders(filename) {

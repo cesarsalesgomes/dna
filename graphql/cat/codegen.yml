@@ -14,6 +14,8 @@ generates:
       rawRequest: true
       namingConvention:
         transformUnderscore: true
+      scalars:
+        ID: number | string
 
   # Sdk Mock Data (Use in tests)
   ./cat/cat.mock.ts:
@@ -39,3 +41,5 @@ generates:
         func: "@config/react-query.config#useGraphqlFetcher"
         isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
+      scalars:
+        ID: number | string
