@@ -1,6 +1,10 @@
 import axios from 'axios';
 import {
-  setDotenvConfiguration, copyGeneratedFilesToUsageFolders, getFeaturesDirectoriesExcludingNodeModules, shellCommand
+  setDotenvConfiguration,
+  copyGeneratedFilesToUsageFolders,
+  getFeaturesDirectoriesExcludingNodeModules,
+  shellCommand,
+  getFeaturesPassedAsArgumentsOfStartCommand
 } from './utils.js';
 
 const DIRECTUS_LOCAL_LOGIN_ROUTE = 'http://127.0.0.1/auth/login';
@@ -34,7 +38,9 @@ async function main() {
 
   const accessToken = await getDirectusAccessToken();
 
-  for (const featureName of getFeaturesDirectoriesExcludingNodeModules()) {
+  const features = getFeaturesPassedAsArgumentsOfStartCommand() ?? getFeaturesDirectoriesExcludingNodeModules();
+
+  for (const featureName of features) {
     try {
       await runGraphqlCodegenScriptAndCopyGeneratedFilesToUsageFolders(accessToken, featureName);
 
