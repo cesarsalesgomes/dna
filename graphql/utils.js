@@ -27,6 +27,12 @@ export function getFeaturesDirectoriesExcludingNodeModules() {
     .filter(filename => filename !== 'node_modules');
 }
 
+export function getFeaturesPassedAsArgumentsOfStartCommand() {
+  const features = process.argv.slice(2);
+
+  return features.length > 0 ? features : null;
+}
+
 /**
  * Scripts to copy generated files to the folders of use
  */
