@@ -3,15 +3,12 @@ import { Cat } from '@hooks/cat.hooks';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-export interface FindCatByIdVariables { id: number }
+import FindCatByIdVariables from '../interfaces/find-cat-by-id-variables.interface';
 
-export const useFindCatByIdQuery = <
-  TData = Cat,
-  TError = GraphQLError
->(
+export default function useFindCatById<TData = Cat, TError = GraphQLError>(
   variables: FindCatByIdVariables,
   options?: UseQueryOptions<Cat, TError, TData>
-) => {
+) {
   const findCatByIdUri = `/cats/${variables.id}`;
 
   return useQuery<Cat, TError, TData>(

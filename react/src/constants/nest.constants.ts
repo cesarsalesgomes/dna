@@ -1,0 +1,1 @@
+export const NEST_URL = 'http://localhost/nestjs'; // TODO: use enviroment variables to set Directus Url
