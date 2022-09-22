@@ -1,33 +1,32 @@
-import { decrementFetchesBeingPerformedAtom, incrementFetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
+import { incrementFetchesBeingPerformedAtom, decrementFetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
+import { DIRECTUS_URL } from '@constants/directus.constants';
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { accessTokenAtom } from '@features/auth/atoms';
-import { useErrorHandler } from '@features/error-handler';
-import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-performed-atom';
+import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
 import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
-const nestUrl = 'http://localhost/nestjs'; // TODO: use enviroment variables 
-
-export const useNestGetFetcher = <TData, TVariables>(
-  uri: string, options?: RequestInit['headers']
+export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(
+  query: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
-  return async (variables?: TVariables & IgnoreFetchesBeingPerformedAtom): Promise<TData> => {
+  return async (variables?: TVariables): Promise<TData> => {
     const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
 
     try {
       if (!ignoreFetchesBeingPerformed) incrementFetchesBeingPerformed();
 
-      const res = await fetch(`${nestUrl}${uri}`, {
-        method: 'GET',
+      const res = await fetch(`${DIRECTUS_URL}/graphql/system`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`
         },
+        body: JSON.stringify({ query, variables }),
         ...(options ?? {}),
       });
 
@@ -47,4 +46,4 @@ export const useNestGetFetcher = <TData, TVariables>(
       if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
     }
   };
-};
+}; 

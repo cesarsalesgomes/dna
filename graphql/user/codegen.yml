@@ -12,6 +12,6 @@ generates:
       - typescript-react-query
     config:
       fetcher:
-        func: "@config/react-query.config#useGraphqlSystemWithAuthorizationFetcher"
+        func: "@config/react-query/directus/directus-system-with-auth-fetcher#useDirectusSystemWithAuthFetcher"
         isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"

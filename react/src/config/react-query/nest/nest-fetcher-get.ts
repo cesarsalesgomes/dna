@@ -1,0 +1,50 @@
+import { decrementFetchesBeingPerformedAtom, incrementFetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
+import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
+import { accessTokenAtom } from '@features/auth/atoms';
+import { useErrorHandler } from '@features/error-handler';
+import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-performed-atom';
+import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
+import { useAtom } from 'jotai';
+
+const nestUrl = 'http://localhost/nestjs'; // TODO: use enviroment variables 
+
+export const useNestFetcherGet = <TData, TVariables>(
+  uri: string, options?: RequestInit['headers']
+): ((variables?: TVariables) => Promise<TData>) => {
+  const [accessToken] = useAtom(accessTokenAtom);
+  const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
+  const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
+  const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
+
+  return async (variables?: TVariables & IgnoreFetchesBeingPerformedAtom): Promise<TData> => {
+    const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
+
+    try {
+      if (!ignoreFetchesBeingPerformed) incrementFetchesBeingPerformed();
+
+      const res = await fetch(`${nestUrl}${uri}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        ...(options ?? {}),
+      });
+
+      const json = await res.json();
+
+      if (json.errors) {
+        return reactQueryErrorHandler(json.errors[0]) as any;
+      }
+
+      resetReactQueryErrorHandler();
+
+      return json.data;
+    } catch (error) {
+      // TODO: send error to analytics
+      return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
+    } finally {
+      if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
+    }
+  };
+};

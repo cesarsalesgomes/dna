@@ -38,7 +38,7 @@ generates:
       - typescript-react-query
     config:
       fetcher:
-        func: "@config/react-query.config#useGraphqlFetcher"
+        func: "@config/react-query/directus/directus-fetcher#useDirectusFetcher"
         isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
       scalars:
