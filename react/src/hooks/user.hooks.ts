@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { useGraphqlSystemWithAuthorizationFetcher } from '@config/react-query.config';
+import { useDirectusSystemWithAuthFetcher } from '@config/react-query/directus/directus-system-with-auth-fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -3814,6 +3814,6 @@ export const useUsersMeQuery = <
     ) =>
     useQuery<UsersMeQuery, TError, TData>(
       variables === undefined ? ['usersMe'] : ['usersMe', variables],
-      useGraphqlSystemWithAuthorizationFetcher<UsersMeQuery, UsersMeQueryVariables>(UsersMeDocument).bind(null, variables),
+      useDirectusSystemWithAuthFetcher<UsersMeQuery, UsersMeQueryVariables>(UsersMeDocument).bind(null, variables),
       options
     );

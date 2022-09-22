@@ -1,4 +1,4 @@
-import { useNestGetFetcher } from '@config/react-query/nest/nest-get.fetcher';
+import { useNestFetcherGet } from '@config/react-query/nest/nest-fetcher-get';
 import { Cat } from '@hooks/cat.hooks';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ export const useFindCatByIdQuery = <
 
   return useQuery<Cat, TError, TData>(
     ['findCatById', variables.id],
-    useNestGetFetcher<Cat, FindCatByIdVariables>(findCatByIdUri).bind(null, variables),
+    useNestFetcherGet<Cat, FindCatByIdVariables>(findCatByIdUri).bind(null, variables),
     options
   );
 };

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
-import { useGraphqlFetcher } from '@config/react-query.config';
+import { useDirectusFetcher } from '@config/react-query/directus/directus-fetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -737,7 +737,7 @@ export const useCreateCatMutation = <
     >(options?: UseMutationOptions<CreateCatMutation, TError, CreateCatMutationVariables, TContext>) =>
     useMutation<CreateCatMutation, TError, CreateCatMutationVariables, TContext>(
       ['createCat'],
-      useGraphqlFetcher<CreateCatMutation, CreateCatMutationVariables>(CreateCatDocument),
+      useDirectusFetcher<CreateCatMutation, CreateCatMutationVariables>(CreateCatDocument),
       options
     );
 export const CatByIdDocument = `
@@ -757,7 +757,7 @@ export const useCatByIdQuery = <
     ) =>
     useQuery<CatByIdQuery, TError, TData>(
       ['catById', variables],
-      useGraphqlFetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument).bind(null, variables),
+      useDirectusFetcher<CatByIdQuery, CatByIdQueryVariables>(CatByIdDocument).bind(null, variables),
       options
     );
 export const FindAllCatsDocument = `
@@ -777,6 +777,6 @@ export const useFindAllCatsQuery = <
     ) =>
     useQuery<FindAllCatsQuery, TError, TData>(
       variables === undefined ? ['findAllCats'] : ['findAllCats', variables],
-      useGraphqlFetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument).bind(null, variables),
+      useDirectusFetcher<FindAllCatsQuery, FindAllCatsQueryVariables>(FindAllCatsDocument).bind(null, variables),
       options
     );
