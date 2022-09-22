@@ -7,7 +7,7 @@ import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-pe
 import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
-export const useNestFetcherGet = <TData, TVariables>(
+export const useNestFetcherPost = <TData, TVariables>(
   uri: string, options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
@@ -22,11 +22,12 @@ export const useNestFetcherGet = <TData, TVariables>(
       if (!ignoreFetchesBeingPerformed) incrementFetchesBeingPerformed();
 
       const res = await fetch(`${NEST_URL}${uri}`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`
         },
+        body: JSON.stringify(variables),
         ...(options ?? {}),
       });
 

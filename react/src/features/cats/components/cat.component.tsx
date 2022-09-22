@@ -3,7 +3,7 @@ import { Cat as CatType } from '@hooks/cat.hooks';
 import ReactQueryProps from '@interfaces/react-query-props.interface';
 import { Dispatch, SetStateAction } from 'react';
 
-import { useFindCatByIdQuery } from '../hooks/find-cat-by-id.hook';
+import useFindCatById from '../hooks/find-cat-by-id.hook';
 
 function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<CatType>) {
   return status === ReactQueryStatusEnum.Error ? (
@@ -17,7 +17,7 @@ function ShowErrorOrCat({ status, error, isFetching, data }: ReactQueryProps<Cat
 }
 
 function Cat({ catId, setCatId }: { catId: number; setCatId: Dispatch<SetStateAction<number>> }) {
-  const { status, data, error, isFetching } = useFindCatByIdQuery({ id: catId });
+  const { status, data, error, isFetching } = useFindCatById({ id: catId });
 
   return (
     <div className="prose dark:prose-invert">
