@@ -19,7 +19,7 @@
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
-    "graphql-codegen-typescript-mock-data": "^2.2.5"
+    "graphql-codegen-typescript-mock-data": "^2.4.0"
   },
   "author": "",
   "license": "UNLICENSED"
