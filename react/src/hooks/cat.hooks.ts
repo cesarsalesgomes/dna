@@ -7,16 +7,13 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: number | string;
+  ID: number;
   String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** ISO8601 Date values */
   Date: any;
-  /** A Float or a String */
   GraphQLStringOrFloat: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
 
@@ -709,19 +706,19 @@ export type CreateCatMutationVariables = Exact<{
 }>;
 
 
-export type CreateCatMutation = { __typename?: 'Mutation', create_cat_item?: { __typename?: 'cat', id?: number | string | null } | null };
+export type CreateCatMutation = { __typename?: 'Mutation', create_cat_item?: { __typename?: 'cat', id?: number | null } | null };
 
 export type CatByIdQueryVariables = Exact<{
   data: Scalars['ID'];
 }>;
 
 
-export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: number | string | null, name?: string | null } | null };
+export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: number | null, name?: string | null } | null };
 
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id?: number | string | null, name?: string | null }> };
+export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id?: number | null, name?: string | null }> };
 
 
 export const CreateCatDocument = `

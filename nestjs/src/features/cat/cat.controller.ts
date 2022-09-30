@@ -13,7 +13,7 @@ export class CatController {
   }
 
   @Get(':id')
-  async findById(@AccessToken() accessToken: string, @Param() params: { id: string }) {
+  async findById(@AccessToken() accessToken: string, @Param() params: { id: number }) {
     return this.catService.findById(accessToken, params?.id);
   }
 }
