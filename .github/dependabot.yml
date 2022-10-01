@@ -9,3 +9,8 @@ updates:
     directory: "/graphql"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "yarn"
+    directory: "/react"
+    schedule:
+      interval: "weekly"
