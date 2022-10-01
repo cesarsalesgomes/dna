@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
 
-  - package-ecosystem: "yarn"
+  - package-ecosystem: "npm"
     directory: "/react"
     schedule:
       interval: "weekly"
