@@ -1,6 +1,7 @@
-import { RequireAuth } from '@features/auth';
+import { lazy } from 'react';
 
-import { HomeRoutes } from '../routes';
+const HomeRoutes = lazy(() => import('../routes/home.routes'));
+const RequireAuth = lazy(() => import('@features/auth/components/require-auth.component'));
 
 export default function Home() {
   return (

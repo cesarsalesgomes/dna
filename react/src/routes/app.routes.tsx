@@ -1,6 +1,8 @@
-import { Home } from '@features/home';
-import { LoginRoutes } from '@features/login';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+const Home = lazy(() => import('@features/home/components/home.component'));
+const LoginRoutes = lazy(() => import('@features/login/components/login.component'));
 
 export default function AppRoutes() {
   return (

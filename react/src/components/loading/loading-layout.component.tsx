@@ -1,5 +1,7 @@
-import LoadingSpinner from '@assets/looties/loading-spinner/loading-spinner.lootie';
 import { MENU_NAVBAR_HEIGHT } from '@constants/styles.constants';
+import { lazy } from 'react';
+
+const LoadingSpinner = lazy(() => import('@assets/looties/loading-spinner/loading-spinner.lootie'));
 
 export default function LoadingLayout() {
   return (

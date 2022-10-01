@@ -1,12 +1,11 @@
-import NavigateToHome from '@components/navigate-to-home.component';
-import { NotFound } from '@features/info';
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import MenuLayout from '../components/menu-layout.component';
-
+const MenuLayout = lazy(() => import('../components/menu-layout.component'));
+const NavigateToHome = lazy(() => import('@components/navigate-to-home.component'));
 const Cats = lazy(() => import('@features/cats/components/cats-condition.component'));
 const Birds = lazy(() => import('@features/birds/components/birds.component'));
+const NotFound = lazy(() => import('@features/info/components/not-found.component'));
 
 export default function HomeRoutes() {
   return (
