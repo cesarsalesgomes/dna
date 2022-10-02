@@ -121,10 +121,6 @@ _Will be documented when starting React development ..._
 
 ## **Deployment** ☁️
 
-After research and attempts to deploy the application via docker compose in the `Azure` environment, it was noticed that the ease of execution and configuration of the development environment is not the same in cloud environments with docker.
-
-In this way, it was decided to deploy each system layer in parts, researching the environment where its configuration was simpler and more intuitive, less costly and with better support.
-
 <br />
 
 > **Directus / NestJS / Database**
@@ -314,11 +310,25 @@ systemctl restart nginx
 
 The goal of the React repository is to serve as a ready-to-start collection of resources and good practices when starting a new project.
 
+> **DEV TOOLS**
+
 The application has been bootstrapped using **[Vite](https://vitejs.dev/)**, a pre-configured dev server + bundler combo, but leaner and faster, recommended nowadays instead of the traditional `create-react-app`.
 
 `Eslint` + `Prettier` were used for formatting code and receiving alerts to maintain the good practices of React codding.
 
+> **SERVER STATE**
+
 For server communication, **[React Query](https://react-query.tanstack.com/)** was used, a library that effectively helps manage and keep track of server state, providing a consistent and straightforward way of managing server state as all of this have been abstracted into the library.
+
+> **CLIENT STATE**
+
+To simplify application state control, two libraries are used: **[Jotai](https://jotai.org/)** for **global** state control due to its flexibility, scalability and easy sharing of state with the concept of atomic models; and **[Zustand](https://github.com/pmndrs/zustand)** for **machine** state, i.e., more complex state controls that require sending actions and subscriptions between components.
+
+> **CSS**
+
+**[Tailwindcss](https://tailwindcss.com/)** was chosen because it provides a lot more flexibility and control over what your application looks like than other CSS frameworks, enabling a creation of a more unique site.
+
+> **STRUCTURE**
 
 The project structure was inspired by the great article about the **[Screaming Architecture](https://dev.to/profydev/screaming-architecture-evolution-of-a-react-folder-structure-4g25)**, that motivates the developer to focus on what the system needs to the tell about code, not the framework used. Below is the explanation of the structure:
 
