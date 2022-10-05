@@ -23,12 +23,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # 3) Install node_modules
-      - name: Install dependencies
+      # 3) Install Nest node_modules
+      - name: Install Nest dependencies
         run: npm install
         working-directory: nestjs
 
-      # 4) Build application
-      - name: Build app
+      # 4) Install React node_modules
+      - name: Install React dependencies
+        run: npm install
+        working-directory: react
+
+      # 5) Build Nest application
+      - name: Build Nest
         run: npm run build
         working-directory: nestjs
+
+      # 6) Build React application
+      - name: Build React
+        run: yarn build
+        working-directory: react
