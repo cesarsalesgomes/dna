@@ -13,7 +13,7 @@ import { useAtom } from 'jotai';
 
 export const useDirectusFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
-): ((variables?: TVariables) => Promise<TData>) => {
+): ((variables?: TVariables & IgnoreFetchesBeingPerformedAtom) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);

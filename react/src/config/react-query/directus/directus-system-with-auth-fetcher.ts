@@ -3,18 +3,19 @@ import { DIRECTUS_URL } from '@constants/directus.constants';
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { accessTokenAtom } from '@features/auth/atoms';
 import useErrorHandler from '@features/error-handler/hooks/error-handler.hooks';
+import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-performed-atom';
 import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
 export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(
   query: string, options?: RequestInit['headers']
-): ((variables?: TVariables) => Promise<TData>) => {
+): ((variables?: TVariables & IgnoreFetchesBeingPerformedAtom) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
   const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
 
-  return async (variables?: TVariables): Promise<TData> => {
+  return async (variables?: TVariables & IgnoreFetchesBeingPerformedAtom): Promise<TData> => {
     const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
 
     try {
