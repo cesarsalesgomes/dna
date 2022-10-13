@@ -9,7 +9,7 @@ import { useAtom } from 'jotai';
 
 export const useNestFetcherPost = <TData, TVariables>(
   uri: string, options?: RequestInit['headers']
-): ((variables?: TVariables) => Promise<TData>) => {
+): ((variables?: TVariables & IgnoreFetchesBeingPerformedAtom) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);

@@ -7,9 +7,7 @@ export function invalidateQueriesOnSuccess(queryKeys: string[]) {
   };
 }
 
-export function checkWhetherToIgnoreFetchesBeingPerformedAtom<TVariables>(
-  variables?: TVariables & IgnoreFetchesBeingPerformedAtom
-): boolean {
+export function checkWhetherToIgnoreFetchesBeingPerformedAtom(variables?: IgnoreFetchesBeingPerformedAtom): boolean {
   if (variables && variables.ignoreFetchesBeingPerformedAtom) {
     // eslint-disable-next-line no-param-reassign
     delete variables.ignoreFetchesBeingPerformedAtom;
