@@ -1,0 +1,6 @@
+query findAllBirds {
+  bird {
+    id
+    name
+  }
+}

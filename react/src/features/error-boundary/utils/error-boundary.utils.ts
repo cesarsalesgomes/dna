@@ -3,8 +3,7 @@ import { ClientErrorCodes, ServerErrorCodes } from '@enums/error-codes.enum';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import ErrorCodesType from 'src/types/error-codes.type';
 
-// TODO: treat FORBIDDEN error extension
-export function checkIfItsAForbiddenError(code: ErrorCodesType) {
+export function checkIfItsAnInvalidTokenError(code: ErrorCodesType) {
   if (
     code === ClientErrorCodes.INVALID_CREDENTIALS ||
     code === ClientErrorCodes.TOKEN_EXPIRED ||
@@ -14,6 +13,10 @@ export function checkIfItsAForbiddenError(code: ErrorCodesType) {
   }
 
   return false;
+}
+
+export function checkIfItsAForbiddenError(code: ErrorCodesType) {
+  return code === ClientErrorCodes.FORBIDDEN || code === ClientErrorCodes.GRAPHQL_VALIDATION_EXCEPTION;
 }
 
 export function getGraphQlErrorCode(error: GraphQLError): ErrorCodesType {

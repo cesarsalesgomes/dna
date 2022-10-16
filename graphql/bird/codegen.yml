@@ -1,0 +1,19 @@
+overwrite: true
+
+generates:
+  # React Query Hooks
+  ./bird/bird.hooks.ts:
+    schema: http://localhost/graphql?access_token=${DOCKER_DNA_DIRECTUS_ACCESS_TOKEN}
+    documents:
+      - ./bird/queries/*.graphql
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher:
+        func: "@config/react-query/directus/directus-fetcher#useDirectusFetcher"
+        isReactHook: true
+      errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
+      scalars:
+        ID: number
