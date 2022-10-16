@@ -12,7 +12,7 @@
     "@heroicons/react": "^1.0.6",
     "@tanstack/react-query": "^4.10.3",
     "@tanstack/react-query-devtools": "^4.0.10",
-    "graphql": "^16.3.0",
+    "graphql": "^16.6.0",
     "jotai": "^1.7.8",
     "lottie-react": "^2.3.1",
     "react": "^18.2.0",
@@ -22,7 +22,7 @@
     "react-router-dom": "6"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.4",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
@@ -37,7 +37,7 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-import-helpers": "^1.2.1",
-    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
