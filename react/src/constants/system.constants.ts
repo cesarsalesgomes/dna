@@ -1,0 +1,1 @@
+export const BANNER_DISPLAY_TIME_IN_SECONDS = 4;

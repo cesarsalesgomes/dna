@@ -6,7 +6,7 @@ import { bannerMessageAtom } from '../atoms';
 
 export default function Banner() {
   const [bannerMessage] = useAtom(bannerMessageAtom);
-  const { resetReactQueryErrorHandler } = useErrorHandler();
+  const { hideErrorBannerMessageHandler } = useErrorHandler();
 
   return (
     bannerMessage ?
@@ -26,7 +26,7 @@ export default function Banner() {
               <button
                 type="button"
                 className="-mr-1 flex rounded-md p-2 hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
-                onClick={resetReactQueryErrorHandler}
+                onClick={hideErrorBannerMessageHandler}
               >
                 <span className="sr-only">Dismiss</span>
                 <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
