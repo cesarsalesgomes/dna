@@ -13,7 +13,7 @@ export const useNestFetcherPost = <TData, TVariables>(
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
   const [, decrementFetchesBeingPerformed] = useAtom(decrementFetchesBeingPerformedAtom);
-  const { reactQueryErrorHandler, resetReactQueryErrorHandler } = useErrorHandler();
+  const { reactQueryErrorHandler } = useErrorHandler();
 
   return async (variables?: TVariables & IgnoreFetchesBeingPerformedAtom): Promise<TData> => {
     const ignoreFetchesBeingPerformed = checkWhetherToIgnoreFetchesBeingPerformedAtom(variables);
@@ -36,8 +36,6 @@ export const useNestFetcherPost = <TData, TVariables>(
       if (json.errors) {
         return reactQueryErrorHandler(json.errors[0]) as any;
       }
-
-      resetReactQueryErrorHandler();
 
       return json.data;
     } catch (error) {
