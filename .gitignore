@@ -47,6 +47,7 @@ typings/
 .env
 .env.test
 /*/.env
+/*/.env.production
 
 # NestJS
 /nestjs/dist
