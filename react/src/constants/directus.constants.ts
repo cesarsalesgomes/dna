@@ -1,1 +1,3 @@
-export const DIRECTUS_URL = 'http://localhost'; // TODO: use enviroment variables to set Directus Url
+import { DNA_BACKEND_URL } from './system.constants';
+
+export const DIRECTUS_URL = DNA_BACKEND_URL; 

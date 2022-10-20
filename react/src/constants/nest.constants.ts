@@ -1,1 +1,3 @@
-export const NEST_URL = 'http://localhost/nestjs'; // TODO: use enviroment variables to set Directus Url
+import { DNA_BACKEND_URL } from './system.constants';
+
+export const NEST_URL = `${DNA_BACKEND_URL}/nestjs`;
