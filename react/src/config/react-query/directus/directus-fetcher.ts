@@ -43,7 +43,6 @@ export const useDirectusFetcher = <TData, TVariables>(
 
       return json.data;
     } catch (error) {
-      // TODO: send error to analytics
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
       if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
