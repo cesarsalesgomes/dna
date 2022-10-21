@@ -5,18 +5,18 @@
 // Winston with AWS Cloudwatch on Nestjs (https://stackoverflow.com/questions/69433044/winston-with-aws-cloudwatch-on-nestjs)
 
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
-import * as winston from 'winston';
+import { LogEntry, transports, transport, format } from 'winston';
 import * as CloudWatchTransport from 'winston-cloudwatch';
 
 import { WINSTON_CLOUDWATCH_NAME, WINSTON_WARN_LEVEL } from './logger.contants';
 
-const messageFormatter = () => (item: winston.LogEntry) => `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`;
+const messageFormatter = () => (item: LogEntry) => `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`;
 
-const winstonTransport = new winston.transports.Console({
-  format: winston.format.combine(winston.format.timestamp(), winston.format.ms(), nestWinstonModuleUtilities.format.nestLike()),
+const winstonTransport: transport = new transports.Console({
+  format: format.combine(format.timestamp(), format.ms(), nestWinstonModuleUtilities.format.nestLike()),
 });
 
-const cloudWatchTransport = new CloudWatchTransport({
+const cloudWatchTransport: transport = new CloudWatchTransport({
   name: WINSTON_CLOUDWATCH_NAME,
   level: WINSTON_WARN_LEVEL,
   logGroupName: process.env.CLOUDWATCH_GROUP_NAME,
@@ -28,6 +28,6 @@ const cloudWatchTransport = new CloudWatchTransport({
 });
 
 export default WinstonModule.createLogger({
-  format: winston.format.uncolorize(),
+  format: format.uncolorize(),
   transports: [winstonTransport, cloudWatchTransport],
 });
