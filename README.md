@@ -139,11 +139,11 @@ _Below are the steps of creation:_
 
 1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Postgres Database`) ¹.
 
-2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
+2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install `Nginx` and `Node.js` on an `AWS EC2` (**Obs**: Skip the certificate step via `Let's Encrypt`. It's recommended to create a subdomain and associate it with a certificate via `Api Gateway` (**[Create](https://codethief.io/aws-connect-api-gateway-to-ec2/)** and **[Certificate](https://www.youtube.com/watch?v=ESei6XQ7dMg&list=PLodrmGJuvVEW3RDUHRY_IkJbPQC2xI2Ze)** steps) or an **[Application Load Balancer](https://www.youtube.com/watch?v=JQP96EjRM98&list=PLodrmGJuvVEW3RDUHRY_IkJbPQC2xI2Ze)**).
 
-3. Clone the `dna` repository. The recommended directory is `/home/ec2-user`.
+3. Clone the `dna` repository.
 
-4. Create the `Directus` project following the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials. The recommended directory is `/home/ec2-user/dna/directus` (The command `sudo su` will be necessary).
+4. Under `directus` folder, follow the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials (**Obs**: update the `start` script of the _package.json_ to `npx directus start`).
 
 5. Set the production enviroment variables. NestJS enviroment variables go on the `.bashrc` script file; Directus environment variables must be inserted in the `.env` file (previously created by the Directus CLI).
 
