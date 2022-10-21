@@ -12,11 +12,11 @@ import { WINSTON_CLOUDWATCH_NAME, WINSTON_WARN_LEVEL } from './logger.contants';
 
 const messageFormatter = () => (item: winston.LogEntry) => `${item.level}: ${item.message} ${JSON.stringify(item.meta)}`;
 
-const winstonTransport: winston.transport = new winston.transports.Console({
+const winstonTransport = new winston.transports.Console({
   format: winston.format.combine(winston.format.timestamp(), winston.format.ms(), nestWinstonModuleUtilities.format.nestLike()),
 });
 
-const cloudWatchTransport: winston.transport = new CloudWatchTransport({
+const cloudWatchTransport = new CloudWatchTransport({
   name: WINSTON_CLOUDWATCH_NAME,
   level: WINSTON_WARN_LEVEL,
   logGroupName: process.env.CLOUDWATCH_GROUP_NAME,
