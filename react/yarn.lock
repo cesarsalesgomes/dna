@@ -1829,6 +1829,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+highlight.run@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-4.5.4.tgz#a55a90964860a46c78ed8c55922d771026da2b41"
+  integrity sha512-3hyEM6jKTsRHKH+/yccQ4VgDlfft7jfjWzgi/7OHQ4jUNQcSwe6G3H3x3UerCFMBA2aA1jRJn59dKPpmiZ3jYg==
+
 ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"

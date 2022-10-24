@@ -3,6 +3,7 @@ import { BANNER_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
 import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from '@features/error-boundary/utils/error-boundary.utils';
 import { navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating } from '@features/login/utils/navigate-to-login.utils';
 import GraphQLError from '@interfaces/graphql-error.interface';
+import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
 import { navigateToPreviousPage } from '@utils/navigation.utils';
 import { SetStateAction } from 'react';
 import { Location, NavigateFunction } from 'react-router-dom';
@@ -32,11 +33,11 @@ export function reactQueryErrorHandler(
         navigateToPreviousPage(navigate);
         setBannerMessage(FORBIDDEN_ERROR_NOTIFICATION);
       } else {
-        // TODO: send error to analytics
+        sendErrorToHighlightInProduction(error);
         setBannerMessage(error.message ?? UNEXPECTED_ERROR_NOTIFICATION);
       }
     } catch (err) {
-      // TODO: send error to analytics
+      sendErrorToHighlightInProduction(error);
       setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
     } finally {
       hideErrorBannerMessageAfterDisplaySeconds(setBannerMessage, bannerDisplayTimeInSeconds ?? BANNER_DISPLAY_TIME_IN_SECONDS);

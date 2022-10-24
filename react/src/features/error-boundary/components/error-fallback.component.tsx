@@ -1,8 +1,8 @@
 import { UnexpectedError } from '@features/info';
+import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
 
 export default function ErrorFallback({ error }: { error: Error }) {
-  // TODO: change console to send error to analytics
-  console.error(error);
+  sendErrorToHighlightInProduction(error);
 
   return <UnexpectedError />;
 };
