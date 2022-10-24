@@ -1,0 +1,1 @@
+export const HIGHLIGHT_PROJECT_ID = import.meta.env.VITE_HIGHLIGHT_PROJECT_ID;

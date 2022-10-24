@@ -165,6 +165,22 @@ _Below are the steps of creation:_
 
 ## **Monitoring** 🛡️
 
+<br />
+
+> **Frontend**
+
+To collect and analyze possible production build errors, [**Highlight**](https://www.highlight.io/) was chosen.
+
+Replay errors with high precision, outgoing network requests, dense stack traces and finding the reason for user drop offs to gain insight into UX, are some of the qualities of the tool.
+
+To install, follow the steps below:
+
+1. [**How to install on React**](https://docs.highlight.run/reactjs)
+
+<br />
+
+> **Backend**
+
 Monitoring a Node.js application is a very important step in the system, so that it is possible to monitor the performance of the system in a fast, simple, efficient and intuitive way.
 
 As the idea of the environment is to look for tools with the highest cost-benefit, **[Uptime Kuma](https://github.com/louislam/uptime-kuma)** was chosen, due to ease configuration, intuitive monitoring, and varied configuration of alert notifications.
