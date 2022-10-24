@@ -125,9 +125,9 @@ _Will be documented when starting React development ..._
 
 > **Directus / NestJS / Database**
 
-_It was chosen to deploy the backend enviroment on the **[AWS](https://aws.com)**. It has a basic unpaid plan of 1 year to its EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for machine configuration._
+_It was chosen to deploy the backend enviroment on the **[AWS](https://aws.com)**. It has a basic unpaid plan of 1 year to it's EC2 basic instance (Thus being more attractive to customers and creation of POC's) and greater freedom for configuration._
 
-_Even having more steps of installation and manual configuration, the environment was chosen due to the idea of ​​integrating it with **[Nginx](https://www.nginx.com/)**, thus obtaining only one IP in production (with reverse proxy), and to take advantage of the good and free server monitoring tool **[Amplify](https://amplify.nginx.com)**, explained in the next topic._
+_Even having more steps of installation and manual configuration, the environment was chosen due to the idea of ​​integrating it with **[Nginx](https://www.nginx.com/)**, thus obtaining only one IP in production (with reverse proxy)._
 
 _The idea behind the configuration of the reverse proxy, is to redirect all calls that contain `nestjs` in their route to NestJS, and redirect all other calls to Directus, thus obtaining the environment configuration with only one ip._
 
@@ -139,11 +139,11 @@ _Below are the steps of creation:_
 
 1. Have in hand the credentials of the chosen cloud database (Recommended: `AWS RDS Postgres Database`) ¹.
 
-2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install Nginx, SSL and Node.js on an AWS EC2 FreeTier instance.
+2. Follow the steps of the **[Link](https://www.youtube.com/watch?v=adQDNRZ59r0)** to install `Nginx` and `Node.js` on an `AWS EC2` (**Obs**: Skip the certificate step via `Let's Encrypt`. It's recommended to create a subdomain and associate it with a certificate via `Api Gateway` (**[Create](https://codethief.io/aws-connect-api-gateway-to-ec2/)** and **[Certificate](https://www.youtube.com/watch?v=ESei6XQ7dMg&list=PLodrmGJuvVEW3RDUHRY_IkJbPQC2xI2Ze)** steps) or an **[Application Load Balancer](https://www.youtube.com/watch?v=JQP96EjRM98&list=PLodrmGJuvVEW3RDUHRY_IkJbPQC2xI2Ze)**).
 
-3. Clone the `dna` repository. The recommended directory is `/home/ec2-user`.
+3. Clone the `dna` repository.
 
-4. Create the `Directus` project following the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials. The recommended directory is `/home/ec2-user/dna/directus` (The command `sudo su` will be necessary).
+4. Under `directus` folder, follow the steps on **[Installing from CLI](https://docs.directus.io/self-hosted/installation/cli/#installing-from-cli)** using the database production credentials (**Obs**: update the `start` script of the _package.json_ to `npx directus start`).
 
 5. Set the production enviroment variables. NestJS enviroment variables go on the `.bashrc` script file; Directus environment variables must be inserted in the `.env` file (previously created by the Directus CLI).
 
@@ -167,29 +167,13 @@ _Below are the steps of creation:_
 
 Monitoring a Node.js application is a very important step in the system, so that it is possible to monitor the performance of the system in a fast, simple, efficient and intuitive way.
 
-As the idea of the environment is to look for tools with the highest cost-benefit, and motivated by the 4 question on the Rocketseat **[video](https://www.youtube.com/watch?v=HrkECIzaQvE)** recommendation on which tools to use for monitoring Node.js applications, **[Nginx Amplify](https://amplify.nginx.com)** monitoring Linux was chosen.
+As the idea of the environment is to look for tools with the highest cost-benefit, **[Uptime Kuma](https://github.com/louislam/uptime-kuma)** was chosen, due to ease configuration, intuitive monitoring, and varied configuration of alert notifications.
 
-Much because it was developed by the `Nginx` developers themselves, because of the excellent documentation, easy instalation, free plan for knowledge of the tool, and many other motivations.
+To install the tool on an `AWS EC2` instance, follow the steps of the links below:
 
-To install the tool on an AWS EC2 instance (Amazon Linux), use the steps below:
+1. **[How to install](https://github.com/louislam/uptime-kuma/wiki/%F0%9F%94%A7-How-to-Install)**
 
-1. After installing Nginx in the previous section on an AWS EC2 instance, follow the steps in this **[link](https://amplify.nginx.com/docs/guide-installing-and-managing-nginx-amplify-agent.html#installing-on-centos-red-hat-linux-or-amazon-linux)** to install Amplify on Amazon Linux
-
-2. To log only user interaction requests (disregard robot calls, Directus Admin interactions, etc.), replace the **access_log** line in **etc/nginx/nginx.conf** file with the condition below:
-
-```bash
-map $uri $loggable {
-  ~^/graphql 1;
-  ~^/nestjs/ 1;
-  default 0;
-}
-
-access_log  /var/log/nginx/access.log main_ext if=$loggable;
-```
-
-**Issues:**
-
-1. Many dependency errors with `Python` occurred while trying to install Amplify. To fix the dependencies, use the **[Python dependency errors link](https://stackoverflow.com/questions/8087184/installing-python-3-on-rhel)**, to install the necessary versions informed in the attempts to install the package `nginx-amplify-agent package`.
+2. **[Configure with Nginx](https://github.com/louislam/uptime-kuma/wiki/Reverse-Proxy)**
 
 <br />
 
