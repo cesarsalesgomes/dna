@@ -1,5 +1,5 @@
 import { useErrorHandler } from '@features/error-handler';
-import { ExclamationCircleIcon, XIcon } from '@heroicons/react/outline';
+import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import { useAtom } from 'jotai';
 
 import { bannerMessageAtom } from '../atoms';
@@ -29,7 +29,7 @@ export default function Banner() {
                 onClick={hideErrorBannerMessageHandler}
               >
                 <span className="sr-only">Dismiss</span>
-                <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </button>
             </div>
           </div>

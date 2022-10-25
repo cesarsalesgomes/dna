@@ -1,26 +1,22 @@
 import { FORBIDDEN_ERROR_NOTIFICATION, UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
-import { BANNER_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
+import { NOTIFICATION_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
 import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from '@features/error-boundary/utils/error-boundary.utils';
 import { navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating } from '@features/login/utils/navigate-to-login.utils';
+import { hideNotificationAfterDisplaySeconds, NotificationType, SetNotificationMessageAndType } from '@features/notification';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
 import { navigateToPreviousPage } from '@utils/navigation.utils';
-import { SetStateAction } from 'react';
 import { Location, NavigateFunction } from 'react-router-dom';
 
-function hideErrorBannerMessageAfterDisplaySeconds(setBannerMessage: (update: SetStateAction<string>) => void, bannerDisplaySeconds: number) {
-  setTimeout(() => setBannerMessage(''), bannerDisplaySeconds * 1000);
-}
-
-export function hideErrorBannerMessage(setBannerMessage: (update: SetStateAction<string>) => void) {
-  return () => setBannerMessage('');
+export function hideErrorNotificationMessage(setNotificationMessageAndType: SetNotificationMessageAndType) {
+  return () => setNotificationMessageAndType('', null);
 }
 
 export function reactQueryErrorHandler(
   navigate: NavigateFunction,
   location: Location,
-  setBannerMessage: (update: SetStateAction<string>) => void,
-  bannerDisplayTimeInSeconds?: number
+  setNotificationMessageAndType: SetNotificationMessageAndType,
+  notificationDisplayTimeInSeconds?: number
 ) {
   return (error: GraphQLError) => {
     try {
@@ -31,16 +27,16 @@ export function reactQueryErrorHandler(
       }
       else if (checkIfItsAForbiddenError(code)) {
         navigateToPreviousPage(navigate);
-        setBannerMessage(FORBIDDEN_ERROR_NOTIFICATION);
+        setNotificationMessageAndType(FORBIDDEN_ERROR_NOTIFICATION, NotificationType.ALERT);
       } else {
         sendErrorToHighlightInProduction(error);
-        setBannerMessage(error.message ?? UNEXPECTED_ERROR_NOTIFICATION);
+        setNotificationMessageAndType(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
       }
     } catch (err) {
       sendErrorToHighlightInProduction(error);
-      setBannerMessage(UNEXPECTED_ERROR_NOTIFICATION);
+      setNotificationMessageAndType(UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
     } finally {
-      hideErrorBannerMessageAfterDisplaySeconds(setBannerMessage, bannerDisplayTimeInSeconds ?? BANNER_DISPLAY_TIME_IN_SECONDS);
+      hideNotificationAfterDisplaySeconds(setNotificationMessageAndType, notificationDisplayTimeInSeconds ?? NOTIFICATION_DISPLAY_TIME_IN_SECONDS);
     }
   };
 }
