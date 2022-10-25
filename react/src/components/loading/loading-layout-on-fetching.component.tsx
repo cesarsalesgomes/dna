@@ -7,6 +7,6 @@ export default function LoadingLayoutOnFetching() {
   const [fetchesBeingPerformed] = useAtom(fetchesBeingPerformedAtom);
 
   return (
-    (fetchesBeingPerformed > 0) ? <LoadingLayout /> : <div />
+    (fetchesBeingPerformed > 0) ? <LoadingLayout isSuspense={false} /> : <div />
   );
 }
