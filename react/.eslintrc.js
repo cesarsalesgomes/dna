@@ -53,7 +53,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
 
     'quotes': [2, 'single', { 'avoidEscape': true }],
-    'max-len': ['error', { 'code': 150, 'comments': 150, 'ignoreStrings': true }],
+    'max-len': ['error', { 'code': 160, 'comments': 160, 'ignoreStrings': true }],
     "no-multiple-empty-lines": "error",
     "no-var": "error",
     "semi": "error",

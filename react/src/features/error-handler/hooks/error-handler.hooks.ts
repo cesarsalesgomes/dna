@@ -1,16 +1,15 @@
-import { bannerMessageAtom } from '@features/banner/atoms';
-import { useAtom } from 'jotai';
+import { useNotificationStore } from '@features/notification';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { reactQueryErrorHandler, hideErrorBannerMessage } from '../utils/react-query-error-handler.utils';
+import { reactQueryErrorHandler, hideErrorNotificationMessage } from '../utils/react-query-error-handler.utils';
 
 export default function useErrorHandler() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [, setBannerMessage] = useAtom(bannerMessageAtom);
+  const setMessageAndType = useNotificationStore((store) => store.setMessageAndType);
 
   return {
-    reactQueryErrorHandler: reactQueryErrorHandler(navigate, location, setBannerMessage),
-    hideErrorBannerMessageHandler: hideErrorBannerMessage(setBannerMessage)
+    reactQueryErrorHandler: reactQueryErrorHandler(navigate, location, setMessageAndType),
+    hideErrorBannerMessageHandler: hideErrorNotificationMessage(setMessageAndType)
   };
 }

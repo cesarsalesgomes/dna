@@ -8,6 +8,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { lazy, Suspense } from 'react';
 
 const Banner = lazy(() => import('@features/banner/components/banner.component'));
+const Notification = lazy(() => import('@features/notification/components/notification.component'));
 
 startHighlightConfiguration();
 
@@ -17,6 +18,7 @@ export default function App() {
       <ErrorBoundary>
         <Suspense fallback={<LoadingLayout />}>
           <Banner />
+          <Notification />
           <AppRoutes />
         </Suspense>
       </ErrorBoundary>
