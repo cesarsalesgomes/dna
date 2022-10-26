@@ -62,3 +62,8 @@ typings/
 /graphql/*/*.sdk.ts
 /graphql/*/*.hooks.ts
 /graphql/*/*.mock.ts
+
+# Playwright
+/tests/test-results/
+/tests/playwright-report/
+/tests/playwright/.cache/
