@@ -22,7 +22,7 @@ export default function App() {
           <AppRoutes />
         </Suspense>
       </ErrorBoundary>
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

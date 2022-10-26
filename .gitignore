@@ -64,6 +64,6 @@ typings/
 /graphql/*/*.mock.ts
 
 # Playwright
-/tests/test-results/
-/tests/playwright-report/
-/tests/playwright/.cache/
+/playwright/test-results/
+/playwright/playwright-report/
+/playwright/playwright/.cache/
