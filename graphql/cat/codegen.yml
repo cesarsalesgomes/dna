@@ -14,8 +14,6 @@ generates:
       rawRequest: true
       namingConvention:
         transformUnderscore: true
-      scalars:
-        ID: number
 
   # Sdk Mock Data (Use in tests)
   ./cat/cat.mock.ts:
@@ -25,12 +23,6 @@ generates:
     plugins:
       - typescript-mock-data:
           typesFile: "./cat.sdk.ts"
-          scalars:
-            ID:
-              generator: integer
-              arguments:
-                - 1
-                - 1000
 
   # React Query Hooks
   ./cat/cat.hooks.ts:
@@ -47,5 +39,3 @@ generates:
         func: "@config/react-query/directus/directus-fetcher#useDirectusFetcher"
         isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
-      scalars:
-        ID: number

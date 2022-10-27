@@ -15,5 +15,3 @@ generates:
         func: "@config/react-query/directus/directus-fetcher#useDirectusFetcher"
         isReactHook: true
       errorType: "{message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}"
-      scalars:
-        ID: number
