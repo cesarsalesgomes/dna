@@ -4,7 +4,7 @@ import useFindCatById from '../hooks/find-cat-by-id.hook';
 
 function Cat() {
   const { catId } = useParams();
-  const { data } = useFindCatById({ id: Number(catId) });
+  const { data } = useFindCatById({ id: catId as string });
 
   return (
     <div className="prose mt-4 dark:prose-invert">

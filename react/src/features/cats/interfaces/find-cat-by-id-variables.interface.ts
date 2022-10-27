@@ -1,3 +1,3 @@
-interface FindCatByIdVariables { id: number };
+interface FindCatByIdVariables { id: string };
 
 export default FindCatByIdVariables;

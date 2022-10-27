@@ -1,5 +1,5 @@
 import { FindAllCatsQuery, useFindAllCatsQuery } from '@hooks/cat.hooks';
-import QueryClientSingleton from '@providers/query-client.provider';
+import QueryClientSingleton from '@providers/react-query-client.provider';
 import { Link } from 'react-router-dom';
 
 import CatCreate from './cat-create.component';
@@ -16,15 +16,7 @@ function ShowCats({ data }: { data: FindAllCatsQuery }) {
           <Link to={`/cats/${item.id}`}>
             <button
               type="button"
-              className='p-2'
-              style={
-                // We can find the existing query data here to show bold links for ones that are cached
-                queryClient.getQueryData(['findAllCats', item!.id])
-                  ? {
-                    backgroundColor: 'green',
-                  }
-                  : {}
-              }
+              className={`p-2 ${queryClient.getQueryData(['findCatById', item!.id]) ? 'text-primary-700' : ''}`}
             >
               {item!.name}
             </button>

@@ -1,5 +1,5 @@
 import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-performed-atom';
-import QueryClientSingleton from '@providers/query-client.provider';
+import QueryClientSingleton from '@providers/react-query-client.provider';
 
 export function invalidateQueriesOnSuccess(queryKeys: string[]) {
   return {
