@@ -9,25 +9,49 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: number;
+  ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
   Date: any;
   GraphQLStringOrFloat: any;
+  Hash: any;
   JSON: any;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  create_bird_item?: Maybe<Bird>;
+  create_bird_items: Array<Bird>;
   create_cat_item?: Maybe<Cat>;
   create_cat_items: Array<Cat>;
+  delete_bird_item?: Maybe<DeleteOne>;
+  delete_bird_items?: Maybe<DeleteMany>;
   delete_cat_item?: Maybe<DeleteOne>;
   delete_cat_items?: Maybe<DeleteMany>;
+  update_bird_batch: Array<Bird>;
+  update_bird_item?: Maybe<Bird>;
+  update_bird_items: Array<Bird>;
   update_cat_batch: Array<Cat>;
   update_cat_item?: Maybe<Cat>;
   update_cat_items: Array<Cat>;
+};
+
+
+export type MutationCreateBirdItemArgs = {
+  data: CreateBirdInput;
+};
+
+
+export type MutationCreateBirdItemsArgs = {
+  data?: InputMaybe<Array<CreateBirdInput>>;
+  filter?: InputMaybe<BirdFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -47,6 +71,16 @@ export type MutationCreateCatItemsArgs = {
 };
 
 
+export type MutationDeleteBirdItemArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteBirdItemsArgs = {
+  ids: Array<InputMaybe<Scalars['ID']>>;
+};
+
+
 export type MutationDeleteCatItemArgs = {
   id: Scalars['ID'];
 };
@@ -54,6 +88,35 @@ export type MutationDeleteCatItemArgs = {
 
 export type MutationDeleteCatItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
+};
+
+
+export type MutationUpdateBirdBatchArgs = {
+  data?: InputMaybe<Array<UpdateBirdInput>>;
+  filter?: InputMaybe<BirdFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type MutationUpdateBirdItemArgs = {
+  data: UpdateBirdInput;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateBirdItemsArgs = {
+  data: UpdateBirdInput;
+  filter?: InputMaybe<BirdFilter>;
+  ids: Array<InputMaybe<Scalars['ID']>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -87,9 +150,36 @@ export type MutationUpdateCatItemsArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  bird: Array<Bird>;
+  bird_aggregated: Array<BirdAggregated>;
+  bird_by_id?: Maybe<Bird>;
   cat: Array<Cat>;
   cat_aggregated: Array<CatAggregated>;
   cat_by_id?: Maybe<Cat>;
+};
+
+
+export type QueryBirdArgs = {
+  filter?: InputMaybe<BirdFilter>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryBirdAggregatedArgs = {
+  filter?: InputMaybe<BirdFilter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  search?: InputMaybe<Scalars['String']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryBirdByIdArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -116,6 +206,49 @@ export type QueryCatByIdArgs = {
   id: Scalars['ID'];
 };
 
+export type Bird = {
+  __typename?: 'bird';
+  date_created?: Maybe<Scalars['Date']>;
+  date_created_func?: Maybe<DatetimeFunctions>;
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type BirdAggregated = {
+  __typename?: 'bird_aggregated';
+  avg?: Maybe<BirdAggregatedFields>;
+  avgDistinct?: Maybe<BirdAggregatedFields>;
+  count?: Maybe<BirdAggregatedCount>;
+  countAll?: Maybe<Scalars['Int']>;
+  countDistinct?: Maybe<BirdAggregatedCount>;
+  group?: Maybe<Scalars['JSON']>;
+  max?: Maybe<BirdAggregatedFields>;
+  min?: Maybe<BirdAggregatedFields>;
+  sum?: Maybe<BirdAggregatedFields>;
+  sumDistinct?: Maybe<BirdAggregatedFields>;
+};
+
+export type BirdAggregatedCount = {
+  __typename?: 'bird_aggregated_count';
+  date_created?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['Int']>;
+};
+
+export type BirdAggregatedFields = {
+  __typename?: 'bird_aggregated_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type BirdFilter = {
+  _and?: InputMaybe<Array<InputMaybe<BirdFilter>>>;
+  _or?: InputMaybe<Array<InputMaybe<BirdFilter>>>;
+  date_created?: InputMaybe<DateFilterOperators>;
+  date_created_func?: InputMaybe<DatetimeFunctionFilterOperators>;
+  id?: InputMaybe<NumberFilterOperators>;
+  name?: InputMaybe<StringFilterOperators>;
+};
+
 export type BooleanFilterOperators = {
   _eq?: InputMaybe<Scalars['Boolean']>;
   _neq?: InputMaybe<Scalars['Boolean']>;
@@ -129,7 +262,7 @@ export type Cat = {
   date_created_func?: Maybe<DatetimeFunctions>;
   date_updated?: Maybe<Scalars['Date']>;
   date_updated_func?: Maybe<DatetimeFunctions>;
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   user_created?: Maybe<DirectusUsers>;
   user_updated?: Maybe<DirectusUsers>;
@@ -206,15 +339,15 @@ export type CountFunctions = {
   count?: Maybe<Scalars['Int']>;
 };
 
-export type CountFunctionsInput = {
-  count?: InputMaybe<Scalars['Int']>;
+export type CreateBirdInput = {
+  date_created?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateCatInput = {
   date_created?: InputMaybe<Scalars['Date']>;
-  date_created_func?: InputMaybe<DatetimeFunctionsInput>;
   date_updated?: InputMaybe<Scalars['Date']>;
-  date_updated_func?: InputMaybe<DatetimeFunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
   user_created?: InputMaybe<CreateDirectusUsersInput>;
@@ -234,18 +367,14 @@ export type CreateDirectusFilesInput = {
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
-  metadata_func?: InputMaybe<CountFunctionsInput>;
   modified_by?: InputMaybe<CreateDirectusUsersInput>;
-  modified_on: Scalars['Date'];
-  modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  modified_on?: InputMaybe<Scalars['Date']>;
   storage: Scalars['String'];
   tags?: InputMaybe<Scalars['JSON']>;
-  tags_func?: InputMaybe<CountFunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<CreateDirectusUsersInput>;
-  uploaded_on: Scalars['Date'];
-  uploaded_on_func?: InputMaybe<DatetimeFunctionsInput>;
+  uploaded_on?: InputMaybe<Scalars['Date']>;
   width?: InputMaybe<Scalars['Int']>;
 };
 
@@ -257,20 +386,18 @@ export type CreateDirectusFoldersInput = {
 
 export type CreateDirectusRolesInput = {
   admin_access: Scalars['Boolean'];
-  app_access: Scalars['Boolean'];
+  app_access?: InputMaybe<Scalars['Boolean']>;
   description?: InputMaybe<Scalars['String']>;
   enforce_tfa: Scalars['Boolean'];
-  icon: Scalars['String'];
+  icon?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: InputMaybe<Array<InputMaybe<CreateDirectusUsersInput>>>;
-  users_func?: InputMaybe<CountFunctionsInput>;
 };
 
 export type CreateDirectusUsersInput = {
   auth_data?: InputMaybe<Scalars['JSON']>;
-  auth_data_func?: InputMaybe<CountFunctionsInput>;
   avatar?: InputMaybe<CreateDirectusFilesInput>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -280,20 +407,18 @@ export type CreateDirectusUsersInput = {
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['String']>;
   last_access?: InputMaybe<Scalars['Date']>;
-  last_access_func?: InputMaybe<DatetimeFunctionsInput>;
   last_name?: InputMaybe<Scalars['String']>;
   last_page?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  provider: Scalars['String'];
+  password?: InputMaybe<Scalars['Hash']>;
+  provider?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<CreateDirectusRolesInput>;
-  status: Scalars['String'];
+  status?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
-  tags_func?: InputMaybe<CountFunctionsInput>;
-  tfa_secret?: InputMaybe<Scalars['String']>;
+  tfa_secret?: InputMaybe<Scalars['Hash']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
+  token?: InputMaybe<Scalars['Hash']>;
 };
 
 export type DateFilterOperators = {
@@ -301,10 +426,12 @@ export type DateFilterOperators = {
   _eq?: InputMaybe<Scalars['String']>;
   _gt?: InputMaybe<Scalars['String']>;
   _gte?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _lt?: InputMaybe<Scalars['String']>;
   _lte?: InputMaybe<Scalars['String']>;
   _nbetween?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']>>>;
   _neq?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _nnull?: InputMaybe<Scalars['Boolean']>;
   _null?: InputMaybe<Scalars['Boolean']>;
 };
@@ -332,17 +459,6 @@ export type DatetimeFunctions = {
   year?: Maybe<Scalars['Int']>;
 };
 
-export type DatetimeFunctionsInput = {
-  day?: InputMaybe<Scalars['Int']>;
-  hour?: InputMaybe<Scalars['Int']>;
-  minute?: InputMaybe<Scalars['Int']>;
-  month?: InputMaybe<Scalars['Int']>;
-  second?: InputMaybe<Scalars['Int']>;
-  week?: InputMaybe<Scalars['Int']>;
-  weekday?: InputMaybe<Scalars['Int']>;
-  year?: InputMaybe<Scalars['Int']>;
-};
-
 export type DeleteMany = {
   __typename?: 'delete_many';
   ids: Array<Maybe<Scalars['ID']>>;
@@ -364,12 +480,12 @@ export type DirectusFiles = {
   filesize?: Maybe<Scalars['String']>;
   folder?: Maybe<DirectusFolders>;
   height?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   location?: Maybe<Scalars['String']>;
   metadata?: Maybe<Scalars['JSON']>;
   metadata_func?: Maybe<CountFunctions>;
   modified_by?: Maybe<DirectusUsers>;
-  modified_on: Scalars['Date'];
+  modified_on?: Maybe<Scalars['Date']>;
   modified_on_func?: Maybe<DatetimeFunctions>;
   storage: Scalars['String'];
   tags?: Maybe<Scalars['JSON']>;
@@ -377,7 +493,7 @@ export type DirectusFiles = {
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   uploaded_by?: Maybe<DirectusUsers>;
-  uploaded_on: Scalars['Date'];
+  uploaded_on?: Maybe<Scalars['Date']>;
   uploaded_on_func?: Maybe<DatetimeFunctions>;
   width?: Maybe<Scalars['Int']>;
 };
@@ -444,7 +560,7 @@ export type DirectusFilesFilter = {
 
 export type DirectusFolders = {
   __typename?: 'directus_folders';
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   name: Scalars['String'];
   parent?: Maybe<DirectusFolders>;
 };
@@ -470,11 +586,11 @@ export type DirectusFoldersFilter = {
 export type DirectusRoles = {
   __typename?: 'directus_roles';
   admin_access: Scalars['Boolean'];
-  app_access: Scalars['Boolean'];
+  app_access?: Maybe<Scalars['Boolean']>;
   description?: Maybe<Scalars['String']>;
   enforce_tfa: Scalars['Boolean'];
-  icon: Scalars['String'];
-  id?: Maybe<Scalars['ID']>;
+  icon?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
   ip_access?: Maybe<Array<Maybe<Scalars['String']>>>;
   name: Scalars['String'];
   users?: Maybe<Array<Maybe<DirectusUsers>>>;
@@ -516,23 +632,23 @@ export type DirectusUsers = {
   email_notifications?: Maybe<Scalars['Boolean']>;
   external_identifier?: Maybe<Scalars['String']>;
   first_name?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
+  id: Scalars['ID'];
   language?: Maybe<Scalars['String']>;
   last_access?: Maybe<Scalars['Date']>;
   last_access_func?: Maybe<DatetimeFunctions>;
   last_name?: Maybe<Scalars['String']>;
   last_page?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  provider: Scalars['String'];
+  password?: Maybe<Scalars['Hash']>;
+  provider?: Maybe<Scalars['String']>;
   role?: Maybe<DirectusRoles>;
-  status: Scalars['String'];
+  status?: Maybe<Scalars['String']>;
   tags?: Maybe<Scalars['JSON']>;
   tags_func?: Maybe<CountFunctions>;
-  tfa_secret?: Maybe<Scalars['String']>;
+  tfa_secret?: Maybe<Scalars['Hash']>;
   theme?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['Hash']>;
 };
 
 
@@ -573,16 +689,23 @@ export type DirectusUsersFilter = {
   last_name?: InputMaybe<StringFilterOperators>;
   last_page?: InputMaybe<StringFilterOperators>;
   location?: InputMaybe<StringFilterOperators>;
-  password?: InputMaybe<StringFilterOperators>;
+  password?: InputMaybe<HashFilterOperators>;
   provider?: InputMaybe<StringFilterOperators>;
   role?: InputMaybe<DirectusRolesFilter>;
   status?: InputMaybe<StringFilterOperators>;
   tags?: InputMaybe<StringFilterOperators>;
   tags_func?: InputMaybe<CountFunctionFilterOperators>;
-  tfa_secret?: InputMaybe<StringFilterOperators>;
+  tfa_secret?: InputMaybe<HashFilterOperators>;
   theme?: InputMaybe<StringFilterOperators>;
   title?: InputMaybe<StringFilterOperators>;
-  token?: InputMaybe<StringFilterOperators>;
+  token?: InputMaybe<HashFilterOperators>;
+};
+
+export type HashFilterOperators = {
+  _empty?: InputMaybe<Scalars['Boolean']>;
+  _nempty?: InputMaybe<Scalars['Boolean']>;
+  _nnull?: InputMaybe<Scalars['Boolean']>;
+  _null?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type NumberFilterOperators = {
@@ -605,6 +728,7 @@ export type StringFilterOperators = {
   _empty?: InputMaybe<Scalars['Boolean']>;
   _ends_with?: InputMaybe<Scalars['String']>;
   _eq?: InputMaybe<Scalars['String']>;
+  _icontains?: InputMaybe<Scalars['String']>;
   _in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _ncontains?: InputMaybe<Scalars['String']>;
   _nempty?: InputMaybe<Scalars['Boolean']>;
@@ -617,11 +741,15 @@ export type StringFilterOperators = {
   _starts_with?: InputMaybe<Scalars['String']>;
 };
 
+export type UpdateBirdInput = {
+  date_created?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type UpdateCatInput = {
   date_created?: InputMaybe<Scalars['Date']>;
-  date_created_func?: InputMaybe<DatetimeFunctionsInput>;
   date_updated?: InputMaybe<Scalars['Date']>;
-  date_updated_func?: InputMaybe<DatetimeFunctionsInput>;
   id?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
   user_created?: InputMaybe<UpdateDirectusUsersInput>;
@@ -641,18 +769,14 @@ export type UpdateDirectusFilesInput = {
   id?: InputMaybe<Scalars['ID']>;
   location?: InputMaybe<Scalars['String']>;
   metadata?: InputMaybe<Scalars['JSON']>;
-  metadata_func?: InputMaybe<CountFunctionsInput>;
   modified_by?: InputMaybe<UpdateDirectusUsersInput>;
   modified_on?: InputMaybe<Scalars['Date']>;
-  modified_on_func?: InputMaybe<DatetimeFunctionsInput>;
   storage?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
-  tags_func?: InputMaybe<CountFunctionsInput>;
   title?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<Scalars['String']>;
   uploaded_by?: InputMaybe<UpdateDirectusUsersInput>;
   uploaded_on?: InputMaybe<Scalars['Date']>;
-  uploaded_on_func?: InputMaybe<DatetimeFunctionsInput>;
   width?: InputMaybe<Scalars['Int']>;
 };
 
@@ -672,12 +796,10 @@ export type UpdateDirectusRolesInput = {
   ip_access?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   name?: InputMaybe<Scalars['String']>;
   users?: InputMaybe<Array<InputMaybe<UpdateDirectusUsersInput>>>;
-  users_func?: InputMaybe<CountFunctionsInput>;
 };
 
 export type UpdateDirectusUsersInput = {
   auth_data?: InputMaybe<Scalars['JSON']>;
-  auth_data_func?: InputMaybe<CountFunctionsInput>;
   avatar?: InputMaybe<UpdateDirectusFilesInput>;
   description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
@@ -687,20 +809,18 @@ export type UpdateDirectusUsersInput = {
   id?: InputMaybe<Scalars['ID']>;
   language?: InputMaybe<Scalars['String']>;
   last_access?: InputMaybe<Scalars['Date']>;
-  last_access_func?: InputMaybe<DatetimeFunctionsInput>;
   last_name?: InputMaybe<Scalars['String']>;
   last_page?: InputMaybe<Scalars['String']>;
   location?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['Hash']>;
   provider?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<UpdateDirectusRolesInput>;
   status?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['JSON']>;
-  tags_func?: InputMaybe<CountFunctionsInput>;
-  tfa_secret?: InputMaybe<Scalars['String']>;
+  tfa_secret?: InputMaybe<Scalars['Hash']>;
   theme?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  token?: InputMaybe<Scalars['String']>;
+  token?: InputMaybe<Scalars['Hash']>;
 };
 
 export type CatByIdQueryVariables = Exact<{
@@ -708,12 +828,12 @@ export type CatByIdQueryVariables = Exact<{
 }>;
 
 
-export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id?: number | null, name?: string | null } | null };
+export type CatByIdQuery = { __typename?: 'Query', cat_by_id?: { __typename?: 'cat', id: string, name?: string | null } | null };
 
 export type FindAllCatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id?: number | null, name?: string | null }> };
+export type FindAllCatsQuery = { __typename?: 'Query', cat: Array<{ __typename?: 'cat', id: string, name?: string | null }> };
 
 
 export const CatByIdDocument = gql`

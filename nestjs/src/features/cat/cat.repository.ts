@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DirectusService } from '@system/directus/directus.service';
 
-import { getSdk } from './cat.sdk';
+import { getSdk, Scalars } from './cat.sdk';
 
 @Injectable()
 export class CatRepository {
@@ -15,7 +15,7 @@ export class CatRepository {
     return (await this.getCatSdk(accessToken).findAllCats()).data.cat;
   }
 
-  async findById(accessToken: string, id: number) {
+  async findById(accessToken: string, id: Scalars['ID']) {
     return (await this.getCatSdk(accessToken).catById({ data: id })).data.cat_by_id;
   }
 }
