@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AccessToken } from '@system/decorators/access-token.decorator';
-import { Scalars } from './cat.sdk';
 
+import { Scalars } from './cat.sdk';
 import { CatService } from './cat.service';
 
 @Controller('/cats')
