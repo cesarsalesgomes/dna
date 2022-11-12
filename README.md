@@ -1,8 +1,21 @@
-# DNA
+</br>
 
-[![codecov](https://codecov.io/gh/cesarsalesgomes/dna/branch/main/graph/badge.svg?token=YH13U4UY6V)](https://codecov.io/gh/cesarsalesgomes/dna)
+<div align="center">
+  <picture>
+    <img src="https://dna-pictures.s3.amazonaws.com/dna-high-resolution-logo-color-on-transparent-background.png" width="210" alt="Logo"/>
+  </picture>
+  </a>
+</div>
 
-[![GitHub Super-Linter](https://github.com/cesarsalesgomes/dna/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+<br />
+
+<div align="center">
+    <a href="https://codecov.io/gh/cesarsalesgomes/dna"><img src="https://codecov.io/gh/cesarsalesgomes/dna/branch/main/graph/badge.svg?token=YH13U4UY6V"></a>
+    &nbsp;
+    <a href="https://github.com/marketplace/actions/super-linter"><img src="https://github.com/cesarsalesgomes/dna/workflows/Lint%20Code%20Base/badge.svg"></a>
+</div>
+
+<br />
 
 Fullstack Typescript project with the objective of joining three well-regarded tools in the community (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io)**, `front-end` **[React](https://reactjs.org/)**), in order to create an initial typesafe environment with the main necessary settings that a project commonly requires during its lifetime.
 
