@@ -2,7 +2,8 @@
 
 <div align="center">
   <picture>
-    <img src="https://dna-pictures.s3.amazonaws.com/dna-high-resolution-logo-color-on-transparent-background.png" width="210" alt="Logo"/>
+    <source media="(prefers-color-scheme: dark)" srcset="https://dna-pictures.s3.amazonaws.com/dna-high-resolution-logo-color-on-transparent-background.png">
+    <img src="https://dna-pictures.s3.amazonaws.com/dna-high-resolution-logo-color-on-transparent-light-background.png" width="210" alt="Logo"/>
   </picture>
   </a>
 </div>
@@ -17,7 +18,7 @@
 
 <br />
 
-Fullstack Typescript project with the objective of joining three well-regarded tools in the community (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io)**, `front-end` **[React](https://reactjs.org/)**), in order to create an initial typesafe environment with the main necessary settings that a project commonly requires during its lifetime.
+Fullstack Typescript project with the objective of joining three well-regarded tools (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io)**, `front-end` **[React](https://reactjs.org/)**), in order to create an initial typesafe environment with the main necessary settings that a project commonly requires during its lifetime.
 
 <br />
 
