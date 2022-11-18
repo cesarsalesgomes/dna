@@ -45,7 +45,7 @@
     "winston-cloudwatch": "^4.0.1"
   },
   "devDependencies": {
-    "@nestjs/schematics": "^8.0.10",
+    "@nestjs/schematics": "^9.0.3",
     "@types/cron": "^1.7.3",
     "@types/express": "^4.17.13",
     "@types/got": "^9.6.12",
