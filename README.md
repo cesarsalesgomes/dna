@@ -308,9 +308,9 @@ Because `Node` **bin** folder directory is not yet in the `PATH` environment var
 
 Thus, it's necessary to **[edit the PATH variable](https://opensource.com/article/17/6/set-path-linux)**, concatenating the directory path of the **bin** folder where `Node` was installed (**Obs:** Use the `whereis node` command, to get the directory).
 
-To do so, edit the `~/.bashrc` file, adding the command `export PATH="$PATH:/path/to/bin/dir/node"` (**Ex:** `export PATH=$PATH:/root/.nvm/versions/node /v16.13.1/bin`).
+To do so, edit the `~/.bashrc` file, adding the command `export PATH="$PATH:/path-to-bin-dir-node"` (**Ex:** `export PATH=$PATH:/root/.nvm/versions/node/v16.13.1/bin`).
 
-After this step, it's possible to define the script that will be run when the instance is restarted, which can be used either via **[User Data](https://aws.amazon.com/pt/premiumsupport/knowledge-center/execute-user-data-ec2)** , or **[Cloud-Init](https://stackoverflow.com/questions/23411408/how-do-i-set-up-cloud-init-on-custom-amis-in-aws-centos)**, and so start the application automatically:
+After this step, it's possible to define the script that will be run when the instance is restarted, which can be used either via **[User Data](https://aws.amazon.com/pt/premiumsupport/knowledge-center/execute-user-data-ec2)**, or **[Cloud-Init](https://stackoverflow.com/questions/23411408/how-do-i-set-up-cloud-init-on-custom-amis-in-aws-centos)**, and so start the application automatically:
 
 ```sh
 # Required to carry out the editing of the PATH environment variable (https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix).
@@ -318,7 +318,7 @@ source ~/.bashrc
 
  # Startup scripts of Directus and Nest
 cd /home/dna/directus && pm2 start npm --name "Directus" -- start
-cd /home/dna/nest && pm2 start npm --name "Nest" -- start
+cd /home/dna/nestjs && pm2 start npm --name "Nest" -- start
 
 # Nginx startup
 systemctl restart nginx
