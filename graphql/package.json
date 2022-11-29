@@ -9,7 +9,7 @@
     "start:install": "npm install && node main"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "2.13.11",
+    "@graphql-codegen/cli": "2.14.1",
     "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.8.1",
     "@graphql-codegen/typescript-graphql-request": "^4.5.8",
