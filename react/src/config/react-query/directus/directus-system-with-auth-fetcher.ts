@@ -7,8 +7,10 @@ import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-pe
 import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
+import { DirectusRequestOptions, resetDirectusRequestOptions } from './directus-config-options';
+
 export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(
-  query: string, options?: RequestInit['headers']
+  query: string
 ): ((variables?: TVariables & IgnoreFetchesBeingPerformedAtom) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
@@ -28,7 +30,7 @@ export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(
           Authorization: `Bearer ${accessToken}`
         },
         body: JSON.stringify({ query, variables }),
-        ...(options ?? {}),
+        ...(DirectusRequestOptions.options ?? {}),
       });
 
       const json = await res.json();
@@ -41,6 +43,8 @@ export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(
     } catch (error) {
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
+      resetDirectusRequestOptions();
+
       if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
     }
   };
