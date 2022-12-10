@@ -1,0 +1,5 @@
+mutation authRefresh {
+  auth_refresh {
+    access_token
+  }
+}
