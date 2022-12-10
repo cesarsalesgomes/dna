@@ -1,7 +1,3 @@
-/**
- * Custom fetchers used by React Query Codegen (https://www.graphql-code-generator.com/plugins/typescript-react-query)
- */
-
 import { decrementFetchesBeingPerformedAtom, incrementFetchesBeingPerformedAtom } from '@atoms/fetches-being-performed.atom';
 import { DIRECTUS_URL } from '@constants/directus.constants';
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
@@ -11,8 +7,10 @@ import IgnoreFetchesBeingPerformedAtom from '@interfaces/ignore-fetches-being-pe
 import { checkWhetherToIgnoreFetchesBeingPerformedAtom } from '@utils/react-query.utils';
 import { useAtom } from 'jotai';
 
+import { DirectusRequestOptions, resetDirectusRequestOptions } from './directus-config-options';
+
 export const useDirectusFetcher = <TData, TVariables>(
-  query: string, options?: RequestInit['headers']
+  query: string
 ): ((variables?: TVariables & IgnoreFetchesBeingPerformedAtom) => Promise<TData>) => {
   const [accessToken] = useAtom(accessTokenAtom);
   const [, incrementFetchesBeingPerformed] = useAtom(incrementFetchesBeingPerformedAtom);
@@ -32,7 +30,7 @@ export const useDirectusFetcher = <TData, TVariables>(
           Authorization: `Bearer ${accessToken}`
         },
         body: JSON.stringify({ query, variables }),
-        ...(options ?? {}),
+        ...(DirectusRequestOptions.options ?? {}),
       });
 
       const json = await res.json();
@@ -45,6 +43,8 @@ export const useDirectusFetcher = <TData, TVariables>(
     } catch (error) {
       return reactQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
+      resetDirectusRequestOptions();
+
       if (!ignoreFetchesBeingPerformed) decrementFetchesBeingPerformed();
     }
   };
