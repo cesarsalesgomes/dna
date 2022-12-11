@@ -1,4 +1,5 @@
 import { SubmitButtonWithLoadingWhenFetching } from '@components/buttons';
+import { DNA_BACKEND_URL, DNA_FRONT_URL } from '@constants/system.constants';
 
 import useSendLoginForm from '../hooks/send-login-form.hook';
 
@@ -98,7 +99,7 @@ export default function Login() {
             <div className="mt-6 grid grid-cols-3 gap-3">
               <div>
                 <a
-                  href="http://localhost:8055/auth/login/google?redirect=http://localhost:5173/login/google"
+                  href={`${DNA_BACKEND_URL}/auth/login/google?redirect=${DNA_FRONT_URL}/login/google`}
                   className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                 >
                   <span className="sr-only">Sign in with Google</span>
