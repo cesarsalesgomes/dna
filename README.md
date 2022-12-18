@@ -310,15 +310,25 @@ Thus, it's necessary to **[edit the PATH variable](https://opensource.com/articl
 
 To do so, edit the `~/.bashrc` file, adding the command `export PATH="$PATH:/path-to-bin-dir-node"` (**Ex:** `export PATH=$PATH:/root/.nvm/versions/node/v16.13.1/bin`).
 
-After this step, it's possible to define the script that will be run when the instance is restarted, which can be used either via **[User Data](https://aws.amazon.com/pt/premiumsupport/knowledge-center/execute-user-data-ec2)**, or **[Cloud-Init](https://stackoverflow.com/questions/23411408/how-do-i-set-up-cloud-init-on-custom-amis-in-aws-centos)**, and so start the application automatically:
+After this step, **[pm2 startup script](https://pm2.keymetrics.io/docs/usage/startup/)** tutorial was used to restart the apps when the instance is restarted. Simply run the scripts below:
 
 ```sh
-# Required to carry out the editing of the PATH environment variable (https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix).
-source ~/.bashrc
+# Generate Startup Script
+$ pm2 startup
 
  # Startup scripts of Directus and Nest
 cd /home/dna/directus && pm2 start npm --name "Directus" -- start
 cd /home/dna/nestjs && pm2 start npm --name "Nest" -- start
+
+# Freeze your process list across server restart
+$ pm2 save
+```
+
+After that, it remains to set the environment variables and start `nginx` when the instance is restarted, which can be either via **[User Data](https://aws.amazon.com/pt/premiumsupport/knowledge-center/execute-user-data-ec2)**, or **[Cloud-Init](https://stackoverflow.com/questions/23411408/how-do-i-set-up-cloud-init-on-custom-amis-in-aws-centos)**:
+
+```sh
+# Required to carry out the editing of the PATH environment variable (https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix).
+source ~/.bashrc
 
 # Nginx startup
 systemctl restart nginx
