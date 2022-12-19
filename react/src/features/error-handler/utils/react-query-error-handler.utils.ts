@@ -1,11 +1,11 @@
-import { FORBIDDEN_ERROR_NOTIFICATION, UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
+import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { NOTIFICATION_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
 import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from '@features/error-boundary/utils/error-boundary.utils';
 import { navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating } from '@features/login/utils/navigate-to-login.utils';
 import { hideNotificationAfterDisplaySeconds, NotificationType, SetNotificationMessageAndType } from '@features/notification';
 import GraphQLError from '@interfaces/graphql-error.interface';
 import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
-import { navigateToPreviousPage } from '@utils/navigation.utils';
+import { SetStateAction } from 'jotai';
 import { Location, NavigateFunction } from 'react-router-dom';
 
 export function hideErrorNotificationMessage(setNotificationMessageAndType: SetNotificationMessageAndType) {
@@ -16,9 +16,9 @@ export function reactQueryErrorHandler(
   navigate: NavigateFunction,
   location: Location,
   setNotificationMessageAndType: SetNotificationMessageAndType,
-  notificationDisplayTimeInSeconds?: number
+  setShowForbiddenAccessModal: (update: SetStateAction<boolean>) => void
 ) {
-  return (error: GraphQLError) => {
+  return (error: GraphQLError, notificationDisplayTimeInSeconds?: number) => {
     try {
       const code = getGraphQlErrorCode(error);
 
@@ -26,8 +26,7 @@ export function reactQueryErrorHandler(
         navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating(navigate, location);
       }
       else if (checkIfItsAForbiddenError(code)) {
-        navigateToPreviousPage(navigate);
-        setNotificationMessageAndType(FORBIDDEN_ERROR_NOTIFICATION, NotificationType.ALERT);
+        setShowForbiddenAccessModal(true);
       } else {
         sendErrorToHighlightInProduction(error);
         setNotificationMessageAndType(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);

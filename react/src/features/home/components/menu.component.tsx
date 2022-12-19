@@ -96,7 +96,7 @@ export default function Menu() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <HeadlessUiMenu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <HeadlessUiMenu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1  focus:outline-none z-40">
                       <HeadlessUiMenu.Item>
                         {({ active }) => (
                           <a
