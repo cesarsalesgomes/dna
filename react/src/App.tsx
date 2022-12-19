@@ -1,4 +1,3 @@
-import { LoadingLayout } from '@components/loading';
 import { ErrorBoundary } from '@features/error-boundary';
 import { startHighlightConfiguration } from '@providers/highlight.provider';
 import QueryClientSingleton from '@providers/react-query-client.provider';
@@ -16,7 +15,7 @@ export default function App() {
   return (
     <QueryClientProvider client={QueryClientSingleton.getInstance()}>
       <ErrorBoundary>
-        <Suspense fallback={<LoadingLayout />}>
+        <Suspense>
           <Banner />
           <Notification />
           <AppRoutes />
