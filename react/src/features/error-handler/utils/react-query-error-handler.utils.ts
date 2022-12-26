@@ -4,7 +4,7 @@ import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErr
 import { navigateToLoginSettingStateToRedirectToPreviousPageAfterAuthenticating } from '@features/login/utils/navigate-to-login.utils';
 import { hideNotificationAfterDisplaySeconds, NotificationType, SetNotificationMessageAndType } from '@features/notification';
 import GraphQLError from '@interfaces/graphql-error.interface';
-import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
+import Highlight from '@providers/highlight.provider';
 import { SetStateAction } from 'jotai';
 import { Location, NavigateFunction } from 'react-router-dom';
 
@@ -28,11 +28,11 @@ export function reactQueryErrorHandler(
       else if (checkIfItsAForbiddenError(code)) {
         setShowForbiddenAccessModal(true);
       } else {
-        sendErrorToHighlightInProduction(error);
+        Highlight.sendErrorToHighlightInProduction(error);
         setNotificationMessageAndType(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
       }
     } catch (err) {
-      sendErrorToHighlightInProduction(error);
+      Highlight.sendErrorToHighlightInProduction(error);
       setNotificationMessageAndType(UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
     } finally {
       hideNotificationAfterDisplaySeconds(setNotificationMessageAndType, notificationDisplayTimeInSeconds ?? NOTIFICATION_DISPLAY_TIME_IN_SECONDS);

@@ -21,7 +21,7 @@ export default function ForbiddenAccessModal() {
   return showForbiddenAccessModal ?
     (
 
-      <div className="absolute z-30 flex w-screen items-center justify-center bg-gray-500/60 px-4"
+      <div className="absolute z-30 flex w-screen items-center justify-center bg-black/25 px-4"
         style={{
           height: `calc(100vh - ${MENU_NAVBAR_HEIGHT}`
         }} aria-labelledby="modal-title" role="dialog" aria-modal="true">

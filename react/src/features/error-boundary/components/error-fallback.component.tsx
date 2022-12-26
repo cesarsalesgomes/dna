@@ -1,8 +1,8 @@
 import { UnexpectedError } from '@features/info';
-import { sendErrorToHighlightInProduction } from '@providers/highlight.provider';
+import Highlight from '@providers/highlight.provider';
 
 export default function ErrorFallback({ error }: { error: Error }) {
-  sendErrorToHighlightInProduction(error);
+  Highlight.sendErrorToHighlightInProduction(error);
 
   return <UnexpectedError />;
 };

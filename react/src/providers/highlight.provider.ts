@@ -1,16 +1,32 @@
 import { HIGHLIGHT_PROJECT_ID } from '@constants/highlight.constants';
 import { H } from 'highlight.run';
+import { HighlightPublicInterface } from 'highlight.run/dist/client/src/types/types';
 
-export function startHighlightConfiguration() {
-  if (import.meta.env.PROD) H.init(HIGHLIGHT_PROJECT_ID, { environment: 'production' });
-}
+export default class Highlight {
+  static instance: HighlightPublicInterface;
 
-export function sendErrorToHighlightInProduction(error: any) {
-  if (import.meta.env.PROD) {
-    H.consumeError(error);
+  public static getInstance(): HighlightPublicInterface | null {
+    if (import.meta.env.PROD) {
+      if (!Highlight.instance) {
+        Highlight.instance = H;
+        Highlight.instance.init(HIGHLIGHT_PROJECT_ID, { environment: 'production', enablePerformanceRecording: false });
+      }
+
+      return Highlight.instance;
+    }
+
+    return null;
   }
-  else {
-    // eslint-disable-next-line no-console
-    console.error(error);
+
+  public static sendErrorToHighlightInProduction(error: any) {
+    const highlight = Highlight.getInstance();
+
+    if (highlight) {
+      highlight.consumeError(error);
+    }
+    else {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
   }
 }
