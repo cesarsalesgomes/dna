@@ -1,7 +1,8 @@
 import { LoadingLayout, LoadingLayoutOnFetching } from '@components/loading';
-import { ForbiddenAccessModal } from '@components/modals';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+
+const ForbiddenAccessModal = lazy(() => import('@components/modals/forbidden-access-modal.component'));
 
 export default function Layout() {
   return (
