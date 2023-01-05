@@ -169,7 +169,11 @@ _Below are the steps of creation:_
 
    5. Update the `start` script of the _package.json_ to `npx directus start`.
 
-5. Set the production enviroment variables. NestJS enviroment variables go on the `.bashrc` script file; Directus environment variables must be inserted in the `.env` file (previously created by the Directus CLI).
+5. Set the production enviroment variables. NestJS enviroment variables go on the `.bashrc` script file; Directus environment variables must be inserted in the `.env` file (previously created by the Directus CLI). Below are environment variable settings in production different from development:
+
+   1. **Directus:** HOST="127.0.0.1"
+
+   2. **Nest:** export DIRECTUS_IP="127.0.0.1"
 
 6. Start the Directus project using the **[Ubuntu](https://docs.directus.io/self-hosted/installation/ubuntu/#ubuntu)** with `pm2`, to keep the application alive **(pm2 start npm --name "Directus" -- start)**.
 
