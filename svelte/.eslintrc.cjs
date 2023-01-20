@@ -10,11 +10,19 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: ['./tsconfig.json'],
+    extraFileExtensions: ['.svelte'],
   },
-  plugins: [
-    '@typescript-eslint', 'eslint-plugin-import-helpers',
+  overrides: [
+    {
+      files: ['*.svelte'],
+      processor: 'svelte3/svelte3'
+    }
   ],
-  ignorePatterns: ['svelte.config.js'],
+  plugins: [
+    'svelte3', '@typescript-eslint', 'eslint-plugin-import-helpers',
+  ],
+  ignorePatterns: ['svelte.config.js', '.eslintrc.cjs', 'vite.config.ts'],
   rules: {
     'import/order': [
       'error',
@@ -53,4 +61,7 @@ module.exports = {
     'no-use-before-define': 'error',
     'import/prefer-default-export': 'off',
   },
+  settings: {
+    'svelte3/typescript': true,
+  }
 };
