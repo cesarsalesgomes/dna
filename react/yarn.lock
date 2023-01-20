@@ -2003,10 +2003,10 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
-jotai@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.9.0.tgz#488aac16fb5b527e2af2efd76d28768ec1fd0386"
-  integrity sha512-XYpSlxbxujUCTA8PNkzfj3+zF6XVyzo6XMZIEic3gXQCpTDPfmqhUj2FR8kwUACK5weosFrSBhesrjwfILUCoQ==
+jotai@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.13.1.tgz#20cc46454cbb39096b12fddfa635b873b3668236"
+  integrity sha512-RUmH1S4vLsG3V6fbGlKzGJnLrDcC/HNb5gH2AeA9DzuJknoVxSGvvg8OBB7lke+gDc4oXmdVsaKn/xDUhWZ0vw==
 
 js-sdsl@^4.1.4:
   version "4.2.0"
