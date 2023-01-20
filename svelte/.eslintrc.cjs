@@ -9,9 +9,10 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   plugins: [
-    '@typescript-eslint',
+    '@typescript-eslint', 'eslint-plugin-import-helpers',
   ],
   ignorePatterns: ['svelte.config.js'],
   rules: {
