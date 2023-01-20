@@ -14,3 +14,8 @@ updates:
     directory: "/react"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "npm"
+    directory: "/svelte"
+    schedule:
+      interval: "weekly"
