@@ -9,9 +9,9 @@ export default function App() {
   return (
     <QueryClientProvider client={QueryClientSingleton.getInstance()}>
       <ErrorBoundary>
+        <AppRoutes />
         <Banner />
         <Notification />
-        <AppRoutes />
       </ErrorBoundary>
     </QueryClientProvider>
   );
