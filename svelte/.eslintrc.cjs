@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    'plugin:@typescript-eslint/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,9 +21,9 @@ module.exports = {
     }
   ],
   plugins: [
-    'svelte3', '@typescript-eslint', 'eslint-plugin-import-helpers',
+    'svelte3', '@typescript-eslint', 'eslint-plugin-import-helpers'
   ],
-  ignorePatterns: ['svelte.config.js', '.eslintrc.cjs', 'vite.config.ts'],
+  ignorePatterns: ['svelte.config.js', '.eslintrc.cjs', 'vite.config.ts', 'tailwind.config.cjs', 'postcss.config.cjs'],
   rules: {
     'import/order': [
       'error',
