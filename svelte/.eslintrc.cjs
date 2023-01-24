@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
+    "plugin:import/typescript",
     'plugin:@typescript-eslint/recommended',
   ],
   parser: '@typescript-eslint/parser',
@@ -21,7 +22,7 @@ module.exports = {
     }
   ],
   plugins: [
-    'svelte3', '@typescript-eslint', 'eslint-plugin-import-helpers'
+    'svelte3', '@typescript-eslint', 'import', 'eslint-plugin-import-helpers'
   ],
   ignorePatterns: ['svelte.config.js', '.eslintrc.cjs', 'vite.config.ts', 'tailwind.config.cjs', 'postcss.config.cjs'],
   rules: {
@@ -34,8 +35,17 @@ module.exports = {
       },
     ],
     'import/default': 'off',
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "ts": "never",
+      }
+    ],
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
+    "import/no-unresolved": "error",
     'no-restricted-imports': [
       'error',
       {
@@ -64,5 +74,14 @@ module.exports = {
   },
   settings: {
     'svelte3/typescript': true,
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "project": "./tsconfig.json",
+      }
+    }
   }
 };
