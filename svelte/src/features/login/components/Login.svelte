@@ -1,3 +1,22 @@
+<script lang="ts">
+  import { authLoginHandler } from '@features/auth/utils/auth.utils';
+  import { useAuthLoginMutation } from '@hooks/auth.hooks';
+
+  let email: string;
+  let password: string;
+  let sendLoginForm: (event: Event) => any;
+
+  useAuthLoginMutation().subscribe(({ mutateAsync }) => {
+    sendLoginForm = async (event: Event) => {
+      event.preventDefault();
+
+      const accessToken = (await mutateAsync({ email, password })).auth_login.access_token;
+
+      authLoginHandler(accessToken);
+    };
+  })();
+</script>
+
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="prose sm:mx-auto sm:w-full sm:max-w-md dark:prose-invert">
     <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
@@ -19,6 +38,7 @@
               type="email"
               autocomplete="email"
               required
+              bind:value={email}
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
           </div>
         </div>
@@ -31,6 +51,7 @@
               type="password"
               autocomplete="current-password"
               required
+              bind:value={password}
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
           </div>
         </div>
@@ -50,7 +71,7 @@
         </div>
 
         <div>
-          <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Sign in</button>
+          <button type="submit" on:click={sendLoginForm} class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Sign in</button>
         </div>
       </form>
 

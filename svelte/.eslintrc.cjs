@@ -32,7 +32,8 @@ module.exports = {
             "multiline": 1,
             "singleline": 3
           }
-        ]
+        ],
+        'max-len': "off",
       }
     }
   ],
