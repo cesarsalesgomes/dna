@@ -7,6 +7,7 @@ module.exports = {
     'airbnb-base',
     "plugin:import/typescript",
     'plugin:@typescript-eslint/recommended',
+    "plugin:svelte/recommended",
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,11 +19,25 @@ module.exports = {
   overrides: [
     {
       files: ['*.svelte'],
-      processor: 'svelte3/svelte3'
+      parser: "svelte-eslint-parser",
+      parserOptions: {
+        parser: "@typescript-eslint/parser",
+      },
+      rules: {
+        "svelte/indent": "error",
+        indent: "off",
+        "svelte/max-attributes-per-line": [
+          "error",
+          {
+            "multiline": 1,
+            "singleline": 3
+          }
+        ]
+      }
     }
   ],
   plugins: [
-    'svelte3', '@typescript-eslint', 'import', 'eslint-plugin-import-helpers'
+    '@typescript-eslint', 'import', 'eslint-plugin-import-helpers'
   ],
   ignorePatterns: ['svelte.config.js', '.eslintrc.cjs', 'vite.config.ts', 'tailwind.config.cjs', 'postcss.config.cjs'],
   rules: {
@@ -73,13 +88,12 @@ module.exports = {
     'import/prefer-default-export': 'off',
   },
   settings: {
-    'svelte3/typescript': true,
     "import/parsers": {
       "@typescript-eslint/parser": [".ts"]
     },
     "import/resolver": {
       "typescript": {
-        "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "alwaysTryTypes": true,
         "project": "./tsconfig.json",
       }
     }

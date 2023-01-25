@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Router, Route } from 'svelte-routing';
-  
+
   import MenuLayout from '../components/MenuLayout.svelte';
 </script>
 
