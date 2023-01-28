@@ -16,7 +16,7 @@
     "@graphql-codegen/typescript-operations": "^2.5.12",
     "@graphql-codegen/typescript-react-query": "^4.0.6",
     "@graphql-codegen/typescript-resolvers": "2.7.12",
-    "axios": "^1.2.1",
+    "axios": "^1.2.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "graphql-codegen-typescript-mock-data": "^2.7.1"
