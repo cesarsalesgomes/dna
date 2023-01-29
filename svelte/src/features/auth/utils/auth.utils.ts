@@ -2,7 +2,7 @@ import { navigate } from 'svelte-routing';
 
 import { accessTokenStore, userIdStore } from '../stores';
 
-import { getAccessTokenFromLocalStorage, setAccessTokenToLocalStorage } from './storage.utils';
+import { getAccessTokenFromLocalStorage, removeAccessTokenFromLocalStorage, setAccessTokenToLocalStorage } from './storage.utils';
 
 function getPayloadFromAccessToken(accessToken: string): { id: string } {
   return JSON.parse(atob(accessToken.split('.')[1]));
@@ -26,7 +26,7 @@ export function authLoginHandler(accessToken: string) {
 }
 
 export function navigateToLoginIfUserNotAuthenticated() {
-  accessTokenStore.subscribe((accessToken) => {
+  return accessTokenStore.subscribe((accessToken) => {
     if (accessToken) return;
 
     const accessTokenFromLocalStorage = getAccessTokenFromLocalStorage();
@@ -37,4 +37,9 @@ export function navigateToLoginIfUserNotAuthenticated() {
       navigate('login');
     }
   });
+}
+
+export function logout() {
+  removeAccessTokenFromLocalStorage();
+  accessTokenStore.set('');
 }

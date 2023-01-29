@@ -1,12 +1,19 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
+  import type { Unsubscriber } from 'svelte/store';
 
   import { navigateToLoginIfUserNotAuthenticated } from '@features/auth/utils/auth.utils';
 
   import { HomeRoutes } from '../routes';
 
+  let accessTokenStoreUnsubscriber: Unsubscriber;
+
   onMount(() => {
-    navigateToLoginIfUserNotAuthenticated();
+    accessTokenStoreUnsubscriber = navigateToLoginIfUserNotAuthenticated();
+  });
+
+  onDestroy(() => {
+    accessTokenStoreUnsubscriber();
   });
 </script>
 
