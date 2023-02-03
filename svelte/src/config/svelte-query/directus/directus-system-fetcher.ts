@@ -1,5 +1,6 @@
 import { DIRECTUS_URL } from '@constants/directus.constants';
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
+import { svelteQueryErrorHandler } from '@features/error-handler/utils/svelte-query-error-handler.utils';
 
 import { DirectusRequestOptions } from './directus-config-options';
 
@@ -18,13 +19,11 @@ export const useDirectusSystemFetcher = <TData, TVariables>(query: string):
       const json = await res.json();
 
       if (json.errors) {
-        // TODO: send error to error handling instead of throwing
-        throw new Error(json.errors[0]);
+        return svelteQueryErrorHandler(json.errors[0]) as any;
       }
 
       return json.data;
     } catch (error) {
-      // TODO: send error to error handling instead of throwing
-      throw new Error(UNEXPECTED_ERROR_NOTIFICATION);
+      return svelteQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     }
   };
