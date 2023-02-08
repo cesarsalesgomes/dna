@@ -1,20 +1,21 @@
 <script lang="ts">
+  import { get } from 'svelte/store';
+
   import { authLoginHandler } from '@features/auth/utils/auth.utils';
   import { useAuthLoginMutation } from '@hooks/auth.hooks';
 
   let email: string;
   let password: string;
-  let sendLoginForm: (event: Event) => any;
 
-  useAuthLoginMutation().subscribe(({ mutateAsync }) => {
-    sendLoginForm = async (event: Event) => {
-      event.preventDefault();
+  const { mutateAsync: authLoginMutation } = get(useAuthLoginMutation());
 
-      const accessToken = (await mutateAsync({ email, password })).auth_login.access_token;
+  const sendLoginForm = async (event: Event) => {
+    event.preventDefault();
 
-      authLoginHandler(accessToken);
-    };
-  })();
+    const accessToken = (await authLoginMutation({ email, password })).auth_login.access_token;
+
+    authLoginHandler(accessToken);
+  };
 </script>
 
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
