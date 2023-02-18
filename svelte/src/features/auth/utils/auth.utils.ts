@@ -1,3 +1,4 @@
+import { get } from 'svelte/store';
 import { navigate } from 'svelte-routing';
 
 import { accessTokenStore, userIdStore } from '../stores';
@@ -25,21 +26,29 @@ export function authLoginHandler(accessToken: string) {
   }
 }
 
-export function navigateToLoginIfUserNotAuthenticated() {
-  return accessTokenStore.subscribe((accessToken) => {
-    if (accessToken) return;
+export function navigateToLoginIfUserNotAuthenticated(): string {
+  // Check Access Token on Store
+  const accessTokenFromStore = get(accessTokenStore);
 
-    const accessTokenFromLocalStorage = getAccessTokenFromLocalStorage();
+  if (accessTokenFromStore) return accessTokenFromStore;
 
-    if (accessTokenFromLocalStorage) {
-      setAccessTokenAndUserOnPayloadToStore(accessTokenFromLocalStorage);
-    } else {
-      navigate('login');
-    }
-  });
+  // Check Access Token on Localstorage
+  const accessTokenFromLocalStorage = getAccessTokenFromLocalStorage();
+
+  if (accessTokenFromLocalStorage) {
+    setAccessTokenAndUserOnPayloadToStore(accessTokenFromLocalStorage);
+
+    return accessTokenFromLocalStorage;
+  }
+
+  // User not authenticated
+  navigate('/login');
+
+  return null;
 }
 
 export function logout() {
   removeAccessTokenFromLocalStorage();
   accessTokenStore.set('');
+  navigate('/login');
 }

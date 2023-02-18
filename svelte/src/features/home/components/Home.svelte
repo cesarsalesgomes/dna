@@ -1,20 +1,18 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
-  import type { Unsubscriber } from 'svelte/store';
+  import { onMount } from 'svelte';
 
   import { navigateToLoginIfUserNotAuthenticated } from '@features/auth/utils/auth.utils';
 
   import { HomeRoutes } from '../routes';
 
-  let accessTokenStoreUnsubscriber: Unsubscriber;
+  let userAuthenticated: boolean;
 
+  // OnMount necessary to trigger tick to 'navigate' if user not authenticated
   onMount(() => {
-    accessTokenStoreUnsubscriber = navigateToLoginIfUserNotAuthenticated();
-  });
-
-  onDestroy(() => {
-    accessTokenStoreUnsubscriber();
+    userAuthenticated = !!navigateToLoginIfUserNotAuthenticated();
   });
 </script>
 
-<HomeRoutes></HomeRoutes>
+{#if userAuthenticated}
+  <HomeRoutes></HomeRoutes>
+{/if}
