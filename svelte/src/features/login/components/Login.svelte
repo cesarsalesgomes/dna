@@ -1,6 +1,7 @@
 <script lang="ts">
   import { get } from 'svelte/store';
 
+  import { SubmitButtonWithLoadingWhenFetching } from '@components/buttons';
   import { authLoginHandler } from '@features/auth/utils/auth.utils';
   import { useAuthLoginMutation } from '@hooks/auth.hooks';
 
@@ -30,7 +31,10 @@
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6"
+        action="#"
+        method="POST"
+        on:submit={sendLoginForm}>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
           <div class="mt-1">
@@ -72,7 +76,7 @@
         </div>
 
         <div>
-          <button type="submit" on:click={sendLoginForm} class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Sign in</button>
+          <SubmitButtonWithLoadingWhenFetching label="Sign in" />
         </div>
       </form>
 

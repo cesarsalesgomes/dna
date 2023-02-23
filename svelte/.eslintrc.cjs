@@ -62,6 +62,7 @@ module.exports = {
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
     "import/no-unresolved": "error",
+    "import/no-mutable-exports": "off",
     'no-restricted-imports': [
       'error',
       {

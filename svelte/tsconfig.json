@@ -27,6 +27,7 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@providers/*": ["src/providers/*"],
       "@routes/*": ["src/routes/*"],
+      "@stores/*": ["src/stores/*"],
       "@test/*": ["src/test/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
