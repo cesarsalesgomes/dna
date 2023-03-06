@@ -1,17 +1,20 @@
 <script lang="ts">
   import { get } from 'svelte/store';
 
+  import { setNotificationOnSuccess } from '@features/notification/utils/notification.utils';
   import { useCreateCatMutation } from '@hooks/cat.hooks';
   import { invalidateQueriesOnSuccess } from '@utils/react-query.utils';
 
   let name: string;
 
-  const { mutate } = get(useCreateCatMutation(invalidateQueriesOnSuccess(['findAllCats'])));
+  const { mutateAsync } = get(useCreateCatMutation(invalidateQueriesOnSuccess(['findAllCats'])));
 
-  const onSubmitCatForm = (event: Event) => {
+  const onSubmitCatForm = async (event: Event) => {
     event.preventDefault();
 
-    mutate({ data: { name } });
+    await mutateAsync({ data: { name } });
+
+    setNotificationOnSuccess();
   };
 </script>
 

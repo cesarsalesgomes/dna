@@ -13,7 +13,7 @@
   const sendLoginForm = async (event: Event) => {
     event.preventDefault();
 
-    const accessToken = (await authLoginMutation({ email, password })).auth_login.access_token;
+    const accessToken = (await authLoginMutation({ email, password }))?.auth_login.access_token;
 
     authLoginHandler(accessToken);
   };
