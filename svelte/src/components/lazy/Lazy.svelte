@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount, SvelteComponent } from 'svelte';
 
+  import LoadingLayout from '@components/loading/LoadingLayout.svelte';
+
   export let component: () => Promise<SvelteComponent>;
 
   let loadedComponent: any = null;
@@ -20,5 +22,5 @@
 {#if loadedComponent}
   <svelte:component this={loadedComponent} {...props} />
 {:else }
-  Loading...
+  <LoadingLayout isSuspense={true}/>
 {/if}
