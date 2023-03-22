@@ -1,11 +1,13 @@
 <script lang="ts">
-  import { Router, Route } from 'svelte-routing';
+  import { Router } from 'svelte-routing';
 
-  import { Home } from '@features/home';
-  import { LoginRoutes } from '@features/login';
+  import LazyRoute from '@components/lazy/LazyRoute.svelte';
+
+  const LoginRoutes = () => import('@features/login/routes/LoginRoutes.svelte');
+  const Home = () => import('@features/home/components/Home.svelte');
 </script>
 
 <Router>
-  <Route path="login"><LoginRoutes/></Route>
-  <Route path=""><Home/></Route>
+  <LazyRoute path="login" component={LoginRoutes}/>
+  <LazyRoute path="" component={Home}/>
 </Router>
