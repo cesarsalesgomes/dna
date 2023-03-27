@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { links, Router } from 'svelte-routing';
+
   import { logout } from '@features/auth/utils/auth.utils';
 
   let showMenu: boolean;
@@ -56,15 +58,11 @@
           <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
-
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+          <div class="flex space-x-4" use:links>
+            <Router>
+              <a href="/cats" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Cats</a>
+              <a href="/birds" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Birds</a>
+            </Router>
           </div>
         </div>
       </div>
@@ -140,15 +138,11 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   {#if showMenu}
     <div class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+      <div class="space-y-1 px-2 pt-2 pb-3" use:links>
+        <Router>
+          <a href="/cats" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Cats</a>
+          <a href="/birds" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Birds</a>
+        </Router>
       </div>
     </div>
   {/if}
