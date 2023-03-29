@@ -1,3 +1,5 @@
+import { navigate } from 'svelte-routing';
+
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { NOTIFICATION_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
 import { NotificationType } from '@features/notification/enums';
@@ -6,7 +8,11 @@ import { hideNotificationAfterDisplaySeconds } from '@features/notification/util
 import type GraphQLError from '@interfaces/graphql-error.interface';
 import { setShowForbiddenAccessModalStore } from '@stores/show-forbidden-access-modal.store';
 
-import { checkIfItsAForbiddenError, getGraphQlErrorCode } from './error-code.utils';
+import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from './error-code.utils';
+
+function navigateToLogin() {
+  navigate('/login', { replace: true });
+}
 
 export function svelteQueryErrorHandler(error: GraphQLError, notificationDisplayTimeInSeconds?: number) {
   const type = NotificationType.ERROR;
@@ -14,7 +20,9 @@ export function svelteQueryErrorHandler(error: GraphQLError, notificationDisplay
   try {
     const code = getGraphQlErrorCode(error);
 
-    if (checkIfItsAForbiddenError(code)) {
+    if (checkIfItsAnInvalidTokenError(code)) {
+      navigateToLogin();
+    } else if (checkIfItsAForbiddenError(code)) {
       setShowForbiddenAccessModalStore(true);
     } else {
       setNotificationStore(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, type);
