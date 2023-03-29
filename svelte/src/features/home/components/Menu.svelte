@@ -1,10 +1,23 @@
 <script lang="ts">
-  import { links, Router } from 'svelte-routing';
+  import { onDestroy } from 'svelte';
 
   import { logout } from '@features/auth/utils/auth.utils';
+  import { currentRouteStore } from '@stores/current-route.store';
+  import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
   let showMenu: boolean;
   let showUserMenu: boolean;
+
+  let navigation = [
+    { name: 'Cats', href: '/cats', isActive: false },
+    { name: 'Birds', href: '/birds', isActive: false },
+  ];
+
+  const unsubscribe = currentRouteStore.subscribe((route) => {
+    navigation = navigation.map((nav) => ({ ...nav, isActive: route === nav.href }));
+  });
+
+  onDestroy(unsubscribe);
 </script>
 
 <nav class="bg-gray-800">
@@ -58,11 +71,13 @@
           <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4" use:links>
-            <Router>
-              <a href="/cats" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Cats</a>
-              <a href="/birds" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Birds</a>
-            </Router>
+          <div class="flex space-x-4">
+            {#each navigation as nav}
+              <div
+                on:click={navigateToRouteAndSetCurrentRouteStore(nav.href) }
+                class={`${nav.isActive ? 'bg-gray-900 text-white cursor-default' : 'text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer'}  px-3 py-2 rounded-md text-sm font-medium `}
+                aria-current="page">{nav.name}</div>
+            {/each}
           </div>
         </div>
       </div>
@@ -138,11 +153,13 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   {#if showMenu}
     <div class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3" use:links>
-        <Router>
-          <a href="/cats" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Cats</a>
-          <a href="/birds" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Birds</a>
-        </Router>
+      <div class="space-y-1 px-2 pt-2 pb-3">
+        {#each navigation as nav}
+          <div
+            on:click={navigateToRouteAndSetCurrentRouteStore(nav.href) }
+            class={`${nav.isActive ? 'bg-gray-900 text-white cursor-default' : 'text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer'} block px-3 py-2 rounded-md text-base font-medium `}
+            aria-current="page">{nav.name}</div>
+        {/each}
       </div>
     </div>
   {/if}

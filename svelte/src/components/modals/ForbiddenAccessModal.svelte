@@ -18,7 +18,7 @@
   function closeModalAndGoBackToLastPageAfterAPeriod() {
     setTimeout(() => {
       setShowForbiddenAccessModalStore(false);
-      window.history.go(-1);
+      window.history.go(-1); // TODO: add previous route store and use method 'navigateToRouteAndSetCurrentRouteStore'
     }, FORBIDDEN_ACCESS_MODAL_DISPLAY_TIME_IN_SECONDS * 1000);
   }
 

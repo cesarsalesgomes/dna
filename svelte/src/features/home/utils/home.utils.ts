@@ -1,5 +1,5 @@
-import { navigate } from 'svelte-routing';
+import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
 export function navigateToUserHome() {
-  navigate('/cats', { replace: true });
+  navigateToRouteAndSetCurrentRouteStore('/cats', true);
 }

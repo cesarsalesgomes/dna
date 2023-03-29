@@ -1,5 +1,3 @@
-import { navigate } from 'svelte-routing';
-
 import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constants';
 import { NOTIFICATION_DISPLAY_TIME_IN_SECONDS } from '@constants/system.constants';
 import { NotificationType } from '@features/notification/enums';
@@ -7,11 +5,12 @@ import { setNotificationStore } from '@features/notification/stores/notification
 import { hideNotificationAfterDisplaySeconds } from '@features/notification/utils';
 import type GraphQLError from '@interfaces/graphql-error.interface';
 import { setShowForbiddenAccessModalStore } from '@stores/show-forbidden-access-modal.store';
+import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
 import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from './error-code.utils';
 
 function navigateToLogin() {
-  navigate('/login', { replace: true });
+  navigateToRouteAndSetCurrentRouteStore('/login', true);
 }
 
 export function svelteQueryErrorHandler(error: GraphQLError, notificationDisplayTimeInSeconds?: number) {

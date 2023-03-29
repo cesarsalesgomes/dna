@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
-import { navigate } from 'svelte-routing';
+
+import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
 import { accessTokenStore, userIdStore } from '../stores';
 
@@ -15,7 +16,7 @@ function setAccessTokenAndUserOnPayloadToStore(accessToken: string) {
 }
 
 function navigateToHome() {
-  navigate('/', { replace: true });
+  navigateToRouteAndSetCurrentRouteStore('/', true);
 }
 
 export function authLoginHandler(accessToken: string) {
@@ -42,7 +43,7 @@ export function navigateToLoginIfUserNotAuthenticated(): string {
   }
 
   // User not authenticated
-  navigate('/login');
+  navigateToRouteAndSetCurrentRouteStore('/login', true);
 
   return null;
 }
@@ -50,5 +51,5 @@ export function navigateToLoginIfUserNotAuthenticated(): string {
 export function logout() {
   removeAccessTokenFromLocalStorage();
   accessTokenStore.set('');
-  navigate('/login');
+  navigateToRouteAndSetCurrentRouteStore('/login', true);
 }
