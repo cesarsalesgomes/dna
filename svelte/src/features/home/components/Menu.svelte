@@ -2,7 +2,7 @@
   import { onDestroy } from 'svelte';
 
   import { logout } from '@features/auth/utils/auth.utils';
-  import { currentRouteStore } from '@stores/current-route.store';
+  import { currentRouteStore } from '@stores/route.store';
   import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
   let showMenu: boolean;

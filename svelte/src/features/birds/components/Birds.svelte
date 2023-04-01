@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { get } from 'svelte/store';
 
   import { useFindAllBirdsQuery } from '@hooks/bird.hooks';
 
-  const birdsSubscription = useFindAllBirdsQuery().subscribe(() => { });
-
-  onDestroy(() => { birdsSubscription(); });
+  get(useFindAllBirdsQuery());
 </script>
 
 <div class="prose flex flex-col dark:prose-invert">
