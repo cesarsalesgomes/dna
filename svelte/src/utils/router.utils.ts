@@ -8,8 +8,10 @@ function setPreviousRouteStore(previousRoute: string) {
 }
 
 export function navigateToRouteAndSetCurrentRouteStore(route: string, replace?: boolean) {
+  const currentRoute = get(currentRouteStore);
+
+  setPreviousRouteStore(currentRoute || window.location.pathname);
   navigate(route, { replace });
-  setPreviousRouteStore(get(currentRouteStore));
 
   currentRouteStore.set(route);
 }

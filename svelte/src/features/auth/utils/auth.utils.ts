@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 
+import { previousRouteStore } from '@stores/route.store';
 import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
 import { accessTokenStore, userIdStore } from '../stores';
@@ -23,7 +24,10 @@ export function authLoginHandler(accessToken: string) {
   if (accessToken) {
     setAccessTokenAndUserOnPayloadToStore(accessToken);
     setAccessTokenToLocalStorage(accessToken);
-    navigateToHome();
+
+    const previousRoute = get(previousRouteStore);
+
+    if (previousRoute) { navigateToRouteAndSetCurrentRouteStore(previousRoute, true); } else navigateToHome();
   }
 }
 

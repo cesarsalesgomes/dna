@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, SvelteComponent } from 'svelte';
 
-  import LoadingLayout from '@components/loading/LoadingLayout.svelte';
+  import { lazyLoadingStore } from '@stores/lazy-loading.store';
 
   export let component: () => Promise<SvelteComponent>;
 
@@ -15,12 +15,14 @@
   }
 
   onMount(async () => {
+    lazyLoadingStore.set(true);
+
     loadedComponent = (await component()).default;
+
+    lazyLoadingStore.set(false);
   });
 </script>
 
 {#if loadedComponent}
   <svelte:component this={loadedComponent} {...props} />
-{:else }
-  <LoadingLayout isSuspense={true}/>
 {/if}

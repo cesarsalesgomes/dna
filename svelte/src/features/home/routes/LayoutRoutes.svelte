@@ -1,18 +1,17 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { Router, Route } from 'svelte-routing';
+  import { Router } from 'svelte-routing';
 
-  import Birds from '@features/birds/components/Birds.svelte';
-  import Cats from '@features/cats/components/Cats.svelte';
+  const Birds = () => import('@features/birds/components/Birds.svelte');
+  const Cats = () => import('@features/cats/components/Cats.svelte');
+  const NavigateToHome = () => import('../components/NavigateToHome.svelte');
+  const NotFound = () => import('../components/NotFound.svelte');
 
-  import NotFound from '../components/NotFound.svelte';
-  import { navigateToUserHome } from '../utils/home.utils';
-
-  onMount(() => navigateToUserHome());
+  import LazyRoute from '@components/lazy/LazyRoute.svelte';
 </script>
 
 <Router>
-  <Route path="cats"><Cats/></Route>
-  <Route path="birds"><Birds/></Route>
-  <Route path="*"><NotFound/></Route>
+  <LazyRoute path="/cats" component={Cats}/>
+  <LazyRoute path="/birds" component={Birds}/>
+  <LazyRoute path="/" component={NavigateToHome}/>
+  <LazyRoute path="*" component={NotFound}/>
 </Router>
