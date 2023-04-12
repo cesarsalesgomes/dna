@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
 
   import { logout } from '@features/auth/utils/auth.utils';
   import { currentRouteStore } from '@stores/route.store';
-  import { navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
+  import { getRoutePath, navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
   let showMenu: boolean;
   let showUserMenu: boolean;
@@ -13,8 +13,16 @@
     { name: 'Birds', href: '/birds', isActive: false },
   ];
 
+  function setActiveNavigationRoute(currentRoute: string) {
+    navigation = navigation.map((nav) => ({ ...nav, isActive: currentRoute === nav.href }));
+  }
+
   const unsubscribe = currentRouteStore.subscribe((route) => {
-    navigation = navigation.map((nav) => ({ ...nav, isActive: route === nav.href }));
+    setActiveNavigationRoute(route);
+  });
+
+  onMount(() => {
+    setActiveNavigationRoute(getRoutePath());
   });
 
   onDestroy(unsubscribe);
