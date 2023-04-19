@@ -5,6 +5,8 @@
   import { currentRouteStore } from '@stores/route.store';
   import { getRoutePath, navigateToRouteAndSetCurrentRouteStore } from '@utils/router.utils';
 
+  import Avatar from './Avatar.svelte';
+
   let showMenu: boolean;
   let showUserMenu: boolean;
 
@@ -12,6 +14,8 @@
     { name: 'Cats', href: '/cats', isActive: false },
     { name: 'Birds', href: '/birds', isActive: false },
   ];
+
+  /* Set Active Navigation Route */
 
   function setActiveNavigationRoute(currentRoute: string) {
     navigation = navigation.map((nav) => ({ ...nav, isActive: currentRoute === nav.href }));
@@ -114,7 +118,7 @@
               aria-haspopup="true"
               on:click={() => { showUserMenu = !showUserMenu; }}>
               <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+              <Avatar/>
             </button>
           </div>
 
