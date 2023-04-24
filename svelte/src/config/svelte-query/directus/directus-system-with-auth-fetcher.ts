@@ -6,7 +6,7 @@ import { accessTokenStore } from '@features/auth/stores';
 import { svelteQueryErrorHandler } from '@features/error-handler/utils/svelte-query-error-handler.utils';
 import { decrementFetchesBeingPerformed, incrementFetchesBeingPerformed } from 'src/stores/fetches-being-performed.store';
 
-import { DirectusRequestOptions } from './directus-config-options';
+import { DirectusRequestOptions, resetDirectusRequestOptions } from './directus-config-options';
 
 export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(query: string):
   ((variables?: TVariables) => Promise<TData>) => async (variables?: TVariables): Promise<TData> => {
@@ -35,6 +35,7 @@ export const useDirectusSystemWithAuthFetcher = <TData, TVariables>(query: strin
     } catch (error) {
       return svelteQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
+      resetDirectusRequestOptions();
       decrementFetchesBeingPerformed();
     }
   };

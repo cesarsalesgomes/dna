@@ -8,6 +8,6 @@
 </script>
 
 <Router>
-  <LazyRoute path="login" component={LoginRoutes}/>
-  <LazyRoute path="" component={Home}/>
+  <LazyRoute path="/login/*" component={LoginRoutes}/>
+  <LazyRoute path="/*" component={Home}/>
 </Router>

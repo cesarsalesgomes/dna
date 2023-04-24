@@ -3,7 +3,7 @@ import { UNEXPECTED_ERROR_NOTIFICATION } from '@constants/notifications.constant
 import { svelteQueryErrorHandler } from '@features/error-handler/utils/svelte-query-error-handler.utils';
 import { decrementFetchesBeingPerformed, incrementFetchesBeingPerformed } from 'src/stores/fetches-being-performed.store';
 
-import { DirectusRequestOptions } from './directus-config-options';
+import { DirectusRequestOptions, resetDirectusRequestOptions } from './directus-config-options';
 
 export const useDirectusSystemFetcher = <TData, TVariables>(query: string):
   ((variables?: TVariables) => Promise<TData>) => async (variables?: TVariables): Promise<TData> => {
@@ -29,6 +29,7 @@ export const useDirectusSystemFetcher = <TData, TVariables>(query: string):
     } catch (error) {
       return svelteQueryErrorHandler(new Error(UNEXPECTED_ERROR_NOTIFICATION)) as any;
     } finally {
+      resetDirectusRequestOptions();
       decrementFetchesBeingPerformed();
     }
   };
