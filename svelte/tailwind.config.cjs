@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
@@ -8,6 +9,11 @@ module.exports = {
     './src/**/*.{html,js,svelte,ts}'
   ],
   theme: {
+    extend: {
+      fontFamily: {
+        'sans': ['Product Sans', ...defaultTheme.fontFamily.sans],
+      },
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
