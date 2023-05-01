@@ -5,6 +5,8 @@
 
   export let component: () => Promise<any>;
 
+  export let hasRouteParams = false;
+
   let props: { [index: string]: any; };
 
   $: {
@@ -14,6 +16,10 @@
   }
 </script>
 
-<Route {...props}>
-  <Lazy {component}/>
+<Route {...props} let:params>
+  {#if hasRouteParams}
+    <Lazy {component} {...params}/>
+  {:else}
+    <Lazy {component}/>
+  {/if}
 </Route>
