@@ -86,7 +86,8 @@
           <div class="flex space-x-4">
             {#each navigation as nav}
               <div
-                on:click={navigateToRouteAndSetCurrentRouteStore(nav.href) }
+                on:click={() => navigateToRouteAndSetCurrentRouteStore(nav.href) }
+                on:keydown={() => navigateToRouteAndSetCurrentRouteStore(nav.href) }
                 class={`${nav.isActive ? 'bg-gray-900 text-white cursor-default' : 'text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer'}  px-3 py-2 rounded-md text-sm font-medium `}
                 aria-current="page">{nav.name}</div>
             {/each}
@@ -139,12 +140,12 @@
               aria-labelledby="user-menu-button"
               tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a href="#"
+              <a
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-0">Your Profile</a>
-              <a href="#"
+              <a
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
@@ -154,7 +155,8 @@
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-2"
-                on:click={logout}>Sign out</span>
+                on:click={logout}
+                on:keydown={logout}>Sign out</span>
             </div>
           {/if}
         </div>
@@ -168,7 +170,8 @@
       <div class="space-y-1 px-2 pt-2 pb-3">
         {#each navigation as nav}
           <div
-            on:click={navigateToRouteAndSetCurrentRouteStore(nav.href) }
+            on:click={() => navigateToRouteAndSetCurrentRouteStore(nav.href) }
+            on:keydown={() => navigateToRouteAndSetCurrentRouteStore(nav.href) }
             class={`${nav.isActive ? 'bg-gray-900 text-white cursor-default' : 'text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer'} block px-3 py-2 rounded-md text-base font-medium `}
             aria-current="page">{nav.name}</div>
         {/each}

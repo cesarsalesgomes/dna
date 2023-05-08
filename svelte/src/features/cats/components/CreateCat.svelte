@@ -23,7 +23,7 @@
     <div class="px-4 py-5 sm:p-6">
       <div class="flex flex-row justify-between gap-8">
         <div class="flex flex-col">
-          <label htmlFor="name" class="block text-sm font-medium text-gray-700">
+          <label for="name" class="block text-sm font-medium text-gray-700">
             Name
           </label>
           <input
