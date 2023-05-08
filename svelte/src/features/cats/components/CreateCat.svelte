@@ -3,7 +3,7 @@
 
   import { setNotificationOnSuccess } from '@features/notification/utils/notification.utils';
   import { useCreateCatMutation } from '@hooks/cat.hooks';
-  import { invalidateQueriesOnSuccess } from '@utils/react-query.utils';
+  import { invalidateQueriesOnSuccess } from '@utils/svelte-query.utils';
 
   let name: string;
 
