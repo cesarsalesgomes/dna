@@ -1,7 +1,5 @@
 import { createQuery, type QueryOptions } from '@tanstack/svelte-query';
-
 import { useDirectusFetcher } from '@config/svelte-query/directus/directus-fetcher';
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -9,12 +7,13 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: number;
+  ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
   Date: any;
+  GraphQLBigInt: any;
   GraphQLStringOrFloat: any;
   Hash: any;
   JSON: any;
@@ -38,9 +37,11 @@ export type Mutation = {
   update_cat_items: Array<Cat>;
 };
 
+
 export type MutationCreate_Bird_ItemArgs = {
   data: Create_Bird_Input;
 };
+
 
 export type MutationCreate_Bird_ItemsArgs = {
   data?: InputMaybe<Array<Create_Bird_Input>>;
@@ -52,9 +53,11 @@ export type MutationCreate_Bird_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationCreate_Cat_ItemArgs = {
   data: Create_Cat_Input;
 };
+
 
 export type MutationCreate_Cat_ItemsArgs = {
   data?: InputMaybe<Array<Create_Cat_Input>>;
@@ -66,21 +69,26 @@ export type MutationCreate_Cat_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationDelete_Bird_ItemArgs = {
   id: Scalars['ID'];
 };
+
 
 export type MutationDelete_Bird_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
 
+
 export type MutationDelete_Cat_ItemArgs = {
   id: Scalars['ID'];
 };
 
+
 export type MutationDelete_Cat_ItemsArgs = {
   ids: Array<InputMaybe<Scalars['ID']>>;
 };
+
 
 export type MutationUpdate_Bird_BatchArgs = {
   data?: InputMaybe<Array<Update_Bird_Input>>;
@@ -92,10 +100,12 @@ export type MutationUpdate_Bird_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationUpdate_Bird_ItemArgs = {
   data: Update_Bird_Input;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdate_Bird_ItemsArgs = {
   data: Update_Bird_Input;
@@ -108,6 +118,7 @@ export type MutationUpdate_Bird_ItemsArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationUpdate_Cat_BatchArgs = {
   data?: InputMaybe<Array<Update_Cat_Input>>;
   filter?: InputMaybe<Cat_Filter>;
@@ -118,10 +129,12 @@ export type MutationUpdate_Cat_BatchArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type MutationUpdate_Cat_ItemArgs = {
   data: Update_Cat_Input;
   id: Scalars['ID'];
 };
+
 
 export type MutationUpdate_Cat_ItemsArgs = {
   data: Update_Cat_Input;
@@ -144,6 +157,7 @@ export type Query = {
   cat_by_id?: Maybe<Cat>;
 };
 
+
 export type QueryBirdArgs = {
   filter?: InputMaybe<Bird_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -153,6 +167,7 @@ export type QueryBirdArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryBird_AggregatedArgs = {
   filter?: InputMaybe<Bird_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -161,9 +176,11 @@ export type QueryBird_AggregatedArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryBird_By_IdArgs = {
   id: Scalars['ID'];
 };
+
 
 export type QueryCatArgs = {
   filter?: InputMaybe<Cat_Filter>;
@@ -174,6 +191,7 @@ export type QueryCatArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type QueryCat_AggregatedArgs = {
   filter?: InputMaybe<Cat_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -181,6 +199,7 @@ export type QueryCat_AggregatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type QueryCat_By_IdArgs = {
   id: Scalars['ID'];
@@ -248,6 +267,7 @@ export type Cat = {
   user_updated?: Maybe<Directus_Users>;
 };
 
+
 export type CatUser_CreatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -256,6 +276,7 @@ export type CatUser_CreatedArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type CatUser_UpdatedArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -339,7 +360,7 @@ export type Create_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: InputMaybe<Scalars['String']>;
+  filesize?: InputMaybe<Scalars['GraphQLBigInt']>;
   folder?: InputMaybe<Create_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -404,10 +425,12 @@ export type Date_Filter_Operators = {
   _eq?: InputMaybe<Scalars['String']>;
   _gt?: InputMaybe<Scalars['String']>;
   _gte?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _lt?: InputMaybe<Scalars['String']>;
   _lte?: InputMaybe<Scalars['String']>;
   _nbetween?: InputMaybe<Array<InputMaybe<Scalars['GraphQLStringOrFloat']>>>;
   _neq?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _nnull?: InputMaybe<Scalars['Boolean']>;
   _null?: InputMaybe<Scalars['Boolean']>;
 };
@@ -453,7 +476,7 @@ export type Directus_Files = {
   embed?: Maybe<Scalars['String']>;
   filename_disk?: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: Maybe<Scalars['String']>;
+  filesize?: Maybe<Scalars['GraphQLBigInt']>;
   folder?: Maybe<Directus_Folders>;
   height?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
@@ -474,6 +497,7 @@ export type Directus_Files = {
   width?: Maybe<Scalars['Int']>;
 };
 
+
 export type Directus_FilesFolderArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -483,6 +507,7 @@ export type Directus_FilesFolderArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+
 export type Directus_FilesModified_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -491,6 +516,7 @@ export type Directus_FilesModified_ByArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type Directus_FilesUploaded_ByArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -510,7 +536,7 @@ export type Directus_Files_Filter = {
   embed?: InputMaybe<String_Filter_Operators>;
   filename_disk?: InputMaybe<String_Filter_Operators>;
   filename_download?: InputMaybe<String_Filter_Operators>;
-  filesize?: InputMaybe<String_Filter_Operators>;
+  filesize?: InputMaybe<Number_Filter_Operators>;
   folder?: InputMaybe<Directus_Folders_Filter>;
   height?: InputMaybe<Number_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
@@ -537,6 +563,7 @@ export type Directus_Folders = {
   name: Scalars['String'];
   parent?: Maybe<Directus_Folders>;
 };
+
 
 export type Directus_FoldersParentArgs = {
   filter?: InputMaybe<Directus_Folders_Filter>;
@@ -568,6 +595,7 @@ export type Directus_Roles = {
   users?: Maybe<Array<Maybe<Directus_Users>>>;
   users_func?: Maybe<Count_Functions>;
 };
+
 
 export type Directus_RolesUsersArgs = {
   filter?: InputMaybe<Directus_Users_Filter>;
@@ -622,6 +650,7 @@ export type Directus_Users = {
   token?: Maybe<Scalars['Hash']>;
 };
 
+
 export type Directus_UsersAvatarArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -630,6 +659,7 @@ export type Directus_UsersAvatarArgs = {
   search?: InputMaybe<Scalars['String']>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
+
 
 export type Directus_UsersRoleArgs = {
   filter?: InputMaybe<Directus_Roles_Filter>;
@@ -697,6 +727,7 @@ export type String_Filter_Operators = {
   _empty?: InputMaybe<Scalars['Boolean']>;
   _ends_with?: InputMaybe<Scalars['String']>;
   _eq?: InputMaybe<Scalars['String']>;
+  _icontains?: InputMaybe<Scalars['String']>;
   _in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _ncontains?: InputMaybe<Scalars['String']>;
   _nempty?: InputMaybe<Scalars['Boolean']>;
@@ -731,7 +762,7 @@ export type Update_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download?: InputMaybe<Scalars['String']>;
-  filesize?: InputMaybe<Scalars['String']>;
+  filesize?: InputMaybe<Scalars['GraphQLBigInt']>;
   folder?: InputMaybe<Update_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -793,7 +824,9 @@ export type Update_Directus_Users_Input = {
 
 export type FindAllBirdsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type FindAllBirdsQuery = { __typename?: 'Query', bird: Array<{ __typename?: 'bird', id: number, name?: string | null }> };
+
+export type FindAllBirdsQuery = { __typename?: 'Query', bird: Array<{ __typename?: 'bird', id: string, name?: string | null }> };
+
 
 export const FindAllBirdsDocument = `
     query findAllBirds {
@@ -804,13 +837,14 @@ export const FindAllBirdsDocument = `
 }
     `;
 export const useFindAllBirdsQuery = <
-  TData = FindAllBirdsQuery,
-  TError = { message: string; locations?: { line: number; column: number; }[]; path?: string[]; extensions?: any; }
->(
-  variables?: FindAllBirdsQueryVariables,
-  options?: QueryOptions<FindAllBirdsQuery, TError, TData>,
-) => createQuery<FindAllBirdsQuery, TError, TData>(
-  variables === undefined ? ['findAllBirds'] : ['findAllBirds', variables],
-  useDirectusFetcher<FindAllBirdsQuery, FindAllBirdsQueryVariables>(FindAllBirdsDocument).bind(null, variables),
-  options,
-);
+      TData = FindAllBirdsQuery,
+      TError = {message:string;locations?:{line:number;column:number;}[];path?:string[];extensions?:any;}
+    >(
+      variables?: FindAllBirdsQueryVariables,
+      options?: QueryOptions<FindAllBirdsQuery, TError, TData>
+    ) =>
+    createQuery<FindAllBirdsQuery, TError, TData>(
+      variables === undefined ? ['findAllBirds'] : ['findAllBirds', variables],
+      useDirectusFetcher<FindAllBirdsQuery, FindAllBirdsQueryVariables>(FindAllBirdsDocument).bind(null, variables),
+      options
+    );

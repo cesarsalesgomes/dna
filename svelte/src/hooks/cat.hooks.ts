@@ -17,6 +17,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Date: any;
+  GraphQLBigInt: any;
   GraphQLStringOrFloat: any;
   Hash: any;
   JSON: any;
@@ -341,7 +342,7 @@ export type Create_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: InputMaybe<Scalars['String']>;
+  filesize?: InputMaybe<Scalars['GraphQLBigInt']>;
   folder?: InputMaybe<Create_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
@@ -457,7 +458,7 @@ export type Directus_Files = {
   embed?: Maybe<Scalars['String']>;
   filename_disk?: Maybe<Scalars['String']>;
   filename_download: Scalars['String'];
-  filesize?: Maybe<Scalars['String']>;
+  filesize?: Maybe<Scalars['GraphQLBigInt']>;
   folder?: Maybe<Directus_Folders>;
   height?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
@@ -514,7 +515,7 @@ export type Directus_Files_Filter = {
   embed?: InputMaybe<String_Filter_Operators>;
   filename_disk?: InputMaybe<String_Filter_Operators>;
   filename_download?: InputMaybe<String_Filter_Operators>;
-  filesize?: InputMaybe<String_Filter_Operators>;
+  filesize?: InputMaybe<Number_Filter_Operators>;
   folder?: InputMaybe<Directus_Folders_Filter>;
   height?: InputMaybe<Number_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
@@ -736,7 +737,7 @@ export type Update_Directus_Files_Input = {
   embed?: InputMaybe<Scalars['String']>;
   filename_disk?: InputMaybe<Scalars['String']>;
   filename_download?: InputMaybe<Scalars['String']>;
-  filesize?: InputMaybe<Scalars['String']>;
+  filesize?: InputMaybe<Scalars['GraphQLBigInt']>;
   folder?: InputMaybe<Update_Directus_Folders_Input>;
   height?: InputMaybe<Scalars['Int']>;
   id?: InputMaybe<Scalars['ID']>;
