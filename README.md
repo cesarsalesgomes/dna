@@ -18,7 +18,7 @@
 
 <br />
 
-Fullstack Typescript project with the objective of joining three well-regarded tools (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io)**, `front-end` **[React](https://reactjs.org/)** or **[Svelte](https://svelte.dev/)**), in order to create an initial typesafe environment with the main necessary settings that a project commonly requires during its lifetime.
+Fullstack Typescript project with the objective of joining four well-regarded tools (`back-end` **[NestJS](https://nestjs.com/)** / **[Directus](https://docs.directus.io)**, `front-end` **[React](https://reactjs.org/)** or **[Svelte](https://svelte.dev/)**), in order to create an initial typesafe environment with the main necessary settings that a project commonly requires during its lifetime.
 
 <br />
 
