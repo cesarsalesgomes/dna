@@ -39,7 +39,7 @@
     "nodemailer": "^6.7.3",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.1",
     "rxjs": "^7.5.5",
     "winston": "^3.7.2",
     "winston-cloudwatch": "^4.0.1"
