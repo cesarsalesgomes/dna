@@ -922,10 +922,10 @@ eslint-plugin-import@^2.27.5:
     semver "^6.3.0"
     tsconfig-paths "^3.14.1"
 
-eslint-plugin-svelte@^2.29.0:
-  version "2.29.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte/-/eslint-plugin-svelte-2.29.0.tgz#f35adc8fc67b659f5253b16bd8c2875ceab6de6d"
-  integrity sha512-ukEC5z9ZXwDtwD8L12ei9doF9P/mQVeiLZiUxExWN9ZNTLNwZgfmEKx+s0tNio0YnYHzKz6qELxFei4SqVbLkQ==
+eslint-plugin-svelte@^2.31.0:
+  version "2.31.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte/-/eslint-plugin-svelte-2.31.0.tgz#6bbc30abc6dd49620cf6f33f79c9a3328ab564bd"
+  integrity sha512-Q70jPFRraTkc/giPSfY7yuatmJcb5fPelWNplevqd45gfaJDjc3qXRtWQ6m9U5tWVVYERU9dcdUod294vwD8Gw==
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
@@ -935,7 +935,8 @@ eslint-plugin-svelte@^2.29.0:
     postcss "^8.4.5"
     postcss-load-config "^3.1.4"
     postcss-safe-parser "^6.0.0"
-    svelte-eslint-parser "^0.29.0"
+    postcss-selector-parser "^6.0.11"
+    svelte-eslint-parser "^0.31.0"
 
 eslint-scope@^5.1.1:
   version "5.1.1"
@@ -1837,6 +1838,11 @@ postcss-safe-parser@^6.0.0:
   resolved "https://registry.yarnpkg.com/postcss-safe-parser/-/postcss-safe-parser-6.0.0.tgz#bb4c29894171a94bc5c996b9a30317ef402adaa1"
   integrity sha512-FARHN8pwH+WiS2OPCxJI8FuRJpTVnn6ZNFiqAM2aeW2LwTHWWmWgIyKC6cUo0L8aeKiF/14MNvnpls6R2PBeMQ==
 
+postcss-scss@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/postcss-scss/-/postcss-scss-4.0.6.tgz#5d62a574b950a6ae12f2aa89b60d63d9e4432bfd"
+  integrity sha512-rLDPhJY4z/i4nVFZ27j9GqLxj1pwxE80eAzUNRMXtcpipFYIeowerzBgG3yJhMtObGEXidtIgbUpQ3eLDsf5OQ==
+
 postcss-selector-parser@6.0.10:
   version "6.0.10"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.10.tgz#79b61e2c0d1bfc2602d549e11d0876256f8df88d"
@@ -1845,10 +1851,10 @@ postcss-selector-parser@6.0.10:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
 
-postcss-selector-parser@^6.0.10:
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.11.tgz#2e41dc39b7ad74046e1615185185cd0b17d0c8dc"
-  integrity sha512-zbARubNdogI9j7WY4nQJBiNqQf3sLS3wCP4WfOidu+p28LofJqDH1tcXypGrcmMHhDk2t9wGhCsYe/+szLTy1g==
+postcss-selector-parser@^6.0.10, postcss-selector-parser@^6.0.11:
+  version "6.0.13"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.13.tgz#d05d8d76b1e8e173257ef9d60b706a8e5e99bf1b"
+  integrity sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
@@ -2109,14 +2115,16 @@ svelte-check@^3.4.3:
     svelte-preprocess "^5.0.3"
     typescript "^5.0.3"
 
-svelte-eslint-parser@^0.29.0:
-  version "0.29.0"
-  resolved "https://registry.yarnpkg.com/svelte-eslint-parser/-/svelte-eslint-parser-0.29.0.tgz#609fada00f2beb46894d632bd84f978bbf6a79c7"
-  integrity sha512-2uzOw9vRpSO3fo6NkbH7UynfCopQbMz/7LO9KT05YPvkB0uuFvFHex8+Ccv3gSrxHRvKS7FwJmV4H8WNWIzgWQ==
+svelte-eslint-parser@^0.31.0:
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/svelte-eslint-parser/-/svelte-eslint-parser-0.31.0.tgz#264a5226d28c25d39601654babe51ea24f91135e"
+  integrity sha512-/31RpBf/e3YjoFphjsyo3JRyN1r4UalGAGafXrZ6EJK4h4COOO0rbfBoen5byGsXnIJKsrlC1lkEd2Vzpq2IDg==
   dependencies:
     eslint-scope "^7.0.0"
     eslint-visitor-keys "^3.0.0"
     espree "^9.0.0"
+    postcss "^8.4.23"
+    postcss-scss "^4.0.6"
 
 svelte-hmr@^0.15.1:
   version "0.15.1"
