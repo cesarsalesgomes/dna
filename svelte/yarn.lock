@@ -251,17 +251,17 @@
     lodash.merge "^4.6.2"
     postcss-selector-parser "6.0.10"
 
-"@tanstack/query-core@4.29.14":
-  version "4.29.14"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.14.tgz#569de51719a0f4445fabff775012d5c09a173b96"
-  integrity sha512-ElEAahtLWA7Y7c2Haw10KdEf2tx+XZl/Z8dmyWxZehxWK3TPL5qtXtb7kUEhvt/8u2cSP62fLxgh2qqzMMGnDQ==
+"@tanstack/query-core@4.29.19":
+  version "4.29.19"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.19.tgz#49ccbd0606633d1e55baf3b91ab7cc7aef411b1d"
+  integrity sha512-uPe1DukeIpIHpQi6UzIgBcXsjjsDaLnc7hF+zLBKnaUlh7jFE/A+P8t4cU4VzKPMFB/C970n/9SxtpO5hmIRgw==
 
-"@tanstack/svelte-query@^4.29.14":
-  version "4.29.14"
-  resolved "https://registry.yarnpkg.com/@tanstack/svelte-query/-/svelte-query-4.29.14.tgz#20a8a80146dfde8c7acb34a8beb3a4b86d13dff8"
-  integrity sha512-kO+i2BJf9ZzQDuWpBpoSnideSsldgfAU4pbza8zAV5IXtXGxI1vDSJYXX0S9ZyJYMDROs1yoMM6dCULAhtqoJg==
+"@tanstack/svelte-query@^4.29.19":
+  version "4.29.19"
+  resolved "https://registry.yarnpkg.com/@tanstack/svelte-query/-/svelte-query-4.29.19.tgz#cc15841452f984d64eb40f5356533e9dc170c5f7"
+  integrity sha512-1d8kqEfjULf7L/mNgNe8HUsGy8G71YRNKAQVDrEpaqtCk1i2LE1d09vJ4WTCO6Low37q3f5WNQQutqW3vZU14Q==
   dependencies:
-    "@tanstack/query-core" "4.29.14"
+    "@tanstack/query-core" "4.29.19"
 
 "@tsconfig/svelte@^4.0.1":
   version "4.0.1"
