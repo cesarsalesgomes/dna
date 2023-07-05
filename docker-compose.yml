@@ -53,11 +53,7 @@ services:
       DB_USER: "directus"
       DB_PASSWORD: "directus"
 
-      CACHE_ENABLED: "true"
-      CACHE_STORE: "redis"
-      CACHE_REDIS: ${REDIS_URL}
-      CACHE_AUTO_PURGE: "true"
-      CACHE_PERMISSIONS: "true"
+      REDIS: ${REDIS}
 
       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
