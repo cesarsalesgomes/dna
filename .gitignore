@@ -67,3 +67,6 @@ typings/
 /playwright/test-results/
 /playwright/playwright-report/
 /playwright/playwright/.cache/
+
+# Sveltekit
+/sveltekit/.svelte-kit/
