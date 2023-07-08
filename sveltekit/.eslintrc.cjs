@@ -24,7 +24,18 @@ module.exports = {
       parser: 'svelte-eslint-parser',
       parserOptions: {
         parser: '@typescript-eslint/parser'
-      }
+      },
+      rules: {
+        'svelte/indent': 'error',
+        indent: 'off',
+        'svelte/max-attributes-per-line': [
+          'error',
+          {
+            multiline: 1,
+            singleline: 3,
+          },
+        ],
+      },
     }
   ],
   rules: {
@@ -80,7 +91,7 @@ module.exports = {
     },
     'import/resolver': {
       typescript: {
-        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        alwaysTryTypes: true,
         project: './tsconfig.json',
       },
     },
