@@ -19,12 +19,13 @@
       "@features/*": ["src/features/*"],
       "@hooks/*": ["src/hooks/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@lib/*": ["src/lib/*"],
       "@providers/*": ["src/providers/*"],
       "@routes/*": ["src/routes/*"],
       "@test/*": ["src/test/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "$lib": ["src/lib"],
+      "$lib/*": ["src/lib/*"]
     }
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
