@@ -1871,10 +1871,10 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-highlight.run@^5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-5.4.1.tgz#c5961bffabe0b98aa79de2662a946c9408bff387"
-  integrity sha512-fPNr0kdIpNAc/6wNTTgwMn6M0KGv1DKVllHcMjUg6ahJylXjSQ9JU8ZqR414FGN00bz/qGnzwhy48IQBmMgf+g==
+highlight.run@^7.3.6:
+  version "7.3.6"
+  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-7.3.6.tgz#13e48af7e53a9b26181790b5053111cc6c930622"
+  integrity sha512-OG8QXK5F+3PTLYtcdGnGvJCrb5BCWlpczjuuHrqJzA1ESvIfsP4z7yD5TSr+ygL2KhsWpYpS0SyuFb/aaYo7eA==
 
 ignore@^5.2.0:
   version "5.2.0"
