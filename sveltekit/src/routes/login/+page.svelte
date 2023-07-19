@@ -1,3 +1,28 @@
+<script lang="ts">
+
+  import type { SubmitFunction } from '@sveltejs/kit';
+
+  import { DirectusRestClientSingleton } from '$lib/directus';
+
+  // eslint-disable-next-line import/extensions, import/no-unresolved
+  import { enhance } from '$app/forms';
+
+  const submitFunction: SubmitFunction = async ({ formData, cancel }) => {
+    cancel();
+
+    const directusRestClient = DirectusRestClientSingleton.getInstance();
+
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      await directusRestClient.login(email, password);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+</script>
+
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
   <div class="prose sm:mx-auto sm:w-full sm:max-w-md dark:prose-invert">
     <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
@@ -10,7 +35,7 @@
 
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
     <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <form class="space-y-6" action="#" method="POST">
+      <form class="space-y-6" method="POST" use:enhance={submitFunction}>
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
           <div class="mt-1">

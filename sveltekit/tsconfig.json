@@ -11,21 +11,21 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
-      "@constants/*": ["src/constants/*"],
-      "@enums/*": ["src/enums/*"],
-      "@features/*": ["src/features/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@providers/*": ["src/providers/*"],
-      "@routes/*": ["src/routes/*"],
-      "@test/*": ["src/test/*"],
-      "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"],
+      "$assets/*": ["src/assets/*"],
+      "$components/*": ["src/components/*"],
+      "$config/*": ["src/config/*"],
+      "$constants/*": ["src/constants/*"],
+      "$enums/*": ["src/enums/*"],
+      "$features/*": ["src/features/*"],
+      "$hooks/*": ["src/hooks/*"],
+      "$interfaces/*": ["src/interfaces/*"],
       "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"]
+      "$lib/*": ["src/lib/*"],
+      "$providers/*": ["src/providers/*"],
+      "$routes/*": ["src/routes/*"],
+      "$test/*": ["src/test/*"],
+      "$types/*": ["src/types/*"],
+      "$utils/*": ["src/utils/*"]
     }
   }
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
