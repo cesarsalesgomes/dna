@@ -2,21 +2,24 @@
 
   import type { SubmitFunction } from '@sveltejs/kit';
 
+  import { authLoginHandler } from '$features/auth/utils';
   import { DirectusRestClientSingleton } from '$lib/directus';
 
   // eslint-disable-next-line import/extensions, import/no-unresolved
   import { enhance } from '$app/forms';
 
-  const submitFunction: SubmitFunction = async ({ formData, cancel }) => {
+  let email: string;
+  let password: string;
+
+  const submitFunction: SubmitFunction = async ({ cancel }) => {
     cancel();
 
     const directusRestClient = DirectusRestClientSingleton.getInstance();
 
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-
     try {
-      await directusRestClient.login(email, password);
+      const { access_token: accessToken } = await directusRestClient.login(email, password);
+
+      authLoginHandler(accessToken);
     } catch (error) {
       console.error(error);
     }
@@ -44,6 +47,7 @@
               type="email"
               autocomplete="email"
               required
+              bind:value={email}
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
           </div>
         </div>
@@ -56,6 +60,7 @@
               type="password"
               autocomplete="current-password"
               required
+              bind:value={password}
               class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
           </div>
         </div>
