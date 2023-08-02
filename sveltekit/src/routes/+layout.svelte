@@ -7,7 +7,7 @@
 
   import './styles.css';
 
-  const onLoginRoute = $page.url.pathname === LOGIN_ROUTE;
+  $: onLoginRoute = $page.url.pathname === LOGIN_ROUTE;
 </script>
 
 <main class="h-screen bg-gray-50 dark:bg-gray-900">

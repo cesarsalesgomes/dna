@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const accessTokenCookieName = 'dna-access-token';
+import { accessTokenCookieName } from '$constants/auth.constants';
 
 export function setCookieWithAccessToken(accessToken: string) {
   const daysToExpire = 1;
