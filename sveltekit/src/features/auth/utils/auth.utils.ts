@@ -1,6 +1,8 @@
+import { LOGIN_ROUTE } from '$constants/route.constants';
+
 import { accessTokenStore, userIdStore } from '../stores';
 
-import { setCookieWithAccessToken } from './cookie.utils';
+import { removeAccessTokenFromCookie, setCookieWithAccessToken } from './cookie.utils';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
@@ -30,4 +32,9 @@ export function authLoginHandler(accessToken: string | null) {
     setCookieWithAccessToken(accessToken);
     navigateToHome();
   }
+}
+
+export function logout() {
+  removeAccessTokenFromCookie();
+  goto(LOGIN_ROUTE);
 }

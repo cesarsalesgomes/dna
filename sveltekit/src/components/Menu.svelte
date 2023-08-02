@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { logout } from '$features/auth/utils';
+
   let showMenu: boolean;
   let showUserMenu: boolean;
 
@@ -128,6 +130,8 @@
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-2"
+                on:click={logout}
+                on:keypress={logout}
               >Sign out</span>
             </div>
           {/if}

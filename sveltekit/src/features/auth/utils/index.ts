@@ -1,6 +1,7 @@
-import { authLoginHandler, getAuthenticatedUserIdFromAccessToken } from './auth.utils';
+import { authLoginHandler, getAuthenticatedUserIdFromAccessToken, logout } from './auth.utils';
 
 export {
   authLoginHandler,
   getAuthenticatedUserIdFromAccessToken,
+  logout,
 };
