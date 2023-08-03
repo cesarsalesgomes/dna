@@ -1,6 +1,7 @@
 <script>
   import Menu from '$components/Menu.svelte';
   import { LOGIN_ROUTE } from '$constants/route.constants';
+  import { Notification } from '$features/notification/components';
 
   // eslint-disable-next-line import/extensions, import/no-unresolved
   import { page } from '$app/stores';
@@ -19,4 +20,5 @@
       <slot />
     </div>
   {/if}
+  <Notification/>
 </main>

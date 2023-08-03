@@ -26,7 +26,7 @@ export function getAuthenticatedUserIdFromAccessToken(accessToken?: string): str
   return null;
 }
 
-export function authLoginHandler(accessToken: string | null) {
+export function authLoginHandler(accessToken?: string | null) {
   if (accessToken) {
     setAccessTokenAndUserOnPayloadToStore(accessToken);
     setCookieWithAccessToken(accessToken);

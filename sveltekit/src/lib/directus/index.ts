@@ -1,5 +1,5 @@
-import DirectusRestClientSingleton from './directus-rest-client.sdk';
+import DirectusRestClient from './directus-rest-client.sdk';
 
 export {
-  DirectusRestClientSingleton,
+  DirectusRestClient,
 };

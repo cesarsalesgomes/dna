@@ -3,7 +3,7 @@
   import type { SubmitFunction } from '@sveltejs/kit';
 
   import { authLoginHandler } from '$features/auth/utils';
-  import { DirectusRestClientSingleton } from '$lib/directus';
+  import { DirectusRestClient } from '$lib/directus';
 
   // eslint-disable-next-line import/extensions, import/no-unresolved
   import { enhance } from '$app/forms';
@@ -14,15 +14,9 @@
   const submitFunction: SubmitFunction = async ({ cancel }) => {
     cancel();
 
-    const directusRestClient = DirectusRestClientSingleton.getInstance();
+    const accessToken = (await DirectusRestClient.login(email, password))?.access_token;
 
-    try {
-      const { access_token: accessToken } = await directusRestClient.login(email, password);
-
-      authLoginHandler(accessToken);
-    } catch (error) {
-      console.error(error);
-    }
+    authLoginHandler(accessToken);
   };
 </script>
 
