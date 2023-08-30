@@ -17,13 +17,11 @@ function setAccessTokenAndUserOnPayloadToStore(accessToken: string) {
 }
 
 function navigateToHome() {
-  goto('/');
+  goto('/cats');
 }
 
-export function getAuthenticatedUserIdFromAccessToken(accessToken?: string): string | null {
-  if (accessToken) return getPayloadFromAccessToken(accessToken).id;
-
-  return null;
+export function getAuthenticatedUserIdFromAccessToken(accessToken: string): string {
+  return getPayloadFromAccessToken(accessToken).id;
 }
 
 export function authLoginHandler(accessToken?: string | null) {

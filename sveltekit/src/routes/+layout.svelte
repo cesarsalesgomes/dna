@@ -1,5 +1,5 @@
 <script>
-  import Menu from '$components/Menu.svelte';
+  import Menu from '$components/menu/Menu.svelte';
   import { LOGIN_ROUTE } from '$constants/route.constants';
   import { Notification } from '$features/notification/components';
 
@@ -12,6 +12,7 @@
 </script>
 
 <main class="h-screen bg-gray-50 dark:bg-gray-900">
+  <Notification/>
   {#if onLoginRoute}
     <slot/>
   {:else}
@@ -20,5 +21,4 @@
       <slot />
     </div>
   {/if}
-  <Notification/>
 </main>
