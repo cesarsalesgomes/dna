@@ -1,16 +1,29 @@
 import { UNEXPECTED_ERROR_NOTIFICATION } from '$constants/notification.constants';
+import { LOGIN_ROUTE } from '$constants/route.constants';
 import { NOTIFICATION_DISPLAY_TIME_IN_SECONDS } from '$constants/system.constants';
-import { notificationStore } from '$features/notification/stores';
+import { NotificationType } from '$features/notification/enums';
+import { setNotificationStore } from '$features/notification/stores/notification.store';
 import { hideNotificationAfterDisplaySeconds } from '$features/notification/utils';
 import type DirectusError from '$interfaces/directus-error.interface';
+
+import { checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from './error-code.utils';
+
+// eslint-disable-next-line import/no-unresolved, import/extensions
+import { goto } from '$app/navigation';
 
 export function directusErrorHandler(directusError: DirectusError, notificationDisplayTimeInSeconds?: number) {
   try {
     const [error] = directusError.errors;
 
-    notificationStore.set(error.message ?? UNEXPECTED_ERROR_NOTIFICATION);
+    const code = getGraphQlErrorCode(error);
+
+    if (checkIfItsAnInvalidTokenError(code)) {
+      goto(LOGIN_ROUTE);
+    } else {
+      setNotificationStore(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
+    }
   } catch (err) {
-    notificationStore.set(UNEXPECTED_ERROR_NOTIFICATION);
+    setNotificationStore(UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
   } finally {
     hideNotificationAfterDisplaySeconds(notificationDisplayTimeInSeconds ?? NOTIFICATION_DISPLAY_TIME_IN_SECONDS);
   }

@@ -1,4 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { writable } from 'svelte/store';
 
-export const notificationStore = writable('');
+import type { NotificationType } from '../enums';
+import type NotificationStoreType from '../types/notification-store.type';
+
+export const notificationStore = writable<NotificationStoreType>(null);
+
+export const setNotificationStore = (message: string, type: NotificationType) => notificationStore.set({ message, type });
+
+export const setNullOnNotificationStore = () => { notificationStore.set(null); };
