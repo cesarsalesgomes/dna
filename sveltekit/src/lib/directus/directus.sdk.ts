@@ -29,6 +29,8 @@ class DirectusSdk {
 export class DirectusClientSdk extends DirectusSdk {
   static async login(email: string, password: string) {
     try {
+      incrementFetchesBeingPerformed();
+
       const directusClient = this.getInstance().with(authentication('cookie'));
 
       return await directusClient.login(email, password, {});
@@ -36,6 +38,8 @@ export class DirectusClientSdk extends DirectusSdk {
       directusErrorHandler(error as DirectusError);
 
       return null;
+    } finally {
+      decrementFetchesBeingPerformed();
     }
   }
 

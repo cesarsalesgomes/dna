@@ -2,6 +2,7 @@
 
   import type { SubmitFunction } from '@sveltejs/kit';
 
+  import { SubmitButtonWithLoadingWhenFetching } from '$components/buttons';
   import { authLoginHandler } from '$features/auth/utils';
   import { DirectusClientSdk } from '$lib/directus';
 
@@ -74,7 +75,7 @@
         </div>
 
         <div>
-          <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Sign in</button>
+          <SubmitButtonWithLoadingWhenFetching label="Sign in" />
         </div>
       </form>
 
