@@ -1,19 +1,29 @@
 <script lang="ts">
   import { createItem } from '@directus/sdk';
+  import type { SubmitFunction } from '@sveltejs/kit';
 
+  import InvalidateKeys from '$enums/invalidate-keys.enum';
   import { setNotificationOnSuccess } from '$features/notification/utils/notification.utils';
   import { DirectusClientSdk } from '$lib/directus';
+  import { invalidateWithLoading } from '$utils/svelte.utils';
+
+  // eslint-disable-next-line import/extensions, import/no-unresolved
+  import { enhance } from '$app/forms';
 
   let name: string;
 
-  const onSubmitCatForm = async (event: Event) => {
-    event.preventDefault();
+  const onSubmitCatForm: SubmitFunction = async ({ cancel }) => {
+    cancel();
 
-    await DirectusClientSdk.request(createItem('cat', { name }), setNotificationOnSuccess);
+    await DirectusClientSdk.request(createItem('cat', { name }), async () => {
+      await invalidateWithLoading(InvalidateKeys.Cats);
+
+      setNotificationOnSuccess();
+    });
   };
 </script>
 
-<form action="#" method="POST" on:submit={onSubmitCatForm}>
+<form method="POST" use:enhance={onSubmitCatForm}>
   <div class="overflow-hidden bg-gray-200 shadow sm:rounded-md">
     <div class="px-4 py-5 sm:p-6">
       <div class="flex flex-row justify-between gap-8">
