@@ -1,3 +1,4 @@
+import type { AuthenticationData } from '@directus/sdk';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { get } from 'svelte/store';
 
@@ -27,8 +28,10 @@ export function getAuthenticatedUserIdFromAccessToken(accessToken: string): stri
   return getPayloadFromAccessToken(accessToken).id;
 }
 
-export function authLoginHandler(accessToken?: string | null) {
-  if (accessToken) {
+export function authLoginHandler(data: AuthenticationData | null) {
+  if (data && data.access_token) {
+    const { access_token: accessToken } = data;
+
     setAccessTokenAndUserOnPayloadToStore(accessToken);
     setCookieWithAccessToken(accessToken);
     navigateToHome();

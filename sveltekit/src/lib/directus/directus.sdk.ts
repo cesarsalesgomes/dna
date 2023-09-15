@@ -1,10 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import {
-  authentication, rest, type DirectusClient, createDirectus, staticToken, type RestClient, type RestCommand,
+  authentication, rest, type DirectusClient, createDirectus, staticToken, type RestClient, type RestCommand, type AuthenticationData,
 } from '@directus/sdk';
 
 import { DNA_BACKEND_URL } from '$constants/system.constants';
-import { directusErrorHandler } from '$features/auth/error-handler/utils/error-handler.utils';
+import { directusLoginErrorHandler, directusRequestErrorHandler } from '$features/auth/error-handler/utils/error-handler.utils';
 import { getAccessToken } from '$features/auth/utils';
 import type DirectusError from '$interfaces/directus-error.interface';
 import { decrementFetchesBeingPerformed, incrementFetchesBeingPerformed } from '$stores/fetches-being-performed.store';
@@ -27,15 +27,19 @@ class DirectusSdk {
  * Directus Sveltekit Client methods
  */
 export class DirectusClientSdk extends DirectusSdk {
-  static async login(email: string, password: string) {
+  static async login(email: string, password: string, onSucess?: (data: AuthenticationData) => void) {
     try {
       incrementFetchesBeingPerformed();
 
       const directusClient = this.getInstance().with(authentication('cookie'));
 
-      return await directusClient.login(email, password, {});
+      const res = await directusClient.login(email, password, {});
+
+      if (onSucess) onSucess(res);
+
+      return res;
     } catch (error) {
-      directusErrorHandler(error as DirectusError);
+      directusLoginErrorHandler(error as DirectusError);
 
       return null;
     } finally {
@@ -51,14 +55,16 @@ export class DirectusClientSdk extends DirectusSdk {
     try {
       incrementFetchesBeingPerformed();
 
-      return await this.getAuthenticatedClient().request<T>(command);
+      const res = await this.getAuthenticatedClient().request<T>(command);
+
+      if (onSucess) onSucess();
+
+      return res;
     } catch (error) {
-      directusErrorHandler(error as DirectusError);
+      directusRequestErrorHandler(error as DirectusError);
 
       return undefined;
     } finally {
-      if (onSucess) onSucess();
-
       decrementFetchesBeingPerformed();
     }
   }
@@ -76,7 +82,7 @@ export class DirectusServerSdk extends DirectusSdk {
     try {
       return await this.getAuthenticatedClient(accessToken).request<T>(command);
     } catch (error) {
-      directusErrorHandler(error as DirectusError);
+      directusRequestErrorHandler(error as DirectusError);
 
       return undefined;
     }

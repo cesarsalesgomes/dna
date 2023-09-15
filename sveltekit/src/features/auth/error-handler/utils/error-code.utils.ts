@@ -14,6 +14,10 @@ export function checkIfItsAnInvalidTokenError(code: ErrorCodesType) {
   return false;
 }
 
+export function checkIfItsAnInvalidCredentialsError(code: ErrorCodesType) {
+  return code === ClientErrorCodes.INVALID_CREDENTIALS;
+}
+
 export function getGraphQlErrorCode(error: GraphQLError): ErrorCodesType {
   return error.extensions?.code || ServerErrorCodes.INTERNAL_SERVER_ERROR;
 }

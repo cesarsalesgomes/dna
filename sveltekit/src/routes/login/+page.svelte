@@ -12,12 +12,10 @@
   let email: string;
   let password: string;
 
-  const submitFunction: SubmitFunction = async ({ cancel }) => {
+  const submitFunction: SubmitFunction = ({ cancel }) => {
     cancel();
 
-    const accessToken = (await DirectusClientSdk.login(email, password))?.access_token;
-
-    authLoginHandler(accessToken);
+    DirectusClientSdk.login(email, password, authLoginHandler);
   };
 </script>
 

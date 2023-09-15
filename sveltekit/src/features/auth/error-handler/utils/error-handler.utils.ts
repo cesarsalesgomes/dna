@@ -11,7 +11,19 @@ import { checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from './error-code
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
 
-export function directusErrorHandler(directusError: DirectusError, notificationDisplayTimeInSeconds?: number) {
+export function directusLoginErrorHandler(directusError: DirectusError) {
+  try {
+    const [error] = directusError.errors;
+
+    setNotificationStore(error.message ?? UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
+  } catch (err) {
+    setNotificationStore(UNEXPECTED_ERROR_NOTIFICATION, NotificationType.ERROR);
+  } finally {
+    hideNotificationAfterDisplaySeconds(NOTIFICATION_DISPLAY_TIME_IN_SECONDS);
+  }
+}
+
+export function directusRequestErrorHandler(directusError: DirectusError, notificationDisplayTimeInSeconds?: number) {
   try {
     const [error] = directusError.errors;
 
