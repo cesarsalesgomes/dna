@@ -12,7 +12,7 @@
   $: onLoginRoute = $page.url.pathname === LOGIN_ROUTE;
 </script>
 
-<main class="h-screen bg-gray-50 dark:bg-gray-900">
+<main class="min-h-screen bg-gray-50 dark:bg-gray-900">
   <Notification/>
   {#if onLoginRoute}
     <slot/>
