@@ -14,8 +14,8 @@ export function checkIfItsAnInvalidTokenError(code: ErrorCodesType) {
   return false;
 }
 
-export function checkIfItsAnInvalidCredentialsError(code: ErrorCodesType) {
-  return code === ClientErrorCodes.INVALID_CREDENTIALS;
+export function checkIfItsAForbiddenError(code: ErrorCodesType) {
+  return code === ClientErrorCodes.FORBIDDEN || code === ClientErrorCodes.GRAPHQL_VALIDATION_EXCEPTION;
 }
 
 export function getGraphQlErrorCode(error: GraphQLError): ErrorCodesType {

@@ -8,13 +8,13 @@ export const prerender = 'auto';
 export const load = async ({ locals, depends, isDataRequest }) => {
   const { accessToken } = locals;
 
-  depends(InvalidateKeys.Cats);
+  depends(InvalidateKeys.Birds);
 
-  const cats = DirectusServerSdk.request(readItems('cat', { fields: ['id', 'name'] }), accessToken);
+  const birds = DirectusServerSdk.request(readItems('bird', { fields: ['id', 'name'] }), accessToken);
 
   return {
     streamed: {
-      cats$: isDataRequest ? cats : await cats,
+      birds$: isDataRequest ? birds : await birds,
     },
   };
 };

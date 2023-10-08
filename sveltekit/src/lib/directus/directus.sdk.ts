@@ -4,8 +4,8 @@ import {
 } from '@directus/sdk';
 
 import { DNA_BACKEND_URL } from '$constants/system.constants';
-import { directusLoginErrorHandler, directusRequestErrorHandler } from '$features/auth/error-handler/utils/error-handler.utils';
 import { getAccessToken } from '$features/auth/utils';
+import { directusLoginErrorHandler, directusRequestErrorHandler } from '$features/error-handler/utils/error-handler.utils';
 import type DirectusError from '$interfaces/directus-error.interface';
 import { decrementFetchesBeingPerformed, incrementFetchesBeingPerformed } from '$stores/fetches-being-performed.store';
 import type DirectusClients from '$types/directus-clients.type';
@@ -79,12 +79,6 @@ export class DirectusServerSdk extends DirectusSdk {
   }
 
   static async request<T extends object>(command: RestCommand<T, DirectusSchema>, accessToken: string) {
-    try {
-      return await this.getAuthenticatedClient(accessToken).request<T>(command);
-    } catch (error) {
-      directusRequestErrorHandler(error as DirectusError);
-
-      return undefined;
-    }
+    return this.getAuthenticatedClient(accessToken).request<T>(command);
   }
 }
