@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class="fixed left-0 z-50 flex w-screen items-center justify-center bg-black opacity-25"
+  class="fixed left-0 z-10 flex w-screen items-center justify-center bg-black opacity-25"
   style="height: {height}; top: {MENU_NAVBAR_HEIGHT}"
 >
   <LoadingSpinner tailwindClasses='h-16 w-16' />
