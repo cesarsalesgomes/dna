@@ -7,3 +7,5 @@ export const UNEXPECTED_SERVER_ERROR: GraphQLError = {
     code: ServerErrorCodes.INTERNAL_SERVER_ERROR,
   },
 };
+
+export const NOT_FOUND_SERVER_ERROR_MESSAGE = 'Not Found';

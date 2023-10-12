@@ -2,7 +2,7 @@ import type { AuthenticationData } from '@directus/sdk';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { get } from 'svelte/store';
 
-import { LOGIN_ROUTE } from '$constants/route.constants';
+import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
 
 import { accessTokenStore, userIdStore } from '../stores';
 
@@ -21,7 +21,7 @@ function setAccessTokenAndUserOnPayloadToStore(accessToken: string) {
 }
 
 function navigateToHome() {
-  goto('/cats');
+  goto(HOME_ROUTE);
 }
 
 export function getAuthenticatedUserIdFromAccessToken(accessToken: string): string {
