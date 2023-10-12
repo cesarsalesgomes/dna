@@ -1,5 +1,6 @@
 <script lang="ts">
   import { LoadingLayout } from '$components/loading';
+  import { LoadErrorHandler } from '$features/error-handler/components';
   import { checkIfIsArrayWithItens } from '$utils/array.utils.js';
 
   // eslint-disable-next-line import/no-mutable-exports
@@ -21,6 +22,6 @@
       <h3>No birds</h3>
     {/if}
   {:catch error}
-    {error.message}
+    <LoadErrorHandler {error}/>
   {/await}
 </div>

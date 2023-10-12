@@ -1,8 +1,11 @@
 /* eslint-disable no-param-reassign */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { redirect, type Handle, type Cookies } from '@sveltejs/kit';
+import {
+  redirect, type Handle, type Cookies, type HandleServerError,
+} from '@sveltejs/kit';
 
 import { accessTokenCookieName } from '$constants/auth.constants';
+import { UNEXPECTED_SERVER_ERROR } from '$constants/error.constants';
 import { LOGIN_ROUTE } from '$constants/route.constants';
 import { getAuthenticatedUserIdFromAccessToken } from '$features/auth/utils';
 
@@ -30,3 +33,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   return resolve(event);
 };
+
+// TODO: Hook with Highlight.io / Add link to redirect to login
+export const handleError: HandleServerError = () => UNEXPECTED_SERVER_ERROR;

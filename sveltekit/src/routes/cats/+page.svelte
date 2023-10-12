@@ -1,5 +1,6 @@
 <script lang="ts">
   import LoadingLayout from '$components/loading/LoadingLayout.svelte';
+  import { LoadErrorHandler } from '$features/error-handler/components';
   import { checkIfIsArrayWithItens } from '$utils/array.utils';
 
   import CreateCat from './components/CreateCat.svelte';
@@ -24,5 +25,7 @@
     {:else}
       <h3>No cats</h3>
     {/if}
+  {:catch error}
+    <LoadErrorHandler {error}/>
   {/await}
 </div>
