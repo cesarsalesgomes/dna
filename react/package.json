@@ -13,7 +13,7 @@
     "@tanstack/react-query": "^4.29.25",
     "@tanstack/react-query-devtools": "^4.0.10",
     "graphql": "^16.7.1",
-    "highlight.run": "^7.5.1",
+    "highlight.run": "^7.5.5",
     "jotai": "^2.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
