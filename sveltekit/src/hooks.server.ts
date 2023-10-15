@@ -2,16 +2,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { redirect, type Handle, type Cookies } from '@sveltejs/kit';
 
-import { accessTokenCookieName } from '$constants/auth.constants';
+import { ACCESS_TOKEN_COOKIE_NAME } from '$constants/auth.constants';
 import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
 import { getAuthenticatedUserIdFromAccessToken } from '$features/auth/utils';
 
 function checkOnLoginRoute({ pathname }: URL): boolean {
-  return pathname === LOGIN_ROUTE;
+  return pathname.includes(LOGIN_ROUTE);
 }
 
 function getAccessTokenFromCookiesEvent(cookies: Cookies) {
-  return cookies.get(accessTokenCookieName);
+  return cookies.get(ACCESS_TOKEN_COOKIE_NAME);
 }
 
 function redirectToHomeIfNoPathWasPassed({ pathname }: URL): boolean {

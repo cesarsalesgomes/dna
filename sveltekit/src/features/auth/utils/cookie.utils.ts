@@ -1,17 +1,17 @@
 import Cookies from 'js-cookie';
 
-import { accessTokenCookieName } from '$constants/auth.constants';
+import { ACCESS_TOKEN_COOKIE_NAME } from '$constants/auth.constants';
 
 export function setCookieWithAccessToken(accessToken: string) {
   const daysToExpire = 1;
 
-  Cookies.set(accessTokenCookieName, accessToken, { expires: daysToExpire, sameSite: 'Lax' });
+  Cookies.set(ACCESS_TOKEN_COOKIE_NAME, accessToken, { expires: daysToExpire, sameSite: 'Lax' });
 }
 
 export function getAccessTokenFromCookie() {
-  return Cookies.get(accessTokenCookieName);
+  return Cookies.get(ACCESS_TOKEN_COOKIE_NAME);
 }
 
 export function removeAccessTokenFromCookie() {
-  Cookies.remove(accessTokenCookieName);
+  Cookies.remove(ACCESS_TOKEN_COOKIE_NAME);
 }

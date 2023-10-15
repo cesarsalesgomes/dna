@@ -10,7 +10,7 @@
 
   import './styles.css';
 
-  $: onLoginRoute = $page.url.pathname === LOGIN_ROUTE;
+  $: onLoginRoute = $page.url.pathname.includes(LOGIN_ROUTE);
 </script>
 
 <main class="min-h-screen bg-gray-50 dark:bg-gray-900">

@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import {
-  authentication, rest, type DirectusClient, createDirectus, staticToken, type RestClient, type RestCommand, type AuthenticationData,
+  authentication, rest, type DirectusClient, createDirectus, staticToken, type RestClient, type RestCommand, type AuthenticationData, refresh,
 } from '@directus/sdk';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { redirect, error as svelteKitError } from '@sveltejs/kit';
@@ -102,5 +102,13 @@ export class DirectusServerSdk extends DirectusSdk {
 
       throw svelteKitError(500, UNEXPECTED_SERVER_ERROR);
     }
+  }
+
+  static googleLogin(refreshToken?: string) {
+    const directusClient = this.getInstance().with(authentication());
+
+    if (!refreshToken) throw redirect(303, LOGIN_ROUTE);
+
+    return directusClient.request(refresh(refreshToken));
   }
 }

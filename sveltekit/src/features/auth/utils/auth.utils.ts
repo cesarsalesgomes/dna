@@ -6,7 +6,9 @@ import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
 
 import { accessTokenStore, userIdStore } from '../stores';
 
-import { getAccessTokenFromCookie, removeAccessTokenFromCookie, setCookieWithAccessToken } from './cookie.utils';
+import {
+  getAccessTokenFromCookie, removeAccessTokenFromCookie, setCookieWithAccessToken,
+} from './cookie.utils';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
