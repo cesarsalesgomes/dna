@@ -3,7 +3,7 @@
 import { redirect, type Handle, type Cookies } from '@sveltejs/kit';
 
 import { accessTokenCookieName } from '$constants/auth.constants';
-import { LOGIN_ROUTE } from '$constants/route.constants';
+import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
 import { getAuthenticatedUserIdFromAccessToken } from '$features/auth/utils';
 
 function checkOnLoginRoute({ pathname }: URL): boolean {
@@ -14,8 +14,14 @@ function getAccessTokenFromCookiesEvent(cookies: Cookies) {
   return cookies.get(accessTokenCookieName);
 }
 
+function redirectToHomeIfNoPathWasPassed({ pathname }: URL): boolean {
+  return pathname === '/';
+}
+
 export const handle: Handle = async ({ event, resolve }) => {
-  if (!checkOnLoginRoute(event.url)) {
+  const { url } = event;
+
+  if (!checkOnLoginRoute(url)) {
     const accessToken = getAccessTokenFromCookiesEvent(event.cookies);
 
     if (!accessToken) throw redirect(303, LOGIN_ROUTE);
@@ -26,6 +32,10 @@ export const handle: Handle = async ({ event, resolve }) => {
       accessToken,
       userId,
     };
+
+    if (redirectToHomeIfNoPathWasPassed(url)) {
+      return new Response('Redirect', { status: 303, headers: { Location: HOME_ROUTE } });
+    }
   }
 
   return resolve(event);
