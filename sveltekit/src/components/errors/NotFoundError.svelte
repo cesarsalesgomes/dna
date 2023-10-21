@@ -2,7 +2,7 @@
   import { HOME_ROUTE } from '$constants/route.constants';
 </script>
 
-<div class="prose min-h-full px-4 py-16 dark:prose-invert sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
+<div class="prose min-h-full min-w-full px-4 py-16 dark:prose-invert sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
   <div class="mx-auto max-w-max">
     <main class="sm:flex">
       <p class="text-4xl font-bold tracking-tight text-primary-600 sm:text-5xl">404</p>

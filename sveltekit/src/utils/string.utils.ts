@@ -1,3 +1,3 @@
-export function getFirstLetterUppercase(str: string): string {
-  return str.charAt(0).toUpperCase();
+export function getFirstLetterUppercase(str?: string | null): string {
+  return str?.charAt(0).toUpperCase() ?? '';
 }

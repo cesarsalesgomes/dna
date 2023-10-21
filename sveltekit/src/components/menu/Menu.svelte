@@ -1,9 +1,17 @@
 <script lang="ts">
+
   import { NavLink, NavLinkMobile } from '$components/buttons';
   import { BIRDS_ROUTE, CATS_ROUTE } from '$constants/route.constants';
   import { logout } from '$features/auth/utils';
+  import type { DirectusUsers } from '$types/directus-schema.type';
 
   import Avatar from './Avatar.svelte';
+
+  // eslint-disable-next-line import/no-mutable-exports
+  export let me$: Promise<DirectusUsers>;
+
+  // eslint-disable-next-line import/no-mutable-exports
+  export let accessTokenFromServer: string;
 
   let showMenu: boolean;
   let showUserMenu: boolean;
@@ -92,7 +100,7 @@
               aria-haspopup="true"
               on:click={() => { showUserMenu = !showUserMenu; }}>
               <span class="sr-only">Open user menu</span>
-              <Avatar/>
+              <Avatar me$={me$} accessTokenFromServer={accessTokenFromServer}/>
             </button>
           </div>
 
