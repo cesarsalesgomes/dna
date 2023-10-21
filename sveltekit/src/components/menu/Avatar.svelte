@@ -28,7 +28,7 @@
   <CircleWithNameInitials/>
 {:then me}
   {#if me.avatar}
-    <img class="h-8 w-8 rounded-full" src={getUserAvatarUrl(me.avatar)} alt="">
+    <img class="h-8 w-8 rounded-full bg-gray-900" src={getUserAvatarUrl(me.avatar)} alt="avatar">
   {:else }
     <CircleWithNameInitials firstName={me.first_name} lastName={me.last_name}/>
   {/if}
