@@ -1,7 +1,7 @@
-import NotFoundError from './NotFoundError.svelte';
+import PageNotFoundError from './PageNotFoundError.svelte';
 import UnexpectedError from './UnexpectedError.svelte';
 
 export {
-  NotFoundError,
+  PageNotFoundError,
   UnexpectedError,
 };

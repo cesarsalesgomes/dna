@@ -2,8 +2,7 @@
   // eslint-disable-next-line import/extensions, import/no-unresolved, import/no-extraneous-dependencies
   import { get } from 'svelte/store';
 
-  import { PageNotFoundError, UnexpectedError } from '$components/errors';
-  import { NOT_FOUND_SERVER_ERROR_MESSAGE } from '$constants/error.constants';
+  import { UnexpectedError } from '$components/errors';
 
   // eslint-disable-next-line import/extensions, import/no-unresolved
   import { page } from '$app/stores';
@@ -12,8 +11,4 @@
 
 </script>
 
-{#if error?.message === NOT_FOUND_SERVER_ERROR_MESSAGE}
-  <PageNotFoundError/>
-{:else}
-  <UnexpectedError error={error}/>
-{/if}
+<UnexpectedError error={error}/>
