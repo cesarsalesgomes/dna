@@ -17,11 +17,22 @@
     <LoadingLayout/>
   {:then cats}
     {#if cats && checkIfIsArrayWithItens(cats) }
-      {#each cats as cat}
-        <div class="p-2">
-          {cat.name}
-        </div>
-      {/each}
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th>Cat</th>
+            <th>Family</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each cats as cat}
+            <tr>
+              <td>{cat.name}</td>
+              <td>{cat.family?.name ?? ''}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
     {:else}
       <h3>No cats</h3>
     {/if}

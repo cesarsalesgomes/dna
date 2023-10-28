@@ -8,6 +8,7 @@ export type Bird = {
 export type Cat = {
   date_created?: string | null;
   date_updated?: string | null;
+  family?: number | Family | null;
   id: number;
   name?: string | null;
   user_created?: string | DirectusUsers | null;
@@ -22,7 +23,7 @@ export type DirectusActivity = {
   ip?: string | null;
   item: string;
   origin?: string | null;
-  revisions?: any[] | DirectusRevisions[] | null;
+  revisions: any[] | DirectusRevisions[];
   timestamp: string;
   user?: string | DirectusUsers | null;
   user_agent?: string | null;
@@ -56,12 +57,12 @@ export type DirectusDashboards = {
   id: string;
   name: string;
   note?: string | null;
-  panels?: any[] | DirectusPanels[] | null;
+  panels: any[] | DirectusPanels[];
   user_created?: string | DirectusUsers | null;
 };
 
 export type DirectusFields = {
-  collection?: string | DirectusCollections | null;
+  collection: string | DirectusCollections;
   conditions?: unknown | null;
   display?: string | null;
   display_options?: unknown | null;
@@ -115,7 +116,7 @@ export type DirectusFlows = {
   id: string;
   name: string;
   operation?: string | DirectusOperations | null;
-  operations?: any[] | DirectusOperations[] | null;
+  operations: any[] | DirectusOperations[];
   options?: unknown | null;
   status: string;
   trigger?: string | null;
@@ -139,7 +140,7 @@ export type DirectusNotifications = {
   id: number;
   item?: string | null;
   message?: string | null;
-  recipient?: string | DirectusUsers | null;
+  recipient: string | DirectusUsers;
   sender?: string | DirectusUsers | null;
   status?: string | null;
   subject: string;
@@ -148,7 +149,7 @@ export type DirectusNotifications = {
 
 export type DirectusOperations = {
   date_created?: string | null;
-  flow?: string | DirectusFlows | null;
+  flow: string | DirectusFlows;
   id: string;
   key: string;
   name?: string | null;
@@ -163,7 +164,7 @@ export type DirectusOperations = {
 
 export type DirectusPanels = {
   color?: string | null;
-  dashboard?: string | DirectusDashboards | null;
+  dashboard: string | DirectusDashboards;
   date_created?: string | null;
   height: number;
   icon?: string | null;
@@ -220,7 +221,7 @@ export type DirectusRelations = {
 };
 
 export type DirectusRevisions = {
-  activity?: number | DirectusActivity | null;
+  activity: number | DirectusActivity;
   collection: string;
   data?: unknown | null;
   delta?: unknown | null;
@@ -238,7 +239,7 @@ export type DirectusRoles = {
   id: string;
   ip_access?: unknown | null;
   name: string;
-  users?: any[] | DirectusUsers[] | null;
+  users: any[] | DirectusUsers[];
 };
 
 export type DirectusSessions = {
@@ -275,12 +276,12 @@ export type DirectusSettings = {
 };
 
 export type DirectusShares = {
-  collection?: string | DirectusCollections | null;
+  collection: string | DirectusCollections;
   date_created?: string | null;
   date_end?: string | null;
   date_start?: string | null;
   id: string;
-  item?: string | null;
+  item: string;
   max_uses?: number | null;
   name?: string | null;
   password?: string | null;
@@ -333,9 +334,64 @@ export type DirectusWebhooks = {
   url: string;
 };
 
-type DirectusSchema = {
-  bird: Bird[];
-  cat: Cat[];
+export type Family = {
+  cats: any[] | Cat[];
+  id: number;
+  name: string;
 };
 
-export default DirectusSchema;
+export type DirectusSchema = {
+  bird: Bird[];
+  cat: Cat[];
+  directus_activity: DirectusActivity[];
+  directus_collections: DirectusCollections[];
+  directus_dashboards: DirectusDashboards[];
+  directus_fields: DirectusFields[];
+  directus_files: DirectusFiles[];
+  directus_flows: DirectusFlows[];
+  directus_folders: DirectusFolders[];
+  directus_migrations: DirectusMigrations[];
+  directus_notifications: DirectusNotifications[];
+  directus_operations: DirectusOperations[];
+  directus_panels: DirectusPanels[];
+  directus_permissions: DirectusPermissions[];
+  directus_presets: DirectusPresets[];
+  directus_relations: DirectusRelations[];
+  directus_revisions: DirectusRevisions[];
+  directus_roles: DirectusRoles[];
+  directus_sessions: DirectusSessions[];
+  directus_settings: DirectusSettings;
+  directus_shares: DirectusShares[];
+  directus_translations: DirectusTranslations[];
+  directus_users: DirectusUsers[];
+  directus_webhooks: DirectusWebhooks[];
+  family: Family[];
+};
+
+export type KyselySchema = {
+  bird: Bird;
+  cat: Cat;
+  directus_activity: DirectusActivity;
+  directus_collections: DirectusCollections;
+  directus_dashboards: DirectusDashboards;
+  directus_fields: DirectusFields;
+  directus_files: DirectusFiles;
+  directus_flows: DirectusFlows;
+  directus_folders: DirectusFolders;
+  directus_migrations: DirectusMigrations;
+  directus_notifications: DirectusNotifications;
+  directus_operations: DirectusOperations;
+  directus_panels: DirectusPanels;
+  directus_permissions: DirectusPermissions;
+  directus_presets: DirectusPresets;
+  directus_relations: DirectusRelations;
+  directus_revisions: DirectusRevisions;
+  directus_roles: DirectusRoles;
+  directus_sessions: DirectusSessions;
+  directus_settings: DirectusSettings;
+  directus_shares: DirectusShares;
+  directus_translations: DirectusTranslations;
+  directus_users: DirectusUsers;
+  directus_webhooks: DirectusWebhooks;
+  family: Family;
+};

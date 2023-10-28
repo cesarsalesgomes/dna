@@ -16,7 +16,7 @@ import {
 import type DirectusError from '$interfaces/directus-error.interface';
 import { decrementFetchesBeingPerformed, incrementFetchesBeingPerformed } from '$stores/fetches-being-performed.store';
 import type DirectusClients from '$types/directus-clients.type';
-import type DirectusSchema from '$types/directus-schema.type';
+import type { DirectusSchema } from '$types/directus-schema.type';
 
 class DirectusSdk {
   static instance: DirectusClient<DirectusSchema> & RestClient<DirectusSchema>;

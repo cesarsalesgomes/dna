@@ -1,16 +1,13 @@
-import { readItems } from '@directus/sdk';
-
 import InvalidateKeys from '$enums/invalidate-keys.enum.js';
-import { DirectusServerSdk } from '$lib/directus/directus.sdk.js';
+
+import CatsRepository from './repository/cats.repository.js';
 
 export const prerender = 'auto';
 
-export const load = async ({ locals, depends, isDataRequest }) => {
-  const { accessToken } = locals;
-
+export const load = async ({ depends, isDataRequest }) => {
   depends(InvalidateKeys.Cats);
 
-  const cats = DirectusServerSdk.request(readItems('cat', { fields: ['id', 'name'] }), accessToken);
+  const cats = CatsRepository.getCatsWithFamily();
 
   return {
     streamed: {

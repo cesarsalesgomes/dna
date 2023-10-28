@@ -18,6 +18,7 @@
 		"@tailwindcss/typography": "^0.5.9",
 		"@types/cookie": "^0.5.1",
 		"@types/js-cookie": "^3.0.3",
+		"@types/pg": "^8.10.7",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -39,6 +40,8 @@
 	"type": "module",
 	"dependencies": {
 		"@directus/sdk": "^11.0.1",
-		"js-cookie": "^3.0.5"
+		"js-cookie": "^3.0.5",
+		"kysely": "^0.26.3",
+		"pg": "^8.11.3"
 	}
 }

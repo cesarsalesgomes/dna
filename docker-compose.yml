@@ -4,6 +4,8 @@ services:
   database:
     container_name: database
     image: postgres:13.5
+    ports:
+      - 5433:5432
     volumes:
       - ./database:/var/lib/postgresql/data
     networks:
@@ -28,6 +30,7 @@ services:
     volumes:
       - ./directus/uploads:/directus/uploads
       - ./directus/migrations:/directus/migrations
+      - ./directus/extensions:/directus/extensions
     command:
       - /bin/sh
       - -c
