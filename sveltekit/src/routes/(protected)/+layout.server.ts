@@ -1,19 +1,14 @@
-import { readMe } from '@directus/sdk';
-
-import { DirectusServerSdk } from '$lib/directus/directus.sdk';
-import type { DirectusUsers } from '$types/directus-schema.type';
+import UserRepository from '$repository/user.repository';
 
 export const prerender = 'auto';
 
 export const load = async ({ locals, isDataRequest }) => {
-  const { accessToken } = locals;
-
-  const me = DirectusServerSdk.request(readMe({ fields: ['avatar', 'first_name', 'last_name'] }), accessToken);
+  const me = UserRepository.getMe(locals.directusPayload);
 
   return {
     streamed: {
-      me$: (isDataRequest ? me : await me) as Promise<DirectusUsers>,
+      me$: isDataRequest ? me : await me,
     },
-    accessToken,
+    accessToken: locals.accessToken,
   };
 };

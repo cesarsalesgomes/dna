@@ -7,7 +7,7 @@
   import CircleWithNameInitials from './CircleWithNameInitials.svelte';
 
   // eslint-disable-next-line import/no-mutable-exports
-  export let me$: Promise<DirectusUsers>;
+  export let me$: Promise<Partial<DirectusUsers>>;
 
   // eslint-disable-next-line import/no-mutable-exports
   export let accessTokenFromServer: string;

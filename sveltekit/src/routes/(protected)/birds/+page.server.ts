@@ -1,13 +1,12 @@
-import InvalidateKeys from '$enums/invalidate-keys.enum.js';
-
-import BirdsRepository from './repository/birds.repository.js';
+import InvalidateKeys from '$enums/invalidate-keys.enum';
+import BirdRepository from '$repository/bird.repository';
 
 export const prerender = 'auto';
 
 export const load = async ({ locals, depends, isDataRequest }) => {
   depends(InvalidateKeys.Birds);
 
-  const birds = BirdsRepository.getBirds(locals.directusPayload);
+  const birds = BirdRepository.getBirds(locals.directusPayload);
 
   return {
     streamed: {

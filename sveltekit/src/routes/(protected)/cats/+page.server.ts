@@ -1,13 +1,12 @@
-import InvalidateKeys from '$enums/invalidate-keys.enum.js';
-
-import CatsRepository from './repository/cats.repository.js';
+import InvalidateKeys from '$enums/invalidate-keys.enum';
+import CatRepository from '$repository/cat.repository';
 
 export const prerender = 'auto';
 
 export const load = async ({ locals, depends, isDataRequest }) => {
   depends(InvalidateKeys.Cats);
 
-  const cats = CatsRepository.getCatsWithFamily(locals.directusPayload);
+  const cats = CatRepository.getCatsWithFamily(locals.directusPayload);
 
   return {
     streamed: {

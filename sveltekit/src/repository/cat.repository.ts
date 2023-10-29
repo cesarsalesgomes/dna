@@ -6,7 +6,7 @@ import type DirectusPayload from '$interfaces/directus-payload.interface';
 import { KyselyRepository } from '$lib/kysely';
 import type { KyselySchema } from '$types/directus-schema.type';
 
-export default class CatsRepository {
+export default class CatRepository {
   static async getCatsWithFamily({ role, admin_access: admin }: DirectusPayload) {
     await KyselyRepository.checkIfRoleHasPermissionToReadCollections(role, ['cat', 'family'], admin);
 

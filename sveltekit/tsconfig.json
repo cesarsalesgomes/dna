@@ -22,6 +22,7 @@
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],
       "$providers/*": ["src/providers/*"],
+      "$repository/*": ["src/repository/*"],
       "$routes/*": ["src/routes/*"],
       "$stores/*": ["src/stores/*"],
       "$test/*": ["src/test/*"],
