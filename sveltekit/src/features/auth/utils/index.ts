@@ -1,5 +1,5 @@
 import {
-  authLoginHandler, logout, getAccessToken, getPayloadFromAccessToken,
+  authLoginHandler, logout, getAccessToken, getPayloadFromAccessToken, checkAccessTokenExpired,
 } from './auth.utils';
 
 export {
@@ -7,4 +7,5 @@ export {
   logout,
   getAccessToken,
   getPayloadFromAccessToken,
+  checkAccessTokenExpired,
 };

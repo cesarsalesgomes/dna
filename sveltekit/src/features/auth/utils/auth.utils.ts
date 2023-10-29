@@ -60,3 +60,9 @@ export function getAccessToken() {
 
   return 'Invalid Token';
 }
+
+export function checkAccessTokenExpired({ exp }: DirectusPayload): boolean {
+  const currentEpochTimeInSeconds = Date.now();
+
+  return currentEpochTimeInSeconds > (exp * 1000);
+}
