@@ -4,7 +4,7 @@ import { redirect, type Handle, type Cookies } from '@sveltejs/kit';
 
 import { ACCESS_TOKEN_COOKIE_NAME } from '$constants/auth.constants';
 import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
-import { getAuthenticatedUserIdFromAccessToken } from '$features/auth/utils';
+import { getPayloadFromAccessToken } from '$features/auth/utils';
 
 function checkOnLoginRoute({ pathname }: URL): boolean {
   return pathname.includes(LOGIN_ROUTE);
@@ -26,11 +26,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     if (!accessToken) throw redirect(303, LOGIN_ROUTE);
 
-    const userId = getAuthenticatedUserIdFromAccessToken(accessToken);
+    const directusPayload = getPayloadFromAccessToken(accessToken);
+
+    // TODO: check token expired with payload
 
     event.locals = {
       accessToken,
-      userId,
+      directusPayload,
     };
 
     if (redirectToHomeIfNoPathWasPassed(url)) {

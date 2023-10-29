@@ -3,6 +3,7 @@ import type { AuthenticationData } from '@directus/sdk';
 import { get } from 'svelte/store';
 
 import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
+import type DirectusPayload from '$interfaces/directus-payload.interface';
 
 import { accessTokenStore, userIdStore } from '../stores';
 
@@ -13,7 +14,7 @@ import {
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
 
-function getPayloadFromAccessToken(accessToken: string): { id: string } {
+export function getPayloadFromAccessToken(accessToken: string): DirectusPayload {
   return JSON.parse(atob(accessToken.split('.')[1]));
 }
 
@@ -24,10 +25,6 @@ function setAccessTokenAndUserOnPayloadToStore(accessToken: string) {
 
 function navigateToHome() {
   goto(HOME_ROUTE);
-}
-
-export function getAuthenticatedUserIdFromAccessToken(accessToken: string): string {
-  return getPayloadFromAccessToken(accessToken).id;
 }
 
 export function authLoginHandler(data: AuthenticationData | null) {

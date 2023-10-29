@@ -1,10 +1,10 @@
 import {
-  authLoginHandler, getAuthenticatedUserIdFromAccessToken, logout, getAccessToken,
+  authLoginHandler, logout, getAccessToken, getPayloadFromAccessToken,
 } from './auth.utils';
 
 export {
   authLoginHandler,
-  getAuthenticatedUserIdFromAccessToken,
   logout,
   getAccessToken,
+  getPayloadFromAccessToken,
 };

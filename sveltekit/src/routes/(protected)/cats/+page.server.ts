@@ -4,10 +4,10 @@ import CatsRepository from './repository/cats.repository.js';
 
 export const prerender = 'auto';
 
-export const load = async ({ depends, isDataRequest }) => {
+export const load = async ({ locals, depends, isDataRequest }) => {
   depends(InvalidateKeys.Cats);
 
-  const cats = CatsRepository.getCatsWithFamily();
+  const cats = CatsRepository.getCatsWithFamily(locals.directusPayload);
 
   return {
     streamed: {

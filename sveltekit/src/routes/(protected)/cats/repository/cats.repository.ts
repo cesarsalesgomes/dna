@@ -2,11 +2,14 @@
 import type { ExpressionBuilder } from 'kysely';
 import { jsonObjectFrom } from 'kysely/helpers/postgres';
 
-import KyselyRepository from '$lib/kysely/kysely.repository';
+import type DirectusPayload from '$interfaces/directus-payload.interface';
+import { KyselyRepository } from '$lib/kysely';
 import type { KyselySchema } from '$types/directus-schema.type';
 
 export default class CatsRepository {
-  static getCatsWithFamily() {
+  static async getCatsWithFamily({ role, admin_access: admin }: DirectusPayload) {
+    await KyselyRepository.checkIfRoleHasPermissionToReadCollections(role, ['cat', 'family'], admin);
+
     return KyselyRepository.getInstance().selectFrom('cat').select('name').select(
       (eb) => [
         this.withFamily(eb),
