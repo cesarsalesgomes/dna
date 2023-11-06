@@ -1,0 +1,95 @@
+version: "3"
+services:
+  # Postgres
+  database:
+    container_name: database
+    image: postgres:13.5
+    ports:
+      - 5433:5432
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    networks:
+      - dna_network
+    environment:
+      POSTGRES_USER: "directus"
+      POSTGRES_PASSWORD: "directus"
+      POSTGRES_DB: "directus"
+
+  cache:
+    container_name: cache
+    image: redis:6
+    networks:
+      - dna_network
+
+  # Directus
+  directus:
+    container_name: directus
+    image: directus/directus:latest
+    ports:
+      - ${DIRECTUS_PORT}:${DIRECTUS_PORT}
+    volumes:
+      - ./directus/uploads:/directus/uploads
+      - ./directus/migrations:/directus/migrations
+      - ./directus/extensions:/directus/extensions
+    command:
+      - /bin/sh
+      - -c
+      - |
+        npx directus bootstrap
+        npx directus start
+    networks:
+      dna_network:
+        ipv4_address: ${DOCKER_DNA_IPV4_DIRECTUS}
+    depends_on:
+      - cache
+      - database
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+
+      PUBLIC_URL: "http://localhost:8055"
+
+      DB_CLIENT: "pg"
+      DB_HOST: "database"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "directus"
+      DB_PASSWORD: "directus"
+
+      REDIS: ${REDIS}
+
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      STORAGE_LOCATIONS: "s3"
+      STORAGE_S3_DRIVER: "s3"
+      STORAGE_S3_KEY: ${STORAGE_S3_KEY}
+      STORAGE_S3_SECRET: ${STORAGE_S3_SECRET}
+      STORAGE_S3_BUCKET: ${STORAGE_S3_BUCKET}
+      STORAGE_S3_REGION: ${STORAGE_S3_REGION}
+
+      ACCESS_TOKEN_TTL: 1d
+
+      CORS_ENABLED: "true"
+
+      AUTH_PROVIDERS: "google"
+      AUTH_GOOGLE_DRIVER: "openid"
+      AUTH_GOOGLE_ISSUER_URL: "https://accounts.google.com"
+      AUTH_GOOGLE_IDENTIFIER_KEY: "email"
+      AUTH_GOOGLE_ICON: "google"
+      AUTH_GOOGLE_LABEL: "Google"
+      AUTH_GOOGLE_ALLOW_PUBLIC_REGISTRATION: "true"
+      AUTH_GOOGLE_CLIENT_ID: ${AUTH_GOOGLE_CLIENT_ID}
+      AUTH_GOOGLE_CLIENT_SECRET: ${AUTH_GOOGLE_CLIENT_SECRET}
+      AUTH_GOOGLE_DEFAULT_ROLE_ID: ${AUTH_GOOGLE_DEFAULT_ROLE_ID}
+
+      REFRESH_TOKEN_COOKIE_DOMAIN: ${REFRESH_TOKEN_COOKIE_DOMAIN}
+      REFRESH_TOKEN_COOKIE_SECURE: "true"
+      REFRESH_TOKEN_COOKIE_SAME_SITE: "None"
+
+networks:
+  dna_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_DNA_IPV4_RANGE}

@@ -8,6 +8,7 @@
   "scripts": {
     "start": "docker-compose up",
     "start:rebuild": "docker-compose up --build -V",
-    "start:migration-import": "docker-compose -f docker-compose.migration-import.yml up"
+    "start:migration-import": "docker-compose -f docker-compose.migration-import.yml up",
+    "start:sveltekit": "docker-compose -f docker-compose.sveltekit.yml up"
   }
 }
