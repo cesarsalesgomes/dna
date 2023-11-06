@@ -11,7 +11,6 @@ import { checkIfIsArrayWithItens } from '$utils/array.utils';
 
 import { checkIfItsAForbiddenError, checkIfItsAnInvalidTokenError, getGraphQlErrorCode } from './error-code.utils';
 
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
 
 export function directusLoginErrorHandler(directusError: DirectusError) {

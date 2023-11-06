@@ -1,7 +1,6 @@
 <script lang="ts">
   import { NotificationType } from '../enums';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let type: NotificationType;
 </script>
 

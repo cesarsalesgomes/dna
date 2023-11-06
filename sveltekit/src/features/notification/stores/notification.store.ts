@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { writable } from 'svelte/store';
 
 import type { NotificationType } from '../enums';

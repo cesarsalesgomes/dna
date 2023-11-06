@@ -3,7 +3,6 @@
   import Menu from '$components/menu/Menu.svelte';
   import ForbiddenAccessModal from '$components/modals/ForbiddenAccessModal.svelte';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let data;
 </script>
 

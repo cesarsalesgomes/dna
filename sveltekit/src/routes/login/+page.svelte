@@ -7,7 +7,6 @@
   import { authLoginHandler } from '$features/auth/utils';
   import { DirectusClientSdk } from '$lib/directus';
 
-  // eslint-disable-next-line import/extensions, import/no-unresolved
   import { enhance } from '$app/forms';
 
   let email: string;

@@ -5,9 +5,7 @@
 
   import CreateCat from './components/CreateCat.svelte';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let data;
-
 </script>
 
 <div class="prose flex flex-col items-start dark:prose-invert">

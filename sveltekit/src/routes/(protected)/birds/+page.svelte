@@ -3,7 +3,6 @@
   import { LoadErrorHandler } from '$features/error-handler/components';
   import { checkIfIsArrayWithItens } from '$utils/array.utils.js';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let data;
 </script>
 

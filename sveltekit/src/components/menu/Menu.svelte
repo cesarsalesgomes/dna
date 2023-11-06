@@ -7,10 +7,8 @@
 
   import Avatar from './Avatar.svelte';
 
-  // eslint-disable-next-line import/no-mutable-exports
-  export let me$: Promise<Partial<DirectusUsers>>;
+  export let me$: Partial<DirectusUsers> | Promise<Partial<DirectusUsers>>;
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let accessTokenFromServer: string;
 
   let showMenu: boolean;

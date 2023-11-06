@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { redirect } from '@sveltejs/kit';
 
 import { REFRESH_TOKEN_COOKIE_NAME, REFRESH_TOKEN_COOKIE_OPTIONS, ACCESS_TOKEN_COOKIE_NAME } from '$constants/auth.constants.js';

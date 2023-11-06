@@ -48,17 +48,13 @@ module.exports = {
       },
     ],
     'import/default': 'off',
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        ts: 'never',
-      },
-    ],
+    'import/extensions': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
-    'import/no-unresolved': 'error',
+    'import/no-unresolved': 'off',
+    'import/no-mutable-exports': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
     'no-restricted-imports': [
       'error',
       {
@@ -83,7 +79,6 @@ module.exports = {
     'no-multiple-empty-lines': 'error',
     'prefer-const': 'error',
     'no-use-before-define': 'error',
-    'import/prefer-default-export': 'off',
   },
   settings: {
     'import/parsers': {

@@ -2,7 +2,6 @@
   import { ClientErrorCodes } from '$enums/error-codes.enum';
   import type GraphQLError from '$interfaces/graphql-error.interface';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let error: GraphQLError | null;
 
   function getErrorTitle() {

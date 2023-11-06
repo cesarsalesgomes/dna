@@ -1,6 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-extraneous-dependencies */
 import { error as svelteKitError } from '@sveltejs/kit';
 import { Kysely, PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
@@ -45,7 +42,7 @@ export default class KyselyRepository {
     for (const collection of collections) {
       const hasPermission = !!permissions.find((permission) => permission.collection === collection);
 
-      if (!hasPermission) throw svelteKitError(500, FORBIDDEN_ERROR); // Qual Erro do Svelkit?;
+      if (!hasPermission) throw svelteKitError(500, FORBIDDEN_ERROR);
     }
   }
 

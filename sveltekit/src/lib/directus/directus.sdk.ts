@@ -2,7 +2,6 @@
 import {
   authentication, rest, type DirectusClient, createDirectus, staticToken, type RestClient, type RestCommand, type AuthenticationData, refresh,
 } from '@directus/sdk';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { redirect, error as svelteKitError } from '@sveltejs/kit';
 
 import { UNEXPECTED_SERVER_ERROR } from '$constants/error.constants';

@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { redirect, type Handle, type Cookies } from '@sveltejs/kit';
 
 import { ACCESS_TOKEN_COOKIE_NAME } from '$constants/auth.constants';

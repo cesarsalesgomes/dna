@@ -1,6 +1,5 @@
 import type { CookieSerializeOptions } from 'cookie';
 
-// eslint-disable-next-line import/extensions, import/no-unresolved
 import { dev } from '$app/environment';
 
 export const ACCESS_TOKEN_COOKIE_NAME = 'dna-access-token';

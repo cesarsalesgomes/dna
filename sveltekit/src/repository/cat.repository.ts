@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import type { ExpressionBuilder } from 'kysely';
 import { jsonObjectFrom } from 'kysely/helpers/postgres';
 

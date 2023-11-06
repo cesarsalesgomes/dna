@@ -1,12 +1,10 @@
 <script lang="ts">
 
-  // eslint-disable-next-line import/no-extraneous-dependencies
   import { onDestroy } from 'svelte';
 
   import { LoadingButton } from '$components/loading';
   import { fetchesBeingPerformedStore } from '$stores/fetches-being-performed.store';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let label: string;
 
   let fetchesBeingPerformed: number;

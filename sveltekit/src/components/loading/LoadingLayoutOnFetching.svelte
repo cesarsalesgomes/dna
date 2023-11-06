@@ -3,7 +3,6 @@
 
   import LoadingLayout from './LoadingLayout.svelte';
 
-  // eslint-disable-next-line import/extensions, import/no-unresolved
   import { navigating } from '$app/stores';
 
 </script>

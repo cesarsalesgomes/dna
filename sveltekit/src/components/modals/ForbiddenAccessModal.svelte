@@ -5,7 +5,6 @@
   import { setShowForbiddenAccessModalStore, showForbiddenAccessModalStore } from '$stores/show-forbidden-access-modal.store';
   import { checkIfNavigatedToDifferentRoute } from '$utils/route.utils';
 
-  // eslint-disable-next-line import/extensions, import/no-unresolved
   import { navigating } from '$app/stores';
 
   const height = `calc(100vh - ${MENU_NAVBAR_HEIGHT}`;

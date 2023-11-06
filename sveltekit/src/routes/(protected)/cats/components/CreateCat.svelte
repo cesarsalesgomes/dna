@@ -7,7 +7,6 @@
   import { DirectusClientSdk } from '$lib/directus';
   import { invalidateWithLoading } from '$utils/svelte.utils';
 
-  // eslint-disable-next-line import/extensions, import/no-unresolved
   import { enhance } from '$app/forms';
 
   let name: string;

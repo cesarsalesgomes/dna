@@ -1,5 +1,4 @@
 <script lang="ts">
-  // eslint-disable-next-line import/no-mutable-exports
   export let tailwindClasses: string;
 
 </script>

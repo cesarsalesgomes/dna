@@ -1,10 +1,7 @@
 <script lang="ts">
-  // eslint-disable-next-line import/extensions, import/no-unresolved
   import { page } from '$app/stores';
 
-  // eslint-disable-next-line import/no-mutable-exports
   export let route: string;
-  // eslint-disable-next-line import/no-mutable-exports
   export let routeDescription: string;
 
   $: onRoute = $page.url.pathname === route;

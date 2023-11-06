@@ -1,5 +1,4 @@
 import type { AuthenticationData } from '@directus/sdk';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { get } from 'svelte/store';
 
 import { HOME_ROUTE, LOGIN_ROUTE } from '$constants/route.constants';
@@ -11,7 +10,6 @@ import {
   getAccessTokenFromCookie, removeAccessTokenFromCookie, setCookieWithAccessToken,
 } from './cookie.utils';
 
-// eslint-disable-next-line import/no-unresolved, import/extensions
 import { goto } from '$app/navigation';
 
 export function getPayloadFromAccessToken(accessToken: string): DirectusPayload {
