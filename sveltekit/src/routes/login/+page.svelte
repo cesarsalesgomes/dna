@@ -3,6 +3,7 @@
   import type { SubmitFunction } from '@sveltejs/kit';
 
   import { SubmitButtonWithLoadingWhenFetching } from '$components/buttons';
+  import { GoogleSvg } from '$components/svgs';
   import { DNA_BACKEND_URL, DNA_FRONT_URL } from '$constants/system.constants';
   import { authLoginHandler } from '$features/auth/utils';
   import { DirectusClientSdk } from '$lib/directus';
@@ -25,7 +26,7 @@
     <h2 class="mt-6 text-center text-3xl font-bold tracking-tight">Sign in to your account</h2>
     <p class="mt-2 text-center text-sm">
       Or
-      <a href="#" class="font-medium text-primary-600 hover:text-primary-500">start your 14-day free trial</a>
+      <a href="/" class="font-medium text-primary-600 hover:text-primary-500">start your 14-day free trial</a>
     </p>
   </div>
 
@@ -41,7 +42,10 @@
               autocomplete="email"
               required
               bind:value={email}
-              class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
+              class="
+                block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm
+                focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm
+              ">
           </div>
         </div>
 
@@ -54,7 +58,10 @@
               autocomplete="current-password"
               required
               bind:value={password}
-              class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm">
+              class="
+                block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm
+                focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm
+              ">
           </div>
         </div>
 
@@ -68,7 +75,7 @@
           </div>
 
           <div class="text-sm">
-            <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Forgot your password?</a>
+            <a href="/" class="font-medium text-primary-600 hover:text-primary-500">Forgot your password?</a>
           </div>
         </div>
 
@@ -89,16 +96,15 @@
 
         <div class="mt-6 grid grid-cols-3 gap-3">
           <div>
-            <a href={`${DNA_BACKEND_URL}/auth/login/google?redirect=${DNA_FRONT_URL}/login/google`} class="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+            <a
+              rel="external"
+              href={`${DNA_BACKEND_URL}/auth/login/google?redirect=${DNA_FRONT_URL}/login/google`}
+              class="
+                inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500
+                shadow-sm hover:bg-gray-50
+              ">
               <span class="sr-only">Sign in with Google</span>
-              <svg class="h-5 w-5"
-                aria-hidden="true"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 488 512">
-                <path
-                  d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-              </svg>
+              <GoogleSvg className="h-5 w-5"/>
             </a>
           </div>
         </div>
