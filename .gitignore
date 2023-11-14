@@ -70,3 +70,4 @@ typings/
 
 # Sveltekit
 /sveltekit/.svelte-kit/
+/sveltekit/build/

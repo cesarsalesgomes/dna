@@ -1,6 +1,6 @@
 import { error as svelteKitError } from '@sveltejs/kit';
 import { Kysely, PostgresDialect } from 'kysely';
-import { Pool } from 'pg';
+import pg from 'pg';
 
 import { FORBIDDEN_ERROR } from '$constants/error.constants';
 import type { KyselySchema } from '$types/directus-schema.type';
@@ -15,7 +15,7 @@ export default class KyselyRepository {
   static getInstance() {
     if (!KyselyRepository.instance) {
       const dialect = new PostgresDialect({
-        pool: new Pool({
+        pool: new pg.Pool({
           database: KYSELY_DATABASE,
           host: KYSELY_HOST,
           user: KYSELY_USER,
