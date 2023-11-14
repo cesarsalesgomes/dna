@@ -5,6 +5,7 @@ import pg from 'pg';
 import { FORBIDDEN_ERROR } from '$constants/error.constants';
 import type { KyselySchema } from '$types/directus-schema.type';
 
+import { dev } from '$app/environment';
 import {
   KYSELY_DATABASE, KYSELY_HOST, KYSELY_USER, KYSELY_PASSWORD, KYSELY_PORT,
 } from '$env/static/private';
@@ -22,6 +23,7 @@ export default class KyselyRepository {
           password: KYSELY_PASSWORD,
           port: Number(KYSELY_PORT),
           max: 10,
+          ssl: !dev,
         }),
       });
 
