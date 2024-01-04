@@ -1959,10 +1959,10 @@ hasown@^2.0.0:
   dependencies:
     function-bind "^1.1.2"
 
-highlight.run@^7.5.5:
-  version "7.5.5"
-  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-7.5.5.tgz#d6172ff64929b33fc6a359a1f1b2039610ed0436"
-  integrity sha512-wg6RITodyhGMRz9TcDQchwhkF0wyGSPVn/8RM1p4in7WXV7WUTkQC43DeS2LJ8piJ5frL8DppqGxro3JOwPGeQ==
+highlight.run@^8.3.1:
+  version "8.3.1"
+  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-8.3.1.tgz#013b75d3c83bb56e229ee76aab66120467926506"
+  integrity sha512-jj+J+6G8cHhY50GiYA5V9vU8ykV10mM+1yuqOGysyeGctbNRurw0UQG443iVS6zqecEnM2WI6Ns2ajT5huCeMQ==
 
 ignore@^5.2.0:
   version "5.2.0"
