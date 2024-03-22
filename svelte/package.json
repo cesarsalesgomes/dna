@@ -12,7 +12,7 @@
   "dependencies": {
     "@tanstack/svelte-query": "^4.35.7",
     "svelte": "^3.54.0",
-    "svelte-routing": "^1.11.0"
+    "svelte-routing": "^2.12.0"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.6",
