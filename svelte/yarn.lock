@@ -280,10 +280,10 @@
   dependencies:
     "@tanstack/query-core" "4.35.7"
 
-"@tsconfig/svelte@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@tsconfig/svelte/-/svelte-4.0.1.tgz#f36c1085fbdd868c10fb0426141956483dd4867b"
-  integrity sha512-B+XlGpmuAQzJqDoBATNCvEPqQg0HkO7S8pM14QDI5NsmtymzRexQ1N+nX2H6RTtFbuFgaZD4I8AAi8voGg0GLg==
+"@tsconfig/svelte@^5.0.3":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@tsconfig/svelte/-/svelte-5.0.3.tgz#8851ee2a65a1839838938ce53052a1125464be2b"
+  integrity sha512-Ms0t9K0oxioSb0lrZ5NRysx0nE/KsojYOG+db9v6wSaU/+P37vc0WRmh1QE1c8IAtTniD4yEhffGQuTKF8uaPw==
 
 "@types/json-schema@^7.0.9":
   version "7.0.11"
