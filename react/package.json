@@ -10,7 +10,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@tanstack/react-query": "^4.29.25",
+    "@tanstack/react-query": "^5.45.1",
     "@tanstack/react-query-devtools": "^4.0.10",
     "graphql": "^16.8.1",
     "highlight.run": "^7.5.5",
